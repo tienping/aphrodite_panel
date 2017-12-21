@@ -84,6 +84,7 @@ module.exports = (options) => ({
         ],
     },
     plugins: options.plugins.concat([
+        new webpack.ContextReplacementPlugin(/moment[\\]lang$/, /^\.\/(en-gb|de|pl)$/),
         new webpack.ProvidePlugin({
             // make fetch available
             fetch: 'exports-loader?self.fetch!whatwg-fetch',
@@ -116,9 +117,6 @@ module.exports = (options) => ({
             'jsnext:main',
             'main',
         ],
-        alias: {
-            moment$: 'moment/moment',
-        },
     },
     devtool: options.devtool,
     target: 'web', // Make web variables accessible to webpack, e.g. window
