@@ -5,7 +5,7 @@
 import {
     getURLParams,
     staticErrorResponse,
-} from '../globalTestUtils';
+} from '../globalUtils';
 
 describe('getURLParams', () => {
     it('should return object based on URL String passed', () => {
