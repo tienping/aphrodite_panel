@@ -21,7 +21,7 @@ const makeSelectUserData = () => createSelector(
 
 const makeSelectLocation = () => createSelector(
     selectRoute,
-    (substate) => substate.get('location')
+    (routeState) => routeState.get('location').toJS()
 );
 
 export {
