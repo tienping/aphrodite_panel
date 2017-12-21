@@ -25,7 +25,10 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import Header from 'components/Header';
 
-import { makeSelectAuthenticated } from './selectors';
+import {
+    makeSelectAuthenticated,
+    makeSelectLocation,
+} from './selectors';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -54,10 +57,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
 App.propTypes = {
     authenticated: PropTypes.bool.isRequired,
+    // location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
     authenticated: makeSelectAuthenticated(),
+    location: makeSelectLocation(),
 });
 
 const withConnect = connect(mapStateToProps);
