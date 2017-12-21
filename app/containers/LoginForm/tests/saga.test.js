@@ -4,7 +4,7 @@
 
 /* eslint-disable redux-saga/yield-effects */
 import { put } from 'redux-saga/effects';
-import { staticErrorResponse } from 'utils/globalTestUtils';
+import { staticErrorResponse } from 'utils/globalUtils';
 import authSaga, {
     getToken,
     checkAuthToken,

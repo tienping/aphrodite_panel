@@ -1,6 +1,6 @@
 import request, { loadSession } from 'utils/request';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { staticErrorResponse } from 'utils/globalTestUtils';
+import { staticErrorResponse } from 'utils/globalUtils';
 
 import { LOGIN, AUTHENTICATE } from './constants';
 import {
