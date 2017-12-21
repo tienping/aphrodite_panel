@@ -17,11 +17,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Switch, Route } from 'react-router-dom';
-import { sessionService } from 'redux-react-session';
 
 import HomePage from 'containers/HomePage/Loadable';
 import LoginForm from 'containers/LoginForm/Loadable';
+import MallPage from 'containers/MallPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+
+import Header from 'components/Header';
 
 import { makeSelectAuthenticated } from './selectors';
 
@@ -33,10 +35,15 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         return (
             <section>
                 {authenticated &&
-                    <button onClick={sessionService.deleteSession}>Logout</button>
+                    <Header />
                 }
                 <Switch>
                     <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
+                    <Route exact path="/mall" component={MallPage} />
+                    <Route exact path="/mall/:id" component={MallPage} />
+                    {/* <Route exact path="/flagship" auth={authenticated} component={Flagship} />
+                    <Route exact path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
+
                     <Route exact path="/login" component={LoginForm} />
                     <Route path="" component={NotFoundPage} />
                 </Switch>
