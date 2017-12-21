@@ -12,10 +12,9 @@ describe('<App />', () => {
         app = shallow(<App authenticated={auth} />);
     });
 
-    it('should show logout button if authenticated', () => {
-        app.setProps({ authenticated: true });
-        expect(app.find('button').length).toEqual(1);
-    });
+    // it('should show nav', () => {
+    //     expect(app.find('navbar').length).toEqual(1);
+    // });
 
     it('should render Routes and PrivateRoutes', (done) => {
         const routes = app.find(Route).length;
