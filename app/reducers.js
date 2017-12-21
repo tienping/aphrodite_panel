@@ -5,10 +5,12 @@
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import globalReducer from 'containers/App/reducer';
 import { sessionImmutableReducer as sessionReducer } from 'redux-react-session';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+
+// Hermint Components Reducer
+import { dialogReducer } from 'redux-dialog';
 
 /*
  * routeReducer
@@ -43,10 +45,10 @@ function routeReducer(state = routeInitialState, action) {
  */
 export default function createReducer(injectedReducers) {
     return combineReducers({
-        global: globalReducer,
         route: routeReducer,
         language: languageProviderReducer,
         session: sessionReducer,
+        dialogReducer,
         ...injectedReducers,
     });
 }
