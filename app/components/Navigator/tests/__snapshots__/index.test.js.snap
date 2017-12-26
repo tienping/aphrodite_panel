@@ -20,6 +20,37 @@ ShallowWrapper {
                 className="navbar-toggler-icon"
             />
         </button>
+        <div
+            className="navbar-collapse"
+            id="navbarNavAltMarkup"
+        >
+            <div
+                className="navbar-nav"
+            >
+                <li
+                    className="nav-item"
+                >
+                    <NavLink
+                        activeClassName="active"
+                        className="nav-link text-capitalize"
+                        to="/mall"
+                    >
+                        Malls
+                    </NavLink>
+                </li>
+                <li
+                    className="nav-item"
+                >
+                    <NavLink
+                        activeClassName="active"
+                        className="nav-link text-capitalize"
+                        to="/flagship"
+                    >
+                        Flagship Stores
+                    </NavLink>
+                </li>
+            </div>
+        </div>
     </nav>
 </div>,
   "nodes": Array [
@@ -35,6 +66,37 @@ ShallowWrapper {
                         className="navbar-toggler-icon"
                   />
             </button>
+            <div
+                  className="navbar-collapse"
+                  id="navbarNavAltMarkup"
+            >
+                  <div
+                        className="navbar-nav"
+                  >
+                        <li
+                              className="nav-item"
+                        >
+                              <NavLink
+                                    activeClassName="active"
+                                    className="nav-link text-capitalize"
+                                    to="/mall"
+                              >
+                                    Malls
+                              </NavLink>
+                        </li>
+                        <li
+                              className="nav-item"
+                        >
+                              <NavLink
+                                    activeClassName="active"
+                                    className="nav-link text-capitalize"
+                                    to="/flagship"
+                              >
+                                    Flagship Stores
+                              </NavLink>
+                        </li>
+                  </div>
+            </div>
       </nav>
 </div>,
   ],
@@ -108,6 +170,37 @@ ShallowWrapper {
                                         className="navbar-toggler-icon"
                               />
                     </button>
+                    <div
+                              className="navbar-collapse"
+                              id="navbarNavAltMarkup"
+                    >
+                              <div
+                                        className="navbar-nav"
+                              >
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/mall"
+                                                  >
+                                                            Malls
+                                                  </NavLink>
+                                        </li>
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/flagship"
+                                                  >
+                                                            Flagship Stores
+                                                  </NavLink>
+                                        </li>
+                              </div>
+                    </div>
           </nav>
 </div>,
         "_debugID": 2,
@@ -123,6 +216,37 @@ ShallowWrapper {
                                         className="navbar-toggler-icon"
                               />
                     </button>
+                    <div
+                              className="navbar-collapse"
+                              id="navbarNavAltMarkup"
+                    >
+                              <div
+                                        className="navbar-nav"
+                              >
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/mall"
+                                                  >
+                                                            Malls
+                                                  </NavLink>
+                                        </li>
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/flagship"
+                                                  >
+                                                            Flagship Stores
+                                                  </NavLink>
+                                        </li>
+                              </div>
+                    </div>
           </nav>
 </div>,
       },

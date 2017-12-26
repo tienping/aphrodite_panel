@@ -18,6 +18,10 @@ ShallowWrapper {
         items={
             Array [
                 Object {
+                  "link": "/",
+                  "name": "Home",
+                },
+                Object {
                   "link": "/mall",
                   "name": "Malls",
                 },
@@ -48,6 +52,10 @@ ShallowWrapper {
       <Navigator
             items={
                   Array [
+                        Object {
+                          "link": "/",
+                          "name": "Home",
+                        },
                         Object {
                           "link": "/mall",
                           "name": "Malls",
@@ -114,6 +122,10 @@ ShallowWrapper {
                     items={
                               Array [
                                         Object {
+                                          "link": "/",
+                                          "name": "Home",
+                                        },
+                                        Object {
                                           "link": "/mall",
                                           "name": "Malls",
                                         },
@@ -144,6 +156,10 @@ ShallowWrapper {
           <Navigator
                     items={
                               Array [
+                                        Object {
+                                          "link": "/",
+                                          "name": "Home",
+                                        },
                                         Object {
                                           "link": "/mall",
                                           "name": "Malls",
