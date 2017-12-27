@@ -18,16 +18,8 @@ ShallowWrapper {
         items={
             Array [
                 Object {
-                  "link": "/",
-                  "name": "Home",
-                },
-                Object {
-                  "link": "/mall",
-                  "name": "Malls",
-                },
-                Object {
-                  "link": "/flagship",
-                  "name": "Flagship Stores",
+                  "text": "Home",
+                  "url": "/",
                 },
               ]
         }
@@ -53,16 +45,8 @@ ShallowWrapper {
             items={
                   Array [
                         Object {
-                          "link": "/",
-                          "name": "Home",
-                        },
-                        Object {
-                          "link": "/mall",
-                          "name": "Malls",
-                        },
-                        Object {
-                          "link": "/flagship",
-                          "name": "Flagship Stores",
+                          "text": "Home",
+                          "url": "/",
                         },
                       ]
             }
@@ -82,13 +66,13 @@ ShallowWrapper {
   "renderer": ReactShallowRenderer {
     "_instance": ShallowComponentWrapper {
       "_calledComponentWillUnmount": false,
-      "_compositeType": 2,
+      "_compositeType": 1,
       "_context": Object {},
       "_currentElement": <Header />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": StatelessComponent {
+      "_instance": Header {
         "_reactInternalInstance": [Circular],
         "context": Object {},
         "props": Object {},
@@ -122,16 +106,8 @@ ShallowWrapper {
                     items={
                               Array [
                                         Object {
-                                          "link": "/",
-                                          "name": "Home",
-                                        },
-                                        Object {
-                                          "link": "/mall",
-                                          "name": "Malls",
-                                        },
-                                        Object {
-                                          "link": "/flagship",
-                                          "name": "Flagship Stores",
+                                          "text": "Home",
+                                          "url": "/",
                                         },
                                       ]
                     }
@@ -157,16 +133,8 @@ ShallowWrapper {
                     items={
                               Array [
                                         Object {
-                                          "link": "/",
-                                          "name": "Home",
-                                        },
-                                        Object {
-                                          "link": "/mall",
-                                          "name": "Malls",
-                                        },
-                                        Object {
-                                          "link": "/flagship",
-                                          "name": "Flagship Stores",
+                                          "text": "Home",
+                                          "url": "/",
                                         },
                                       ]
                     }

@@ -13,6 +13,7 @@ const selectMallDomain = (state) => state.get('mall');
 /**
  * Default selector used by Mall
  */
+
 const makeSelectMallLoading = () => createSelector(
     selectMallDomain,
     (substate) => substate.get('loading')

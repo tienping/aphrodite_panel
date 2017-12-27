@@ -33,10 +33,8 @@ ShallowWrapper {
                     <NavLink
                         activeClassName="active"
                         className="nav-link text-capitalize"
-                        to="/mall"
-                    >
-                        Malls
-                    </NavLink>
+                        to={undefined}
+                    />
                 </li>
                 <li
                     className="nav-item"
@@ -44,10 +42,8 @@ ShallowWrapper {
                     <NavLink
                         activeClassName="active"
                         className="nav-link text-capitalize"
-                        to="/flagship"
-                    >
-                        Flagship Stores
-                    </NavLink>
+                        to={undefined}
+                    />
                 </li>
             </div>
         </div>
@@ -79,10 +75,8 @@ ShallowWrapper {
                               <NavLink
                                     activeClassName="active"
                                     className="nav-link text-capitalize"
-                                    to="/mall"
-                              >
-                                    Malls
-                              </NavLink>
+                                    to={undefined}
+                              />
                         </li>
                         <li
                               className="nav-item"
@@ -90,10 +84,8 @@ ShallowWrapper {
                               <NavLink
                                     activeClassName="active"
                                     className="nav-link text-capitalize"
-                                    to="/flagship"
-                              >
-                                    Flagship Stores
-                              </NavLink>
+                                    to={undefined}
+                              />
                         </li>
                   </div>
             </div>
@@ -183,10 +175,8 @@ ShallowWrapper {
                                                   <NavLink
                                                             activeClassName="active"
                                                             className="nav-link text-capitalize"
-                                                            to="/mall"
-                                                  >
-                                                            Malls
-                                                  </NavLink>
+                                                            to={undefined}
+                                                  />
                                         </li>
                                         <li
                                                   className="nav-item"
@@ -194,10 +184,8 @@ ShallowWrapper {
                                                   <NavLink
                                                             activeClassName="active"
                                                             className="nav-link text-capitalize"
-                                                            to="/flagship"
-                                                  >
-                                                            Flagship Stores
-                                                  </NavLink>
+                                                            to={undefined}
+                                                  />
                                         </li>
                               </div>
                     </div>
@@ -229,10 +217,8 @@ ShallowWrapper {
                                                   <NavLink
                                                             activeClassName="active"
                                                             className="nav-link text-capitalize"
-                                                            to="/mall"
-                                                  >
-                                                            Malls
-                                                  </NavLink>
+                                                            to={undefined}
+                                                  />
                                         </li>
                                         <li
                                                   className="nav-item"
@@ -240,10 +226,8 @@ ShallowWrapper {
                                                   <NavLink
                                                             activeClassName="active"
                                                             className="nav-link text-capitalize"
-                                                            to="/flagship"
-                                                  >
-                                                            Flagship Stores
-                                                  </NavLink>
+                                                            to={undefined}
+                                                  />
                                         </li>
                               </div>
                     </div>

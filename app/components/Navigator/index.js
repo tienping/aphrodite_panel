@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 function Navigator(props) {
     const menu = props.items.map((item) => (
         <li className="nav-item" key={item.name}>
-            <NavLink to={item.link} className="nav-link text-capitalize">{item.name}</NavLink>
+            <NavLink to={item.url} className="nav-link text-capitalize">{item.text}</NavLink>
         </li>
     ));
 

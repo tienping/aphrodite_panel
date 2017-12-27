@@ -23,7 +23,7 @@ import LoginForm from 'containers/LoginForm/Loadable';
 import MallPage from 'containers/MallPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
-import Header from 'components/Header';
+import Header from 'containers/Header';
 
 import {
     makeSelectAuthenticated,
