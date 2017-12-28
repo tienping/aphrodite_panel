@@ -11,8 +11,12 @@ import PropTypes from 'prop-types';
 
 function Navigator(props) {
     const menu = props.items.map((item) => (
-        <li className="nav-item" key={item.name}>
-            <NavLink to={item.url} className="nav-link text-capitalize">{item.text}</NavLink>
+        <li className="nav-item" key={item.code}>
+            {item.url ?
+                <NavLink to={item.url} className="nav-link text-capitalize">{item.text}</NavLink>
+                :
+                <span className="nav-link text-capitalize">{item.text}</span>
+            }
         </li>
     ));
 
@@ -24,7 +28,7 @@ function Navigator(props) {
                 </button>
                 <div className="navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        {menu}
+                        {props.items.length && menu}
                     </div>
                 </div>
             </nav>

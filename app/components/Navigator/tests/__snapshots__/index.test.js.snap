@@ -30,19 +30,15 @@ ShallowWrapper {
                 <li
                     className="nav-item"
                 >
-                    <NavLink
-                        activeClassName="active"
+                    <span
                         className="nav-link text-capitalize"
-                        to={undefined}
                     />
                 </li>
                 <li
                     className="nav-item"
                 >
-                    <NavLink
-                        activeClassName="active"
+                    <span
                         className="nav-link text-capitalize"
-                        to={undefined}
                     />
                 </li>
             </div>
@@ -72,19 +68,15 @@ ShallowWrapper {
                         <li
                               className="nav-item"
                         >
-                              <NavLink
-                                    activeClassName="active"
+                              <span
                                     className="nav-link text-capitalize"
-                                    to={undefined}
                               />
                         </li>
                         <li
                               className="nav-item"
                         >
-                              <NavLink
-                                    activeClassName="active"
+                              <span
                                     className="nav-link text-capitalize"
-                                    to={undefined}
                               />
                         </li>
                   </div>
@@ -172,19 +164,15 @@ ShallowWrapper {
                                         <li
                                                   className="nav-item"
                                         >
-                                                  <NavLink
-                                                            activeClassName="active"
+                                                  <span
                                                             className="nav-link text-capitalize"
-                                                            to={undefined}
                                                   />
                                         </li>
                                         <li
                                                   className="nav-item"
                                         >
-                                                  <NavLink
-                                                            activeClassName="active"
+                                                  <span
                                                             className="nav-link text-capitalize"
-                                                            to={undefined}
                                                   />
                                         </li>
                               </div>
@@ -214,19 +202,15 @@ ShallowWrapper {
                                         <li
                                                   className="nav-item"
                                         >
-                                                  <NavLink
-                                                            activeClassName="active"
+                                                  <span
                                                             className="nav-link text-capitalize"
-                                                            to={undefined}
                                                   />
                                         </li>
                                         <li
                                                   className="nav-item"
                                         >
-                                                  <NavLink
-                                                            activeClassName="active"
+                                                  <span
                                                             className="nav-link text-capitalize"
-                                                            to={undefined}
                                                   />
                                         </li>
                               </div>

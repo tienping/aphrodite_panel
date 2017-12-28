@@ -26,7 +26,7 @@ const makeSelectHeaderError = () => createSelector(
 
 const makeSelectTopNav = () => createSelector(
     selectHeaderDomain,
-    (substate) => substate.get('topNav').toJS()
+    (substate) => substate.get('topNav')
 );
 
 export {

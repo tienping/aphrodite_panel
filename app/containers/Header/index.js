@@ -15,21 +15,26 @@ import { sessionService } from 'redux-react-session';
 import Navigator from 'components/Navigator';
 
 import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
+import saga from './saga';
 import messages from './messages';
 
 import {
     makeSelectTopNav,
-    makeSelectHeaderLoading,
+    // makeSelectHeaderLoading,
+    // makeSelectHeaderError,
 } from './selectors';
 
+import { fetchTopNav } from './actions';
+
 export class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    componentDidMount() {
+        this.props.dispatch(fetchTopNav({}));
+    }
+
     render() {
-        const navItems = [
-            { url: '/', text: 'Home' },
-            // { link: '/mall', name: 'Malls' },
-            // { link: '/flagship', name: 'Flagship Stores' },
-        ];
+        const navItems = this.props.topNav;
 
         return (
             <div>
@@ -45,13 +50,18 @@ export class Header extends React.PureComponent { // eslint-disable-line react/p
 
 Header.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    topNav: PropTypes.array.isRequired,
-    loading: PropTypes.boolean,
+    topNav: PropTypes.array,
+    // loading: PropTypes.bool,
+    // error: PropTypes.oneOfType([
+    //     PropTypes.bool,
+    //     PropTypes.object,
+    // ]),
 };
 
 const mapStateToProps = createStructuredSelector({
     topNav: makeSelectTopNav(),
-    loading: makeSelectHeaderLoading(),
+    // loading: makeSelectHeaderLoading(),
+    // error: makeSelectHeaderError(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -63,8 +73,10 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({ key: 'header', reducer });
+const withSaga = injectSaga({ key: 'mall', saga });
 
 export default compose(
     withReducer,
+    withSaga,
     withConnect,
 )(Header);

@@ -14,7 +14,12 @@ import {
 const initialState = fromJS({
     loading: false,
     error: false,
-    topNav: [],
+    topNav: [
+        {
+            text: 'Loading...',
+            code: 'navigator-loading',
+        },
+    ],
 });
 
 function headerReducer(state = initialState, action) {
@@ -27,12 +32,12 @@ function headerReducer(state = initialState, action) {
             return state
                 .set('loading', false)
                 .set('error', false)
-                .setIn(['header'].topNav, action.payload);
+                .setIn(['topNav'], action.payload);
         case FETCH_TOP_NAV_FAILED:
             return state
                 .set('loading', false)
                 .set('error', true)
-                .setIn(['header'].topNav, action.payload);
+                .setIn(['topNav'], action.payload);
         default:
             return state;
     }

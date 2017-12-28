@@ -15,14 +15,7 @@ ShallowWrapper {
         src=""
     />
     <Navigator
-        items={
-            Array [
-                Object {
-                  "text": "Home",
-                  "url": "/",
-                },
-              ]
-        }
+        items={undefined}
     />
     <button
         onClick={[Function]}
@@ -42,14 +35,7 @@ ShallowWrapper {
             src=""
       />
       <Navigator
-            items={
-                  Array [
-                        Object {
-                          "text": "Home",
-                          "url": "/",
-                        },
-                      ]
-            }
+            items={undefined}
       />
       <button
             onClick={[Function]}
@@ -103,14 +89,7 @@ ShallowWrapper {
                     src=""
           />
           <Navigator
-                    items={
-                              Array [
-                                        Object {
-                                          "text": "Home",
-                                          "url": "/",
-                                        },
-                                      ]
-                    }
+                    items={undefined}
           />
           <button
                     onClick={[Function]}
@@ -130,14 +109,7 @@ ShallowWrapper {
                     src=""
           />
           <Navigator
-                    items={
-                              Array [
-                                        Object {
-                                          "text": "Home",
-                                          "url": "/",
-                                        },
-                                      ]
-                    }
+                    items={undefined}
           />
           <button
                     onClick={[Function]}

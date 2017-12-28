@@ -5,7 +5,12 @@ import headerReducer from '../reducer';
 const initialState = fromJS({
     loading: false,
     error: false,
-    topNav: [],
+    topNav: [
+        {
+            text: 'Loading...',
+            code: 'navigator-loading',
+        },
+    ],
 });
 
 describe('headerReducer', () => {
