@@ -30,12 +30,6 @@ import {
 
 import { fetchTopNav } from './actions';
 
-
-const HershopHeader = styled.div`
-    background-color: papayawhip;
-    position: relative;
-`;
-
 const LogoutBtn = styled.button`
     position: absolute;
     right: 10px;
@@ -68,13 +62,13 @@ export class Header extends React.PureComponent { // eslint-disable-line react/p
         ];
 
         return (
-            <HershopHeader className="d-none d-md-block">
+            <div>
                 <img className="navbar-brand" src="" alt="logo" />
                 {<Navigator items={navItems} />}
                 <LogoutBtn className="btn btn-secondary" onClick={sessionService.deleteSession}>
                     <FormattedMessage {...messages.logout} />
                 </LogoutBtn>
-            </HershopHeader>
+            </div>
         );
     }
 }

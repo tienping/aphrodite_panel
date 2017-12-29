@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -32,13 +33,44 @@ import {
 
 import PrivateRoute from './PrivateRoute';
 
+
+const HershopHeader = styled.div`
+    background-color: papayawhip;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+`;
+const HershopSideBar = styled.div`
+    background-color: skyblue;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    padding-top: ${(props) => props.paddingTop ? props.paddingTop : '70px'};
+`;
+
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    componentDidMount() {
+        // const headerEl = document.getElementById('hershop-header-container');
+        // this.headerHeight = headerEl ? headerEl.clientHeight : '';
+    }
+
     render() {
         const { authenticated } = this.props;
         return (
             <section>
                 {authenticated &&
-                    <Header />
+                    <HershopHeader id="hershop-header-container" className="d-none d-md-block">
+                        <Header />
+                    </HershopHeader>
+                }
+                {authenticated &&
+                    <HershopSideBar className="d-none d-md-block" paddingTop={'300px'}>
+                        asdfasdf
+                    </HershopSideBar>
                 }
                 <Switch>
                     <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />

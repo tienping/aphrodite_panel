@@ -8,9 +8,7 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <Header__HershopHeader
-    className="d-none d-md-block"
->
+  "node": <div>
     <img
         alt="logo"
         className="navbar-brand"
@@ -47,11 +45,9 @@ ShallowWrapper {
             values={Object {}}
         />
     </Header__LogoutBtn>
-</Header__HershopHeader>,
+</div>,
   "nodes": Array [
-    <Header__HershopHeader
-      className="d-none d-md-block"
->
+    <div>
       <img
             alt="logo"
             className="navbar-brand"
@@ -88,7 +84,7 @@ ShallowWrapper {
                   values={Object {}}
             />
       </Header__LogoutBtn>
-</Header__HershopHeader>,
+</div>,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -124,9 +120,7 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <Header__HershopHeader
-          className="d-none d-md-block"
->
+        "_currentElement": <div>
           <img
                     alt="logo"
                     className="navbar-brand"
@@ -163,11 +157,9 @@ ShallowWrapper {
                               values={Object {}}
                     />
           </Header__LogoutBtn>
-</Header__HershopHeader>,
+</div>,
         "_debugID": 2,
-        "_renderedOutput": <Header__HershopHeader
-          className="d-none d-md-block"
->
+        "_renderedOutput": <div>
           <img
                     alt="logo"
                     className="navbar-brand"
@@ -204,9 +196,9 @@ ShallowWrapper {
                               values={Object {}}
                     />
           </Header__LogoutBtn>
-</Header__HershopHeader>,
+</div>,
       },
-      "_renderedNodeType": 1,
+      "_renderedNodeType": 0,
       "_rootNodeID": 0,
       "_topLevelWrapper": null,
       "_updateBatchNumber": null,
