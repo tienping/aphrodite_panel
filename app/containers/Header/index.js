@@ -5,6 +5,8 @@
  */
 
 import React from 'react';
+import styled from 'styled-components';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -22,11 +24,23 @@ import messages from './messages';
 
 import {
     makeSelectTopNav,
-    // makeSelectHeaderLoading,
+    makeSelectHeaderLoading,
     // makeSelectHeaderError,
 } from './selectors';
 
 import { fetchTopNav } from './actions';
+
+
+const HershopHeader = styled.div`
+    background-color: papayawhip;
+    position: relative;
+`;
+
+const LogoutBtn = styled.button`
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+`;
 
 export class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
@@ -34,23 +48,40 @@ export class Header extends React.PureComponent { // eslint-disable-line react/p
     }
 
     render() {
-        const navItems = this.props.topNav;
+        // const navItems = this.props.topNav;
+        const navItems = [
+            {
+                code: 'a',
+                text: 'Item A',
+                url: '/item-a',
+            },
+            {
+                code: 'b',
+                text: 'Item B',
+                url: '/item-b',
+            },
+            {
+                code: 'mall',
+                text: 'Mall',
+                url: '/mall',
+            },
+        ];
 
         return (
-            <div>
+            <HershopHeader className="d-none d-md-block">
                 <img className="navbar-brand" src="" alt="logo" />
-                <Navigator items={navItems} />
-                <button onClick={sessionService.deleteSession}>
+                {<Navigator items={navItems} />}
+                <LogoutBtn className="btn btn-secondary" onClick={sessionService.deleteSession}>
                     <FormattedMessage {...messages.logout} />
-                </button>
-            </div>
+                </LogoutBtn>
+            </HershopHeader>
         );
     }
 }
 
 Header.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    topNav: PropTypes.array,
+    // topNav: PropTypes.array,
     // loading: PropTypes.bool,
     // error: PropTypes.oneOfType([
     //     PropTypes.bool,
@@ -60,7 +91,7 @@ Header.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     topNav: makeSelectTopNav(),
-    // loading: makeSelectHeaderLoading(),
+    loading: makeSelectHeaderLoading(),
     // error: makeSelectHeaderError(),
 });
 

@@ -8,16 +8,37 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <div>
+  "node": <Header__HershopHeader
+    className="d-none d-md-block"
+>
     <img
         alt="logo"
         className="navbar-brand"
         src=""
     />
     <Navigator
-        items={undefined}
+        items={
+            Array [
+                Object {
+                  "code": "a",
+                  "text": "Item A",
+                  "url": "/item-a",
+                },
+                Object {
+                  "code": "b",
+                  "text": "Item B",
+                  "url": "/item-b",
+                },
+                Object {
+                  "code": "mall",
+                  "text": "Mall",
+                  "url": "/mall",
+                },
+              ]
+        }
     />
-    <button
+    <Header__LogoutBtn
+        className="btn btn-secondary"
         onClick={[Function]}
     >
         <FormattedMessage
@@ -25,19 +46,40 @@ ShallowWrapper {
             id="app.components.Header.logout"
             values={Object {}}
         />
-    </button>
-</div>,
+    </Header__LogoutBtn>
+</Header__HershopHeader>,
   "nodes": Array [
-    <div>
+    <Header__HershopHeader
+      className="d-none d-md-block"
+>
       <img
             alt="logo"
             className="navbar-brand"
             src=""
       />
       <Navigator
-            items={undefined}
+            items={
+                  Array [
+                        Object {
+                          "code": "a",
+                          "text": "Item A",
+                          "url": "/item-a",
+                        },
+                        Object {
+                          "code": "b",
+                          "text": "Item B",
+                          "url": "/item-b",
+                        },
+                        Object {
+                          "code": "mall",
+                          "text": "Mall",
+                          "url": "/mall",
+                        },
+                      ]
+            }
       />
-      <button
+      <Header__LogoutBtn
+            className="btn btn-secondary"
             onClick={[Function]}
       >
             <FormattedMessage
@@ -45,8 +87,8 @@ ShallowWrapper {
                   id="app.components.Header.logout"
                   values={Object {}}
             />
-      </button>
-</div>,
+      </Header__LogoutBtn>
+</Header__HershopHeader>,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -82,16 +124,37 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <div>
+        "_currentElement": <Header__HershopHeader
+          className="d-none d-md-block"
+>
           <img
                     alt="logo"
                     className="navbar-brand"
                     src=""
           />
           <Navigator
-                    items={undefined}
+                    items={
+                              Array [
+                                        Object {
+                                          "code": "a",
+                                          "text": "Item A",
+                                          "url": "/item-a",
+                                        },
+                                        Object {
+                                          "code": "b",
+                                          "text": "Item B",
+                                          "url": "/item-b",
+                                        },
+                                        Object {
+                                          "code": "mall",
+                                          "text": "Mall",
+                                          "url": "/mall",
+                                        },
+                                      ]
+                    }
           />
-          <button
+          <Header__LogoutBtn
+                    className="btn btn-secondary"
                     onClick={[Function]}
           >
                     <FormattedMessage
@@ -99,19 +162,40 @@ ShallowWrapper {
                               id="app.components.Header.logout"
                               values={Object {}}
                     />
-          </button>
-</div>,
+          </Header__LogoutBtn>
+</Header__HershopHeader>,
         "_debugID": 2,
-        "_renderedOutput": <div>
+        "_renderedOutput": <Header__HershopHeader
+          className="d-none d-md-block"
+>
           <img
                     alt="logo"
                     className="navbar-brand"
                     src=""
           />
           <Navigator
-                    items={undefined}
+                    items={
+                              Array [
+                                        Object {
+                                          "code": "a",
+                                          "text": "Item A",
+                                          "url": "/item-a",
+                                        },
+                                        Object {
+                                          "code": "b",
+                                          "text": "Item B",
+                                          "url": "/item-b",
+                                        },
+                                        Object {
+                                          "code": "mall",
+                                          "text": "Mall",
+                                          "url": "/mall",
+                                        },
+                                      ]
+                    }
           />
-          <button
+          <Header__LogoutBtn
+                    className="btn btn-secondary"
                     onClick={[Function]}
           >
                     <FormattedMessage
@@ -119,10 +203,10 @@ ShallowWrapper {
                               id="app.components.Header.logout"
                               values={Object {}}
                     />
-          </button>
-</div>,
+          </Header__LogoutBtn>
+</Header__HershopHeader>,
       },
-      "_renderedNodeType": 0,
+      "_renderedNodeType": 1,
       "_rootNodeID": 0,
       "_topLevelWrapper": null,
       "_updateBatchNumber": null,
