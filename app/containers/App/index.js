@@ -59,9 +59,9 @@ const HershopSideBar = styled.div`
 `;
 
 const HershopContent = styled.div`
+    padding: 16px;
     margin-top: ${headerHeight};
     margin-left: ${sidebarWidth};
-    padding: 16px;
 `;
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
