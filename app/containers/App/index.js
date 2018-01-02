@@ -64,6 +64,16 @@ const HershopContent = styled.div`
     margin-left: ${sidebarWidth};
 `;
 
+const HershopMobileBar = styled.div`
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    overflow: hidden;
+    position: absolute;
+    background-color: papayawhip;
+`;
+
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
         // anything to do after component rendered?
@@ -85,7 +95,6 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                     <HershopSideBar
                         id="hershop-sidebar-container"
                         className="d-none d-md-block"
-                        paddingTop={'300px'}
                     >
                         This is sidebar
                     </HershopSideBar>
@@ -102,6 +111,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                         <Route path="" component={NotFoundPage} />
                     </Switch>
                 </HershopContent>
+                <HershopMobileBar
+                    id="hershop-mobilebar-container"
+                    className="d-block d-md-none"
+                >
+                    This is bottom mobile bar
+                </HershopMobileBar>
             </section>
         );
     }
