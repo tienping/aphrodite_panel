@@ -66,8 +66,7 @@ const HershopContent = styled.div`
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
-        // const headerEl = document.getElementById('hershop-header-container');
-        // this.headerHeight = headerEl ? headerEl.clientHeight : '';
+        // anything to do after component rendered?
     }
 
     render() {
@@ -75,16 +74,23 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         return (
             <section>
                 {authenticated &&
-                    <HershopHeader id="hershop-header-container" className="d-none d-md-block">
+                    <HershopHeader
+                        id="hershop-header-container"
+                        className="d-none d-md-block"
+                    >
                         <Header />
                     </HershopHeader>
                 }
                 {authenticated &&
-                    <HershopSideBar className="d-none d-md-block" paddingTop={'300px'}>
-                        asdfasdf
+                    <HershopSideBar
+                        id="hershop-sidebar-container"
+                        className="d-none d-md-block"
+                        paddingTop={'300px'}
+                    >
+                        This is sidebar
                     </HershopSideBar>
                 }
-                <HershopContent>
+                <HershopContent id="hershop-content-container">
                     <Switch>
                         <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
                         <Route exact path="/mall" component={MallPage} />

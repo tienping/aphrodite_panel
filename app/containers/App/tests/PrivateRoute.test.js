@@ -49,4 +49,14 @@ describe('<PrivateRoute />', () => {
 
         done();
     });
+
+    it('should render mall page route', (done) => {
+        const wrapper = shallow(
+            <MemoryRouter initialEntries={['/mall']} initialIndex={0}>
+                <PrivateRoute auth={authenticated} path="/" component={spy} />
+            </MemoryRouter>
+        ).children().at(0).dive();
+        expect(wrapper.find(Route).length).toEqual(1);
+        done();
+    });
 });
