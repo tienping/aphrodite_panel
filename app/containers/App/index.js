@@ -33,23 +33,35 @@ import {
 
 import PrivateRoute from './PrivateRoute';
 
+const sidebarWidth = '40px';
+const headerHeight = '95px';
 
 const HershopHeader = styled.div`
-    background-color: papayawhip;
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     z-index: 2000;
+    overflow: hidden;
+    position: absolute;
+    height: ${headerHeight};
+    background-color: papayawhip;
 `;
 const HershopSideBar = styled.div`
-    background-color: skyblue;
-    position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
     bottom: 0;
     z-index: 1000;
-    padding-top: ${(props) => props.paddingTop ? props.paddingTop : '70px'};
+    overflow: hidden;
+    position: absolute;
+    width: ${sidebarWidth};
+    background-color: skyblue;
+    padding-top: ${headerHeight};
+`;
+
+const HershopContent = styled.div`
+    margin-top: ${headerHeight};
+    margin-left: ${sidebarWidth};
+    padding: 16px;
 `;
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -72,16 +84,18 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                         asdfasdf
                     </HershopSideBar>
                 }
-                <Switch>
-                    <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
-                    <Route exact path="/mall" component={MallPage} />
-                    <Route exact path="/mall/:id" component={MallPage} />
-                    {/* <Route exact path="/flagship" auth={authenticated} component={Flagship} />
-                    <Route exact path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
+                <HershopContent>
+                    <Switch>
+                        <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
+                        <Route exact path="/mall" component={MallPage} />
+                        <Route exact path="/mall/:id" component={MallPage} />
+                        {/* <Route exact path="/flagship" auth={authenticated} component={Flagship} />
+                        <Route exact path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
 
-                    <Route exact path="/login" component={LoginForm} />
-                    <Route path="" component={NotFoundPage} />
-                </Switch>
+                        <Route exact path="/login" component={LoginForm} />
+                        <Route path="" component={NotFoundPage} />
+                    </Switch>
+                </HershopContent>
             </section>
         );
     }
