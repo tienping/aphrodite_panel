@@ -36,31 +36,34 @@ const LogoutBtn = styled.button`
     bottom: 5px;
 `;
 
+export const navItems = [
+    {
+        code: 'a',
+        text: 'Item A',
+        url: '/item-a',
+    },
+    {
+        code: 'b',
+        text: 'Item B',
+        url: '/item-b',
+    },
+    {
+        code: 'mall',
+        text: 'Mall',
+        url: '/mall',
+    },
+    {
+        code: 'no-url',
+        text: 'no url',
+    },
+];
+
 export class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
         this.props.dispatch(fetchTopNav({}));
     }
 
     render() {
-        // const navItems = this.props.topNav;
-        const navItems = [
-            {
-                code: 'a',
-                text: 'Item A',
-                url: '/item-a',
-            },
-            {
-                code: 'b',
-                text: 'Item B',
-                url: '/item-b',
-            },
-            {
-                code: 'mall',
-                text: 'Mall',
-                url: '/mall',
-            },
-        ];
-
         return (
             <div>
                 <img className="navbar-brand" src="" alt="logo" />

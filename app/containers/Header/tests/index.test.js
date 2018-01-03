@@ -5,7 +5,7 @@ import { Header } from '../index';
 
 describe('<Header />', () => {
     it('should render Header Correctly', () => {
-        const wrapper = shallow(<Header />);
+        const wrapper = shallow(<Header dispatch={jest.fn} />);
         expect(wrapper).toMatchSnapshot();
     });
 

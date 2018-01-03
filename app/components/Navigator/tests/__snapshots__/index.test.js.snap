@@ -30,16 +30,44 @@ ShallowWrapper {
                 <li
                     className="nav-item"
                 >
-                    <span
+                    <NavLink
+                        activeClassName="active"
                         className="nav-link text-capitalize"
-                    />
+                        to="/item-a"
+                    >
+                        Item A
+                    </NavLink>
+                </li>
+                <li
+                    className="nav-item"
+                >
+                    <NavLink
+                        activeClassName="active"
+                        className="nav-link text-capitalize"
+                        to="/item-b"
+                    >
+                        Item B
+                    </NavLink>
+                </li>
+                <li
+                    className="nav-item"
+                >
+                    <NavLink
+                        activeClassName="active"
+                        className="nav-link text-capitalize"
+                        to="/mall"
+                    >
+                        Mall
+                    </NavLink>
                 </li>
                 <li
                     className="nav-item"
                 >
                     <span
                         className="nav-link text-capitalize"
-                    />
+                    >
+                        no url
+                    </span>
                 </li>
             </div>
         </div>
@@ -68,16 +96,44 @@ ShallowWrapper {
                         <li
                               className="nav-item"
                         >
-                              <span
+                              <NavLink
+                                    activeClassName="active"
                                     className="nav-link text-capitalize"
-                              />
+                                    to="/item-a"
+                              >
+                                    Item A
+                              </NavLink>
+                        </li>
+                        <li
+                              className="nav-item"
+                        >
+                              <NavLink
+                                    activeClassName="active"
+                                    className="nav-link text-capitalize"
+                                    to="/item-b"
+                              >
+                                    Item B
+                              </NavLink>
+                        </li>
+                        <li
+                              className="nav-item"
+                        >
+                              <NavLink
+                                    activeClassName="active"
+                                    className="nav-link text-capitalize"
+                                    to="/mall"
+                              >
+                                    Mall
+                              </NavLink>
                         </li>
                         <li
                               className="nav-item"
                         >
                               <span
                                     className="nav-link text-capitalize"
-                              />
+                              >
+                                    no url
+                              </span>
                         </li>
                   </div>
             </div>
@@ -94,12 +150,23 @@ ShallowWrapper {
         items={
                 Array [
                         Object {
-                          "link": "/mall",
-                          "name": "Malls",
+                          "code": "a",
+                          "text": "Item A",
+                          "url": "/item-a",
                         },
                         Object {
-                          "link": "/flagship",
-                          "name": "Flagship Stores",
+                          "code": "b",
+                          "text": "Item B",
+                          "url": "/item-b",
+                        },
+                        Object {
+                          "code": "mall",
+                          "text": "Mall",
+                          "url": "/mall",
+                        },
+                        Object {
+                          "code": "no-url",
+                          "text": "no url",
                         },
                       ]
         }
@@ -113,12 +180,23 @@ ShallowWrapper {
         "props": Object {
           "items": Array [
             Object {
-              "link": "/mall",
-              "name": "Malls",
+              "code": "a",
+              "text": "Item A",
+              "url": "/item-a",
             },
             Object {
-              "link": "/flagship",
-              "name": "Flagship Stores",
+              "code": "b",
+              "text": "Item B",
+              "url": "/item-b",
+            },
+            Object {
+              "code": "mall",
+              "text": "Mall",
+              "url": "/mall",
+            },
+            Object {
+              "code": "no-url",
+              "text": "no url",
             },
           ],
         },
@@ -164,16 +242,44 @@ ShallowWrapper {
                                         <li
                                                   className="nav-item"
                                         >
-                                                  <span
+                                                  <NavLink
+                                                            activeClassName="active"
                                                             className="nav-link text-capitalize"
-                                                  />
+                                                            to="/item-a"
+                                                  >
+                                                            Item A
+                                                  </NavLink>
+                                        </li>
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/item-b"
+                                                  >
+                                                            Item B
+                                                  </NavLink>
+                                        </li>
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/mall"
+                                                  >
+                                                            Mall
+                                                  </NavLink>
                                         </li>
                                         <li
                                                   className="nav-item"
                                         >
                                                   <span
                                                             className="nav-link text-capitalize"
-                                                  />
+                                                  >
+                                                            no url
+                                                  </span>
                                         </li>
                               </div>
                     </div>
@@ -202,16 +308,44 @@ ShallowWrapper {
                                         <li
                                                   className="nav-item"
                                         >
-                                                  <span
+                                                  <NavLink
+                                                            activeClassName="active"
                                                             className="nav-link text-capitalize"
-                                                  />
+                                                            to="/item-a"
+                                                  >
+                                                            Item A
+                                                  </NavLink>
+                                        </li>
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/item-b"
+                                                  >
+                                                            Item B
+                                                  </NavLink>
+                                        </li>
+                                        <li
+                                                  className="nav-item"
+                                        >
+                                                  <NavLink
+                                                            activeClassName="active"
+                                                            className="nav-link text-capitalize"
+                                                            to="/mall"
+                                                  >
+                                                            Mall
+                                                  </NavLink>
                                         </li>
                                         <li
                                                   className="nav-item"
                                         >
                                                   <span
                                                             className="nav-link text-capitalize"
-                                                  />
+                                                  >
+                                                            no url
+                                                  </span>
                                         </li>
                               </div>
                     </div>
@@ -232,12 +366,23 @@ ShallowWrapper {
     items={
         Array [
             Object {
-              "link": "/mall",
-              "name": "Malls",
+              "code": "a",
+              "text": "Item A",
+              "url": "/item-a",
             },
             Object {
-              "link": "/flagship",
-              "name": "Flagship Stores",
+              "code": "b",
+              "text": "Item B",
+              "url": "/item-b",
+            },
+            Object {
+              "code": "mall",
+              "text": "Mall",
+              "url": "/mall",
+            },
+            Object {
+              "code": "no-url",
+              "text": "no url",
             },
           ]
     }

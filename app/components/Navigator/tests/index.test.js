@@ -1,13 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { navItems } from 'containers/Header';
 import Navigator from '../index';
 
 describe('<Navigator />', () => {
-    const navItems = [
-        { link: '/mall', name: 'Malls' },
-        { link: '/flagship', name: 'Flagship Stores' },
-    ];
     const wrapper = shallow(<Navigator items={navItems} />);
 
     it('should render Navigator Correctly', () => {

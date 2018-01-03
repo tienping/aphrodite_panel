@@ -32,6 +32,10 @@ ShallowWrapper {
                   "text": "Mall",
                   "url": "/mall",
                 },
+                Object {
+                  "code": "no-url",
+                  "text": "no url",
+                },
               ]
         }
     />
@@ -71,6 +75,10 @@ ShallowWrapper {
                           "text": "Mall",
                           "url": "/mall",
                         },
+                        Object {
+                          "code": "no-url",
+                          "text": "no url",
+                        },
                       ]
             }
       />
@@ -92,14 +100,18 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 1,
       "_context": Object {},
-      "_currentElement": <Header />,
+      "_currentElement": <Header
+        dispatch={[Function]}
+/>,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": Header {
         "_reactInternalInstance": [Circular],
         "context": Object {},
-        "props": Object {},
+        "props": Object {
+          "dispatch": [Function],
+        },
         "refs": Object {},
         "state": null,
         "updater": Object {
@@ -144,6 +156,10 @@ ShallowWrapper {
                                           "text": "Mall",
                                           "url": "/mall",
                                         },
+                                        Object {
+                                          "code": "no-url",
+                                          "text": "no url",
+                                        },
                                       ]
                     }
           />
@@ -183,6 +199,10 @@ ShallowWrapper {
                                           "text": "Mall",
                                           "url": "/mall",
                                         },
+                                        Object {
+                                          "code": "no-url",
+                                          "text": "no url",
+                                        },
                                       ]
                     }
           />
@@ -208,6 +228,8 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <Header />,
+  "unrendered": <Header
+    dispatch={[Function]}
+/>,
 }
 `;

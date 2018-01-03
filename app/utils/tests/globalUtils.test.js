@@ -16,6 +16,12 @@ describe('getURLParams', () => {
             shit: '3',
         });
     });
+
+    it('should return empty object if argument is not a string', () => {
+        const string = true;
+        const expected = getURLParams(string);
+        expect(expected).toEqual({});
+    });
 });
 
 describe('staticErrorResponse()', () => {
