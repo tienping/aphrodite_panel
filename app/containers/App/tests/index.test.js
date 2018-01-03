@@ -6,53 +6,27 @@ import { App } from '../index';
 import PrivateRoute from '../PrivateRoute';
 
 describe('<App />', () => {
-    const auth = false;
-    let appNoLogin;
-    let appDoLogin;
+    let app;
+    const isTrue = true;
     beforeEach(() => {
-        appNoLogin = shallow(<App authenticated={auth} />);
-        appDoLogin = shallow(<App authenticated={!auth} />);
+        app = shallow(<App authenticated={isTrue}></App>);
     });
 
-// before login:
-
-    it('should NOT show HershopHeader before login', () => {
-        expect(appNoLogin.find('#hershop-header-container').length).toEqual(0);
+    it('should show HershopHeader', () => {
+        expect(app.find('#hershop-header-container').length).toEqual(1);
     });
 
-    it('should NOT show show HershopSideBar before login', () => {
-        expect(appNoLogin.find('#hershop-sidebar-container').length).toEqual(0);
+    it('should show show HershopSideBar', () => {
+        expect(app.find('#hershop-sidebar-container').length).toEqual(1);
     });
 
-    it('should show HershopContent before login', () => {
-        expect(appNoLogin.find('#hershop-content-container').length).toEqual(1);
+    it('should show HershopContent', () => {
+        expect(app.find('#hershop-content-container').length).toEqual(1);
     });
 
-    it('should render Routes and PrivateRoutes before login', (done) => {
-        const routes = appNoLogin.find(Route).length;
-        const privateRoutes = appNoLogin.find(PrivateRoute).length;
-        expect(routes).toBeGreaterThan(0);
-        expect(privateRoutes).toBeGreaterThan(0);
-        done();
-    });
-
-// after login:
-
-    it('should show HershopHeader after login', () => {
-        expect(appDoLogin.find('#hershop-header-container').length).toEqual(1);
-    });
-
-    it('should show show HershopSideBar after login', () => {
-        expect(appDoLogin.find('#hershop-sidebar-container').length).toEqual(1);
-    });
-
-    it('should show HershopContent after login', () => {
-        expect(appDoLogin.find('#hershop-content-container').length).toEqual(1);
-    });
-
-    it('should render Routes and PrivateRoutes after login', (done) => {
-        const routes = appNoLogin.find(Route).length;
-        const privateRoutes = appNoLogin.find(PrivateRoute).length;
+    it('should render Routes and PrivateRoutes', (done) => {
+        const routes = app.find(Route).length;
+        const privateRoutes = app.find(PrivateRoute).length;
         expect(routes).toBeGreaterThan(0);
         expect(privateRoutes).toBeGreaterThan(0);
         done();
