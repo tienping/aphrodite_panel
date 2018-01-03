@@ -10,8 +10,8 @@ import {
     FETCH_TOP_NAV_FAILED,
 } from '../constants';
 
-describe('Header actions', () => {
-    describe('Fetch Header action', () => {
+describe('Topbar actions', () => {
+    describe('Fetch Topbar action', () => {
         it('has a type of FETCH_TOP_NAV', () => {
             const expected = {
                 type: FETCH_TOP_NAV,
@@ -19,7 +19,7 @@ describe('Header actions', () => {
             expect(fetchTopNav()).toEqual(expected);
         });
     });
-    describe('Fetch Header success action', () => {
+    describe('Fetch Topbar success action', () => {
         it('has a type of FETCH_TOP_NAV_SUCCESS', () => {
             const expected = {
                 type: FETCH_TOP_NAV_SUCCESS,
@@ -27,7 +27,7 @@ describe('Header actions', () => {
             expect(fetchTopNavSuccess()).toEqual(expected);
         });
     });
-    describe('Fetch Header failed action', () => {
+    describe('Fetch Topbar failed action', () => {
         it('has a type of FETCH_TOP_NAV_FAILED', () => {
             const expected = {
                 type: FETCH_TOP_NAV_FAILED,

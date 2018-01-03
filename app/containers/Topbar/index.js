@@ -1,6 +1,6 @@
 /**
  *
- * Header
+ * Topbar
  *
  */
 
@@ -24,8 +24,8 @@ import messages from './messages';
 
 import {
     makeSelectTopNav,
-    makeSelectHeaderLoading,
-    // makeSelectHeaderError,
+    makeSelectTopbarLoading,
+    // makeSelectTopbarError,
 } from './selectors';
 
 import { fetchTopNav } from './actions';
@@ -58,7 +58,7 @@ export const navItems = [
     },
 ];
 
-export class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class Topbar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
         this.props.dispatch(fetchTopNav({}));
     }
@@ -76,7 +76,7 @@ export class Header extends React.PureComponent { // eslint-disable-line react/p
     }
 }
 
-Header.propTypes = {
+Topbar.propTypes = {
     dispatch: PropTypes.func.isRequired,
     // topNav: PropTypes.array,
     // loading: PropTypes.bool,
@@ -88,8 +88,8 @@ Header.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     topNav: makeSelectTopNav(),
-    loading: makeSelectHeaderLoading(),
-    // error: makeSelectHeaderError(),
+    loading: makeSelectTopbarLoading(),
+    // error: makeSelectTopbarError(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -100,11 +100,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'header', reducer });
+const withReducer = injectReducer({ key: 'topbar', reducer });
 const withSaga = injectSaga({ key: 'mall', saga });
 
 export default compose(
     withReducer,
     withSaga,
     withConnect,
-)(Header);
+)(Topbar);

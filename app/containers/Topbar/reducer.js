@@ -22,7 +22,7 @@ const initialState = fromJS({
     ],
 });
 
-function headerReducer(state = initialState, action) {
+function topbarReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_TOP_NAV:
             return state
@@ -43,4 +43,4 @@ function headerReducer(state = initialState, action) {
     }
 }
 
-export default headerReducer;
+export default topbarReducer;

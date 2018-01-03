@@ -7,7 +7,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
     logout: {
-        id: 'app.components.Header.logout',
+        id: 'app.components.Topbar.logout',
         defaultMessage: 'Logout !',
     },
 });

@@ -1,7 +1,7 @@
 // import { fromJS } from 'immutable';
-// import { selectHeaderDomain } from '../selectors';
+// import { selectTopbarDomain } from '../selectors';
 
-describe('selectHeaderDomain', () => {
+describe('selectTopbarDomain', () => {
     it('Expect to have unit tests specified', () => {
         expect(true).toEqual(true);
     });

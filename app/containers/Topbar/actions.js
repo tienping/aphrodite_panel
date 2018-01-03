@@ -1,6 +1,6 @@
 /*
  *
- * Header actions
+ * Topbar actions
  *
  */
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { navItems } from 'containers/Header';
+import { navItems } from 'containers/Topbar';
 import Navigator from '../index';
 
 describe('<Navigator />', () => {

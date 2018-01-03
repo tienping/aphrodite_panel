@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Header } from '../index';
+import { Topbar } from '../index';
 
-describe('<Header />', () => {
-    it('should render Header Correctly', () => {
-        const wrapper = shallow(<Header dispatch={jest.fn} />);
+describe('<Topbar />', () => {
+    it('should render Topbar Correctly', () => {
+        const wrapper = shallow(<Topbar dispatch={jest.fn} />);
         expect(wrapper).toMatchSnapshot();
     });
 

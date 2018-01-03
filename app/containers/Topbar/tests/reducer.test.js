@@ -1,6 +1,6 @@
 
 import { fromJS } from 'immutable';
-import headerReducer from '../reducer';
+import topbarReducer from '../reducer';
 
 const initialState = fromJS({
     loading: false,
@@ -13,8 +13,8 @@ const initialState = fromJS({
     ],
 });
 
-describe('headerReducer', () => {
+describe('topbarReducer', () => {
     it('returns the initial state', () => {
-        expect(headerReducer(undefined, {})).toEqual(fromJS(initialState));
+        expect(topbarReducer(undefined, {})).toEqual(fromJS(initialState));
     });
 });

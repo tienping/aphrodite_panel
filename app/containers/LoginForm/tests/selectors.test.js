@@ -23,7 +23,7 @@ describe('Auth Selectors', () => {
         expect(selector(mock)).toEqual(errorState.get('error'));
     });
 
-    it('should select error LoginForm', () => {
+    it('should select loading LoginForm', () => {
         const selector = makeSelectAuthLoading();
         const loadingSelector = fromJS({
             loading: false,

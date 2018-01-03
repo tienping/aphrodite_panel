@@ -24,7 +24,7 @@ import LoginForm from 'containers/LoginForm/Loadable';
 import MallPage from 'containers/MallPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
-import Header from 'containers/Header';
+import Topbar from 'containers/Topbar';
 
 import {
     makeSelectAuthenticated,
@@ -34,16 +34,16 @@ import {
 import PrivateRoute from './PrivateRoute';
 
 const sidebarWidth = '40px';
-const headerHeight = '95px';
+const topbarHeight = '95px';
 
-const HershopHeader = styled.div`
+const HershopTopbar = styled.div`
     top: 0;
     left: 0;
     right: 0;
     z-index: 2000;
     overflow: hidden;
     position: absolute;
-    height: ${headerHeight};
+    height: ${topbarHeight};
     background-color: papayawhip;
 `;
 const HershopSideBar = styled.div`
@@ -55,12 +55,12 @@ const HershopSideBar = styled.div`
     position: absolute;
     width: ${sidebarWidth};
     background-color: skyblue;
-    padding-top: ${headerHeight};
+    padding-top: ${topbarHeight};
 `;
 
 const HershopContent = styled.div`
     padding: 16px;
-    margin-top: ${headerHeight};
+    margin-top: ${topbarHeight};
     margin-left: ${sidebarWidth};
 `;
 
@@ -84,12 +84,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         return (
             <section>
                 {authenticated &&
-                    <HershopHeader
-                        id="hershop-header-container"
+                    <HershopTopbar
+                        id="hershop-topbar-container"
                         className="d-none d-md-block"
                     >
-                        <Header />
-                    </HershopHeader>
+                        <Topbar />
+                    </HershopTopbar>
                 }
                 {authenticated &&
                     <HershopSideBar

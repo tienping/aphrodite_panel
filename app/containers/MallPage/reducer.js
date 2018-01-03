@@ -11,9 +11,13 @@ import {
     FETCH_MALL_FAILED,
 } from './constants';
 
-const initialState = fromJS({});
+export const initialState = fromJS({
+    loading: false,
+    error: false,
+    mall: {},
+});
 
-function mallPageReducer(state = initialState, action) {
+export function mallPageReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_MALL:
             return state

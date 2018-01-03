@@ -12,8 +12,8 @@ describe('<App />', () => {
         app = shallow(<App authenticated={isTrue}></App>);
     });
 
-    it('should show HershopHeader', () => {
-        expect(app.find('#hershop-header-container').length).toEqual(1);
+    it('should show HershopTopbar', () => {
+        expect(app.find('#hershop-topbar-container').length).toEqual(1);
     });
 
     it('should show show HershopSideBar', () => {

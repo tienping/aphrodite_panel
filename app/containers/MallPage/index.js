@@ -63,7 +63,7 @@ const mapStateToProps = createStructuredSelector({
     loading: makeSelectMallLoading(),
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         dispatch,
     };
