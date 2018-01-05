@@ -1,0 +1,12 @@
+.NavDropdown-component.dropdown {
+    display: inline-block;
+}
+
+.NavDropdown-component .dropdown__content {
+    display: none;
+    position: absolute;
+}
+
+.NavDropdown-component .dropdown--active .dropdown__content {
+    display: block;
+}

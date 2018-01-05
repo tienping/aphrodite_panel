@@ -196,7 +196,10 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": ["html","text"],
+    "coverageReporters": [
+      "html",
+      "text"
+    ],
     "collectCoverageFrom": [
       "app/**/*.{js,jsx}",
       "!app/**/*.test.{js,jsx}",
@@ -256,6 +259,7 @@
     "react-redux": "5.0.5",
     "react-router-dom": "4.1.1",
     "react-router-redux": "5.0.0-alpha.6",
+    "react-simple-dropdown": "^3.2.0",
     "redux": "3.6.0",
     "redux-dialog": "0.0.9",
     "redux-form": "^7.1.2",

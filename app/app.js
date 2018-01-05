@@ -70,9 +70,6 @@ if (module.hot) {
     module.hot.accept([
         './i18n',
         'containers/App',
-        'containers/MallPage',
-        // 'containers/FlagshipPage',
-        'containers/LoginForm',
     ], () => {
         ReactDOM.unmountComponentAtNode(MOUNT_NODE);
         render(translationMessages);

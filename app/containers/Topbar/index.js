@@ -30,31 +30,56 @@ import {
 
 import { fetchTopNav } from './actions';
 
+const HershopTopbarTitle = styled.span`
+    padding: 8px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    font-family: cursive;
+    display: inline-block;
+    color: ${(props) => props.theme.main_color};
+`;
+
 const LogoutBtn = styled.button`
-    position: absolute;
     right: 10px;
     bottom: 5px;
+    position: absolute;
 `;
 
 export const navItems = [
     {
-        code: 'a',
-        text: 'Item A',
-        url: '/item-a',
+        code: 'download',
+        type: 'external_url',
+        text: 'Download Mobile App',
+        url: 'https://app.hermo.my/iLgE/SmWv2UnrhC',
+        iconClass: 'fa fa-mobile text-white',
     },
     {
-        code: 'b',
-        text: 'Item B',
-        url: '/item-b',
+        code: 'Search',
+        type: 'dropdown',
+        text: 'Search',
+        // url: '/notification',
+        iconClass: 'fa fa-search text-white',
     },
     {
-        code: 'mall',
-        text: 'Mall',
-        url: '/mall',
+        code: 'notification',
+        type: 'button',
+        text: 'Notification',
+        // url: '/notification',
+        iconClass: 'fa fa-bell text-white',
     },
     {
-        code: 'no-url',
-        text: 'no url',
+        code: 'profile',
+        type: 'dropdown',
+        text: 'Profile',
+        // url: '/profile',
+        iconClass: 'fa fa-user text-white',
+    },
+    {
+        code: 'cart',
+        type: 'dropdown',
+        text: 'Cart',
+        // url: '/cart',
+        iconClass: 'fa fa-shopping-cart text-white',
     },
 ];
 
@@ -63,12 +88,19 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
         this.props.dispatch(fetchTopNav({}));
     }
 
+    handleLinkClick() {
+        console.log('click detected on simple dropdown');
+    }
+
     render() {
         return (
-            <div>
-                <img className="navbar-brand" src="" alt="logo" />
-                {<Navigator items={navItems} />}
-                <LogoutBtn className="btn btn-secondary" onClick={sessionService.deleteSession}>
+            <div className="text-center">
+                <HershopTopbarTitle>HERMO</HershopTopbarTitle>
+                {<Navigator
+                    items={navItems}
+                    handleLinkClick={this.handleLinkClick}
+                />}
+                <LogoutBtn className="btn btn-secondary d-none" onClick={sessionService.deleteSession}>
                     <FormattedMessage {...messages.logout} />
                 </LogoutBtn>
             </div>

@@ -7,37 +7,57 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import styled from 'styled-components';
+
+import NavDropdown from './NavDropdown';
+
+const NavContainer = styled.div`
+    position: absolute;
+    top: 0;
+    right: 16px;
+`;
+
+const navDropdownContainer = {
+    position: 'relative',
+};
 
 function Navigator(props) {
     const menu = props.items.map((item) => (
-        <li className="nav-item" key={item.code}>
-            {item.url ?
-                <NavLink to={item.url} className="nav-link text-capitalize">{item.text}</NavLink>
+        <li className="nav-item px-2" key={item.code} style={navDropdownContainer}>
+            {item.type === 'internal_url' ?
+                <NavLink to={item.url} className="nav-link text-capitalize" title={item.text}>
+                    <span className={item.iconClass ? item.iconClass : ''}></span>
+                </NavLink>
                 :
-                <span className="nav-link text-capitalize">{item.text}</span>
+                item.type === 'external_url' ?
+                    <a href={item.url} className="nav-link text-capitalize" title={item.text}>
+                        <span className={item.iconClass ? item.iconClass : ''}></span>
+                    </a>
+                    :
+                    item.type === 'dropdown' ?
+                        <span>{'<NavDropdown handleLinkClick={props.handleLinkClick} item={item}></NavDropdown>'}</span>
+                        :
+                        <span className="nav-link text-capitalize" title={item.text}>
+                            <span className={item.iconClass ? item.iconClass : ''}></span>
+                        </span>
             }
         </li>
     ));
 
     return (
-        <div>
-            <nav className="navbar navbar-toggleable-md navbar-expand-md navbar-light bg-faded">
-                <button className="navbar-toggler navbar-toggler-right" type="button">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        {props.items.length && menu}
-                    </div>
+        <NavContainer>
+            <nav className="navbar navbar-expand-md navbar-dark p-0">
+                <div className="navbar-nav d-flex flex-row">
+                    {props.items.length && menu}
                 </div>
             </nav>
-        </div>
+        </NavContainer>
     );
 }
 
 Navigator.propTypes = {
     items: PropTypes.array.isRequired,
+    handleLinkClick: PropTypes.func,
 };
 
 export default Navigator;

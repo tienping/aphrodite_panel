@@ -8,39 +8,52 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <div>
-    <img
-        alt="logo"
-        className="navbar-brand"
-        src=""
-    />
+  "node": <div
+    className="text-center"
+>
+    <Topbar__HershopTopbarTitle>
+        HERMO
+    </Topbar__HershopTopbarTitle>
     <Navigator
+        handleLinkClick={[Function]}
         items={
             Array [
                 Object {
-                  "code": "a",
-                  "text": "Item A",
-                  "url": "/item-a",
+                  "code": "download",
+                  "iconClass": "fa fa-mobile text-white",
+                  "text": "Download Mobile App",
+                  "type": "external_url",
+                  "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                 },
                 Object {
-                  "code": "b",
-                  "text": "Item B",
-                  "url": "/item-b",
+                  "code": "Search",
+                  "iconClass": "fa fa-search text-white",
+                  "text": "Search",
+                  "type": "dropdown",
                 },
                 Object {
-                  "code": "mall",
-                  "text": "Mall",
-                  "url": "/mall",
+                  "code": "notification",
+                  "iconClass": "fa fa-bell text-white",
+                  "text": "Notification",
+                  "type": "button",
                 },
                 Object {
-                  "code": "no-url",
-                  "text": "no url",
+                  "code": "profile",
+                  "iconClass": "fa fa-user text-white",
+                  "text": "Profile",
+                  "type": "dropdown",
+                },
+                Object {
+                  "code": "cart",
+                  "iconClass": "fa fa-shopping-cart text-white",
+                  "text": "Cart",
+                  "type": "dropdown",
                 },
               ]
         }
     />
     <Topbar__LogoutBtn
-        className="btn btn-secondary"
+        className="btn btn-secondary d-none"
         onClick={[Function]}
     >
         <FormattedMessage
@@ -51,39 +64,52 @@ ShallowWrapper {
     </Topbar__LogoutBtn>
 </div>,
   "nodes": Array [
-    <div>
-      <img
-            alt="logo"
-            className="navbar-brand"
-            src=""
-      />
+    <div
+      className="text-center"
+>
+      <Topbar__HershopTopbarTitle>
+            HERMO
+      </Topbar__HershopTopbarTitle>
       <Navigator
+            handleLinkClick={[Function]}
             items={
                   Array [
                         Object {
-                          "code": "a",
-                          "text": "Item A",
-                          "url": "/item-a",
+                          "code": "download",
+                          "iconClass": "fa fa-mobile text-white",
+                          "text": "Download Mobile App",
+                          "type": "external_url",
+                          "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                         },
                         Object {
-                          "code": "b",
-                          "text": "Item B",
-                          "url": "/item-b",
+                          "code": "Search",
+                          "iconClass": "fa fa-search text-white",
+                          "text": "Search",
+                          "type": "dropdown",
                         },
                         Object {
-                          "code": "mall",
-                          "text": "Mall",
-                          "url": "/mall",
+                          "code": "notification",
+                          "iconClass": "fa fa-bell text-white",
+                          "text": "Notification",
+                          "type": "button",
                         },
                         Object {
-                          "code": "no-url",
-                          "text": "no url",
+                          "code": "profile",
+                          "iconClass": "fa fa-user text-white",
+                          "text": "Profile",
+                          "type": "dropdown",
+                        },
+                        Object {
+                          "code": "cart",
+                          "iconClass": "fa fa-shopping-cart text-white",
+                          "text": "Cart",
+                          "type": "dropdown",
                         },
                       ]
             }
       />
       <Topbar__LogoutBtn
-            className="btn btn-secondary"
+            className="btn btn-secondary d-none"
             onClick={[Function]}
       >
             <FormattedMessage
@@ -132,39 +158,52 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <div>
-          <img
-                    alt="logo"
-                    className="navbar-brand"
-                    src=""
-          />
+        "_currentElement": <div
+          className="text-center"
+>
+          <Topbar__HershopTopbarTitle>
+                    HERMO
+          </Topbar__HershopTopbarTitle>
           <Navigator
+                    handleLinkClick={[Function]}
                     items={
                               Array [
                                         Object {
-                                          "code": "a",
-                                          "text": "Item A",
-                                          "url": "/item-a",
+                                          "code": "download",
+                                          "iconClass": "fa fa-mobile text-white",
+                                          "text": "Download Mobile App",
+                                          "type": "external_url",
+                                          "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                                         },
                                         Object {
-                                          "code": "b",
-                                          "text": "Item B",
-                                          "url": "/item-b",
+                                          "code": "Search",
+                                          "iconClass": "fa fa-search text-white",
+                                          "text": "Search",
+                                          "type": "dropdown",
                                         },
                                         Object {
-                                          "code": "mall",
-                                          "text": "Mall",
-                                          "url": "/mall",
+                                          "code": "notification",
+                                          "iconClass": "fa fa-bell text-white",
+                                          "text": "Notification",
+                                          "type": "button",
                                         },
                                         Object {
-                                          "code": "no-url",
-                                          "text": "no url",
+                                          "code": "profile",
+                                          "iconClass": "fa fa-user text-white",
+                                          "text": "Profile",
+                                          "type": "dropdown",
+                                        },
+                                        Object {
+                                          "code": "cart",
+                                          "iconClass": "fa fa-shopping-cart text-white",
+                                          "text": "Cart",
+                                          "type": "dropdown",
                                         },
                                       ]
                     }
           />
           <Topbar__LogoutBtn
-                    className="btn btn-secondary"
+                    className="btn btn-secondary d-none"
                     onClick={[Function]}
           >
                     <FormattedMessage
@@ -175,39 +214,52 @@ ShallowWrapper {
           </Topbar__LogoutBtn>
 </div>,
         "_debugID": 2,
-        "_renderedOutput": <div>
-          <img
-                    alt="logo"
-                    className="navbar-brand"
-                    src=""
-          />
+        "_renderedOutput": <div
+          className="text-center"
+>
+          <Topbar__HershopTopbarTitle>
+                    HERMO
+          </Topbar__HershopTopbarTitle>
           <Navigator
+                    handleLinkClick={[Function]}
                     items={
                               Array [
                                         Object {
-                                          "code": "a",
-                                          "text": "Item A",
-                                          "url": "/item-a",
+                                          "code": "download",
+                                          "iconClass": "fa fa-mobile text-white",
+                                          "text": "Download Mobile App",
+                                          "type": "external_url",
+                                          "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                                         },
                                         Object {
-                                          "code": "b",
-                                          "text": "Item B",
-                                          "url": "/item-b",
+                                          "code": "Search",
+                                          "iconClass": "fa fa-search text-white",
+                                          "text": "Search",
+                                          "type": "dropdown",
                                         },
                                         Object {
-                                          "code": "mall",
-                                          "text": "Mall",
-                                          "url": "/mall",
+                                          "code": "notification",
+                                          "iconClass": "fa fa-bell text-white",
+                                          "text": "Notification",
+                                          "type": "button",
                                         },
                                         Object {
-                                          "code": "no-url",
-                                          "text": "no url",
+                                          "code": "profile",
+                                          "iconClass": "fa fa-user text-white",
+                                          "text": "Profile",
+                                          "type": "dropdown",
+                                        },
+                                        Object {
+                                          "code": "cart",
+                                          "iconClass": "fa fa-shopping-cart text-white",
+                                          "text": "Cart",
+                                          "type": "dropdown",
                                         },
                                       ]
                     }
           />
           <Topbar__LogoutBtn
-                    className="btn btn-secondary"
+                    className="btn btn-secondary d-none"
                     onClick={[Function]}
           >
                     <FormattedMessage

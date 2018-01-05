@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -25,6 +25,7 @@ import MallPage from 'containers/MallPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import Topbar from 'containers/Topbar';
+import theme from '../../theme';
 
 import {
     makeSelectAuthenticated,
@@ -34,17 +35,16 @@ import {
 import PrivateRoute from './PrivateRoute';
 
 const sidebarWidth = '40px';
-const topbarHeight = '95px';
+const topbarHeight = '40px';
 
 const HershopTopbar = styled.div`
     top: 0;
     left: 0;
     right: 0;
     z-index: 2000;
-    overflow: hidden;
     position: absolute;
     height: ${topbarHeight};
-    background-color: papayawhip;
+    background-color: ${(props) => props.theme.main_bg};
 `;
 const HershopSideBar = styled.div`
     top: 0;
@@ -82,42 +82,44 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     render() {
         const { authenticated } = this.props;
         return (
-            <section>
-                {authenticated &&
-                    <HershopTopbar
-                        id="hershop-topbar-container"
-                        className="d-none d-md-block"
-                    >
-                        <Topbar />
-                    </HershopTopbar>
-                }
-                {authenticated &&
-                    <HershopSideBar
-                        id="hershop-sidebar-container"
-                        className="d-none d-md-block"
-                    >
-                        This is sidebar
-                    </HershopSideBar>
-                }
-                <HershopContent id="hershop-content-container">
-                    <Switch>
-                        <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
-                        <Route exact path="/mall" component={MallPage} />
-                        <Route exact path="/mall/:id" component={MallPage} />
-                        {/* <Route exact path="/flagship" auth={authenticated} component={Flagship} />
-                        <Route exact path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
+            <ThemeProvider theme={theme}>
+                <section>
+                    {authenticated &&
+                        <HershopTopbar
+                            id="hershop-topbar-container"
+                            className="d-none d-md-block"
+                        >
+                            <Topbar />
+                        </HershopTopbar>
+                    }
+                    {authenticated &&
+                        <HershopSideBar
+                            id="hershop-sidebar-container"
+                            className="d-none d-md-block"
+                        >
+                            This is sidebar
+                        </HershopSideBar>
+                    }
+                    <HershopContent id="hershop-content-container">
+                        <Switch>
+                            <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
+                            <Route exact path="/mall" component={MallPage} />
+                            <Route exact path="/mall/:id" component={MallPage} />
+                            {/* <Route exact path="/flagship" auth={authenticated} component={Flagship} />
+                            <Route exact path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
 
-                        <Route exact path="/login" component={LoginForm} />
-                        <Route path="" component={NotFoundPage} />
-                    </Switch>
-                </HershopContent>
-                <HershopMobileBar
-                    id="hershop-mobilebar-container"
-                    className="d-block d-md-none"
-                >
-                    This is bottom mobile bar
-                </HershopMobileBar>
-            </section>
+                            <Route exact path="/login" component={LoginForm} />
+                            <Route path="" component={NotFoundPage} />
+                        </Switch>
+                    </HershopContent>
+                    <HershopMobileBar
+                        id="hershop-mobilebar-container"
+                        className="d-block d-md-none"
+                    >
+                        This is bottom mobile bar
+                    </HershopMobileBar>
+                </section>
+            </ThemeProvider>
         );
     }
 }
