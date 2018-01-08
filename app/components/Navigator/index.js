@@ -35,7 +35,7 @@ function Navigator(props) {
                     </a>
                     :
                     item.type === 'dropdown' ?
-                        <span>{'<NavDropdown handleLinkClick={props.handleLinkClick} item={item}></NavDropdown>'}</span>
+                        <NavDropdown handleLinkClick={props.handleLinkClick} item={item}></NavDropdown>
                         :
                         <span className="nav-link text-capitalize" title={item.text}>
                             <span className={item.iconClass ? item.iconClass : ''}></span>
