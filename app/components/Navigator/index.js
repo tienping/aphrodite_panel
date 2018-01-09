@@ -5,11 +5,10 @@
 */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import NavDropdown from './NavDropdown';
+import NavItem from './NavItem/index';
 
 const NavContainer = styled.div`
     position: absolute;
@@ -17,30 +16,10 @@ const NavContainer = styled.div`
     right: 16px;
 `;
 
-const navDropdownContainer = {
-    position: 'relative',
-};
-
 function Navigator(props) {
     const menu = props.items.map((item) => (
-        <li className="nav-item px-2" key={item.code} style={navDropdownContainer}>
-            {item.type === 'internal_url' ?
-                <NavLink to={item.url} className="nav-link text-capitalize" title={item.text}>
-                    <span className={item.iconClass ? item.iconClass : ''}></span>
-                </NavLink>
-                :
-                item.type === 'external_url' ?
-                    <a href={item.url} className="nav-link text-capitalize" title={item.text}>
-                        <span className={item.iconClass ? item.iconClass : ''}></span>
-                    </a>
-                    :
-                    item.type === 'dropdown' ?
-                        <NavDropdown handleLinkClick={props.handleLinkClick} item={item}></NavDropdown>
-                        :
-                        <span className="nav-link text-capitalize" title={item.text}>
-                            <span className={item.iconClass ? item.iconClass : ''}></span>
-                        </span>
-            }
+        <li className="nav-item px-2" key={item.code}>
+            <NavItem data={item} handleLinkClick={props.handleLinkClick}></NavItem>
         </li>
     ));
 

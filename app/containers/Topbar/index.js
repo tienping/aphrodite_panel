@@ -88,9 +88,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
         this.props.dispatch(fetchTopNav({}));
     }
 
-    handleLinkClick() {
-        console.log('click detected on simple dropdown');
-    }
+    handleLinkClick() {}
 
     render() {
         return (

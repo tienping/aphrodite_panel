@@ -17,72 +17,77 @@ ShallowWrapper {
         >
             <li
                 className="nav-item px-2"
-                style={
-                    Object {
-                        "position": "relative",
-                      }
-                }
             >
-                <a
-                    className="nav-link text-capitalize"
-                    href="https://app.hermo.my/iLgE/SmWv2UnrhC"
-                    title="Download Mobile App"
-                >
-                    <span
-                        className="fa fa-mobile text-white"
-                    />
-                </a>
-            </li>
-            <li
-                className="nav-item px-2"
-                style={
-                    Object {
-                        "position": "relative",
-                      }
-                }
-            >
-                <NavDropdown
+                <NavItem
+                    data={
+                        Object {
+                            "code": "download",
+                            "iconClass": "fa fa-mobile text-white",
+                            "text": "Download Mobile App",
+                            "type": "external_url",
+                            "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
+                          }
+                    }
                     handleLinkClick={undefined}
                 />
             </li>
             <li
                 className="nav-item px-2"
-                style={
-                    Object {
-                        "position": "relative",
-                      }
-                }
             >
-                <span
-                    className="nav-link text-capitalize"
-                    title="Notification"
-                >
-                    <span
-                        className="fa fa-bell text-white"
-                    />
-                </span>
-            </li>
-            <li
-                className="nav-item px-2"
-                style={
-                    Object {
-                        "position": "relative",
-                      }
-                }
-            >
-                <NavDropdown
+                <NavItem
+                    data={
+                        Object {
+                            "code": "Search",
+                            "iconClass": "fa fa-search text-white",
+                            "text": "Search",
+                            "type": "dropdown",
+                          }
+                    }
                     handleLinkClick={undefined}
                 />
             </li>
             <li
                 className="nav-item px-2"
-                style={
-                    Object {
-                        "position": "relative",
-                      }
-                }
             >
-                <NavDropdown
+                <NavItem
+                    data={
+                        Object {
+                            "code": "notification",
+                            "iconClass": "fa fa-bell text-white",
+                            "text": "Notification",
+                            "type": "button",
+                          }
+                    }
+                    handleLinkClick={undefined}
+                />
+            </li>
+            <li
+                className="nav-item px-2"
+            >
+                <NavItem
+                    data={
+                        Object {
+                            "code": "profile",
+                            "iconClass": "fa fa-user text-white",
+                            "text": "Profile",
+                            "type": "dropdown",
+                          }
+                    }
+                    handleLinkClick={undefined}
+                />
+            </li>
+            <li
+                className="nav-item px-2"
+            >
+                <NavItem
+                    data={
+                        Object {
+                            "code": "cart",
+                            "iconClass": "fa fa-shopping-cart text-white",
+                            "text": "Cart",
+                            "type": "dropdown",
+                          }
+                    }
                     handleLinkClick={undefined}
                 />
             </li>
@@ -99,72 +104,77 @@ ShallowWrapper {
             >
                   <li
                         className="nav-item px-2"
-                        style={
-                              Object {
-                                    "position": "relative",
-                                  }
-                        }
                   >
-                        <a
-                              className="nav-link text-capitalize"
-                              href="https://app.hermo.my/iLgE/SmWv2UnrhC"
-                              title="Download Mobile App"
-                        >
-                              <span
-                                    className="fa fa-mobile text-white"
-                              />
-                        </a>
-                  </li>
-                  <li
-                        className="nav-item px-2"
-                        style={
-                              Object {
-                                    "position": "relative",
-                                  }
-                        }
-                  >
-                        <NavDropdown
+                        <NavItem
+                              data={
+                                    Object {
+                                          "code": "download",
+                                          "iconClass": "fa fa-mobile text-white",
+                                          "text": "Download Mobile App",
+                                          "type": "external_url",
+                                          "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
+                                        }
+                              }
                               handleLinkClick={undefined}
                         />
                   </li>
                   <li
                         className="nav-item px-2"
-                        style={
-                              Object {
-                                    "position": "relative",
-                                  }
-                        }
                   >
-                        <span
-                              className="nav-link text-capitalize"
-                              title="Notification"
-                        >
-                              <span
-                                    className="fa fa-bell text-white"
-                              />
-                        </span>
-                  </li>
-                  <li
-                        className="nav-item px-2"
-                        style={
-                              Object {
-                                    "position": "relative",
-                                  }
-                        }
-                  >
-                        <NavDropdown
+                        <NavItem
+                              data={
+                                    Object {
+                                          "code": "Search",
+                                          "iconClass": "fa fa-search text-white",
+                                          "text": "Search",
+                                          "type": "dropdown",
+                                        }
+                              }
                               handleLinkClick={undefined}
                         />
                   </li>
                   <li
                         className="nav-item px-2"
-                        style={
-                              Object {
-                                    "position": "relative",
-                                  }
-                        }
                   >
-                        <NavDropdown
+                        <NavItem
+                              data={
+                                    Object {
+                                          "code": "notification",
+                                          "iconClass": "fa fa-bell text-white",
+                                          "text": "Notification",
+                                          "type": "button",
+                                        }
+                              }
+                              handleLinkClick={undefined}
+                        />
+                  </li>
+                  <li
+                        className="nav-item px-2"
+                  >
+                        <NavItem
+                              data={
+                                    Object {
+                                          "code": "profile",
+                                          "iconClass": "fa fa-user text-white",
+                                          "text": "Profile",
+                                          "type": "dropdown",
+                                        }
+                              }
+                              handleLinkClick={undefined}
+                        />
+                  </li>
+                  <li
+                        className="nav-item px-2"
+                  >
+                        <NavItem
+                              data={
+                                    Object {
+                                          "code": "cart",
+                                          "iconClass": "fa fa-shopping-cart text-white",
+                                          "text": "Cart",
+                                          "type": "dropdown",
+                                        }
+                              }
                               handleLinkClick={undefined}
                         />
                   </li>
@@ -285,72 +295,77 @@ ShallowWrapper {
                     >
                               <li
                                         className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
                               >
-                                        <a
-                                                  className="nav-link text-capitalize"
-                                                  href="https://app.hermo.my/iLgE/SmWv2UnrhC"
-                                                  title="Download Mobile App"
-                                        >
-                                                  <span
-                                                            className="fa fa-mobile text-white"
-                                                  />
-                                        </a>
-                              </li>
-                              <li
-                                        className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
-                              >
-                                        <NavDropdown
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "download",
+                                                                      "iconClass": "fa fa-mobile text-white",
+                                                                      "text": "Download Mobile App",
+                                                                      "type": "external_url",
+                                                                      "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
+                                                                    }
+                                                  }
                                                   handleLinkClick={undefined}
                                         />
                               </li>
                               <li
                                         className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
                               >
-                                        <span
-                                                  className="nav-link text-capitalize"
-                                                  title="Notification"
-                                        >
-                                                  <span
-                                                            className="fa fa-bell text-white"
-                                                  />
-                                        </span>
-                              </li>
-                              <li
-                                        className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
-                              >
-                                        <NavDropdown
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "Search",
+                                                                      "iconClass": "fa fa-search text-white",
+                                                                      "text": "Search",
+                                                                      "type": "dropdown",
+                                                                    }
+                                                  }
                                                   handleLinkClick={undefined}
                                         />
                               </li>
                               <li
                                         className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
                               >
-                                        <NavDropdown
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "notification",
+                                                                      "iconClass": "fa fa-bell text-white",
+                                                                      "text": "Notification",
+                                                                      "type": "button",
+                                                                    }
+                                                  }
+                                                  handleLinkClick={undefined}
+                                        />
+                              </li>
+                              <li
+                                        className="nav-item px-2"
+                              >
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "profile",
+                                                                      "iconClass": "fa fa-user text-white",
+                                                                      "text": "Profile",
+                                                                      "type": "dropdown",
+                                                                    }
+                                                  }
+                                                  handleLinkClick={undefined}
+                                        />
+                              </li>
+                              <li
+                                        className="nav-item px-2"
+                              >
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "cart",
+                                                                      "iconClass": "fa fa-shopping-cart text-white",
+                                                                      "text": "Cart",
+                                                                      "type": "dropdown",
+                                                                    }
+                                                  }
                                                   handleLinkClick={undefined}
                                         />
                               </li>
@@ -367,72 +382,77 @@ ShallowWrapper {
                     >
                               <li
                                         className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
                               >
-                                        <a
-                                                  className="nav-link text-capitalize"
-                                                  href="https://app.hermo.my/iLgE/SmWv2UnrhC"
-                                                  title="Download Mobile App"
-                                        >
-                                                  <span
-                                                            className="fa fa-mobile text-white"
-                                                  />
-                                        </a>
-                              </li>
-                              <li
-                                        className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
-                              >
-                                        <NavDropdown
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "download",
+                                                                      "iconClass": "fa fa-mobile text-white",
+                                                                      "text": "Download Mobile App",
+                                                                      "type": "external_url",
+                                                                      "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
+                                                                    }
+                                                  }
                                                   handleLinkClick={undefined}
                                         />
                               </li>
                               <li
                                         className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
                               >
-                                        <span
-                                                  className="nav-link text-capitalize"
-                                                  title="Notification"
-                                        >
-                                                  <span
-                                                            className="fa fa-bell text-white"
-                                                  />
-                                        </span>
-                              </li>
-                              <li
-                                        className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
-                              >
-                                        <NavDropdown
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "Search",
+                                                                      "iconClass": "fa fa-search text-white",
+                                                                      "text": "Search",
+                                                                      "type": "dropdown",
+                                                                    }
+                                                  }
                                                   handleLinkClick={undefined}
                                         />
                               </li>
                               <li
                                         className="nav-item px-2"
-                                        style={
-                                                  Object {
-                                                            "position": "relative",
-                                                          }
-                                        }
                               >
-                                        <NavDropdown
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "notification",
+                                                                      "iconClass": "fa fa-bell text-white",
+                                                                      "text": "Notification",
+                                                                      "type": "button",
+                                                                    }
+                                                  }
+                                                  handleLinkClick={undefined}
+                                        />
+                              </li>
+                              <li
+                                        className="nav-item px-2"
+                              >
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "profile",
+                                                                      "iconClass": "fa fa-user text-white",
+                                                                      "text": "Profile",
+                                                                      "type": "dropdown",
+                                                                    }
+                                                  }
+                                                  handleLinkClick={undefined}
+                                        />
+                              </li>
+                              <li
+                                        className="nav-item px-2"
+                              >
+                                        <NavItem
+                                                  data={
+                                                            Object {
+                                                                      "code": "cart",
+                                                                      "iconClass": "fa fa-shopping-cart text-white",
+                                                                      "text": "Cart",
+                                                                      "type": "dropdown",
+                                                                    }
+                                                  }
                                                   handleLinkClick={undefined}
                                         />
                               </li>

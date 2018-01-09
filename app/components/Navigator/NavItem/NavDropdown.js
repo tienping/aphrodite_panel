@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
-import './simple-dropdown.scss';
+import './NavDropdown.scss';
 
 const DropdownContainer = styled(DropdownContent)`
     position: absolute;
