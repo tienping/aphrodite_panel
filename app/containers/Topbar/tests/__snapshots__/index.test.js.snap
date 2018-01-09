@@ -28,6 +28,15 @@ ShallowWrapper {
                 Object {
                   "code": "Search",
                   "iconClass": "fa fa-search text-white",
+                  "items": Array [
+                    Object {
+                      "text": "Search",
+                      "type": "title",
+                    },
+                    Object {
+                      "type": "search",
+                    },
+                  ],
                   "text": "Search",
                   "type": "dropdown",
                 },
@@ -40,12 +49,48 @@ ShallowWrapper {
                 Object {
                   "code": "profile",
                   "iconClass": "fa fa-user text-white",
+                  "items": Array [
+                    Object {
+                      "text": "Profile",
+                      "type": "title",
+                    },
+                    Object {
+                      "items": Array [
+                        Object {
+                          "code": "profile",
+                          "text": "Profile",
+                          "url": "/profile",
+                        },
+                        Object {
+                          "code": "order",
+                          "text": "Order",
+                          "url": "/profile/order",
+                        },
+                        Object {
+                          "code": "voucher",
+                          "text": "Voucher",
+                          "url": "/profile/voucher",
+                        },
+                        Object {
+                          "code": "logout",
+                          "text": "Logout",
+                          "url": "/lougout",
+                        },
+                      ],
+                      "type": "list",
+                    },
+                  ],
                   "text": "Profile",
                   "type": "dropdown",
                 },
                 Object {
                   "code": "cart",
                   "iconClass": "fa fa-shopping-cart text-white",
+                  "items": Array [
+                    Object {
+                      "type": "cart",
+                    },
+                  ],
                   "text": "Cart",
                   "type": "dropdown",
                 },
@@ -84,6 +129,15 @@ ShallowWrapper {
                         Object {
                           "code": "Search",
                           "iconClass": "fa fa-search text-white",
+                          "items": Array [
+                            Object {
+                              "text": "Search",
+                              "type": "title",
+                            },
+                            Object {
+                              "type": "search",
+                            },
+                          ],
                           "text": "Search",
                           "type": "dropdown",
                         },
@@ -96,12 +150,48 @@ ShallowWrapper {
                         Object {
                           "code": "profile",
                           "iconClass": "fa fa-user text-white",
+                          "items": Array [
+                            Object {
+                              "text": "Profile",
+                              "type": "title",
+                            },
+                            Object {
+                              "items": Array [
+                                Object {
+                                  "code": "profile",
+                                  "text": "Profile",
+                                  "url": "/profile",
+                                },
+                                Object {
+                                  "code": "order",
+                                  "text": "Order",
+                                  "url": "/profile/order",
+                                },
+                                Object {
+                                  "code": "voucher",
+                                  "text": "Voucher",
+                                  "url": "/profile/voucher",
+                                },
+                                Object {
+                                  "code": "logout",
+                                  "text": "Logout",
+                                  "url": "/lougout",
+                                },
+                              ],
+                              "type": "list",
+                            },
+                          ],
                           "text": "Profile",
                           "type": "dropdown",
                         },
                         Object {
                           "code": "cart",
                           "iconClass": "fa fa-shopping-cart text-white",
+                          "items": Array [
+                            Object {
+                              "type": "cart",
+                            },
+                          ],
                           "text": "Cart",
                           "type": "dropdown",
                         },
@@ -178,6 +268,15 @@ ShallowWrapper {
                                         Object {
                                           "code": "Search",
                                           "iconClass": "fa fa-search text-white",
+                                          "items": Array [
+                                            Object {
+                                              "text": "Search",
+                                              "type": "title",
+                                            },
+                                            Object {
+                                              "type": "search",
+                                            },
+                                          ],
                                           "text": "Search",
                                           "type": "dropdown",
                                         },
@@ -190,12 +289,48 @@ ShallowWrapper {
                                         Object {
                                           "code": "profile",
                                           "iconClass": "fa fa-user text-white",
+                                          "items": Array [
+                                            Object {
+                                              "text": "Profile",
+                                              "type": "title",
+                                            },
+                                            Object {
+                                              "items": Array [
+                                                Object {
+                                                  "code": "profile",
+                                                  "text": "Profile",
+                                                  "url": "/profile",
+                                                },
+                                                Object {
+                                                  "code": "order",
+                                                  "text": "Order",
+                                                  "url": "/profile/order",
+                                                },
+                                                Object {
+                                                  "code": "voucher",
+                                                  "text": "Voucher",
+                                                  "url": "/profile/voucher",
+                                                },
+                                                Object {
+                                                  "code": "logout",
+                                                  "text": "Logout",
+                                                  "url": "/lougout",
+                                                },
+                                              ],
+                                              "type": "list",
+                                            },
+                                          ],
                                           "text": "Profile",
                                           "type": "dropdown",
                                         },
                                         Object {
                                           "code": "cart",
                                           "iconClass": "fa fa-shopping-cart text-white",
+                                          "items": Array [
+                                            Object {
+                                              "type": "cart",
+                                            },
+                                          ],
                                           "text": "Cart",
                                           "type": "dropdown",
                                         },
@@ -234,6 +369,15 @@ ShallowWrapper {
                                         Object {
                                           "code": "Search",
                                           "iconClass": "fa fa-search text-white",
+                                          "items": Array [
+                                            Object {
+                                              "text": "Search",
+                                              "type": "title",
+                                            },
+                                            Object {
+                                              "type": "search",
+                                            },
+                                          ],
                                           "text": "Search",
                                           "type": "dropdown",
                                         },
@@ -246,12 +390,48 @@ ShallowWrapper {
                                         Object {
                                           "code": "profile",
                                           "iconClass": "fa fa-user text-white",
+                                          "items": Array [
+                                            Object {
+                                              "text": "Profile",
+                                              "type": "title",
+                                            },
+                                            Object {
+                                              "items": Array [
+                                                Object {
+                                                  "code": "profile",
+                                                  "text": "Profile",
+                                                  "url": "/profile",
+                                                },
+                                                Object {
+                                                  "code": "order",
+                                                  "text": "Order",
+                                                  "url": "/profile/order",
+                                                },
+                                                Object {
+                                                  "code": "voucher",
+                                                  "text": "Voucher",
+                                                  "url": "/profile/voucher",
+                                                },
+                                                Object {
+                                                  "code": "logout",
+                                                  "text": "Logout",
+                                                  "url": "/lougout",
+                                                },
+                                              ],
+                                              "type": "list",
+                                            },
+                                          ],
                                           "text": "Profile",
                                           "type": "dropdown",
                                         },
                                         Object {
                                           "code": "cart",
                                           "iconClass": "fa fa-shopping-cart text-white",
+                                          "items": Array [
+                                            Object {
+                                              "type": "cart",
+                                            },
+                                          ],
                                           "text": "Cart",
                                           "type": "dropdown",
                                         },

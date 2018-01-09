@@ -57,7 +57,17 @@ export const navItems = [
         code: 'Search',
         type: 'dropdown',
         text: 'Search',
-        // url: '/notification',
+        items: [
+            {
+                code: 'searchTitle',
+                type: 'title',
+                text: 'Search',
+            },
+            {
+                code: 'searchComponent',
+                type: 'search',
+            },
+        ],
         iconClass: 'fa fa-search text-white',
     },
     {
@@ -71,14 +81,46 @@ export const navItems = [
         code: 'profile',
         type: 'dropdown',
         text: 'Profile',
-        // url: '/profile',
+        items: [
+            {
+                code: 'profileTitle',
+                type: 'title',
+                text: 'Profile',
+            },
+            {
+                code: 'profileList',
+                type: 'list',
+                items: [{
+                    code: 'profile',
+                    text: 'Profile',
+                    url: '/profile',
+                }, {
+                    code: 'order',
+                    text: 'Order',
+                    url: '/profile/order',
+                }, {
+                    code: 'voucher',
+                    text: 'Voucher',
+                    url: '/profile/voucher',
+                }, {
+                    code: 'logout',
+                    text: 'Logout',
+                    url: '/lougout',
+                }],
+            },
+        ],
         iconClass: 'fa fa-user text-white',
     },
     {
         code: 'cart',
         type: 'dropdown',
         text: 'Cart',
-        // url: '/cart',
+        items: [
+            {
+                code: 'cartComponent',
+                type: 'cart',
+            },
+        ],
         iconClass: 'fa fa-shopping-cart text-white',
     },
 ];

@@ -19,39 +19,59 @@ const DropdownContainer = styled(DropdownContent)`
     right: 16px;
 `;
 
-const refString = 'dropdown';
+function NavLi(param) {
+    return (
+        <li className="dropdown__link">
+            <a className="dropdown__link__anchor" role="button" tabIndex="0" href={param.data.url}>
+                {param.data.text}
+            </a>
+        </li>
+    );
+}
+
+function Section(param) {
+    if (param.data.type === 'list') {
+        const list = param.data.items.map((item) => (
+            <NavLi data={item} key={item.code}></NavLi>
+        ));
+        return (
+            <ul className="account-dropdown__quick-links account-dropdown__segment text-left unstyled">
+                {list}
+            </ul>
+        );
+    } else if (param.data.type === 'title') {
+        return (
+            <h5>{param.data.text}</h5>
+        );
+    } else if (param.data.type === 'search') {
+        return (
+            <span>TODO: search_component</span>
+        );
+    } else if (param.data.type === 'cart') {
+        return (
+            <span>TODO: cart_component</span>
+        );
+    }
+}
 
 function NavDropdown(props) {
+    const sections = props.item.items.map((item) => (
+        <Section data={item} key={item.code}></Section>
+    ));
+
     return (
-        <Dropdown className="NavDropdown-component nav-link text-capitalize account-dropdown" ref={refString}>
+        <Dropdown className="NavDropdown-component nav-link text-capitalize account-dropdown">
             <DropdownTrigger>
                 <span className={(props.item.iconClass ? props.item.iconClass : 'account-dropdown__name ')} title={props.item.text}></span>
             </DropdownTrigger>
             <DropdownContainer>
-                <div className="account-dropdown__identity account-dropdown__segment">
-                    Signed in as <strong>username here</strong>
-                </div>
-                <ul className="account-dropdown__quick-links account-dropdown__segment text-left">
-                    <li className="account-dropdown__link">
-                        <a className="account-dropdown__link__anchor" role="button" tabIndex="0" onClick={props.handleLinkClick}>
-                            Help
-                        </a>
-                    </li>
-                </ul>
-                <ul className="account-dropdown__management-links account-dropdown__segment">
-                    <li className="account-dropdown__link">
-                        <a className="account-dropdown__link__anchor" role="button" tabIndex="0" onClick={props.handleLinkClick}>
-                            Sign out
-                        </a>
-                    </li>
-                </ul>
+                {sections}
             </DropdownContainer>
         </Dropdown>
     );
 }
 
 NavDropdown.propTypes = {
-    handleLinkClick: PropTypes.func,
     item: PropTypes.object,
 };
 
