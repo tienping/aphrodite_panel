@@ -38,6 +38,6 @@ export function* getTopNavData(page) {
     }
 }
 
-export default function* mallSaga() {
+export default function* topnavSaga() {
     yield takeLatest(FETCH_TOP_NAV, getTopNavData);
 }

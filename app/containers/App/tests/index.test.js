@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Route } from 'react-router-dom';
 
-import { App } from '../index';
+import 'jest-styled-components';
+
+import { App, HershopTopbar } from '../index';
 import PrivateRoute from '../PrivateRoute';
 
 describe('<App />', () => {
@@ -14,6 +16,11 @@ describe('<App />', () => {
 
     it('should show HershopTopbar', () => {
         expect(app.find('#hershop-topbar-container').length).toEqual(1);
+    });
+
+    it('should show HershopTopbar background colour based on theme colour', () => {
+        const rendered = shallow(<HershopTopbar theme={{ main_bg: 'salmon' }} />);
+        expect(rendered).toHaveStyleRule('background-color', 'salmon');
     });
 
     it('should show show HershopSideBar', () => {

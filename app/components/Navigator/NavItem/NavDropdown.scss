@@ -1,5 +1,19 @@
 .NavDropdown-component.dropdown {
     display: inline-block;
+
+    &.nav-link {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .dropdown__trigger {
+        padding: 8px;
+        cursor: pointer;
+    }
+}
+
+.vertical-navigator .NavDropdown-component .dropdown__content {
+    left: 0;
 }
 
 .NavDropdown-component .dropdown__content {

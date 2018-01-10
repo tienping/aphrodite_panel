@@ -35,7 +35,7 @@ function Section(param) {
             <NavLi data={item} key={item.code}></NavLi>
         ));
         return (
-            <ul className="account-dropdown__quick-links account-dropdown__segment text-left unstyled">
+            <ul className="dropdown__quick-links dropdown__segment text-left unstyled">
                 {list}
             </ul>
         );
@@ -60,9 +60,9 @@ function NavDropdown(props) {
     ));
 
     return (
-        <Dropdown className="NavDropdown-component nav-link text-capitalize account-dropdown">
+        <Dropdown className="NavDropdown-component nav-link text-capitalize dropdown">
             <DropdownTrigger>
-                <span className={(props.item.iconClass ? props.item.iconClass : 'account-dropdown__name ')} title={props.item.text}></span>
+                <span className={(props.item.iconClass ? props.item.iconClass : 'dropdown__name ')} title={props.item.text}></span>
             </DropdownTrigger>
             <DropdownContainer>
                 {sections}

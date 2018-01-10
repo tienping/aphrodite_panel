@@ -11,6 +11,11 @@ ShallowWrapper {
   "node": <div
     className="text-center"
 >
+    <Topbar__HideHeader>
+        <span
+            className="fa fa-bars"
+        />
+    </Topbar__HideHeader>
     <Topbar__HershopTopbarTitle>
         HERMO
     </Topbar__HershopTopbarTitle>
@@ -26,21 +31,6 @@ ShallowWrapper {
                   "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                 },
                 Object {
-                  "code": "Search",
-                  "iconClass": "fa fa-search text-white",
-                  "items": Array [
-                    Object {
-                      "text": "Search",
-                      "type": "title",
-                    },
-                    Object {
-                      "type": "search",
-                    },
-                  ],
-                  "text": "Search",
-                  "type": "dropdown",
-                },
-                Object {
                   "code": "notification",
                   "iconClass": "fa fa-bell text-white",
                   "text": "Notification",
@@ -51,10 +41,12 @@ ShallowWrapper {
                   "iconClass": "fa fa-user text-white",
                   "items": Array [
                     Object {
+                      "code": "profileTitle",
                       "text": "Profile",
                       "type": "title",
                     },
                     Object {
+                      "code": "profileList",
                       "items": Array [
                         Object {
                           "code": "profile",
@@ -88,6 +80,7 @@ ShallowWrapper {
                   "iconClass": "fa fa-shopping-cart text-white",
                   "items": Array [
                     Object {
+                      "code": "cartComponent",
                       "type": "cart",
                     },
                   ],
@@ -97,21 +90,16 @@ ShallowWrapper {
               ]
         }
     />
-    <Topbar__LogoutBtn
-        className="btn btn-secondary d-none"
-        onClick={[Function]}
-    >
-        <FormattedMessage
-            defaultMessage="Logout !"
-            id="app.components.Topbar.logout"
-            values={Object {}}
-        />
-    </Topbar__LogoutBtn>
 </div>,
   "nodes": Array [
     <div
       className="text-center"
 >
+      <Topbar__HideHeader>
+            <span
+                  className="fa fa-bars"
+            />
+      </Topbar__HideHeader>
       <Topbar__HershopTopbarTitle>
             HERMO
       </Topbar__HershopTopbarTitle>
@@ -127,21 +115,6 @@ ShallowWrapper {
                           "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                         },
                         Object {
-                          "code": "Search",
-                          "iconClass": "fa fa-search text-white",
-                          "items": Array [
-                            Object {
-                              "text": "Search",
-                              "type": "title",
-                            },
-                            Object {
-                              "type": "search",
-                            },
-                          ],
-                          "text": "Search",
-                          "type": "dropdown",
-                        },
-                        Object {
                           "code": "notification",
                           "iconClass": "fa fa-bell text-white",
                           "text": "Notification",
@@ -152,10 +125,12 @@ ShallowWrapper {
                           "iconClass": "fa fa-user text-white",
                           "items": Array [
                             Object {
+                              "code": "profileTitle",
                               "text": "Profile",
                               "type": "title",
                             },
                             Object {
+                              "code": "profileList",
                               "items": Array [
                                 Object {
                                   "code": "profile",
@@ -189,6 +164,7 @@ ShallowWrapper {
                           "iconClass": "fa fa-shopping-cart text-white",
                           "items": Array [
                             Object {
+                              "code": "cartComponent",
                               "type": "cart",
                             },
                           ],
@@ -198,16 +174,6 @@ ShallowWrapper {
                       ]
             }
       />
-      <Topbar__LogoutBtn
-            className="btn btn-secondary d-none"
-            onClick={[Function]}
-      >
-            <FormattedMessage
-                  defaultMessage="Logout !"
-                  id="app.components.Topbar.logout"
-                  values={Object {}}
-            />
-      </Topbar__LogoutBtn>
 </div>,
   ],
   "options": Object {},
@@ -251,6 +217,11 @@ ShallowWrapper {
         "_currentElement": <div
           className="text-center"
 >
+          <Topbar__HideHeader>
+                    <span
+                              className="fa fa-bars"
+                    />
+          </Topbar__HideHeader>
           <Topbar__HershopTopbarTitle>
                     HERMO
           </Topbar__HershopTopbarTitle>
@@ -266,21 +237,6 @@ ShallowWrapper {
                                           "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                                         },
                                         Object {
-                                          "code": "Search",
-                                          "iconClass": "fa fa-search text-white",
-                                          "items": Array [
-                                            Object {
-                                              "text": "Search",
-                                              "type": "title",
-                                            },
-                                            Object {
-                                              "type": "search",
-                                            },
-                                          ],
-                                          "text": "Search",
-                                          "type": "dropdown",
-                                        },
-                                        Object {
                                           "code": "notification",
                                           "iconClass": "fa fa-bell text-white",
                                           "text": "Notification",
@@ -291,10 +247,12 @@ ShallowWrapper {
                                           "iconClass": "fa fa-user text-white",
                                           "items": Array [
                                             Object {
+                                              "code": "profileTitle",
                                               "text": "Profile",
                                               "type": "title",
                                             },
                                             Object {
+                                              "code": "profileList",
                                               "items": Array [
                                                 Object {
                                                   "code": "profile",
@@ -328,6 +286,7 @@ ShallowWrapper {
                                           "iconClass": "fa fa-shopping-cart text-white",
                                           "items": Array [
                                             Object {
+                                              "code": "cartComponent",
                                               "type": "cart",
                                             },
                                           ],
@@ -337,21 +296,16 @@ ShallowWrapper {
                                       ]
                     }
           />
-          <Topbar__LogoutBtn
-                    className="btn btn-secondary d-none"
-                    onClick={[Function]}
-          >
-                    <FormattedMessage
-                              defaultMessage="Logout !"
-                              id="app.components.Topbar.logout"
-                              values={Object {}}
-                    />
-          </Topbar__LogoutBtn>
 </div>,
         "_debugID": 2,
         "_renderedOutput": <div
           className="text-center"
 >
+          <Topbar__HideHeader>
+                    <span
+                              className="fa fa-bars"
+                    />
+          </Topbar__HideHeader>
           <Topbar__HershopTopbarTitle>
                     HERMO
           </Topbar__HershopTopbarTitle>
@@ -367,21 +321,6 @@ ShallowWrapper {
                                           "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                                         },
                                         Object {
-                                          "code": "Search",
-                                          "iconClass": "fa fa-search text-white",
-                                          "items": Array [
-                                            Object {
-                                              "text": "Search",
-                                              "type": "title",
-                                            },
-                                            Object {
-                                              "type": "search",
-                                            },
-                                          ],
-                                          "text": "Search",
-                                          "type": "dropdown",
-                                        },
-                                        Object {
                                           "code": "notification",
                                           "iconClass": "fa fa-bell text-white",
                                           "text": "Notification",
@@ -392,10 +331,12 @@ ShallowWrapper {
                                           "iconClass": "fa fa-user text-white",
                                           "items": Array [
                                             Object {
+                                              "code": "profileTitle",
                                               "text": "Profile",
                                               "type": "title",
                                             },
                                             Object {
+                                              "code": "profileList",
                                               "items": Array [
                                                 Object {
                                                   "code": "profile",
@@ -429,6 +370,7 @@ ShallowWrapper {
                                           "iconClass": "fa fa-shopping-cart text-white",
                                           "items": Array [
                                             Object {
+                                              "code": "cartComponent",
                                               "type": "cart",
                                             },
                                           ],
@@ -438,16 +380,6 @@ ShallowWrapper {
                                       ]
                     }
           />
-          <Topbar__LogoutBtn
-                    className="btn btn-secondary d-none"
-                    onClick={[Function]}
-          >
-                    <FormattedMessage
-                              defaultMessage="Logout !"
-                              id="app.components.Topbar.logout"
-                              values={Object {}}
-                    />
-          </Topbar__LogoutBtn>
 </div>,
       },
       "_renderedNodeType": 0,

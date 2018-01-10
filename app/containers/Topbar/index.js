@@ -9,10 +9,10 @@ import styled from 'styled-components';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { sessionService } from 'redux-react-session';
+// import { sessionService } from 'redux-react-session';
 
 import Navigator from 'components/Navigator';
 
@@ -20,13 +20,13 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+// import messages from './messages';
 
-import {
-    makeSelectTopNav,
-    makeSelectTopbarLoading,
-    // makeSelectTopbarError,
-} from './selectors';
+// import {
+//     makeSelectTopNav,
+//     makeSelectTopbarLoading,
+//     // makeSelectTopbarError,
+// } from './selectors';
 
 import { fetchTopNav } from './actions';
 
@@ -39,12 +39,6 @@ const HershopTopbarTitle = styled.span`
     color: ${(props) => props.theme.main_color};
 `;
 
-const LogoutBtn = styled.button`
-    right: 10px;
-    bottom: 5px;
-    position: absolute;
-`;
-
 export const navItems = [
     {
         code: 'download',
@@ -52,23 +46,6 @@ export const navItems = [
         text: 'Download Mobile App',
         url: 'https://app.hermo.my/iLgE/SmWv2UnrhC',
         iconClass: 'fa fa-mobile text-white',
-    },
-    {
-        code: 'Search',
-        type: 'dropdown',
-        text: 'Search',
-        items: [
-            {
-                code: 'searchTitle',
-                type: 'title',
-                text: 'Search',
-            },
-            {
-                code: 'searchComponent',
-                type: 'search',
-            },
-        ],
-        iconClass: 'fa fa-search text-white',
     },
     {
         code: 'notification',
@@ -125,6 +102,12 @@ export const navItems = [
     },
 ];
 
+const HideHeader = styled.div`
+    float: left;
+    color: white;
+    padding: 8px 16px;
+`;
+
 export class Topbar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
         this.props.dispatch(fetchTopNav({}));
@@ -135,14 +118,12 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
     render() {
         return (
             <div className="text-center">
+                <HideHeader><span className="fa fa-bars"></span></HideHeader>
                 <HershopTopbarTitle>HERMO</HershopTopbarTitle>
                 {<Navigator
                     items={navItems}
                     handleLinkClick={this.handleLinkClick}
                 />}
-                <LogoutBtn className="btn btn-secondary d-none" onClick={sessionService.deleteSession}>
-                    <FormattedMessage {...messages.logout} />
-                </LogoutBtn>
             </div>
         );
     }
@@ -150,7 +131,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
 
 Topbar.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    // topNav: PropTypes.array,
+    // topNav: PropTypes.object,
     // loading: PropTypes.bool,
     // error: PropTypes.oneOfType([
     //     PropTypes.bool,
@@ -159,8 +140,8 @@ Topbar.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-    topNav: makeSelectTopNav(),
-    loading: makeSelectTopbarLoading(),
+    // topNav: makeSelectTopNav(),
+    // loading: makeSelectTopbarLoading(),
     // error: makeSelectTopbarError(),
 });
 
@@ -173,7 +154,7 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({ key: 'topbar', reducer });
-const withSaga = injectSaga({ key: 'mall', saga });
+const withSaga = injectSaga({ key: 'topnav', saga });
 
 export default compose(
     withReducer,

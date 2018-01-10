@@ -19,12 +19,15 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Switch, Route } from 'react-router-dom';
 
+import Notify from 'containers/Notify';
+
 import HomePage from 'containers/HomePage/Loadable';
 import LoginForm from 'containers/LoginForm/Loadable';
 import MallPage from 'containers/MallPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import Topbar from 'containers/Topbar';
+import Sidebar from 'containers/Sidebar';
 import theme from '../../theme';
 
 import {
@@ -34,10 +37,10 @@ import {
 
 import PrivateRoute from './PrivateRoute';
 
-const sidebarWidth = '40px';
+const sidebarWidth = '48px';
 const topbarHeight = '40px';
 
-const HershopTopbar = styled.div`
+export const HershopTopbar = styled.div`
     top: 0;
     left: 0;
     right: 0;
@@ -51,11 +54,12 @@ const HershopSideBar = styled.div`
     left: 0;
     bottom: 0;
     z-index: 1000;
-    overflow: hidden;
+    margin-top: 20px;
     position: absolute;
+    background-color: white;
     width: ${sidebarWidth};
-    background-color: skyblue;
     padding-top: ${topbarHeight};
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 `;
 
 const HershopContent = styled.div`
@@ -92,12 +96,13 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                             <Topbar />
                         </HershopTopbar>
                     }
+                    <Notify></Notify>
                     {authenticated &&
                         <HershopSideBar
                             id="hershop-sidebar-container"
                             className="d-none d-md-block"
                         >
-                            This is sidebar
+                            <Sidebar />
                         </HershopSideBar>
                     }
                     <HershopContent id="hershop-content-container">

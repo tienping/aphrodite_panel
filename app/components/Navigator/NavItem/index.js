@@ -26,7 +26,19 @@ function NavItem(props) {
         );
     } else if (props.data.type === 'dropdown') {
         return (
-            <NavDropdown handleLinkClick={props.handleLinkClick} item={props.data}></NavDropdown>
+            <NavDropdown item={props.data}></NavDropdown>
+        );
+    } else if (props.data.type === 'exec_function') {
+        return (
+            <a
+                onClick={props.handleLinkClick}
+                role="button"
+                tabIndex="0"
+                className="nav-link text-capitalize"
+                title={props.data.text}
+            >
+                <span className={props.data.iconClass ? props.data.iconClass : ''}></span>
+            </a>
         );
     }
 

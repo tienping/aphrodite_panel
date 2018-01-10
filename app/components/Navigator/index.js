@@ -18,10 +18,22 @@ const NavContainer = styled.div`
 
 function Navigator(props) {
     const menu = props.items.map((item) => (
-        <li className="nav-item px-2" key={item.code}>
+        <li className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
             <NavItem data={item} handleLinkClick={props.handleLinkClick}></NavItem>
         </li>
     ));
+
+    if (props.vertical) {
+        return (
+            <div className="vertical-navigator">
+                <nav className="navbar navbar-expand-md navbar-light p-0">
+                    <div className="navbar-nav d-flex flex-column">
+                        {props.items.length && menu}
+                    </div>
+                </nav>
+            </div>
+        );
+    }
 
     return (
         <NavContainer>
@@ -37,6 +49,7 @@ function Navigator(props) {
 Navigator.propTypes = {
     items: PropTypes.array.isRequired,
     handleLinkClick: PropTypes.func,
+    vertical: PropTypes.bool,
 };
 
 export default Navigator;

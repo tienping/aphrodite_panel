@@ -17,6 +17,11 @@ ShallowWrapper {
         >
             <li
                 className="nav-item px-2"
+                style={
+                    Object {
+                        "width": "48px",
+                      }
+                }
             >
                 <NavItem
                     data={
@@ -33,30 +38,11 @@ ShallowWrapper {
             </li>
             <li
                 className="nav-item px-2"
-            >
-                <NavItem
-                    data={
-                        Object {
-                            "code": "Search",
-                            "iconClass": "fa fa-search text-white",
-                            "items": Array [
-                              Object {
-                                "text": "Search",
-                                "type": "title",
-                              },
-                              Object {
-                                "type": "search",
-                              },
-                            ],
-                            "text": "Search",
-                            "type": "dropdown",
-                          }
-                    }
-                    handleLinkClick={undefined}
-                />
-            </li>
-            <li
-                className="nav-item px-2"
+                style={
+                    Object {
+                        "width": "48px",
+                      }
+                }
             >
                 <NavItem
                     data={
@@ -72,6 +58,11 @@ ShallowWrapper {
             </li>
             <li
                 className="nav-item px-2"
+                style={
+                    Object {
+                        "width": "48px",
+                      }
+                }
             >
                 <NavItem
                     data={
@@ -80,10 +71,12 @@ ShallowWrapper {
                             "iconClass": "fa fa-user text-white",
                             "items": Array [
                               Object {
+                                "code": "profileTitle",
                                 "text": "Profile",
                                 "type": "title",
                               },
                               Object {
+                                "code": "profileList",
                                 "items": Array [
                                   Object {
                                     "code": "profile",
@@ -118,6 +111,11 @@ ShallowWrapper {
             </li>
             <li
                 className="nav-item px-2"
+                style={
+                    Object {
+                        "width": "48px",
+                      }
+                }
             >
                 <NavItem
                     data={
@@ -126,6 +124,7 @@ ShallowWrapper {
                             "iconClass": "fa fa-shopping-cart text-white",
                             "items": Array [
                               Object {
+                                "code": "cartComponent",
                                 "type": "cart",
                               },
                             ],
@@ -149,6 +148,11 @@ ShallowWrapper {
             >
                   <li
                         className="nav-item px-2"
+                        style={
+                              Object {
+                                    "width": "48px",
+                                  }
+                        }
                   >
                         <NavItem
                               data={
@@ -165,30 +169,11 @@ ShallowWrapper {
                   </li>
                   <li
                         className="nav-item px-2"
-                  >
-                        <NavItem
-                              data={
-                                    Object {
-                                          "code": "Search",
-                                          "iconClass": "fa fa-search text-white",
-                                          "items": Array [
-                                            Object {
-                                              "text": "Search",
-                                              "type": "title",
-                                            },
-                                            Object {
-                                              "type": "search",
-                                            },
-                                          ],
-                                          "text": "Search",
-                                          "type": "dropdown",
-                                        }
-                              }
-                              handleLinkClick={undefined}
-                        />
-                  </li>
-                  <li
-                        className="nav-item px-2"
+                        style={
+                              Object {
+                                    "width": "48px",
+                                  }
+                        }
                   >
                         <NavItem
                               data={
@@ -204,6 +189,11 @@ ShallowWrapper {
                   </li>
                   <li
                         className="nav-item px-2"
+                        style={
+                              Object {
+                                    "width": "48px",
+                                  }
+                        }
                   >
                         <NavItem
                               data={
@@ -212,10 +202,12 @@ ShallowWrapper {
                                           "iconClass": "fa fa-user text-white",
                                           "items": Array [
                                             Object {
+                                              "code": "profileTitle",
                                               "text": "Profile",
                                               "type": "title",
                                             },
                                             Object {
+                                              "code": "profileList",
                                               "items": Array [
                                                 Object {
                                                   "code": "profile",
@@ -250,6 +242,11 @@ ShallowWrapper {
                   </li>
                   <li
                         className="nav-item px-2"
+                        style={
+                              Object {
+                                    "width": "48px",
+                                  }
+                        }
                   >
                         <NavItem
                               data={
@@ -258,6 +255,7 @@ ShallowWrapper {
                                           "iconClass": "fa fa-shopping-cart text-white",
                                           "items": Array [
                                             Object {
+                                              "code": "cartComponent",
                                               "type": "cart",
                                             },
                                           ],
@@ -289,21 +287,6 @@ ShallowWrapper {
                           "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
                         },
                         Object {
-                          "code": "Search",
-                          "iconClass": "fa fa-search text-white",
-                          "items": Array [
-                            Object {
-                              "text": "Search",
-                              "type": "title",
-                            },
-                            Object {
-                              "type": "search",
-                            },
-                          ],
-                          "text": "Search",
-                          "type": "dropdown",
-                        },
-                        Object {
                           "code": "notification",
                           "iconClass": "fa fa-bell text-white",
                           "text": "Notification",
@@ -314,10 +297,12 @@ ShallowWrapper {
                           "iconClass": "fa fa-user text-white",
                           "items": Array [
                             Object {
+                              "code": "profileTitle",
                               "text": "Profile",
                               "type": "title",
                             },
                             Object {
+                              "code": "profileList",
                               "items": Array [
                                 Object {
                                   "code": "profile",
@@ -351,6 +336,7 @@ ShallowWrapper {
                           "iconClass": "fa fa-shopping-cart text-white",
                           "items": Array [
                             Object {
+                              "code": "cartComponent",
                               "type": "cart",
                             },
                           ],
@@ -376,21 +362,6 @@ ShallowWrapper {
               "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
             },
             Object {
-              "code": "Search",
-              "iconClass": "fa fa-search text-white",
-              "items": Array [
-                Object {
-                  "text": "Search",
-                  "type": "title",
-                },
-                Object {
-                  "type": "search",
-                },
-              ],
-              "text": "Search",
-              "type": "dropdown",
-            },
-            Object {
               "code": "notification",
               "iconClass": "fa fa-bell text-white",
               "text": "Notification",
@@ -401,10 +372,12 @@ ShallowWrapper {
               "iconClass": "fa fa-user text-white",
               "items": Array [
                 Object {
+                  "code": "profileTitle",
                   "text": "Profile",
                   "type": "title",
                 },
                 Object {
+                  "code": "profileList",
                   "items": Array [
                     Object {
                       "code": "profile",
@@ -438,6 +411,7 @@ ShallowWrapper {
               "iconClass": "fa fa-shopping-cart text-white",
               "items": Array [
                 Object {
+                  "code": "cartComponent",
                   "type": "cart",
                 },
               ],
@@ -475,6 +449,11 @@ ShallowWrapper {
                     >
                               <li
                                         className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -491,30 +470,11 @@ ShallowWrapper {
                               </li>
                               <li
                                         className="nav-item px-2"
-                              >
-                                        <NavItem
-                                                  data={
-                                                            Object {
-                                                                      "code": "Search",
-                                                                      "iconClass": "fa fa-search text-white",
-                                                                      "items": Array [
-                                                                        Object {
-                                                                          "text": "Search",
-                                                                          "type": "title",
-                                                                        },
-                                                                        Object {
-                                                                          "type": "search",
-                                                                        },
-                                                                      ],
-                                                                      "text": "Search",
-                                                                      "type": "dropdown",
-                                                                    }
-                                                  }
-                                                  handleLinkClick={undefined}
-                                        />
-                              </li>
-                              <li
-                                        className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -530,6 +490,11 @@ ShallowWrapper {
                               </li>
                               <li
                                         className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -538,10 +503,12 @@ ShallowWrapper {
                                                                       "iconClass": "fa fa-user text-white",
                                                                       "items": Array [
                                                                         Object {
+                                                                          "code": "profileTitle",
                                                                           "text": "Profile",
                                                                           "type": "title",
                                                                         },
                                                                         Object {
+                                                                          "code": "profileList",
                                                                           "items": Array [
                                                                             Object {
                                                                               "code": "profile",
@@ -576,6 +543,11 @@ ShallowWrapper {
                               </li>
                               <li
                                         className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -584,6 +556,7 @@ ShallowWrapper {
                                                                       "iconClass": "fa fa-shopping-cart text-white",
                                                                       "items": Array [
                                                                         Object {
+                                                                          "code": "cartComponent",
                                                                           "type": "cart",
                                                                         },
                                                                       ],
@@ -607,6 +580,11 @@ ShallowWrapper {
                     >
                               <li
                                         className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -623,30 +601,11 @@ ShallowWrapper {
                               </li>
                               <li
                                         className="nav-item px-2"
-                              >
-                                        <NavItem
-                                                  data={
-                                                            Object {
-                                                                      "code": "Search",
-                                                                      "iconClass": "fa fa-search text-white",
-                                                                      "items": Array [
-                                                                        Object {
-                                                                          "text": "Search",
-                                                                          "type": "title",
-                                                                        },
-                                                                        Object {
-                                                                          "type": "search",
-                                                                        },
-                                                                      ],
-                                                                      "text": "Search",
-                                                                      "type": "dropdown",
-                                                                    }
-                                                  }
-                                                  handleLinkClick={undefined}
-                                        />
-                              </li>
-                              <li
-                                        className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -662,6 +621,11 @@ ShallowWrapper {
                               </li>
                               <li
                                         className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -670,10 +634,12 @@ ShallowWrapper {
                                                                       "iconClass": "fa fa-user text-white",
                                                                       "items": Array [
                                                                         Object {
+                                                                          "code": "profileTitle",
                                                                           "text": "Profile",
                                                                           "type": "title",
                                                                         },
                                                                         Object {
+                                                                          "code": "profileList",
                                                                           "items": Array [
                                                                             Object {
                                                                               "code": "profile",
@@ -708,6 +674,11 @@ ShallowWrapper {
                               </li>
                               <li
                                         className="nav-item px-2"
+                                        style={
+                                                  Object {
+                                                            "width": "48px",
+                                                          }
+                                        }
                               >
                                         <NavItem
                                                   data={
@@ -716,6 +687,7 @@ ShallowWrapper {
                                                                       "iconClass": "fa fa-shopping-cart text-white",
                                                                       "items": Array [
                                                                         Object {
+                                                                          "code": "cartComponent",
                                                                           "type": "cart",
                                                                         },
                                                                       ],
@@ -751,21 +723,6 @@ ShallowWrapper {
               "url": "https://app.hermo.my/iLgE/SmWv2UnrhC",
             },
             Object {
-              "code": "Search",
-              "iconClass": "fa fa-search text-white",
-              "items": Array [
-                Object {
-                  "text": "Search",
-                  "type": "title",
-                },
-                Object {
-                  "type": "search",
-                },
-              ],
-              "text": "Search",
-              "type": "dropdown",
-            },
-            Object {
               "code": "notification",
               "iconClass": "fa fa-bell text-white",
               "text": "Notification",
@@ -776,10 +733,12 @@ ShallowWrapper {
               "iconClass": "fa fa-user text-white",
               "items": Array [
                 Object {
+                  "code": "profileTitle",
                   "text": "Profile",
                   "type": "title",
                 },
                 Object {
+                  "code": "profileList",
                   "items": Array [
                     Object {
                       "code": "profile",
@@ -813,6 +772,7 @@ ShallowWrapper {
               "iconClass": "fa fa-shopping-cart text-white",
               "items": Array [
                 Object {
+                  "code": "cartComponent",
                   "type": "cart",
                 },
               ],
