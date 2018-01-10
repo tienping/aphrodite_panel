@@ -5,13 +5,19 @@ import { navItems } from 'containers/Topbar';
 import Navigator from '../index';
 
 describe('<Navigator />', () => {
-    const wrapper = shallow(<Navigator items={navItems} />);
+    const isTrue = true;
+    const navigator = shallow(<Navigator items={navItems} />);
+    const verticalNavigator = shallow(<Navigator items={navItems} vertical={isTrue} />);
 
     it('should render Navigator Correctly', () => {
-        expect(wrapper).toMatchSnapshot();
+        expect(navigator).toMatchSnapshot();
     });
 
     it('should have a nav element', () => {
-        expect(wrapper.find('nav').length).toEqual(1);
+        expect(navigator.find('nav').length).toEqual(1);
+    });
+
+    it('should be arranged in column if vertical is true', () => {
+        expect(verticalNavigator.find('.flex-column').length).toEqual(1);
     });
 });
