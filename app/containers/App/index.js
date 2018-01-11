@@ -19,6 +19,9 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Switch, Route } from 'react-router-dom';
 
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+
 import Notify from 'containers/Notify';
 
 import HomePage from 'containers/HomePage/Loadable';
@@ -34,6 +37,12 @@ import {
     makeSelectAuthenticated,
     makeSelectLocation,
 } from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+
+import {
+    fetchConfig,
+} from './actions';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -80,7 +89,7 @@ const HershopMobileBar = styled.div`
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
-        // anything to do after component rendered?
+        this.props.dispatch(fetchConfig());
     }
 
     render() {
@@ -130,6 +139,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 }
 
 App.propTypes = {
+    dispatch: PropTypes.func.isRequired,
     authenticated: PropTypes.bool.isRequired,
     // location: PropTypes.object,
 };
@@ -139,6 +149,19 @@ const mapStateToProps = createStructuredSelector({
     location: makeSelectLocation(),
 });
 
-const withConnect = connect(mapStateToProps);
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch,
+    };
+}
 
-export default compose(withConnect)(App);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'config', reducer });
+const withSaga = injectSaga({ key: 'config', saga });
+
+export default compose(
+    withReducer,
+    withSaga,
+    withConnect,
+)(App);
