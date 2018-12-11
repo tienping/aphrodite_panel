@@ -39,5 +39,5 @@ export function* getTopNavData(page) {
 }
 
 export default function* topnavSaga() {
-    yield takeLatest(FETCH_TOP_NAV, getTopNavData);
+    // yield takeLatest(FETCH_TOP_NAV, getTopNavData);
 }

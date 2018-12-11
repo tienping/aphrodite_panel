@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -25,13 +25,15 @@ import injectReducer from 'utils/injectReducer';
 import Notify from 'containers/Notify';
 
 import HomePage from 'containers/HomePage/Loadable';
+import TableListingPage from 'containers/TableListingPage/Loadable';
 import LoginForm from 'containers/LoginForm/Loadable';
-import MallPage from 'containers/MallPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+
+import tableSetting from 'utils/globalTableSetting';
+import { dataChecking } from 'utils/globalUtils';
 
 import Topbar from 'containers/Topbar';
 import Sidebar from 'containers/Sidebar';
-import theme from '../../theme';
 
 import {
     makeSelectAuthenticated,
@@ -87,6 +89,10 @@ const HershopMobileBar = styled.div`
     background-color: papayawhip;
 `;
 
+const pageReference = {
+    home: HomePage,
+};
+
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
         this.props.dispatch(fetchConfig());
@@ -95,45 +101,52 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     render() {
         const { authenticated } = this.props;
         return (
-            <ThemeProvider theme={theme}>
-                <section>
-                    {authenticated &&
-                        <HershopTopbar
-                            id="hershop-topbar-container"
-                            className="d-none d-md-block"
-                        >
-                            <Topbar />
-                        </HershopTopbar>
-                    }
-                    <Notify></Notify>
-                    {authenticated &&
-                        <HershopSideBar
-                            id="hershop-sidebar-container"
-                            className="d-none d-md-block"
-                        >
-                            <Sidebar />
-                        </HershopSideBar>
-                    }
-                    <HershopContent id="hershop-content-container">
-                        <Switch>
-                            <PrivateRoute exact path="/" auth={authenticated} component={HomePage} />
-                            <Route exact path="/mall" component={MallPage} />
-                            <Route exact path="/mall/:id" component={MallPage} />
-                            {/* <Route exact path="/flagship" auth={authenticated} component={Flagship} />
-                            <Route exact path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
+            <section>
+                <HershopTopbar
+                    id="hershop-topbar-container"
+                    className="visible-sm visible-md visible-lg"
+                >
+                    <Topbar />
+                </HershopTopbar>
 
-                            <Route exact path="/login" component={LoginForm} />
-                            <Route path="" component={NotFoundPage} />
-                        </Switch>
-                    </HershopContent>
-                    <HershopMobileBar
-                        id="hershop-mobilebar-container"
-                        className="d-block d-md-none"
-                    >
-                        This is bottom mobile bar
-                    </HershopMobileBar>
-                </section>
-            </ThemeProvider>
+                <Notify></Notify>
+
+                <HershopSideBar
+                    id="hershop-sidebar-container"
+                    className="hide"
+                >
+                    <Sidebar />
+                </HershopSideBar>
+
+                <HershopContent id="hershop-content-container">
+                    <Switch>
+                        <PrivateRoute exact={true} path="/" auth={authenticated} component={pageReference.home} />
+                        {
+                            Object.keys(tableSetting).map((key, index) => (
+                                <Route
+                                    key={index}
+                                    exact={true}
+                                    path={dataChecking(tableSetting, key, 'href')}
+
+                                    render={(props) => <TableListingPage {...props} pageType={dataChecking(tableSetting, key, 'id')} />}
+                                />
+                            ))
+                        }
+                        {/* <Route exact={true} path="/flagship" auth={authenticated} component={Flagship} />
+                        <Route exact={true} path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
+
+                        <Route exact={true} path="/login" component={LoginForm} />
+                        <Route path="" component={NotFoundPage} />
+                    </Switch>
+                </HershopContent>
+
+                <HershopMobileBar
+                    id="hershop-mobilebar-container"
+                    className="d-block d-md-none"
+                >
+                    This is bottom mobile bar
+                </HershopMobileBar>
+            </section>
         );
     }
 }

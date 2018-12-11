@@ -35,5 +35,5 @@ export function* getConfigData() {
 }
 
 export default function* appSaga() {
-    yield takeLatest(FETCH_CONFIG, getConfigData);
+    // yield takeLatest(FETCH_CONFIG, getConfigData);
 }

@@ -16,6 +16,9 @@ import { compose } from 'redux';
 
 import Navigator from 'components/Navigator';
 
+import tableSetting from 'utils/globalTableSetting';
+import { dataChecking } from 'utils/globalUtils';
+
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import reducer from './reducer';
@@ -32,6 +35,16 @@ import { fetchTopNav } from './actions';
 
 const HershopTopbarTitle = styled.span`
     padding: 8px;
+    font-size: 50%;
+    font-weight: 900;
+    letter-spacing: 5px;
+    font-family: cursive;
+    display: inline-block;
+    color: ${(props) => props.theme.main_color};
+`;
+const HershopTopbarBigTitle = styled.span`
+    padding: 8px;
+    font-size: 150%;
     font-weight: 900;
     letter-spacing: 5px;
     font-family: cursive;
@@ -109,6 +122,26 @@ const HideHeader = styled.div`
 `;
 
 export class Topbar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    state = {
+        navItems: (() => {
+            const items = [];
+
+            if (Object.keys(tableSetting)) {
+                Object.keys(tableSetting).forEach((key) => {
+                    items.push({
+                        code: dataChecking(tableSetting, key, 'id'),
+                        type: 'internal_url',
+                        text: dataChecking(tableSetting, key, 'title'),
+                        url: dataChecking(tableSetting, key, 'href'),
+                        iconClass: dataChecking(tableSetting, key, 'iconClass'),
+                    });
+                });
+            }
+
+            return items;
+        })(),
+    }
+
     componentDidMount() {
         this.props.dispatch(fetchTopNav({}));
     }
@@ -119,11 +152,15 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
         return (
             <div className="text-center">
                 <HideHeader><span className="fa fa-bars"></span></HideHeader>
-                <HershopTopbarTitle>HERMO</HershopTopbarTitle>
-                {<Navigator
-                    items={navItems}
+                <a href="/">
+                    <HershopTopbarTitle>HERMO</HershopTopbarTitle>
+                    <HershopTopbarBigTitle className="text-white text-hover-hermo-pink">GAMICENTER</HershopTopbarBigTitle>
+                    <HershopTopbarTitle>HERMO</HershopTopbarTitle>
+                </a>
+                <Navigator
+                    items={this.state.navItems}
                     handleLinkClick={this.handleLinkClick}
-                />}
+                />
             </div>
         );
     }

@@ -15,12 +15,15 @@ const NavContainer = styled.div`
     top: 0;
     right: 16px;
 `;
+const UnstyleList = styled.li`
+    list-style: none
+`;
 
 function Navigator(props) {
     const menu = props.items.map((item) => (
-        <li className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
+        <UnstyleList className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
             <NavItem data={item} handleLinkClick={props.handleLinkClick}></NavItem>
-        </li>
+        </UnstyleList>
     ));
 
     if (props.vertical) {

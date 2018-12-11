@@ -1,5 +1,4 @@
 import { injectGlobal } from 'styled-components';
-import './global-styles.scss';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
@@ -27,5 +26,13 @@ injectGlobal`
     label {
         font-family: Georgia, Times, 'Times New Roman', serif;
         line-height: 1.5em;
+    }
+
+    .text-white {
+        color: white;
+    }
+
+    .text-hover-hermo-pink:hover {
+        color: #FF0066;
     }
 `;

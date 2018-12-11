@@ -62,7 +62,7 @@ function NavDropdown(props) {
     return (
         <Dropdown className="NavDropdown-component nav-link text-capitalize dropdown">
             <DropdownTrigger>
-                <span className={(props.item.iconClass ? props.item.iconClass : 'dropdown__name ')} title={props.item.text}></span>
+                {props.children}
             </DropdownTrigger>
             <DropdownContainer>
                 {sections}
@@ -73,6 +73,7 @@ function NavDropdown(props) {
 
 NavDropdown.propTypes = {
     item: PropTypes.object,
+    children: PropTypes.object,
 };
 
 export default NavDropdown;

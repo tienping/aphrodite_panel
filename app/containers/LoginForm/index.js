@@ -46,7 +46,7 @@ export const Form = (props) => (
 export class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
         return (
-            <Modal header={{}} title="Login to MyReact" dismissable={{}} origin="/test" >
+            <Modal header={{}} title="Login to GamiCenter" dismissable={{}} origin="/test" >
                 <Form action={this.props.login} keys={authkeys} {...this.props} />
             </Modal>
         );
