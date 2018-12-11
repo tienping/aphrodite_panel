@@ -6,6 +6,7 @@ const tableSetting = {
         title: 'System Variable',
         href: '/sysvar',
         iconClass: 'fa fa-cogs text-white text-hover-hermo-pink',
+        tableWidth: null,
         fields: [
             { key: 'key', label: 'Key', width: getXdp(5), align: 'center', type: 'string' },
             { key: 'category', label: 'Category', width: getXdp(10), align: 'center', type: 'string' },
@@ -19,6 +20,7 @@ const tableSetting = {
         title: 'Vendors',
         href: '/vendor',
         iconClass: 'fa fa-users text-white text-hover-hermo-pink',
+        tableWidth: null,
         fields: [
             { key: 'id', label: 'ID', width: getXdp(5), align: 'center', type: 'string' },
             { key: 'name', label: 'Name', width: getXdp(10), align: 'center', type: 'string' },
@@ -31,6 +33,7 @@ const tableSetting = {
         title: 'Import voucher',
         href: '/import',
         iconClass: 'fa fa-upload text-white text-hover-hermo-pink',
+        tableWidth: getXdp(70),
         fields: [
             { key: 'event_code', label: 'Event Code', width: getXdp(10), align: 'center', type: 'string' },
             { key: 'partner', label: 'Partner', width: getXdp(10), align: 'center', type: 'dropdown' },
