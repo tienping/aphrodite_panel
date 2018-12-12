@@ -32,9 +32,6 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'utils/globalUtils';
 
-import Topbar from 'containers/Topbar';
-import Sidebar from 'containers/Sidebar';
-
 import {
     makeSelectAuthenticated,
     makeSelectLocation,
@@ -48,35 +45,10 @@ import {
 
 import PrivateRoute from './PrivateRoute';
 
-const sidebarWidth = '48px';
 const topbarHeight = '40px';
 
-export const HershopTopbar = styled.div`
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2000;
-    position: absolute;
-    height: ${topbarHeight};
-    background-color: ${(props) => props.theme.main_bg};
-`;
-const HershopSideBar = styled.div`
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1000;
-    margin-top: 20px;
-    position: absolute;
-    background-color: white;
-    width: ${sidebarWidth};
-    padding-top: ${topbarHeight};
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-`;
-
 const HershopContent = styled.div`
-    padding: 16px;
     margin-top: ${topbarHeight};
-    margin-left: ${sidebarWidth};
 `;
 
 const HershopMobileBar = styled.div`
@@ -102,23 +74,9 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         const { authenticated } = this.props;
         return (
             <section>
-                <HershopTopbar
-                    id="hershop-topbar-container"
-                    className="visible-sm visible-md visible-lg"
-                >
-                    <Topbar />
-                </HershopTopbar>
-
                 <Notify></Notify>
 
-                <HershopSideBar
-                    id="hershop-sidebar-container"
-                    className="hide"
-                >
-                    <Sidebar />
-                </HershopSideBar>
-
-                <HershopContent id="hershop-content-container">
+                <HershopContent id="hershop-content-container" className="container">
                     <Switch>
                         <PrivateRoute exact={true} path="/" auth={authenticated} component={pageReference.home} />
                         {

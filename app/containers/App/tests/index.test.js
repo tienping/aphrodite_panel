@@ -23,10 +23,6 @@ describe('<App />', () => {
         expect(rendered).toHaveStyleRule('background-color', 'salmon');
     });
 
-    it('should show show HershopSideBar', () => {
-        expect(app.find('#hershop-sidebar-container').length).toEqual(1);
-    });
-
     it('should show HershopContent', () => {
         expect(app.find('#hershop-content-container').length).toEqual(1);
     });

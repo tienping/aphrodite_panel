@@ -1,0 +1,51 @@
+.TableListingPage-page {
+    .table-container {
+        margin-top: 2rem;
+        border-top: 1px dashed #D0D0FD;
+        border-left: 1px dashed #D0D0FD;
+
+        .table-content-wrapper {
+            background-color: #FDFDFD;
+
+            .table-row {
+                border-bottom: 1px double #D0D0FD;
+
+                &.table-header .table-header-item { background-color: black !important; color: white !important; font-weight: 700; }
+
+                &:nth-child(even) {
+                    .table-row-item {
+                        background: RGBA(208, 208, 253, 0.2);
+                    }
+                }
+
+                .table-row-item {
+                    background: #FDFDFD;
+                    padding: 5px 10px;
+                    display: inline-block;
+                    border-right: 1px dashed #D0D0FD;
+                }
+            }
+        }
+    }
+
+    .page-action-modal-wrapper {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: RGBA(0, 0, 0, 0.5);
+
+        .page-action-modal {
+            position: absolute;
+            width: 50vw;
+            padding: 2vw;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background-color: #FFFFFF;
+            border-left: 1px solid gold;
+            box-shadow: -3px 0 10px 1px gray;
+        }
+    }
+}

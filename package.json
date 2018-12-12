@@ -192,7 +192,8 @@
       "no-useless-escape": 0,
       "global-require": 0,
       "camelcase": 0,
-      "no-plusplus": 0
+      "no-plusplus": 0,
+      "jsx-a11y/no-static-element-interactions": 0
     },
     "settings": {
       "import/resolver": {

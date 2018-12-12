@@ -1,0 +1,22 @@
+.gamicenter-button {
+    font-size: 120%;
+    margin: .5rem 1rem;
+    padding: 1.5rem 3rem;
+    display: inline-block;
+    border-radius: 15px;
+    color: #FDFDFD;
+    background-color: #660033;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: transform .215s;
+        color: #FF0068;
+        text-decoration: none;
+
+        &.triggered {
+            transform: none;
+            transition: none;
+        }
+    };
+}

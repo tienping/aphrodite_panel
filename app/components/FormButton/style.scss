@@ -1,0 +1,33 @@
+.FormButton-component {
+    display: inline-block;
+    height: 37px;
+    position: relative;
+}
+
+.page-action-modal-wrapper {
+    z-index: 1;
+}
+
+.page-action-modal-toggle {
+    display: none;
+}
+
+#page-action-modal {
+    height: 53px;
+    width: 160px;
+    position: absolute;
+    transition: background-color 1s, height 1s, width 1s, left 1s;
+
+    &.triggered {
+        z-index: 2;
+        background-color: white;
+        height: 500px;
+        width: 260px;
+        color: black;
+        overflow: hidden;
+
+        .page-action-modal-toggle {
+            display: block;
+        }
+    }
+}

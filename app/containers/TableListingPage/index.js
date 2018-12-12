@@ -5,40 +5,27 @@
  */
 
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { dataChecking } from 'utils/globalUtils';
-
 import tableSetting from 'utils/globalTableSetting';
 import formSetting from 'utils/globalFormSetting';
+
+import FormButton from 'components/FormButton';
 
 import makeSelectTableListingPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
-import { getXdp } from '../../utils/globalUtils';
+// import messages from './messages';
 
-const Item = styled.div`
-    background-color: 'lightyellow';
-`;
-
-const TouchableOpacity = styled.div`
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.05);
-        transition: transform .215s;
-        color: ${(props) => props.theme.tertiary_color};
-        text-decoration: none;
-    };
-`;
+import './TableListingPage.scss';
 
 const dataGroup = {
     sysvar: {
@@ -56,6 +43,279 @@ const dataGroup = {
                 'pageCount': 1,
             },
             'result': [
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{food: \'red\', good: \'almost\'}',
+                },
                 {
                     key: 'bolder',
                     category: '14',
@@ -110,6 +370,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             },
             {
                 title: `New ${this.props.pageType}`,
+                type: 'formAction',
                 action: () => {
                     this.setState({
                         showCreateModal: true,
@@ -119,17 +380,34 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         ];
 
         return (
-            <section style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+            <section className="page-actions" style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                 {
-                    actionButton.map((item, index) => (
-                        <button
-                            key={index}
-                            onClick={item.action}
-                            style={{ marginTop: getXdp(4), alignSelf: 'center', width: getXdp(20), justifyContent: 'center', backgroundColor: '#ffc94f' }}
-                        >
-                            <span style={{ color: 'black', textAlign: 'center', fontSize: 18 }}>{item.title}</span>
-                        </button>
-                    ))
+                    actionButton.map((item, index) => {
+                        if (item.type === 'formAction') {
+                            return (
+                                <FormButton
+                                    key={index}
+                                    style={{ color: 'black', textAlign: 'center', fontSize: 18 }}
+                                    action={item.action}
+                                    formFields={this.state.formFields}
+                                    formConfig={this.state.formConfig}
+                                    show={this.showCreateModal}
+                                >
+                                    {item.title}4
+                                </FormButton>
+                            );
+                        }
+
+                        return (
+                            <div
+                                key={index}
+                                className="gamicenter-button"
+                                onClick={item.action}
+                            >
+                                <span className="text-capitalize">{item.title}</span>
+                            </div>
+                        );
+                    })
                 }
             </section>
         );
@@ -139,15 +417,15 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         const { tableConfig, tableWidth } = this.state;
 
         return (
-            <section className="table-container" style={{ width: getXdp(90), overflow: 'auto', padding: '1vw 3vw' }}>
-                <div style={{ flex: 1, width: tableWidth || 'auto' }}>
-                    <div className="table-header" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <section className="table-container" style={{ overflowX: tableWidth ? 'scroll' : 'auto' }}>
+                <div className="table-content-wrapper" style={{ width: tableWidth || 'auto' }}>
+                    <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         {
                             tableConfig.map((head, index) => (
                                 <div
                                     key={index}
-                                    className="table-header-item"
-                                    style={{ flex: 1, width: head.width, display: 'inline-block' }}
+                                    className="table-header-item table-row-item"
+                                    style={{ flex: 1, width: head.width }}
                                 >
                                     <span style={{ textAlign: head.align }}>{ head.label }</span>
                                 </div>
@@ -167,7 +445,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             <div
                                                 key={index2}
                                                 className="table-row-item"
-                                                style={{ flex: 1, width: col.width, display: 'inline-block' }}
+                                                style={{ flex: 1, width: col.width }}
                                             >
                                                 { this.renderCell(row, col) }
                                             </div>
@@ -213,107 +491,33 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'checkbox':
                 return <span style={{ textAlign: col.align }}>[ ]</span>;
             default:
-                return <span style={{ textAlign: col.align }}>{ dataChecking(row, col.key) }</span>;
+                return <span style={{ textAlign: col.align }}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }
-    }
-
-    renderCreateModal() {
-        return (
-            <div
-                style={{
-                    display: this.state.showCreateModal ? 'flex' : 'none',
-                    position: 'absolute',
-                    width: getXdp(50),
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    backgroundColor: '#FFF',
-                    borderLeftWidth: 2,
-                    borderColor: 'gold',
-                    shadowOpacity: 0.5,
-                    padding: getXdp(2),
-                }}
-            >
-                <div style={{ position: 'relative' }}>
-                    <div
-                        style={{
-                            position: 'absolute',
-                            right: 0,
-                            top: 0,
-                            backgroundColor: 'rgba(0,0,0,0.3)',
-                            borderRadius: 100,
-                            zIndex: 100,
-                        }}
-                    >
-                        <span
-                            style={{
-                                padding: getXdp(1),
-                                fontWeight: '700',
-                                color: 'white',
-                            }}
-                            onClick={() => { this.setState({ showCreateModal: false }); }}
-                        >
-                            X
-                        </span>
-                    </div>
-                    <div>
-                        <div style={{ borderBottomColor: 'gray', borderBottomWidth: 1, padding: getXdp(1) }}>
-                            <span>{`Create ${this.props.pageType}`}</span>
-                        </div>
-                        <div>
-                            {
-                                this.state.formConfig ?
-                                    <div>
-                                        {
-                                            this.state.formConfig.map((field, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="create-modal-form-field"
-                                                >
-                                                    <span style={{ color: 'red' }}>{dataChecking(this.state.formFields, field.key, 'error')}</span>
-                                                    <Item style={{ marginTop: getXdp(3) }}>
-                                                        <input onChangeText={(value) => this.handleTextChange(field.key, value)} placeholder={field.placeholder} />
-                                                    </Item>
-                                                </div>
-                                            ))
-                                        }
-                                        <TouchableOpacity style={{ marginTop: getXdp(4) }} activeOpacity={0.9} onClick={() => this.state.formAction()}>
-                                            {
-                                                this.state.loading ?
-                                                    <span>isloading</span>
-                                                    :
-                                                    <span style={{ fontSize: 20, borderWidth: 1, textAlign: 'center', padding: 20, width: getXdp(40) }}>Create</span>
-                                            }
-                                        </TouchableOpacity>
-                                    </div>
-                                    :
-                                    null
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
     }
 
     render() {
         return (
-            <div>
+            <div id="TableListingPage-container" className="TableListingPage-page">
                 <Helmet>
-                    <title>TableListingPage</title>
+                    <title>
+                        {
+                            dataChecking(this.props, 'id') ?
+                                `${this.props.id} Page` :
+                                'Table'
+                        }
+                    </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
                 <div>{dataChecking(this.props, 'id')}</div>
                 {this.renderMenu()}
                 {this.renderTable()}
-                {this.renderCreateModal()}
             </div>
         );
     }
 }
 
 TableListingPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

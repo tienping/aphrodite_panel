@@ -10,15 +10,16 @@ import 'babel-polyfill';
 
 // Import all the third party stuff
 import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 
 // Import root app
 import App from 'containers/App';
+import Topbar from 'containers/Topbar';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -46,6 +47,18 @@ import { translationMessages } from './i18n';
 // Import CSS reset and Global Styles
 import './global-styles';
 
+const topbarHeight = '40px';
+
+export const HershopTopbar = styled.div`
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    position: sticky;
+    height: ${topbarHeight};
+    background-color: ${(props) => props.theme.main_bg};
+`;
+
 // Create redux store with history
 const initialState = {};
 const history = createHistory();
@@ -58,7 +71,15 @@ const render = (messages) => {
             <LanguageProvider messages={messages}>
                 <ThemeProvider theme={theme}>
                     <ConnectedRouter history={history}>
-                        <App />
+                        <div style={{ height: '100vh' }}>
+                            <HershopTopbar
+                                id="hershop-topbar-container"
+                                className="visible-sm visible-md visible-lg"
+                            >
+                                <Topbar />
+                            </HershopTopbar>
+                            <App />
+                        </div>
                     </ConnectedRouter>
                 </ThemeProvider>
             </LanguageProvider>
