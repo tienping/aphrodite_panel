@@ -22,7 +22,7 @@
         z-index: 2;
         background-color: white;
         height: 500px;
-        width: 260px;
+        width: 275px;
         color: black;
         overflow: hidden;
 
@@ -30,4 +30,8 @@
             display: block;
         }
     }
+}
+
+.field-input {
+    padding: 5px 10px;
 }

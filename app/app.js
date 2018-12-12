@@ -71,7 +71,7 @@ const render = (messages) => {
             <LanguageProvider messages={messages}>
                 <ThemeProvider theme={theme}>
                     <ConnectedRouter history={history}>
-                        <div style={{ height: '100vh' }}>
+                        <div>
                             <HershopTopbar
                                 id="hershop-topbar-container"
                                 className="visible-sm visible-md visible-lg"

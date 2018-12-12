@@ -14,10 +14,6 @@ import { dataChecking, getXdp } from 'utils/globalUtils';
 
 import './style.scss';
 
-const Item = styled.div`
-    background-color: 'lightyellow';
-`;
-
 const TouchableOpacity = styled.div`
     margin-top: 2rem;
 `;
@@ -66,9 +62,9 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                                         className="create-modal-form-field"
                                                     >
                                                         <span style={{ color: 'red' }}>{dataChecking(this.props.formFields, field.key, 'error')}</span>
-                                                        <Item style={{ marginTop: getXdp(3) }}>
+                                                        <div className="field-input">
                                                             <input onChange={(value) => this.handleTextChange(field.key, value)} placeholder={field.placeholder} />
-                                                        </Item>
+                                                        </div>
                                                     </div>
                                                 ))
                                             }

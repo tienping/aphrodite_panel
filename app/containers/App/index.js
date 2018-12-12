@@ -51,16 +51,6 @@ const HershopContent = styled.div`
     margin-top: ${topbarHeight};
 `;
 
-const HershopMobileBar = styled.div`
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2000;
-    overflow: hidden;
-    position: absolute;
-    background-color: papayawhip;
-`;
-
 const pageReference = {
     home: HomePage,
 };
@@ -97,13 +87,6 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                         <Route path="" component={NotFoundPage} />
                     </Switch>
                 </HershopContent>
-
-                <HershopMobileBar
-                    id="hershop-mobilebar-container"
-                    className="d-block d-md-none"
-                >
-                    This is bottom mobile bar
-                </HershopMobileBar>
             </section>
         );
     }
