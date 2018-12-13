@@ -8,6 +8,12 @@
     z-index: -1000;
     opacity: 0;
     transition: opacity 1s;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: RGBA(0, 0, 0, 0.5);
 
     &.triggered {
         z-index: 1;
@@ -35,7 +41,8 @@
 #page-action-modal {
     height: 45px;
     position: absolute;
-    transition: background-color 1s, height .5s, width .5s, left 1s;
+    box-shadow: 0px 0px 0px transparent;
+    transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
 
     &.gamicenter-button {
         padding: 0;
@@ -57,6 +64,7 @@
         width: 265px !important;
         color: black;
         overflow: hidden;
+        box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
 
         .become-title {
             font-family: cursive;

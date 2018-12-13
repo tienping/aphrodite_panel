@@ -26,7 +26,7 @@ import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
 
-import './TableListingPage.scss';
+import './style.scss';
 
 const dataGroup = {
     sysvar: {
@@ -252,7 +252,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         const { tableConfig, tableWidth } = this.state;
 
         return (
-            <section className="table-container" style={{ overflowX: tableWidth ? 'scroll' : 'auto' }}>
+            <section className="table-container">
                 <div className="table-content-wrapper" style={{ width: tableWidth || 'auto' }}>
                     <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         {
