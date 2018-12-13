@@ -74,8 +74,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                                 <Route
                                     key={index}
                                     exact={true}
-                                    path={dataChecking(tableSetting, key, 'href')}
-
+                                    path={dataChecking(tableSetting, key, 'link')}
                                     render={(props) => <TableListingPage {...props} pageType={dataChecking(tableSetting, key, 'id')} />}
                                 />
                             ))

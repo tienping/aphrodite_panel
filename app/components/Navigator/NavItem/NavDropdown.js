@@ -7,6 +7,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+import { dataChecking } from 'utils/globalUtils';
 
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import './NavDropdown.scss';
@@ -22,9 +25,9 @@ const DropdownContainer = styled(DropdownContent)`
 function NavLi(param) {
     return (
         <li className="dropdown__link">
-            <a className="dropdown__link__anchor" role="button" tabIndex="0" href={param.data.url}>
-                {param.data.text}
-            </a>
+            <NavLink to={dataChecking(param, 'data', 'url')} className="dropdown__link__anchor" title={dataChecking(param, 'data', 'text')}>
+                {dataChecking(param, 'data', 'text')}
+            </NavLink>
         </li>
     );
 }

@@ -4,7 +4,7 @@ const tableSetting = {
     sysvar: {
         id: 'sysvar',
         title: 'System Variable',
-        href: '/sysvar',
+        link: '/sysvar',
         iconClass: 'fa fa-cogs text-white text-hover-hermo-pink',
         tableWidth: getXdp(145),
         api: '',
@@ -21,7 +21,7 @@ const tableSetting = {
     vendor: {
         id: 'vendor',
         title: 'Vendors',
-        href: '/vendor',
+        link: '/vendor',
         iconClass: 'fa fa-users text-white text-hover-hermo-pink',
         tableWidth: null,
         api: '',
@@ -36,7 +36,7 @@ const tableSetting = {
     import: {
         id: 'import',
         title: 'Import voucher',
-        href: '/import',
+        link: '/import',
         iconClass: 'fa fa-upload text-white text-hover-hermo-pink',
         tableWidth: getXdp(70),
         api: '',

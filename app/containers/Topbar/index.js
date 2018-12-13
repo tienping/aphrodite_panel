@@ -6,6 +6,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -132,7 +133,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         code: dataChecking(tableSetting, key, 'id'),
                         type: 'internal_url',
                         text: dataChecking(tableSetting, key, 'title'),
-                        url: dataChecking(tableSetting, key, 'href'),
+                        url: dataChecking(tableSetting, key, 'link'),
                         iconClass: dataChecking(tableSetting, key, 'iconClass'),
                     });
                 });
@@ -152,11 +153,15 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
         return (
             <div className="text-center">
                 <HideHeader><span className="fa fa-bars"></span></HideHeader>
-                <a href="/">
-                    <HershopTopbarTitle>HERMO</HershopTopbarTitle>
-                    <HershopTopbarBigTitle className="text-white text-hover-hermo-pink">GAMICENTER</HershopTopbarBigTitle>
-                    <HershopTopbarTitle>HERMO</HershopTopbarTitle>
-                </a>
+                <div>
+                    <NavLink to="/" title="Go to homepage" className="gami-header-logo" type="default">
+                        <div>
+                            <HershopTopbarTitle>HERMO</HershopTopbarTitle>
+                            <HershopTopbarBigTitle className="text-white text-hover-hermo-pink">GAMICENTER</HershopTopbarBigTitle>
+                            <HershopTopbarTitle>HERMO</HershopTopbarTitle>
+                        </div>
+                    </NavLink>
+                </div>
                 <Navigator
                     items={this.state.navItems}
                     handleLinkClick={this.handleLinkClick}
