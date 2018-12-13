@@ -1,0 +1,172 @@
+const dataGroup = {
+    sysvar: {
+        'success': true,
+        'message': 'menu read successfully.',
+        'result': {
+            'page': {
+                'base': 'https://hermo-test.herokuapp.com:1337/',
+                'path': 'postgres/menu',
+            },
+            'meta': {
+                'totalCount': 3,
+                'currentPage': 1,
+                'perPage': 10,
+                'pageCount': 1,
+            },
+            'result': [
+                {
+                    key: 'bolder',
+                    category: '10',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+                {
+                    key: 'bolder',
+                    category: '14',
+                    start: 1544537352618,
+                    end: 1544537352900,
+                    value: '{"food":"red","good":"almost"}',
+                },
+            ],
+        },
+    },
+    vendor: {
+        'success': true,
+        'message': 'menu read successfully.',
+        'result': {
+            'page': {
+                'base': 'https://hermo-test.herokuapp.com:1337/',
+                'path': 'postgres/menu',
+            },
+            'meta': {
+                'totalCount': 3,
+                'currentPage': 1,
+                'perPage': 10,
+                'pageCount': 1,
+            },
+            'result': [
+                {
+                    id: '1',
+                    name: 'hermamak cook manman',
+                    logo: 'url to logo',
+                    status: true,
+                },
+                {
+                    id: '2',
+                    name: 'wahahha lai makan',
+                    logo: 'url to logo',
+                    status: false,
+                },
+            ],
+        },
+    },
+    import: {},
+};
+
+export default dataGroup;

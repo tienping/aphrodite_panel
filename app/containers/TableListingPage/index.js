@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import ReactJson from 'react-json-view';
+import Switch from 'react-switch';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -25,150 +26,9 @@ import makeSelectTableListingPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
+import dataGroup from './mockdata';
 
 import './style.scss';
-
-const dataGroup = {
-    sysvar: {
-        'success': true,
-        'message': 'menu read successfully.',
-        'result': {
-            'page': {
-                'base': 'https://hermo-test.herokuapp.com:1337/',
-                'path': 'postgres/menu',
-            },
-            'meta': {
-                'totalCount': 3,
-                'currentPage': 1,
-                'perPage': 10,
-                'pageCount': 1,
-            },
-            'result': [
-                {
-                    key: 'bolder',
-                    category: '10',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{"food":"red","good":"almost"}',
-                },
-            ],
-        },
-    },
-    vendor: {},
-    import: {},
-};
 
 export class TableListingPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
@@ -176,10 +36,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             this.state = {
-                showCreateModal: false,
                 tableConfig: tableSetting[this.props.pageType].fields,
                 tableWidth: tableSetting[this.props.pageType].tableWidth,
                 createButtonWidth: tableSetting[this.props.pageType].createButtonWidth,
+                createFormHeight: tableSetting[this.props.pageType].createFormHeight,
                 formConfig: dataChecking(formSetting, this.props.pageType, 'fields'),
                 formAction: dataChecking(formSetting, this.props.pageType, 'action'),
                 data: dataChecking(dataGroup, this.props.pageType, 'result', 'result'),
@@ -205,11 +65,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             {
                 title: `New ${this.props.pageType}`,
                 type: 'formAction',
-                action: () => {
-                    this.setState({
-                        showCreateModal: true,
-                    });
-                },
             },
         ];
 
@@ -222,11 +77,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <FormButton
                                     key={index}
                                     style={{ width: this.state.createButtonWidth }}
-                                    action={item.action}
                                     tableConfig={this.state.tableConfig}
                                     formConfig={this.state.formConfig}
                                     formFields={this.state.formFields}
-                                    show={this.showCreateModal}
+                                    createFormHeight={this.state.createFormHeight}
                                 >
                                     {item.title}
                                 </FormButton>
@@ -268,13 +122,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         }
                     </div>
                     {
-                        this.state.data ?
+                        this.state.data && this.state.data.length ?
                             this.state.data.map((row, index) => (
-                                <div
-                                    key={index}
-                                    className="table-row"
-                                    style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-                                >
+                                <div key={index} className="table-row">
                                     {
                                         tableConfig.map((col, index2) => (
                                             <div
@@ -289,7 +139,14 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 </div>
                             ))
                             :
-                            null
+                            <div className="table-row" >
+                                <div
+                                    className="table-row-item"
+                                    style={{ padding: '3vh 1vw', width: '100%' }}
+                                >
+                                    No data found...
+                                </div>
+                            </div>
                     }
                 </div>
             </section>
@@ -325,6 +182,18 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 );
             case 'checkbox':
                 return <span style={{ textAlign: col.align }}>[ ]</span>;
+            case 'boolean':
+                return (
+                    <Switch
+                        onChange={(checked, event, id) => {
+                            // alert('toggle function is not supported yet');
+                            console.log(checked, event, id);
+                        }}
+                        disabled={true}
+                        checked={row[col.key]}
+                        // id="normal-switch"
+                    />
+                );
             case 'json':
                 console.log(row[col.key]);
                 console.log(JSON.parse(row[col.key]));
