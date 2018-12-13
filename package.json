@@ -104,27 +104,27 @@
     },
     "rules": {
       "react/no-array-index-key": [
-          "off"
+        "off"
       ],
       "object-curly-newline": [
-          "off",
-          {
-              "multiline": true,
-              "minProperties": 4
-          }
+        "off",
+        {
+          "multiline": true,
+          "minProperties": 4
+        }
       ],
       "arrow-parens": [
-          "error",
-          "always"
+        "error",
+        "always"
       ],
       "arrow-body-style": [
-          2,
-          "as-needed"
+        2,
+        "as-needed"
       ],
       "class-methods-use-this": 0,
       "comma-dangle": [
-          2,
-          "always-multiline"
+        2,
+        "always-multiline"
       ],
       "import/imports-first": 0,
       "import/newline-after-import": 0,
@@ -136,11 +136,11 @@
       "import/prefer-default-export": 0,
       "import/extensions": 0,
       "indent": [
-          2,
-          4,
-          {
-              "SwitchCase": 1
-          }
+        2,
+        4,
+        {
+          "SwitchCase": 1
+        }
       ],
       "jsx-a11y/aria-props": 2,
       "jsx-a11y/heading-has-content": 0,
@@ -154,27 +154,27 @@
       "no-console": 1,
       "no-use-before-define": 0,
       "no-underscore-dangle": [
-          "off"
+        "off"
       ],
       "prefer-template": 2,
       "react/forbid-prop-types": 0,
       "react/prop-types": [
-          "off",
-          {
-              "ignore": []
-          }
+        "off",
+        {
+          "ignore": []
+        }
       ],
       "react/jsx-first-prop-new-line": [
-          2,
-          "multiline"
+        2,
+        "multiline"
       ],
       "react/jsx-indent": [
-          1,
-          4
+        1,
+        4
       ],
       "react/jsx-indent-props": [
-          1,
-          4
+        1,
+        4
       ],
       "react/jsx-filename-extension": 0,
       "react/jsx-no-target-blank": 0,
@@ -182,8 +182,8 @@
       "react/require-extension": 0,
       "react/self-closing-comp": 0,
       "react/jsx-boolean-value": [
-          "error",
-          "always"
+        "error",
+        "always"
       ],
       "redux-saga/no-yield-in-race": 2,
       "redux-saga/yield-effects": 2,
@@ -287,6 +287,7 @@
     "react-dom": "^16.6.3",
     "react-helmet": "5.1.3",
     "react-intl": "2.3.0",
+    "react-json-view": "^1.19.1",
     "react-loadable": "4.0.3",
     "react-moment": "^0.6.6",
     "react-notifications": "^1.4.3",

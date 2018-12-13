@@ -14,7 +14,7 @@ const tableSetting = {
             { key: 'category', label: 'Category', width: getXdp(10), align: 'center', type: 'string' },
             { key: 'start', label: 'Start Date', width: getXdp(15), align: 'center', type: 'date' },
             { key: 'end', label: 'End Date', width: getXdp(15), align: 'center', type: 'date' },
-            { key: 'value', label: 'Value', width: getXdp(25), align: 'center', type: 'string' },
+            { key: 'value', label: 'Value', width: getXdp(25), align: 'center', type: 'json' },
             { key: 'va2lue', label: 'Value', width: getXdp(25), align: 'center', type: 'string' },
         ],
     },

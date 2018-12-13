@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import ReactJson from 'react-json-view';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -45,290 +46,122 @@ const dataGroup = {
             'result': [
                 {
                     key: 'bolder',
-                    category: '14',
+                    category: '10',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
                 {
                     key: 'bolder',
                     category: '14',
                     start: 1544537352618,
                     end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'bolder',
-                    category: '14',
-                    start: 1544537352618,
-                    end: 1544537352900,
-                    value: '{food: \'red\', good: \'almost\'}',
-                },
-                {
-                    key: 'sparpse',
-                    category: '14',
-                    start: 1544537352334,
-                    end: 1544537356500,
-                    value: '{food: \'blue\', good: \'deal\'}',
+                    value: '{"food":"red","good":"almost"}',
                 },
             ],
         },
@@ -393,7 +226,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     formConfig={this.state.formConfig}
                                     show={this.showCreateModal}
                                 >
-                                    {item.title}4
+                                    {item.title}
                                 </FormButton>
                             );
                         }
@@ -425,7 +258,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <div
                                     key={index}
                                     className="table-header-item table-row-item"
-                                    style={{ flex: 1, width: head.width }}
+                                    style={{ display: 'table-cell', width: head.width }}
                                 >
                                     <span style={{ textAlign: head.align }}>{ head.label }</span>
                                 </div>
@@ -445,7 +278,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             <div
                                                 key={index2}
                                                 className="table-row-item"
-                                                style={{ flex: 1, width: col.width }}
+                                                style={{ display: 'table-cell', width: col.width }}
                                             >
                                                 { this.renderCell(row, col) }
                                             </div>
@@ -490,6 +323,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 );
             case 'checkbox':
                 return <span style={{ textAlign: col.align }}>[ ]</span>;
+            case 'json':
+                console.log(row[col.key]);
+                console.log(JSON.parse(row[col.key]));
+                // return <span>{row[col.key]}</span>;
+                return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
+                // return <ReactJson src={{}} name={false} enableClipboard={false}></ReactJson>;
+                // return <ReactJson src={row[col.key] ? JSON.parse(row[col.key]) : null} enableClipboard={false}></ReactJson>;
             default:
                 return <span style={{ textAlign: col.align }}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }

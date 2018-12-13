@@ -1,37 +1,72 @@
 .FormButton-component {
     display: inline-block;
-    height: 37px;
+    height: 33px;
     position: relative;
 }
 
-.page-action-modal-wrapper {
-    z-index: 1;
+#page-action-modal-wrapper {
+    z-index: -1000;
+    opacity: 0;
+    transition: opacity 1s;
+
+    &.triggered {
+        z-index: 1;
+        opacity: 1;
+    }
 }
 
 .page-action-modal-toggle {
     display: none;
+
+    .field-input {
+        padding: 0.5rem 0;
+
+        .field-label {
+            color: black;
+            font-size: 75%;
+        }
+
+        input {
+            padding: 0.25rem 0.75rem;
+        }
+    }
 }
 
 #page-action-modal {
-    height: 53px;
-    width: 160px;
+    height: 45px;
+    width: 150px;
     position: absolute;
-    transition: background-color 1s, height 1s, width 1s, left 1s;
+    transition: background-color 1s, height .5s, width .5s, left 1s;
+
+    &.gamicenter-button {
+        padding: 0;
+
+        .default-button-text { padding: 1.1rem 3rem; }
+    }
+
+    .become-title {
+        height: 32px;
+        white-space: nowrap;
+        transition: background-color 1s, height 1s, width 1s, left 1s, font-size 1s, font-weight 1s;
+    }
 
     &.triggered {
         z-index: 2;
+        padding: 1.1rem 3rem;
         background-color: white;
-        height: 500px;
-        width: 275px;
+        height: 430px;
+        width: 265px;
         color: black;
         overflow: hidden;
+
+        .become-title {
+            font-family: cursive;
+            font-size: 135%;
+            font-weight: 600;
+        }
 
         .page-action-modal-toggle {
             display: block;
         }
     }
-}
-
-.field-input {
-    padding: 5px 10px;
 }

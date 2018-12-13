@@ -5,7 +5,6 @@
 */
 
 import React from 'react';
-import styled from 'styled-components';
 
 import { dataChecking, getXdp } from 'utils/globalUtils';
 
@@ -13,10 +12,6 @@ import { dataChecking, getXdp } from 'utils/globalUtils';
 // import messages from './messages';
 
 import './style.scss';
-
-const TouchableOpacity = styled.div`
-    margin-top: 2rem;
-`;
 
 class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     state = {
@@ -27,7 +22,12 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         return (
             <div className="FormButton-component">
                 <div role="button" id="page-action-modal" className={`page-action-modal gamicenter-button ${this.state.showModal ? 'triggered' : ''}`} >
-                    <div className="button-text" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
+                    {
+                        this.state.showModal ?
+                            <div className="become-title">{this.props.children}</div>
+                            :
+                            <div className="default-button-text button-text" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
+                    }
                     <div className="page-action-modal-toggle">
                         <div
                             style={{
@@ -63,19 +63,20 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                                     >
                                                         <span style={{ color: 'red' }}>{dataChecking(this.props.formFields, field.key, 'error')}</span>
                                                         <div className="field-input">
+                                                            <span className="field-label">{`${field.label}: `}</span>
                                                             <input onChange={(value) => this.handleTextChange(field.key, value)} placeholder={field.placeholder} />
                                                         </div>
                                                     </div>
                                                 ))
                                             }
-                                            <TouchableOpacity activeOpacity={0.9} onClick={() => this.state.formAction()}>
+                                            <div className="gamicenter-button smaller">
                                                 {
                                                     this.state.loading ?
-                                                        <span>isloading</span>
+                                                        <span>loading...</span>
                                                         :
-                                                        <span className="gamicenter-button">Create</span>
+                                                        <span>Create</span>
                                                 }
-                                            </TouchableOpacity>
+                                            </div>
                                         </div>
                                         :
                                         null
@@ -84,7 +85,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         </div>
                     </div>
                 </div>
-                <div className={`page-action-modal-wrapper ${this.state.showModal ? '' : 'hide'}`}></div>
+                <div id="page-action-modal-wrapper" className={`page-action-modal-wrapper ${this.state.showModal ? 'triggered' : ''}`}></div>
             </div>
         );
     }
