@@ -34,7 +34,6 @@
 
 #page-action-modal {
     height: 45px;
-    width: 150px;
     position: absolute;
     transition: background-color 1s, height .5s, width .5s, left 1s;
 
@@ -55,7 +54,7 @@
         padding: 1.1rem 3rem;
         background-color: white;
         height: 430px;
-        width: 265px;
+        width: 265px !important;
         color: black;
         overflow: hidden;
 

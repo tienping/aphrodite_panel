@@ -179,6 +179,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 showCreateModal: false,
                 tableConfig: tableSetting[this.props.pageType].fields,
                 tableWidth: tableSetting[this.props.pageType].tableWidth,
+                createButtonWidth: tableSetting[this.props.pageType].createButtonWidth,
                 formConfig: dataChecking(formSetting, this.props.pageType, 'fields'),
                 formAction: dataChecking(formSetting, this.props.pageType, 'action'),
                 data: dataChecking(dataGroup, this.props.pageType, 'result', 'result'),
@@ -220,10 +221,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                             return (
                                 <FormButton
                                     key={index}
-                                    style={{ color: 'black', textAlign: 'center', fontSize: 18 }}
+                                    style={{ width: this.state.createButtonWidth }}
                                     action={item.action}
-                                    formFields={this.state.formFields}
+                                    tableConfig={this.state.tableConfig}
                                     formConfig={this.state.formConfig}
+                                    formFields={this.state.formFields}
                                     show={this.showCreateModal}
                                 >
                                     {item.title}

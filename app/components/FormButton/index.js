@@ -21,7 +21,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
     render() {
         return (
             <div className="FormButton-component">
-                <div role="button" id="page-action-modal" className={`page-action-modal gamicenter-button ${this.state.showModal ? 'triggered' : ''}`} >
+                <div role="button" id="page-action-modal" style={this.props.style} className={`page-action-modal gamicenter-button ${this.state.showModal ? 'triggered' : ''}`} >
                     {
                         this.state.showModal ?
                             <div className="become-title">{this.props.children}</div>
