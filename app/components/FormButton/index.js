@@ -7,6 +7,7 @@
 import React from 'react';
 
 import { dataChecking, getXdp } from 'utils/globalUtils';
+import Switch from 'react-switch';
 
 import tableSetting from 'utils/globalTableSetting';
 import formSetting from 'utils/globalFormSetting';
@@ -21,17 +22,22 @@ import './style.scss';
 class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
         super(props);
+        this.state = {
+            showModal: false,
+        };
 
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
-            this.state = {
-                formConfig: dataChecking(formSetting, this.props.pageType, 'fields'),
-                formHeight: dataChecking(formSetting, this.props.pageType, 'formHeight'),
-            };
-        }
-    }
+            this.state.formConfig = dataChecking(formSetting, this.props.pageType, 'fields');
+            this.state.formHeight = dataChecking(formSetting, this.props.pageType, 'formHeight');
 
-    state = {
-        showModal: false,
+            if (dataChecking(formSetting, this.props.pageType, 'fields')) {
+                formSetting[this.props.pageType].fields.forEach((field) => {
+                    this.state[field.key] = {
+                        value: field.type === 'boolean' ? field.default || false : '',
+                    };
+                });
+            }
+        }
     }
 
     onSelectImage = (event, field) => {
@@ -51,7 +57,10 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
 
             reader.readAsDataURL(target.files[0]);
         } else {
-            obj[field.key] = {};
+            obj[field.key] = {
+                info: null,
+                url: '',
+            };
             this.setState(obj);
         }
     }
@@ -60,8 +69,26 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         const inputEl = document.getElementById(inputId);
         inputEl.value = '';
 
-        const obj = [];
-        obj[field.key] = {};
+        const obj = {};
+        obj[field.key] = {
+            value: '',
+        };
+        this.setState(obj);
+    }
+
+    handleTextChange = (event, field) => {
+        const obj = {};
+        let newValue = null;
+        if (field.type === 'boolean') {
+            newValue = event;
+        } else if (event && event.target) {
+            newValue = event.target.value;
+        } else {
+            alert('unhandled change...');
+        }
+        obj[field.key] = {
+            value: newValue,
+        };
         this.setState(obj);
     }
 
@@ -102,14 +129,30 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         <input id={`${this.props.pageType}-${field.key}-uploader`} type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
                     </div>
                 );
+            case 'boolean':
+                return (
+                    <Switch
+                        className="switch-button"
+                        onChange={(event) => {
+                            this.handleTextChange(event, field);
+                        }}
+                        checked={this.state[field.key].value}
+                    />
+                );
             default:
-                return <input onChange={(value) => this.handleTextChange(field.key, value)} placeholder={field.placeholder} />;
+                return (
+                    <input
+                        placeholder={field.placeholder}
+                        value={dataChecking(this.state, field.key, 'value')}
+                        onChange={(value) => this.handleTextChange(value, field)}
+                    />
+                );
         }
     }
 
     renderField(field) {
         return (
-            <div className="field-input">
+            <div className={`field-input input-${field.type}`}>
                 <span className="field-label">{`${field.label}: `}</span>
                 { this.renderInput(field) }
             </div>

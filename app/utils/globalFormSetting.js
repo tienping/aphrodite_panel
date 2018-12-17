@@ -18,7 +18,7 @@ const formSetting = {
             { key: 'id', label: 'ID', type: 'textfield' },
             { key: 'name', label: 'Name', type: 'textfield' },
             { key: 'logo', label: 'Logo', type: 'image' },
-            { key: 'status', label: 'Status', type: 'boolean' },
+            { key: 'status', label: 'Status', type: 'boolean', default: true },
         ],
         action: () => { alert('create vendor'); return null; },
     },
