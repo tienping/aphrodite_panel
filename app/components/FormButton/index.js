@@ -108,7 +108,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                 <img
                                     className={`previewer-image ${dataChecking(this.state, field.key, 'url') ? '' : 'previewer-placeholder'}`}
                                     style={{ maxHeight: '150px', maxWidth: '80%' }}
-                                    width={dataChecking(this.state, field.key, 'url') ? '' : '60%'}
+                                    width={dataChecking(this.state, field.key, 'url') ? '' : '70%'}
                                     src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
                                     alt="preview upload"
                                 />

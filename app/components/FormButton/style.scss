@@ -70,19 +70,23 @@
                     border: 1px solid black;
                     padding: 3rem;
                     border-radius: 15px;
+                    opacity: 0.2;
                 }
             }
 
             .upload-action {
                 text-align: center;
-                transform: scale(0.7);
 
                 .upload-button {
                     border-color: #660033;
-                    border-width: 3px;
+                    border-width: 2px;
                     color: #660033;
                     background-color: RGBA(155, 0, 75, 0.15);
                     margin: 0;
+                    font-size: 75%;
+                    padding: .5rem 1.5rem;
+                    margin-bottom: .75rem;
+                    border-radius: 10px;
                 }
 
                 .upload-input {
