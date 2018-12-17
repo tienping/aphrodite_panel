@@ -5,7 +5,6 @@
 */
 
 import React from 'react';
-import ImageUploader from 'react-images-upload';
 
 import { dataChecking, getXdp } from 'utils/globalUtils';
 

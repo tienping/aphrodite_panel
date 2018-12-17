@@ -175,13 +175,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'boolean':
                 return (
                     <Switch
-                        onChange={(checked, event, id) => {
-                            // alert('toggle function is not supported yet');
-                            console.log(checked, event, id);
-                        }}
                         disabled={true}
                         checked={row[col.key]}
-                        // id="normal-switch"
                     />
                 );
             case 'image':
@@ -190,12 +185,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 date = new Date(row[col.key]);
                 return <span style={{ textAlign: col.align }}>{date.toLocaleDateString()}</span>;
             case 'json':
-                console.log(row[col.key]);
-                console.log(JSON.parse(row[col.key]));
-                // return <span>{row[col.key]}</span>;
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
-                // return <ReactJson src={{}} name={false} enableClipboard={false}></ReactJson>;
-                // return <ReactJson src={row[col.key] ? JSON.parse(row[col.key]) : null} enableClipboard={false}></ReactJson>;
             default:
                 return <span style={{ textAlign: col.align }}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }
