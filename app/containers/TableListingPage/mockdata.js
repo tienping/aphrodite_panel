@@ -154,14 +154,20 @@ const dataGroup = {
                 {
                     id: '1',
                     name: 'hermamak cook manman',
-                    logo: 'url to logo',
+                    logo: 'http://www.findthatlogo.com/wp-content/gallery/mercedes-logos/mercedes-logo.jpg',
                     status: true,
                 },
                 {
                     id: '2',
                     name: 'wahahha lai makan',
-                    logo: 'url to logo',
+                    logo: 'https://en.opensuse.org/images/4/49/Amarok-logo-small.png',
                     status: false,
+                },
+                {
+                    id: '3',
+                    name: 'bo jio',
+                    logo: 'https://www.humanrightslogo.net/sites/default/files/HRLogoCMYKsmall.jpg',
+                    status: true,
                 },
             ],
         },

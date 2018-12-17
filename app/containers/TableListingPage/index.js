@@ -51,25 +51,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     renderMenu = () => {
         const actionButton = [
             {
-                title: 'Import',
-                action: () => {
-                    alert('Import');
-                },
-            },
-            {
-                title: 'Export',
-                action: () => {
-                    alert('Export');
-                },
-            },
-            {
                 title: `New ${this.props.pageType}`,
                 type: 'formAction',
             },
         ];
 
         return (
-            <section className="page-actions" style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+            <section className="page-actions">
                 {
                     actionButton.map((item, index) => {
                         if (item.type === 'formAction') {
@@ -114,7 +102,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <div
                                     key={index}
                                     className="table-header-item table-row-item"
-                                    style={{ display: 'table-cell', width: head.width }}
+                                    style={{ width: head.width, maxWidth: head.width }}
                                 >
                                     <span style={{ textAlign: head.align }}>{ head.label }</span>
                                 </div>
@@ -130,7 +118,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             <div
                                                 key={index2}
                                                 className="table-row-item"
-                                                style={{ display: 'table-cell', width: col.width }}
+                                                style={{ width: col.width, maxWidth: col.width }}
                                             >
                                                 { this.renderCell(row, col) }
                                             </div>
@@ -142,7 +130,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                             <div className="table-row" >
                                 <div
                                     className="table-row-item"
-                                    style={{ padding: '3vh 1vw', width: '100%' }}
+                                    style={{ display: 'inline-block', padding: '3vh 1vw', width: '100%' }}
                                 >
                                     No data found...
                                 </div>
@@ -154,6 +142,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     }
 
     renderCell = (row, col) => {
+        let date = null;
+
         switch (col.type) {
             case 'action':
                 return (
@@ -194,6 +184,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         // id="normal-switch"
                     />
                 );
+            case 'image':
+                return <img src={row[col.key]} alt={row.name} width={row.width || '100%'} height={row.height || ''} />;
+            case 'date':
+                date = new Date(row[col.key]);
+                return <span style={{ textAlign: col.align }}>{date.toLocaleDateString()}</span>;
             case 'json':
                 console.log(row[col.key]);
                 console.log(JSON.parse(row[col.key]));

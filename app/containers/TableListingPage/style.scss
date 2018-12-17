@@ -1,4 +1,8 @@
 .TableListingPage-page {
+    .page-actions {
+        text-align: right;
+    }
+
     .table-container {
         margin-top: 2rem;
         max-width: 100%;
@@ -30,9 +34,10 @@
 
                 .table-row-item {
                     background: #FDFDFD;
-                    padding: 5px 10px;
-                    display: inline-block;
+                    padding: 7px 10px;
+                    display: table-cell;
                     border-right: 1px dashed #D0D0FD;
+                    word-wrap: break-word;
                 }
             }
         }

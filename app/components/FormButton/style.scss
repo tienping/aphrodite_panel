@@ -40,6 +40,7 @@
 
 #page-action-modal {
     height: 45px;
+    right: 0;
     position: absolute;
     box-shadow: 0px 0px 0px transparent;
     transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
@@ -70,6 +71,7 @@
             font-family: cursive;
             font-size: 135%;
             font-weight: 600;
+            text-align: left;
         }
 
         .page-action-modal-toggle {

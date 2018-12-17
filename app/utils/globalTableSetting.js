@@ -27,14 +27,14 @@ const tableSetting = {
         createButtonWidth: '151px',
         createFormHeight: '365',
         iconClass: 'fa fa-users text-white text-hover-hermo-pink',
-        tableWidth: getXdp(45),
+        tableWidth: getXdp(50),
         api: '',
         pathToDataRoot: '',
         fields: [
             { key: 'id', label: 'ID', width: getXdp(5), align: 'center', type: 'string' },
-            { key: 'name', label: 'Name', width: getXdp(10), align: 'center', type: 'string' },
-            { key: 'logo', label: 'Logo', width: getXdp(15), align: 'center', type: 'image' },
-            { key: 'status', label: 'Status', width: getXdp(15), align: 'center', type: 'boolean' },
+            { key: 'name', label: 'Name', width: getXdp(30), align: 'center', type: 'string' },
+            { key: 'logo', label: 'Logo', width: getXdp(8), align: 'center', type: 'image' },
+            { key: 'status', label: 'Status', width: getXdp(7), align: 'center', type: 'boolean' },
         ],
     },
     import: {
