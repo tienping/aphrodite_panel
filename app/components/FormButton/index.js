@@ -8,12 +8,28 @@ import React from 'react';
 
 import { dataChecking, getXdp } from 'utils/globalUtils';
 
+import tableSetting from 'utils/globalTableSetting';
+import formSetting from 'utils/globalFormSetting';
+
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
 import './style.scss';
 
+// import dataGroup from './../../containers/TableListingPage/mockdata';
+
 class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props) {
+        super(props);
+
+        if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
+            this.state = {
+                formConfig: dataChecking(formSetting, this.props.pageType, 'fields'),
+                formHeight: dataChecking(formSetting, this.props.pageType, 'formHeight'),
+            };
+        }
+    }
+
     state = {
         showModal: false,
     }
@@ -57,7 +73,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         <div className="image-preview">
                             <span
                                 onClick={() => {
-                                    const inputEl = document.getElementById(`${this.props.pageId}-${field.key}-uploader`);
+                                    const inputEl = document.getElementById(`${this.props.pageType}-${field.key}-uploader`);
                                     inputEl.click();
                                 }}
                             >
@@ -74,7 +90,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                     <span
                                         className="close-btn"
                                         onClick={(event) => {
-                                            this.onUnselectImage(event, `${this.props.pageId}-${field.key}-uploader`, field);
+                                            this.onUnselectImage(event, `${this.props.pageType}-${field.key}-uploader`, field);
                                         }}
                                     >
                                         <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
@@ -83,19 +99,8 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                     null
                             }
                         </div>
-                        <input id={`${this.props.pageId}-${field.key}-uploader`} type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
+                        <input id={`${this.props.pageType}-${field.key}-uploader`} type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
                     </div>
-                    // <ImageUploader
-                    //     className="formButton-imageUploader"
-                    //     withIcon={false}
-                    //     buttonText="Choose images"
-                    //     onChange={this.onSelectImage}
-                    //     maxFileSize={5242880}
-                    //     withPreview={true}
-                    //     label={field.formLabel || 'Max file size: 5mb [ jpg or png]'}
-                    //     imgExtension={['.jpg', '.png']}
-                    //     fileSizeError="File size is too big"
-                    // />
                 );
             default:
                 return <input onChange={(value) => this.handleTextChange(field.key, value)} placeholder={field.placeholder} />;
@@ -116,7 +121,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
             <div className="FormButton-component">
                 <div
                     id="page-action-modal"
-                    style={{ ...this.props.style, height: `${this.state.showModal ? this.props.formHeight : '45px'}` }}
+                    style={{ ...this.props.style, height: `${this.state.showModal ? this.state.formHeight : '45px'}` }}
                     className={`page-action-modal gamicenter-button ${this.state.showModal ? 'triggered' : ''}`}
                 >
                     {
@@ -150,15 +155,15 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         <div>
                             <div>
                                 {
-                                    this.props.formConfig ?
+                                    this.state.formConfig ?
                                         <div>
                                             {
-                                                this.props.formConfig.map((field, index) => (
+                                                this.state.formConfig.map((field, index) => (
                                                     <div
                                                         key={index}
                                                         className="create-modal-form-field"
                                                     >
-                                                        <span style={{ color: 'red' }}>{dataChecking(this.props.formFields, field.key, 'error')}</span>
+                                                        <span style={{ color: 'red' }}>{dataChecking(this.state, field.key, 'error')}</span>
                                                         { this.renderField(field) }
                                                     </div>
                                                 ))

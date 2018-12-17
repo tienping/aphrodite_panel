@@ -1,7 +1,7 @@
 const formSetting = {
     sysvar: {
         title: 'System Variable',
-        formHeight: '620px',
+        formHeight: '430px',
         fields: [
             { key: 'key', label: 'Key', type: 'textfield', placeholder: 'Key of variable', mandatory: true },
             { key: 'category', label: 'Category', type: 'textfield', placeholder: 'Category' },
@@ -13,7 +13,7 @@ const formSetting = {
     },
     vendor: {
         title: 'Vendors',
-        formHeight: '555px',
+        formHeight: '505px',
         fields: [
             { key: 'id', label: 'ID', type: 'textfield' },
             { key: 'name', label: 'Name', type: 'textfield' },
@@ -24,7 +24,7 @@ const formSetting = {
     },
     import: {
         title: 'Import voucher',
-        formHeight: '490px',
+        formHeight: '300px',
         fields: [
             { key: 'event_code', label: 'Event Code', type: 'textfield' },
             { key: 'partner', label: 'Partner', type: 'dropdown' },

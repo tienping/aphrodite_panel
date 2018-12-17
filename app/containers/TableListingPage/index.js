@@ -18,7 +18,6 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { dataChecking } from 'utils/globalUtils';
 import tableSetting from 'utils/globalTableSetting';
-import formSetting from 'utils/globalFormSetting';
 
 import FormButton from 'components/FormButton';
 
@@ -39,9 +38,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 tableConfig: dataChecking(tableSetting, this.props.pageType, 'fields'),
                 tableWidth: dataChecking(tableSetting, this.props.pageType, 'tableWidth'),
                 createButtonWidth: dataChecking(tableSetting, this.props.pageType, 'createButtonWidth'),
-                formHeight: dataChecking(formSetting, this.props.pageType, 'formHeight'),
-                formConfig: dataChecking(formSetting, this.props.pageType, 'fields'),
-                formAction: dataChecking(formSetting, this.props.pageType, 'action'),
                 data: dataChecking(dataGroup, this.props.pageType, 'result', 'result'),
             };
         }
@@ -64,11 +60,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <FormButton
                                     key={index}
                                     style={{ width: this.state.createButtonWidth }}
-                                    tableConfig={this.state.tableConfig}
-                                    formConfig={this.state.formConfig}
-                                    formFields={this.state.formFields}
-                                    formHeight={this.state.formHeight}
-                                    pageId={this.props.pageType}
+                                    pageType={this.props.pageType}
                                 >
                                     {item.title}
                                 </FormButton>
@@ -91,14 +83,12 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     }
 
     renderTable() {
-        const { tableConfig, tableWidth } = this.state;
-
         return (
             <section className="table-container">
-                <div className="table-content-wrapper" style={{ width: tableWidth || 'auto' }}>
+                <div className="table-content-wrapper" style={{ width: this.state.tableWidth || 'auto' }}>
                     <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         {
-                            tableConfig.map((head, index) => (
+                            this.state.tableConfig.map((head, index) => (
                                 <div
                                     key={index}
                                     className="table-header-item table-row-item"
@@ -114,7 +104,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                             this.state.data.map((row, index) => (
                                 <div key={index} className="table-row">
                                     {
-                                        tableConfig.map((col, index2) => (
+                                        this.state.tableConfig.map((col, index2) => (
                                             <div
                                                 key={index2}
                                                 className="table-row-item"
