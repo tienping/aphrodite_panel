@@ -23,6 +23,7 @@
 
 .page-action-modal-toggle {
     display: none;
+    text-align: left;
 
     .field-input {
         padding: 0.5rem 0;
@@ -34,6 +35,36 @@
 
         input {
             padding: 0.25rem 0.75rem;
+        }
+
+        .gamicenter-imageUploader {
+            box-shadow: 0px 0px 1px 0px RGBA(0, 0, 0, 0.3);
+
+            .image-preview {
+                height: 150px;
+                text-align: center;
+                padding: .5rem 1rem;
+                position: relative;
+
+                .close-btn {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: .5rem .75rem;
+                    background: RGBA(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    z-index: 1;
+                }
+
+                .previewer-image,
+                .previewer-placeholder {
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+
+            input { font-size: 80%; max-width: 100% }
         }
     }
 }

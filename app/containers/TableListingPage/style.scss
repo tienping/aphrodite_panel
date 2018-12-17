@@ -1,6 +1,8 @@
 .TableListingPage-page {
     .page-actions {
         text-align: right;
+        margin: auto;
+        max-width: 100%;
     }
 
     .table-container {
@@ -10,8 +12,9 @@
         overflow-x: auto;
 
         .table-content-wrapper {
-            background-color: #FDFDFD;
+            margin: auto;
             overflow: auto;
+            background-color: #FDFDFD;
             border-top: 1px dashed #D0D0FD;
             border-left: 1px dashed #D0D0FD;
 

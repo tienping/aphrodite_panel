@@ -36,14 +36,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             this.state = {
-                tableConfig: tableSetting[this.props.pageType].fields,
-                tableWidth: tableSetting[this.props.pageType].tableWidth,
-                createButtonWidth: tableSetting[this.props.pageType].createButtonWidth,
-                createFormHeight: tableSetting[this.props.pageType].createFormHeight,
+                tableConfig: dataChecking(tableSetting, this.props.pageType, 'fields'),
+                tableWidth: dataChecking(tableSetting, this.props.pageType, 'tableWidth'),
+                createButtonWidth: dataChecking(tableSetting, this.props.pageType, 'createButtonWidth'),
+                formHeight: dataChecking(formSetting, this.props.pageType, 'formHeight'),
                 formConfig: dataChecking(formSetting, this.props.pageType, 'fields'),
                 formAction: dataChecking(formSetting, this.props.pageType, 'action'),
                 data: dataChecking(dataGroup, this.props.pageType, 'result', 'result'),
-                // formFields: {},
             };
         }
     }
@@ -57,7 +56,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         ];
 
         return (
-            <section className="page-actions">
+            <section className="page-actions"style={{ width: this.state.tableWidth || 'auto' }}>
                 {
                     actionButton.map((item, index) => {
                         if (item.type === 'formAction') {
@@ -68,7 +67,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     tableConfig={this.state.tableConfig}
                                     formConfig={this.state.formConfig}
                                     formFields={this.state.formFields}
-                                    createFormHeight={this.state.createFormHeight}
+                                    formHeight={this.state.formHeight}
+                                    pageId={this.props.pageType}
                                 >
                                     {item.title}
                                 </FormButton>
