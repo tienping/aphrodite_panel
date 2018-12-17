@@ -99,15 +99,16 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                     <div className="gamicenter-imageUploader">
                         <div className="image-preview">
                             <span
+                                className="image-holder"
                                 onClick={() => {
                                     const inputEl = document.getElementById(`${this.props.pageType}-${field.key}-uploader`);
                                     inputEl.click();
                                 }}
                             >
                                 <img
-                                    className="previewer-image"
+                                    className={`previewer-image ${dataChecking(this.state, field.key, 'url') ? '' : 'previewer-placeholder'}`}
                                     style={{ maxHeight: '150px', maxWidth: '80%' }}
-                                    width={dataChecking(this.state, field.key, 'url') ? '' : '30%'}
+                                    width={dataChecking(this.state, field.key, 'url') ? '' : '60%'}
                                     src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
                                     alt="preview upload"
                                 />
@@ -126,7 +127,19 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                     null
                             }
                         </div>
-                        <input id={`${this.props.pageType}-${field.key}-uploader`} type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
+                        <div className="upload-action">
+                            <button
+                                htmlFor={`${this.props.pageType}-${field.key}-uploader`}
+                                className="upload-button gamicenter-button"
+                                onClick={() => {
+                                    const inputEl = document.getElementById(`${this.props.pageType}-${field.key}-uploader`);
+                                    inputEl.click();
+                                }}
+                            >
+                                <i className="fa fa-cloud-upload"></i> Upload
+                            </button>
+                            <input id={`${this.props.pageType}-${field.key}-uploader`} className="upload-input" type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
+                        </div>
                     </div>
                 );
             case 'boolean':

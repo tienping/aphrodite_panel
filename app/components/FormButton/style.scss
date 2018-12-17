@@ -45,6 +45,7 @@
                 text-align: center;
                 padding: .5rem 1rem;
                 position: relative;
+                cursor: default;
 
                 .close-btn {
                     position: absolute;
@@ -54,7 +55,10 @@
                     background: RGBA(255, 255, 255, 0.5);
                     border-radius: 50%;
                     z-index: 1;
+                    cursor: pointer;
                 }
+
+                .image-holder { cursor: pointer; }
 
                 .previewer-image,
                 .previewer-placeholder {
@@ -62,9 +66,31 @@
                     top: 50%;
                     transform: translateY(-50%);
                 }
+                .previewer-placeholder {
+                    border: 1px solid black;
+                    padding: 3rem;
+                    border-radius: 15px;
+                }
             }
 
-            input { font-size: 80%; max-width: 100% }
+            .upload-action {
+                text-align: center;
+                transform: scale(0.7);
+
+                .upload-button {
+                    border-color: #660033;
+                    border-width: 3px;
+                    color: #660033;
+                    background-color: RGBA(155, 0, 75, 0.15);
+                    margin: 0;
+                }
+
+                .upload-input {
+                    display: none;
+                }
+            }
+
+            input { font-size: 80%; max-width: 100%; cursor: pointer; }
         }
 
         .switch-button { vertical-align: middle; }
