@@ -175,6 +175,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'boolean':
                 return (
                     <Switch
+                        onChange={() => {}}
                         disabled={true}
                         checked={row[col.key]}
                     />

@@ -16,38 +16,37 @@ import './style.scss';
 class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     state = {
         showModal: false,
-        pictures: [],
     }
 
-    onSelectImage = (event) => {
+    onSelectImage = (event, field) => {
         const { target } = event;
+        const obj = {};
+
         if (target.files && target.files[0]) {
             const reader = new FileReader();
 
             reader.onload = (e) => {
-                this.setState({
-                    pictureObj: {
-                        info: target.files[0],
-                        url: e.target.result,
-                    },
-                });
+                obj[field.key] = {
+                    info: target.files[0],
+                    url: e.target.result,
+                };
+                this.setState(obj);
             };
 
             reader.readAsDataURL(target.files[0]);
         } else {
-            this.setState({
-                pictureObj: {},
-            });
+            obj[field.key] = {};
+            this.setState(obj);
         }
     }
 
-    onUnselectImage = (event, inputId) => {
+    onUnselectImage = (event, inputId, field) => {
         const inputEl = document.getElementById(inputId);
         inputEl.value = '';
 
-        this.setState({
-            pictureObj: {},
-        });
+        const obj = [];
+        obj[field.key] = {};
+        this.setState(obj);
     }
 
     renderInput(field) {
@@ -65,17 +64,17 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                 <img
                                     className="previewer-image"
                                     style={{ maxHeight: '150px', maxWidth: '80%' }}
-                                    width={dataChecking(this.state, 'pictureObj', 'url') ? '' : '30%'}
-                                    src={dataChecking(this.state, 'pictureObj', 'url') || require('../../Resources/arrow_up_upload-512.png')}
+                                    width={dataChecking(this.state, field.key, 'url') ? '' : '30%'}
+                                    src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
                                     alt="preview upload"
                                 />
                             </span>
                             {
-                                dataChecking(this.state, 'pictureObj', 'url') ?
+                                dataChecking(this.state, field.key, 'url') ?
                                     <span
                                         className="close-btn"
                                         onClick={(event) => {
-                                            this.onUnselectImage(event, `${this.props.pageId}-${field.key}-uploader`);
+                                            this.onUnselectImage(event, `${this.props.pageId}-${field.key}-uploader`, field);
                                         }}
                                     >
                                         <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
@@ -84,7 +83,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                     null
                             }
                         </div>
-                        <input id={`${this.props.pageId}-${field.key}-uploader`} type="file" onChange={this.onSelectImage}></input>
+                        <input id={`${this.props.pageId}-${field.key}-uploader`} type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
                     </div>
                     // <ImageUploader
                     //     className="formButton-imageUploader"
