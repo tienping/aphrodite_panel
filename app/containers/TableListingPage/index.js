@@ -189,7 +189,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     <title>
                         {
                             dataChecking(this.props, 'id') ?
-                                `${this.props.id} Page` :
+                                `${this.props.title} Page` :
                                 'Table'
                         }
                     </title>

@@ -4,25 +4,22 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 
 # Settings
 ## Table Setting
-Example:
-    sysvar: {
-        id: 'sysvar',
-        title: 'System Variable',
-        link: '/sysvar',
-        createButtonWidth: '150px',
-        iconClass: 'fa fa-cogs text-white text-hover-hermo-pink',
-        tableWidth: getXdp(105),
-        api: '',
-        pathToDataRoot: '',
-        fields: [
-            { key: 'key', label: 'Key', width: getXdp(5), align: 'center', type: 'string' },
-            { key: 'category', label: 'Category', width: getXdp(10), align: 'center', type: 'string' },
-            { key: 'start', label: 'Start Date', width: getXdp(15), align: 'center', type: 'date' },
-            { key: 'end', label: 'End Date', width: getXdp(15), align: 'center', type: 'date' },
-            { key: 'value', label: 'Value', width: getXdp(25), align: 'center', type: 'json' },
-            { key: 'va2lue', label: 'Value', width: getXdp(35), align: 'center', type: 'string' },
-        ],
-    },
+[Example](https://bitbucket.org/hermo/gamicenter/src/26bd00f897ac/app/utils/globalTableSetting.js?at=devel-base)
+> object key will be the table's id
+* title
+* link
+* createButtonWidth
+* iconClass
+* tableWidth
+* api
+* pathToDataRoot
+* fields
+> * key
+> * label
+> * width
+> * align
+> * type
 
 
 ## Form Setting
+[Example](https://bitbucket.org/hermo/gamicenter/src/26bd00f897ac/app/utils/globalFormSetting.js?at=devel-base)

@@ -2,7 +2,6 @@ import { getXdp } from './globalUtils';
 
 const tableSetting = {
     sysvar: {
-        id: 'sysvar',
         title: 'System Variable',
         link: '/sysvar',
         createButtonWidth: '150px',
@@ -20,7 +19,6 @@ const tableSetting = {
         ],
     },
     partner: {
-        id: 'partner',
         title: 'Partners',
         link: '/partner',
         createButtonWidth: '155px',
@@ -36,7 +34,6 @@ const tableSetting = {
         ],
     },
     import: {
-        id: 'import',
         title: 'Import voucher',
         link: '/import',
         createButtonWidth: '148px',
