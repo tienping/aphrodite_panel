@@ -6,6 +6,7 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 ## Table Setting
 [Example](https://bitbucket.org/hermo/gamicenter/src/26bd00f897ac/app/utils/globalTableSetting.js?at=devel-base)
 > object key will be the table's id
+
 * title `string`
 * link `string`
 * createButtonWidth `xxpx or xxrem or xx% or xxvw`
@@ -24,6 +25,7 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 ## Form Setting
 [Example](https://bitbucket.org/hermo/gamicenter/src/26bd00f897ac/app/utils/globalFormSetting.js?at=devel-base)
 > object key will be the table's id
+
 * title `string`
 * formHeight `xxpx or xxrem or xx% or xxvw`
 * fields `array of object`
