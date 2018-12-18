@@ -136,7 +136,7 @@ const dataGroup = {
             ],
         },
     },
-    vendor: {
+    partner: {
         'success': true,
         'message': 'menu read successfully.',
         'result': {

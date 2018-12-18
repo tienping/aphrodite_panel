@@ -184,7 +184,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         this.state.showModal ?
                             <div className="become-title">{this.props.children}</div>
                             :
-                            <div className="default-button-text button-text" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
+                            <div className="default-button-text button-text text-capitalize" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
                     }
                     <div className="page-action-modal-toggle">
                         <div

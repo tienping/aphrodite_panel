@@ -11,8 +11,8 @@ const formSetting = {
         ],
         action: () => { alert('create System Variable'); return null; },
     },
-    vendor: {
-        title: 'Vendors',
+    partner: {
+        title: 'Partners',
         formHeight: '505px',
         fields: [
             { key: 'id', label: 'ID', type: 'textfield' },
@@ -20,7 +20,7 @@ const formSetting = {
             { key: 'logo', label: 'Logo', type: 'image' },
             { key: 'status', label: 'Status', type: 'boolean', default: true },
         ],
-        action: () => { alert('create vendor'); return null; },
+        action: () => { alert('create partner'); return null; },
     },
     import: {
         title: 'Import voucher',
@@ -30,7 +30,7 @@ const formSetting = {
             { key: 'partner', label: 'Partner', type: 'dropdown' },
             { key: 'remarks', label: 'Remarks', type: 'textbox' },
         ],
-        action: () => { alert('create vendor'); return null; },
+        action: () => { alert('create partner'); return null; },
     },
 };
 export default formSetting;
