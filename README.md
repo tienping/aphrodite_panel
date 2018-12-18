@@ -1,6 +1,12 @@
 # GamiCenter
 This project is extended from react-boilerplate [https://www.reactboilerplate.com/]
 
+# Getting Started
+1. Clone the repo
+2. `npm install` to setup the environment
+3. `npm start` to start the instance
+4. `npm run build && aws s3 sync build/ s3://gamicenter$` to push update into s3 instance
+
 
 # Settings
 ## Table Setting
