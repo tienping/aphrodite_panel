@@ -9,7 +9,6 @@ const formSetting = {
             { key: 'end', label: 'End Date', type: 'date', placeholder: 'End date' },
             { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value' },
         ],
-        action: () => { alert('create System Variable'); return null; },
     },
     partner: {
         title: 'Partners',
@@ -20,7 +19,6 @@ const formSetting = {
             { key: 'logo', label: 'Logo', type: 'image' },
             { key: 'status', label: 'Status', type: 'boolean', default: true },
         ],
-        action: () => { alert('create partner'); return null; },
     },
     import: {
         title: 'Import voucher',
@@ -30,7 +28,6 @@ const formSetting = {
             { key: 'partner', label: 'Partner', type: 'dropdown' },
             { key: 'remarks', label: 'Remarks', type: 'textbox' },
         ],
-        action: () => { alert('create partner'); return null; },
     },
 };
 export default formSetting;
