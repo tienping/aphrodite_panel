@@ -4,11 +4,6 @@ const selectGlobal = (state) => state.get('global');
 const selectRoute = (state) => state.get('route');
 const selectSession = (state) => state.get('session');
 
-const makeSelectAuthenticated = () => createSelector(
-    selectSession,
-    (substate) => substate.get('authenticated')
-);
-
 const makeSelectChecked = () => createSelector(
     selectSession,
     (substate) => substate.get('checked')
@@ -28,7 +23,6 @@ export {
     selectGlobal,
     selectRoute,
     selectSession,
-    makeSelectAuthenticated,
     makeSelectChecked,
     makeSelectUserData,
     makeSelectLocation,

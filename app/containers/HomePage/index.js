@@ -14,7 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import tableSetting from 'utils/globalTableSetting';
-import { dataChecking } from 'utils/globalUtils';
+import { dataChecking } from 'globalUtils';
 
 import messages from './messages';
 

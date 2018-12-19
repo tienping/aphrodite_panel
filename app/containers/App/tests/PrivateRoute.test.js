@@ -5,29 +5,29 @@ import { MemoryRouter, Route } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute';
 
 describe('<PrivateRoute />', () => {
-    let authenticated;
+    let token = '';
     let spy;
 
     beforeEach(() => {
-        authenticated = false;
+        token = 'some login token';
         spy = () => <span />;
     });
 
     it('should render a route', (done) => {
         const wrapper = shallow(
             <MemoryRouter initialEntries={['/']} initialIndex={0}>
-                <PrivateRoute auth={authenticated} path="/" component={spy} />
+                <PrivateRoute token={token} path="/" component={spy} />
             </MemoryRouter>
         ).children().at(0).dive();
         expect(wrapper.find(Route).length).toEqual(1);
         done();
     });
 
-    // it('should not display LoginForm authenticated=true', (done) => {
-    //     authenticated = true;
+    // it('should not display LoginForm token="some login token", (done) => {
+    //     token = 'some login token';
     //     const wrapper = shallow(
     //         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-    //             <PrivateRoute auth={authenticated} path="/" component={spy} />
+    //             <PrivateRoute token={token} path="/" component={spy} />
     //         </MemoryRouter>
     //     ).children().at(0).dive();
 
@@ -40,7 +40,7 @@ describe('<PrivateRoute />', () => {
     // it('should display LoginForm if authenticated=false', (done) => {
     //     const wrapper = shallow(
     //         <MemoryRouter initialEntries={['/']} initialIndex={0}>
-    //             <PrivateRoute auth={authenticated} path="/" component={spy} />
+    //             <PrivateRoute token={token} path="/" component={spy} />
     //         </MemoryRouter>
     //     ).children().at(0).dive();
 
@@ -53,7 +53,7 @@ describe('<PrivateRoute />', () => {
     it('should render mall page route', (done) => {
         const wrapper = shallow(
             <MemoryRouter initialEntries={['/mall']} initialIndex={0}>
-                <PrivateRoute auth={authenticated} path="/" component={spy} />
+                <PrivateRoute token={token} path="/" component={spy} />
             </MemoryRouter>
         ).children().at(0).dive();
         expect(wrapper.find(Route).length).toEqual(1);

@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import globalScope from 'globalScope';
 import NavItem from './NavItem/index';
 
 const NavContainer = styled.div`
@@ -20,11 +21,17 @@ const UnstyleList = styled.li`
 `;
 
 function Navigator(props) {
-    const menu = props.items.map((item) => (
-        <UnstyleList className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
-            <NavItem data={item} handleLinkClick={props.handleLinkClick}></NavItem>
-        </UnstyleList>
-    ));
+    const menu = props.items.map((item) => {
+        if (item.require_login && !globalScope.token) {
+            return null;
+        }
+
+        return (
+            <UnstyleList className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
+                <NavItem data={item} handleLinkClick={props.handleLinkClick}></NavItem>
+            </UnstyleList>
+        );
+    });
 
     if (props.vertical) {
         return (

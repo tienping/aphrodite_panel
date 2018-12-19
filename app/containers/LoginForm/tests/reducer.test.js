@@ -16,12 +16,6 @@ describe('loginFormReducer', () => {
     const responseSuccess = { token: '123' };
     // const responseFailed = { success: false };
     beforeEach(() => {
-        window.sessionService = {
-            saveSession: jest.fn,
-            deleteSession: jest.fn,
-            deleteUser: jest.fn,
-        };
-
         state = fromJS({
             loading: false,
             error: false,
@@ -73,18 +67,6 @@ describe('loginFormReducer', () => {
     it('should set loading when checking authentication', (done) => {
         // const expected = state.set('loading', true);
         // expect(loginFormReducer(state, checkAuth())).toEqual(expected);
-        done();
-    });
-
-    it('should set loading success if authenticated', (done) => {
-        const expected = state.set('loading', false).set('error', false);
-        expect(loginFormReducer(state, checkAuthDone(responseSuccess))).toEqual(expected);
-        done();
-    });
-
-    it('should set error to true if unauthenticated', (done) => {
-        // const expected = state.set('loading', false).set('error', false);
-        // expect(loginFormReducer(state, checkAuthError(responseFailed))).toEqual(expected);
         done();
     });
 });

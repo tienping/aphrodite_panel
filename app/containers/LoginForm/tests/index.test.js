@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { staticErrorResponse } from 'utils/globalUtils';
+import { staticErrorResponse } from 'globalUtils';
 
 import { doLogin } from '../actions';
 import { LoginForm, Form, authkeys, mapDispatchToProps } from '../index';

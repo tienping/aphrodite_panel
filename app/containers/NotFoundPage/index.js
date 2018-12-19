@@ -10,7 +10,7 @@
  */
 
 import React from 'react';
-import { staticErrorResponse } from 'utils/globalUtils';
+import { staticErrorResponse } from 'globalUtils';
 import ErrorMessage from 'components/ErrorMessage';
 
 export default class NotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

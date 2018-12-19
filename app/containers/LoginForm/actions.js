@@ -5,58 +5,35 @@
  */
 
 import {
-    LOGIN,
-    LOGOUT,
-    LOGIN_SUCCESS,
-    LOGIN_FAILED,
-    AUTHENTICATE,
-    AUTHENTICATE_DONE,
-    AUTHENTICATE_ERROR,
+    AUTH_LOGIN,
+    AUTH_LOGOUT,
+    AUTH_LOGIN_SUCCESS,
+    AUTH_LOGIN_FAILED,
 } from './constants';
 
 export function doLogin(userdata) {
     return {
-        type: LOGIN,
+        type: AUTH_LOGIN,
         payload: userdata,
     };
 }
 
 export function doLogout() {
     return {
-        type: LOGOUT,
+        type: AUTH_LOGOUT,
     };
 }
 
 export function loginSuccess(response) {
     return {
-        type: LOGIN_SUCCESS,
+        type: AUTH_LOGIN_SUCCESS,
         payload: response.token,
     };
 }
 
 export function loginFailed(response) {
     return {
-        type: LOGIN_FAILED,
-        payload: response,
-    };
-}
-
-export function checkAuth() {
-    return {
-        type: AUTHENTICATE,
-    };
-}
-
-export function checkAuthDone(response) {
-    return {
-        type: AUTHENTICATE_DONE,
-        payload: response,
-    };
-}
-
-export function checkAuthError(response) {
-    return {
-        type: AUTHENTICATE_ERROR,
+        type: AUTH_LOGIN_FAILED,
         payload: response,
     };
 }

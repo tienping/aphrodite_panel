@@ -13,12 +13,11 @@ import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-// import { sessionService } from 'redux-react-session';
 
 import Navigator from 'components/Navigator';
 
 import tableSetting from 'utils/globalTableSetting';
-import { dataChecking } from 'utils/globalUtils';
+import { dataChecking } from 'globalUtils';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -53,69 +52,6 @@ const HershopTopbarBigTitle = styled.span`
     color: ${(props) => props.theme.main_color};
 `;
 
-export const navItems = [
-    {
-        code: 'download',
-        type: 'external_url',
-        text: 'Download Mobile App',
-        url: 'https://app.hermo.my/iLgE/SmWv2UnrhC',
-        iconClass: 'fa fa-mobile text-white',
-    },
-    {
-        code: 'notification',
-        type: 'button',
-        text: 'Notification',
-        // url: '/notification',
-        iconClass: 'fa fa-bell text-white',
-    },
-    {
-        code: 'profile',
-        type: 'dropdown',
-        text: 'Profile',
-        items: [
-            {
-                code: 'profileTitle',
-                type: 'title',
-                text: 'Profile',
-            },
-            {
-                code: 'profileList',
-                type: 'list',
-                items: [{
-                    code: 'profile',
-                    text: 'Profile',
-                    url: '/profile',
-                }, {
-                    code: 'order',
-                    text: 'Order',
-                    url: '/profile/order',
-                }, {
-                    code: 'voucher',
-                    text: 'Voucher',
-                    url: '/profile/voucher',
-                }, {
-                    code: 'logout',
-                    text: 'Logout',
-                    url: '/lougout',
-                }],
-            },
-        ],
-        iconClass: 'fa fa-user text-white',
-    },
-    {
-        code: 'cart',
-        type: 'dropdown',
-        text: 'Cart',
-        items: [
-            {
-                code: 'cartComponent',
-                type: 'cart',
-            },
-        ],
-        iconClass: 'fa fa-shopping-cart text-white',
-    },
-];
-
 const HideHeader = styled.div`
     float: left;
     color: white;
@@ -130,7 +66,8 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
             if (Object.keys(tableSetting)) {
                 Object.keys(tableSetting).forEach((key) => {
                     items.push({
-                        code: dataChecking(tableSetting, key, 'id'),
+                        code: key,
+                        require_login: true,
                         type: 'internal_url',
                         text: dataChecking(tableSetting, key, 'title'),
                         url: dataChecking(tableSetting, key, 'link'),

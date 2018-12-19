@@ -3,7 +3,6 @@ import {
     selectGlobal,
     selectRoute,
     selectSession,
-    makeSelectAuthenticated,
     makeSelectChecked,
     makeSelectUserData,
     makeSelectLocation,
@@ -44,7 +43,6 @@ describe('Routes Selector', () => {
 describe('Session Selector', () => {
     it('should select the session state', () => {
         const sessionState = fromJS({
-            authenticated: false,
             checked: false,
             user: {},
         });
@@ -64,18 +62,6 @@ describe('Session Selector', () => {
         });
 
         expect(checkedState.get('checked')).toEqual(selectChecked(mock));
-    });
-
-    it('should select authentication status', () => {
-        const selectAuth = makeSelectAuthenticated();
-        const authState = fromJS({
-            authenticated: true,
-        });
-        const mock = fromJS({
-            session: authState,
-        });
-
-        expect(authState.get('authenticated')).toEqual(selectAuth(mock));
     });
 
     it('should select user data', () => {

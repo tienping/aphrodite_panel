@@ -1,4 +1,4 @@
-import { getXdp } from './globalUtils';
+import { getXdp } from 'globalUtils';
 
 const tableSetting = {
     sysvar: {

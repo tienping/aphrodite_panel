@@ -30,10 +30,10 @@ import LoginForm from 'containers/LoginForm/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import tableSetting from 'utils/globalTableSetting';
-import { dataChecking } from 'utils/globalUtils';
+import { dataChecking } from 'globalUtils';
+import globalScope from 'globalScope';
 
 import {
-    makeSelectAuthenticated,
     makeSelectLocation,
 } from './selectors';
 import reducer from './reducer';
@@ -61,28 +61,25 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     }
 
     render() {
-        const { authenticated } = this.props;
         return (
             <section>
                 <Notify></Notify>
 
                 <HershopContent id="hershop-content-container" className="container">
                     <Switch>
-                        <PrivateRoute exact={true} path="/" auth={authenticated} component={pageReference.home} />
+                        <Route exact={true} path="/login" component={LoginForm} />
+                        <PrivateRoute exact={true} path="/" token={globalScope.token} component={pageReference.home} />
                         {
                             Object.keys(tableSetting).map((key, index) => (
-                                <Route
+                                <PrivateRoute
                                     key={index}
                                     exact={true}
+                                    token={globalScope.token}
                                     path={dataChecking(tableSetting, key, 'link')}
-                                    render={(props) => <TableListingPage {...props} pageType={dataChecking(tableSetting, key, 'id')} />}
+                                    render={(props) => <TableListingPage {...props} pageType={key} />}
                                 />
                             ))
                         }
-                        {/* <Route exact={true} path="/flagship" auth={authenticated} component={Flagship} />
-                        <Route exact={true} path="/flagship/:id" auth={authenticated} component={Flagship} /> */}
-
-                        <Route exact={true} path="/login" component={LoginForm} />
                         <Route path="" component={NotFoundPage} />
                     </Switch>
                 </HershopContent>
@@ -93,12 +90,10 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
 App.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    authenticated: PropTypes.bool.isRequired,
     // location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-    authenticated: makeSelectAuthenticated(),
     location: makeSelectLocation(),
 });
 

@@ -24,6 +24,8 @@ import Topbar from 'containers/Topbar';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
+import initialiseApp from 'initialiseApp';
+
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
@@ -40,11 +42,7 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
-
-// Import i18n messages
 import { translationMessages } from './i18n';
-
-// Import CSS reset and Global Styles
 import './global-styles';
 
 const topbarHeight = '40px';
@@ -87,6 +85,8 @@ const render = (messages) => {
         MOUNT_NODE
     );
 };
+
+initialiseApp();
 
 if (module.hot) {
     // Hot reloadable React components and translation json files

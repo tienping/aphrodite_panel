@@ -9,9 +9,8 @@ import PrivateRoute from '../PrivateRoute';
 
 describe('<App />', () => {
     let app;
-    const isTrue = true;
     beforeEach(() => {
-        app = shallow(<App authenticated={isTrue}></App>);
+        app = shallow(<App></App>);
     });
 
     it('should show HershopTopbar', () => {

@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import { dataChecking, getXdp } from 'utils/globalUtils';
+import { dataChecking, getXdp } from 'globalUtils';
 import Switch from 'react-switch';
 
 import tableSetting from 'utils/globalTableSetting';

@@ -1,13 +1,7 @@
 // import { take, call, put, select } from 'redux-saga/effects';
 
-import { call, put, takeLatest } from 'redux-saga/effects';
-import request from 'utils/request';
-import { staticErrorResponse } from 'utils/globalUtils';
-
-
-import {
-    FETCH_TOP_NAV,
-} from './constants';
+import { call, put } from 'redux-saga/effects';
+import { staticErrorResponse, request } from 'globalUtils';
 
 import {
     fetchTopNavSuccess,

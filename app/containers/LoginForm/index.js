@@ -6,6 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -14,7 +15,6 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
-import Modal from 'components/Modal/Loadable';
 import Input from 'components/Input';
 // import Loading from 'components/Loading';
 import ErrorMessage from 'components/ErrorMessage';
@@ -29,33 +29,51 @@ import {
     makeSelectAuthLoading,
 } from './selectors';
 
+import './style.scss';
+
 export const authkeys = ['username', 'password'];
 
 export const Form = (props) => (
-    <form onSubmit={props.action}>
+    <form className="login-form" onSubmit={props.action}>
         {props.keys.map((key) => (
             <Input key={key} type={key} placeholder={key} name={key} />)
         )}
         {props.error &&
             <ErrorMessage error={props.error} type="danger" />
         }
-        <Input type="submit" className="btn btn-primary" value="Login" loading={props.loading} />
+        <Input type="submit" className="gamicenter-button" value="Login" loading={props.loading} />
     </form>
 );
 
 export class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    loginAction = (evt) => {
+        evt.preventDefault();
+        const form = {};
+        authkeys.map((key) => (
+            form[key] = evt.target[key].value)
+        );
+        this.props.dispatch(doLogin(form));
+    };
+
     render() {
         return (
-            <Modal header={{}} title="Login to GamiCenter" dismissable={{}} origin="/test" >
-                <Form action={this.props.login} keys={authkeys} {...this.props} />
-            </Modal>
+            <div id="TableListingPage-container" className="TableListingPage-page">
+                <Helmet>
+                    <title>Login to Hermo Gamicenter</title>
+                    <meta name="description" content="Description of TableListingPage" />
+                </Helmet>
+                <section className="container">
+                    <div className="loginForm-wrapper">
+                        <Form action={this.loginAction} keys={authkeys} {...this.props} />
+                    </div>
+                </section>
+            </div>
         );
     }
 }
 
 LoginForm.propTypes = {
     // dispatch: PropTypes.func.isRequired,
-    login: PropTypes.func,
 };
 
 Form.propTypes = {
@@ -76,12 +94,6 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
     return {
         dispatch,
-        login: (evt) => {
-            evt.preventDefault();
-            const form = {};
-            authkeys.map((key) => (form[key] = evt.target[key].value));
-            dispatch(doLogin(form));
-        },
     };
 }
 

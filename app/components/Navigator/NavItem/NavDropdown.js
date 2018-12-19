@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import { dataChecking } from 'utils/globalUtils';
+import { dataChecking } from 'globalUtils';
 
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import './NavDropdown.scss';

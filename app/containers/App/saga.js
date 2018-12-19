@@ -1,6 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import request from 'utils/request';
-import { staticErrorResponse } from 'utils/globalUtils';
+import { staticErrorResponse, request } from 'globalUtils';
 
 import {
     FETCH_CONFIG,
