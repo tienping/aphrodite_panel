@@ -1,33 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`checkAuth() should throw checkAuthError() when there is no session 1`] = `
-Object {
-  "done": false,
-  "value": Object {
-    "@@redux-saga/IO": true,
-    "CALL": Object {
-      "args": Array [],
-      "context": null,
-      "fn": [Function],
-    },
-  },
-}
-`;
-
-exports[`checkAuth() should trigger checkAuthDone() when success 1`] = `
-Object {
-  "done": false,
-  "value": Object {
-    "@@redux-saga/IO": true,
-    "CALL": Object {
-      "args": Array [],
-      "context": null,
-      "fn": [Function],
-    },
-  },
-}
-`;
-
 exports[`getToken() should throw loginFailed() if the generator throws error 1`] = `
 Object {
   "done": false,

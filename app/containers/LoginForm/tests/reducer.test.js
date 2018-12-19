@@ -6,9 +6,6 @@ import {
     // doLogout,
     loginSuccess,
     // loginFailed,
-    // checkAuth,
-    checkAuthDone,
-    // checkAuthError,
 } from '../actions';
 
 describe('loginFormReducer', () => {
@@ -61,12 +58,4 @@ describe('loginFormReducer', () => {
     //     expect(loginFormReducer(state, doLogout())).toEqual(expected);
     //     done();
     // });
-
-    // describe('authentication');
-
-    it('should set loading when checking authentication', (done) => {
-        // const expected = state.set('loading', true);
-        // expect(loginFormReducer(state, checkAuth())).toEqual(expected);
-        done();
-    });
 });

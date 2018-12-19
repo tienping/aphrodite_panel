@@ -1,9 +1,9 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { staticErrorResponse, request } from 'globalUtils';
 
-import {
-    FETCH_CONFIG,
-} from './constants';
+// import {
+//     FETCH_CONFIG,
+// } from './constants';
 
 import {
     fetchConfigSuccess,
