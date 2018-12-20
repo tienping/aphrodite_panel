@@ -15,6 +15,7 @@ export function* doLogin(action) {
         const hash = base64.encode(`${username}:${password}`);
         const response = yield call(apiRequest, 'auth/token', 'post', {}, null, { headers: { 'Authorization': `Basic ${hash}` } });
         if (response && response.ok) {
+            globalScope.token = response.data.token;
             const isAdminResponse = yield call(apiRequest, '/view/preview/145', 'post');
             globalScope.isAdmin = !!(isAdminResponse && isAdminResponse.data && isAdminResponse.data.id);
             if (globalScope.isAdmin) {
@@ -23,6 +24,8 @@ export function* doLogin(action) {
                 setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
                 yield put(loginSuccess(response.data.token));
             } else {
+                globalScope.token = '';
+                response.data.messages[0] = { type: 'error', text: 'Invalid user access level!' };
                 yield put(loginFailed(response.data));
             }
         } else {
