@@ -165,6 +165,13 @@ module.exports = {
             });
         }
 
+        actions.push({
+            type: 'add',
+            path: '../../app/containers/{{properCase name}}/style.scss',
+            templateFile: './component/style.scss',
+            abortOnFail: true,
+        });
+
         return actions;
     },
 };

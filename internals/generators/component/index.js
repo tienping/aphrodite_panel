@@ -85,6 +85,13 @@ module.exports = {
             });
         }
 
+        actions.push({
+            type: 'add',
+            path: '../../app/components/{{properCase name}}/style.scss',
+            templateFile: './component/style.scss',
+            abortOnFail: true,
+        });
+
         return actions;
     },
 };
