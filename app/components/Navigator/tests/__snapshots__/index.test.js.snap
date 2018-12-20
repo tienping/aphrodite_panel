@@ -96,7 +96,7 @@ ShallowWrapper {
                                   Object {
                                     "code": "logout",
                                     "text": "Logout",
-                                    "url": "/lougout",
+                                    "url": "/logout",
                                   },
                                 ],
                                 "type": "list",
@@ -227,7 +227,7 @@ ShallowWrapper {
                                                 Object {
                                                   "code": "logout",
                                                   "text": "Logout",
-                                                  "url": "/lougout",
+                                                  "url": "/logout",
                                                 },
                                               ],
                                               "type": "list",
@@ -322,7 +322,7 @@ ShallowWrapper {
                                 Object {
                                   "code": "logout",
                                   "text": "Logout",
-                                  "url": "/lougout",
+                                  "url": "/logout",
                                 },
                               ],
                               "type": "list",
@@ -397,7 +397,7 @@ ShallowWrapper {
                     Object {
                       "code": "logout",
                       "text": "Logout",
-                      "url": "/lougout",
+                      "url": "/logout",
                     },
                   ],
                   "type": "list",
@@ -528,7 +528,7 @@ ShallowWrapper {
                                                                             Object {
                                                                               "code": "logout",
                                                                               "text": "Logout",
-                                                                              "url": "/lougout",
+                                                                              "url": "/logout",
                                                                             },
                                                                           ],
                                                                           "type": "list",
@@ -659,7 +659,7 @@ ShallowWrapper {
                                                                             Object {
                                                                               "code": "logout",
                                                                               "text": "Logout",
-                                                                              "url": "/lougout",
+                                                                              "url": "/logout",
                                                                             },
                                                                           ],
                                                                           "type": "list",
@@ -758,7 +758,7 @@ ShallowWrapper {
                     Object {
                       "code": "logout",
                       "text": "Logout",
-                      "url": "/lougout",
+                      "url": "/logout",
                     },
                   ],
                   "type": "list",

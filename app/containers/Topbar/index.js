@@ -90,7 +90,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                             require_login: true,
                             type: 'internal_url',
                             text: 'Logout',
-                            url: '/lougout',
+                            url: '/logout',
                         },
                     ],
                     iconClass: 'fa fa-user text-white',
