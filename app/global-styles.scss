@@ -9,6 +9,17 @@
     cursor: pointer;
     outline: none;
 
+    &.invert {
+        background-color: transparent;
+        color: #660033;
+        border: 1px dashed #660033;
+
+        &:hover {
+            color: #FF0068;
+            background-color: RGBA(255, 255, 255, 0.85)
+        }
+    }
+
     &.smaller {
         font-size: 100%;
         padding: .75rem 3rem;

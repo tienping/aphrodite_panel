@@ -24,10 +24,10 @@ import injectReducer from 'utils/injectReducer';
 
 import Notify from 'containers/Notify';
 
-import HomePage from 'containers/HomePage/Loadable';
-import TableListingPage from 'containers/TableListingPage/Loadable';
-import LoginForm from 'containers/LoginForm/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import HomePage from 'containers/HomePage';
+import TableListingPage from 'containers/TableListingPage';
+import LoginForm from 'containers/LoginForm';
+import NotFoundPage from 'containers/NotFoundPage';
 
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
@@ -68,13 +68,13 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                 <HershopContent id="hershop-content-container" className="container">
                     <Switch>
                         <Route exact={true} path="/login" component={LoginForm} />
-                        <PrivateRoute exact={true} path="/" token={globalScope.token} component={pageReference.home} />
+                        <Route exact={true} path="/" component={pageReference.home} />
                         {
                             Object.keys(tableSetting).map((key, index) => (
                                 <PrivateRoute
                                     key={index}
                                     exact={true}
-                                    token={globalScope.token}
+                                    token={globalScope.token || ''}
                                     path={dataChecking(tableSetting, key, 'link')}
                                     render={(props) => <TableListingPage {...props} pageType={key} />}
                                 />

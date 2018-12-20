@@ -6,12 +6,13 @@
 
 import React from 'react';
 // import styled from 'styled-components';
-
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 {{/if}}
 
+{{#if wantMessages}}
+import messages from './messages';
+{{/if}}
 import './style.scss';
 
 class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line react/prefer-stateless-function

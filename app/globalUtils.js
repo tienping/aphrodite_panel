@@ -110,8 +110,11 @@ export const request = (url, options) => (
 
 const cookies = new Cookies();
 
-export const setCookie = (key, value) => {
-    cookies.set(key, value, { path: '/' });
+export const setCookie = (key, value, options) => {
+    const opt = options || { path: '/' };
+    cookies.set(key, value, opt);
 };
 
-export const getCookie = (key) => cookies.get(key);
+export const getCookie = (key, options) => cookies.get(key, options);
+
+export const removeCookie = (key, options) => cookies.remove(key, options);

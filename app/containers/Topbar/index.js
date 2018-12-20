@@ -68,7 +68,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                 Object.keys(tableSetting).forEach((key) => {
                     items.push({
                         code: key,
-                        require_login: true,
+                        require_login: false,
                         type: 'internal_url',
                         title: dataChecking(tableSetting, key, 'title'),
                         url: dataChecking(tableSetting, key, 'link'),
