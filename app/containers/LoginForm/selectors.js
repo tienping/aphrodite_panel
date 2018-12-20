@@ -24,8 +24,14 @@ const makeSelectAuthLoading = () => createSelector(
     (session) => session.get('loading')
 );
 
+const makeSelectAuthLoginSuccess = () => createSelector(
+    selectSession,
+    (session) => session.get('loginSuccess')
+);
+
 export {
     selectSession,
     makeSelectAuthError,
     makeSelectAuthLoading,
+    makeSelectAuthLoginSuccess,
 };

@@ -14,17 +14,20 @@ import {
 const initialState = fromJS({
     loading: false,
     error: false,
+    loginSuccess: false,
 });
 
 function loginFormReducer(state = initialState, action) {
     switch (action.type) {
         case AUTH_LOGIN:
             return state
+                .set('loginSuccess', false)
                 .set('loading', true)
                 .set('error', false);
         case AUTH_LOGIN_SUCCESS:
             return state
-                .set('loading', false)
+                .set('loginSuccess', true)
+                // .set('loading', false) // no need to remove loading, page will be redirect
                 .set('error', false);
         case AUTH_LOGIN_FAILED:
             return state

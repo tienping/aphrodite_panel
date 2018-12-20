@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-    header: {
-        id: 'app.containers.LogoutForm.header',
-        defaultMessage: 'This is LogoutForm container !',
+    formTitle: {
+        id: 'app.containers.LogoutForm.formTitle',
+        defaultMessage: 'Are you sure you want to logout?',
+    },
+    confirm: {
+        id: 'app.containers.LogoutForm.confirm',
+        defaultMessage: 'Confirm',
+    },
+    cancel: {
+        id: 'app.containers.LogoutForm.cancel',
+        defaultMessage: 'Cancel',
     },
 });

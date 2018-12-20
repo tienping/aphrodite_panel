@@ -6,7 +6,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -88,9 +88,12 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         {
                             code: 'logout',
                             require_login: true,
-                            type: 'internal_url',
+                            type: 'exec_function',
                             text: 'Logout',
-                            url: '/logout',
+                            handleLinkClick: () => {
+                                globalScope.previousPage = window.location.pathname;
+                                this.props.history.push('/logout');
+                            },
                         },
                     ],
                     iconClass: 'fa fa-user text-white',
@@ -157,4 +160,5 @@ export default compose(
     withReducer,
     withSaga,
     withConnect,
+    withRouter,
 )(Topbar);

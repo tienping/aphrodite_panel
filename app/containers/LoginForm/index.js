@@ -11,24 +11,20 @@ import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-
 import Input from 'components/Input';
 // import Loading from 'components/Loading';
 import ErrorMessage from 'components/ErrorMessage';
 
 import reducer from './reducer';
 import saga from './saga';
-
 import { doLogin } from './actions';
-
 import {
     makeSelectAuthError,
     makeSelectAuthLoading,
+    makeSelectAuthLoginSuccess,
 } from './selectors';
-
 import './style.scss';
 
 export const authkeys = ['username', 'password'];
@@ -46,6 +42,12 @@ export const Form = (props) => (
 );
 
 export class LoginForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.loginSuccess !== this.props.loginSuccess && nextProps.loginSuccess) {
+            window.location.href = window.location.pathname;
+        }
+    }
+
     loginAction = (evt) => {
         evt.preventDefault();
         const form = {};
@@ -57,10 +59,10 @@ export class LoginForm extends React.PureComponent { // eslint-disable-line reac
 
     render() {
         return (
-            <div id="TableListingPage-container" className="TableListingPage-page">
+            <div id="LoginForm-container" className="LoginForm-page">
                 <Helmet>
                     <title>Login to Hermo Gamicenter</title>
-                    <meta name="description" content="Description of TableListingPage" />
+                    <meta name="description" content="Form to facilitate logoin" />
                 </Helmet>
                 <section className="container">
                     <div className="loginForm-wrapper">
@@ -89,6 +91,7 @@ Form.propTypes = {
 const mapStateToProps = createStructuredSelector({
     loading: makeSelectAuthLoading(),
     error: makeSelectAuthError(),
+    loginSuccess: makeSelectAuthLoginSuccess(),
 });
 
 export function mapDispatchToProps(dispatch) {
