@@ -9,8 +9,8 @@ const PrivateRoute = ({ component: Component, render: propsRender, token, ...rem
             return <LoginForm />;
         }
 
-        if (props.render) {
-            return props.render(props);
+        if (propsRender) {
+            return propsRender(props);
         }
 
         return <Component {...props}></Component>;

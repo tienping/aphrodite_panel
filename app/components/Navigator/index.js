@@ -28,7 +28,7 @@ function Navigator(props) {
 
         return (
             <UnstyleList className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
-                <NavItem data={item} handleLinkClick={props.handleLinkClick}></NavItem>
+                <NavItem data={item}></NavItem>
             </UnstyleList>
         );
     });
@@ -58,7 +58,6 @@ function Navigator(props) {
 
 Navigator.propTypes = {
     items: PropTypes.array.isRequired,
-    handleLinkClick: PropTypes.func,
     vertical: PropTypes.bool,
 };
 

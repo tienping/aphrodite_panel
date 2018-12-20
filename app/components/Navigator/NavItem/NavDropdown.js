@@ -13,6 +13,7 @@ import { dataChecking } from 'globalUtils';
 
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import './NavDropdown.scss';
+import NavItem from './../NavItem/index';
 
 const DropdownContainer = styled(DropdownContent)`
     position: absolute;
@@ -55,6 +56,8 @@ function Section(param) {
             <span>TODO: cart_component</span>
         );
     }
+
+    return <NavItem data={param.data}></NavItem>;
 }
 
 function NavDropdown(props) {

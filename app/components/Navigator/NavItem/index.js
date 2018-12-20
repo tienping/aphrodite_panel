@@ -15,13 +15,20 @@ import NavDropdown from './NavDropdown';
 const StyleNavi = styled.span`
     padding: 1rem;
     cursor: pointer;
+    color: white;
+
+    &:hover {
+        color: ${(props) => props.theme.tertiary_color};
+    }
 `;
 
 function NavItem(props) {
     if (props.data.type === 'internal_url') {
         return (
-            <NavLink to={props.data.url} className="nav-link text-capitalize" title={props.data.text}>
-                <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}></StyleNavi>
+            <NavLink to={props.data.url} className="nav-link text-capitalize" title={props.data.title}>
+                <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}>
+                    {props.data.text}
+                </StyleNavi>
             </NavLink>
         );
     } else if (props.data.type === 'external_url') {

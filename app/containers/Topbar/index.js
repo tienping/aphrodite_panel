@@ -32,6 +32,7 @@ import saga from './saga';
 // } from './selectors';
 
 import { fetchTopNav } from './actions';
+import globalScope from '../../globalScope';
 
 const HershopTopbarTitle = styled.span`
     padding: 8px;
@@ -69,10 +70,30 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         code: key,
                         require_login: true,
                         type: 'internal_url',
-                        text: dataChecking(tableSetting, key, 'title'),
+                        title: dataChecking(tableSetting, key, 'title'),
                         url: dataChecking(tableSetting, key, 'link'),
                         iconClass: dataChecking(tableSetting, key, 'iconClass'),
                     });
+                });
+            }
+
+            if (globalScope.token) {
+                items.push({
+                    code: 'user_profile',
+                    require_login: true,
+                    type: 'dropdown',
+                    title: 'Profile',
+                    text: 'Profile',
+                    items: [
+                        {
+                            code: 'logout',
+                            require_login: true,
+                            type: 'internal_url',
+                            text: 'Logout',
+                            url: '/lougout',
+                        },
+                    ],
+                    iconClass: 'fa fa-user text-white',
                 });
             }
 
@@ -83,8 +104,6 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
     componentDidMount() {
         this.props.dispatch(fetchTopNav({}));
     }
-
-    handleLinkClick() {}
 
     render() {
         return (
@@ -101,7 +120,6 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                 </div>
                 <Navigator
                     items={this.state.navItems}
-                    handleLinkClick={this.handleLinkClick}
                 />
             </div>
         );

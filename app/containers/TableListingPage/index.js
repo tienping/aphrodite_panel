@@ -28,7 +28,6 @@ import saga from './saga';
 import dataGroup from './mockdata';
 
 import './style.scss';
-import globalScope from '../../globalScope';
 
 export class TableListingPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
@@ -54,9 +53,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         return (
             <section className="page-actions"style={{ width: this.state.tableWidth || 'auto' }}>
-                <div>
-                    <div>token: {globalScope.token || 'null'}</div>
-                </div>
                 {
                     actionButton.map((item, index) => {
                         if (item.type === 'formAction') {
