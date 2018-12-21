@@ -92,9 +92,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <div
                                     key={index}
                                     className="table-header-item table-row-item"
-                                    style={{ width: head.width, maxWidth: head.width }}
+                                    style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
                                 >
-                                    <span style={{ textAlign: head.align }}>{ head.label }</span>
+                                    <span>{ head.label }</span>
                                 </div>
                             ))
                         }
@@ -108,7 +108,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             <div
                                                 key={index2}
                                                 className="table-row-item"
-                                                style={{ width: col.width, maxWidth: col.width }}
+                                                style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
                                             >
                                                 { this.renderCell(row, col) }
                                             </div>
@@ -161,7 +161,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </div>
                 );
             case 'checkbox':
-                return <span style={{ textAlign: col.align }}>[ ]</span>;
+                return <span>[ ]</span>;
             case 'boolean':
                 return (
                     <Switch
@@ -174,11 +174,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 return <img src={row[col.key]} alt={row.name} width={row.width || '100%'} height={row.height || ''} />;
             case 'date':
                 date = new Date(row[col.key]);
-                return <span style={{ textAlign: col.align }}>{date.toLocaleDateString()}</span>;
+                return <span>{date.toLocaleDateString()}</span>;
             case 'json':
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
             default:
-                return <span style={{ textAlign: col.align }}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
+                return <span>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }
     }
 

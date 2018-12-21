@@ -11,6 +11,8 @@ import styled from 'styled-components';
 import globalScope from 'globalScope';
 import NavItem from './NavItem/index';
 
+import './style.scss';
+
 const NavContainer = styled.div`
     position: absolute;
     top: 0;
@@ -27,17 +29,17 @@ function Navigator(props) {
         }
 
         return (
-            <UnstyleList className="nav-item px-2" key={item.code} style={{ width: '48px' }}>
-                <NavItem data={item}></NavItem>
+            <UnstyleList className="nav-item px-2" key={item.code}>
+                <NavItem clickHandler={props.clickHandler} vertical={props.vertical} itemClassName={props.itemClassName} data={item}></NavItem>
             </UnstyleList>
         );
     });
 
     if (props.vertical) {
         return (
-            <div className="vertical-navigator">
-                <nav className="navbar navbar-expand-md navbar-light p-0">
-                    <div className="navbar-nav d-flex flex-column">
+            <div className={`vertical-navigator ${props.className}`}>
+                <nav className="">
+                    <div className="">
                         {props.items.length && menu}
                     </div>
                 </nav>
@@ -46,9 +48,9 @@ function Navigator(props) {
     }
 
     return (
-        <NavContainer>
-            <nav className="navbar navbar-expand-md navbar-dark p-0">
-                <div className="navbar-nav d-flex flex-row">
+        <NavContainer className={props.className}>
+            <nav className="gami-navbar">
+                <div className="gami-navbar-nav">
                     {props.items.length && menu}
                 </div>
             </nav>

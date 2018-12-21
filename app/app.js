@@ -72,7 +72,7 @@ const render = (messages) => {
                         <div>
                             <HershopTopbar
                                 id="hershop-topbar-container"
-                                className="visible-sm visible-md visible-lg"
+                                className=""
                             >
                                 <Topbar />
                             </HershopTopbar>

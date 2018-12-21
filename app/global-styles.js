@@ -1,6 +1,7 @@
 import { injectGlobal } from 'styled-components';
 
-import './global-styles.scss';
+import theme from 'theme';
+import 'global-styles.scss';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
@@ -35,7 +36,32 @@ injectGlobal`
         color: white;
     }
 
-    .text-hover-hermo-pink:hover {
+    .text-hover-hermo-pink:hover,
+    .text-hover-hermo-pink:focus {
         color: #FF0066;
+    }
+
+    .text-main-color {
+        color: ${theme.main_color};
+    }
+
+    .bg-main-color {
+        background-color: ${theme.main_bg};
+    }
+
+    .text-secondary-color {
+        color: ${theme.secondary_color};
+    }
+
+    .bg-secondary-color {
+        background-color: ${theme.secondary_bg};
+    }
+
+    .text-tertiary-color {
+        color: ${theme.tertiary_color};
+    }
+
+    .bg-tertiary-color {
+        background-color: ${theme.tertiary_bg};
     }
 `;

@@ -13,28 +13,38 @@ import getInjectors from './sagaInjectors';
  * cancelled with `task.cancel()` on component un-mount for improved performance. Another two options:
  *   - constants.DAEMON—starts the saga on component mount and never cancels it or starts again,
  *   - constants.ONCE_TILL_UNMOUNT—behaves like 'RESTART_ON_REMOUNT' but never runs it again.
- *
  */
-export default ({ key, saga, mode }) => (WrappedComponent) => {
+export default ({ key, saga, mode, args }) => (WrappedComponent) => {
     class InjectSaga extends React.Component {
         static WrappedComponent = WrappedComponent;
+
         static contextTypes = {
             store: PropTypes.object.isRequired,
         };
         static displayName = `withSaga(${(WrappedComponent.displayName || WrappedComponent.name || 'Component')})`;
 
         componentWillMount() {
-            const { injectSaga } = this.injectors;
+            const { injectSaga, ejectSaga } = this.injectors;
+            const injectedArgs = args || [this.props];
+            const { store } = this.context;
 
-            injectSaga(key, { saga, mode }, this.props);
+            // eject old saga with same name, so it does not get double sagas injected
+            if (Reflect.has(store.injectedSagas, key) && store.injectedSagas[key].saga === saga) {
+                ejectSaga(key);
+            }
+            injectSaga(key, { saga, mode }, ...injectedArgs);
         }
 
         componentWillUnmount() {
             const { ejectSaga } = this.injectors;
+            const { store } = this.context;
 
-            ejectSaga(key);
+            if (Reflect.has(store.injectedSagas, key) && store.injectedSagas[key].saga === saga) {
+                ejectSaga(key);
+            }
         }
 
+        // eslint-disable-next-line react/destructuring-assignment
         injectors = getInjectors(this.context.store);
 
         render() {

@@ -15,7 +15,6 @@ import NavDropdown from './NavDropdown';
 const StyleNavi = styled.span`
     padding: 1rem;
     cursor: pointer;
-    color: white;
 
     &:hover {
         color: ${(props) => props.theme.tertiary_color};
@@ -25,34 +24,54 @@ const StyleNavi = styled.span`
 function NavItem(props) {
     if (props.data.type === 'internal_url') {
         return (
-            <NavLink to={props.data.url} className="nav-link text-capitalize" title={props.data.title}>
-                <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}>
-                    {props.data.text}
-                </StyleNavi>
+            <NavLink
+                to={props.data.url}
+                className={`nav-link text-capitalize text-hover-hermo-pink ${props.itemClassName}`}
+                title={props.data.title}
+                onClick={props.clickHandler ? props.clickHandler : () => {}}
+            >
+                <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}></StyleNavi>
+                <span>{ props.vertical ? props.data.verticalText : props.data.text}</span>
             </NavLink>
         );
     } else if (props.data.type === 'external_url') {
         return (
-            <a href={props.data.url} className="nav-link text-capitalize" title={props.data.title}>
+            <a
+                href={props.data.url}
+                className={`nav-link text-capitalize text-hover-hermo-pink ${props.itemClassName}`}
+                title={props.data.title}
+                onClick={props.clickHandler ? props.clickHandler : () => {}}
+            >
                 <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}>{props.data.text}</StyleNavi>
+                <span>{ props.vertical ? props.data.verticalText : props.data.text}</span>
             </a>
         );
     } else if (props.data.type === 'dropdown') {
         return (
-            <NavDropdown item={props.data}>
-                <StyleNavi className={(props.data.iconClass ? props.data.iconClass : 'dropdown__name ')} title={props.data.title}></StyleNavi>
+            <NavDropdown item={props.data} data={props.data} title={props.data.title} vertical={props.vertical} itemClassName={props.itemClassName} clickHandler={props.clickHandler}>
+                <span className={`text-hover-hermo-pink ${props.itemClassName}`}>
+                    <StyleNavi className={(props.data.iconClass ? props.data.iconClass : 'dropdown__name ')} title={props.data.title}></StyleNavi>
+                    <span>{ props.vertical ? props.data.verticalText : props.data.text}</span>
+                </span>
             </NavDropdown>
         );
     } else if (props.data.type === 'exec_function') {
         return (
             <a
-                onClick={props.data.handleLinkClick}
+                onClick={(...params) => {
+                    props.data.handleLinkClick({ ...params });
+
+                    if (props.clickHandler) {
+                        props.clickHandler({ ...params });
+                    }
+                }}
                 role="button"
                 tabIndex="0"
-                className="nav-link text-capitalize"
+                className={`nav-link text-capitalize text-hover-hermo-pink ${props.itemClassName}`}
                 title={props.data.title}
             >
-                <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}>{props.data.text}</StyleNavi>
+                <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}></StyleNavi>
+                <span>{ props.vertical ? props.data.verticalText : props.data.text}</span>
             </a>
         );
     } else if (props.data.type === 'render') {
@@ -60,8 +79,9 @@ function NavItem(props) {
     }
 
     return (
-        <span className="nav-link text-capitalize" title={props.data.title}>
-            <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}>{props.data.text}</StyleNavi>
+        <span className={`nav-link text-capitalize text-hover-hermo-pink ${props.itemClassName}`} title={props.data.title}>
+            <StyleNavi className={props.data.iconClass ? props.data.iconClass : ''}></StyleNavi>
+            <span>{ props.vertical ? props.data.verticalText : props.data.text}</span>
         </span>
     );
 }
