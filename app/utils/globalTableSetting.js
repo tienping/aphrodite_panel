@@ -47,6 +47,21 @@ const tableSetting = {
             { key: 'remarks', label: 'Remarks', width: '30rem', align: 'center', type: 'string' },
         ],
     },
+    partnerEvent: {
+        title: 'Partners Event',
+        link: '/partner_event',
+        createButtonWidth: '200px',
+        iconClass: 'fa fa-users',
+        tableWidth: '50rem',
+        api: '',
+        pathToDataRoot: '',
+        fields: [
+            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'string' },
+            { key: 'name', label: 'Name', width: '25rem', align: 'left', type: 'string' },
+            { key: 'start date', label: 'Start Date', width: '10rem', align: 'center', type: 'date' },
+            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean' },
+        ],
+    },
 };
 
 export default tableSetting;

@@ -29,6 +29,16 @@ const formSetting = {
             { key: 'remarks', label: 'Remarks', type: 'textbox' },
         ],
     },
+    partnerEvent: {
+        title: 'Partners Event',
+        formHeight: '505px',
+        fields: [
+            { key: 'id', label: 'ID', type: 'textfield' },
+            { key: 'name', label: 'Name', type: 'textfield' },
+            { key: 'logo', label: 'Logo', type: 'image' },
+            { key: 'status', label: 'Status', type: 'boolean', default: true },
+        ],
+    },
 };
 export default formSetting;
 
