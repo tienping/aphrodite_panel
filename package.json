@@ -267,6 +267,9 @@
         "testRegex": "tests/.*\\.test\\.js$"
     },
     "dependencies": {
+        "@tienping/my-react-dom": "0.0.1",
+        "@tienping/my-react-kit": "0.0.1",
+        "@tienping/my-react-toolkit": "0.0.1",
         "apisauce": "^1.0.1",
         "babel-polyfill": "6.23.0",
         "base-64": "^0.1.0",

@@ -20,6 +20,7 @@ import { dataChecking } from 'globalUtils';
 import tableSetting from 'utils/globalTableSetting';
 
 import FormButton from 'components/FormButton';
+import { Input } from '@tienping/my-react-kit';
 
 import makeSelectTableListingPage from './selectors';
 import reducer from './reducer';
@@ -195,6 +196,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
+                {/* <div style={{ padding: '1rem', background: 'lime' }}>
+                    <Input></Input>
+                </div> */}
                 <div>{dataChecking(this.props, 'id')}</div>
                 {this.renderMenu()}
                 {this.renderTable()}

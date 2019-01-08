@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
+import Fancy from '@tienping/my-react-dom';
 
 import messages from './messages';
 
@@ -34,6 +35,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                 <Header>
                     <FormattedMessage {...messages.header} />
                 </Header>
+                <div><Fancy /></div>
                 <Section>
                     {
                         Object.keys(tableSetting).map((key, index) => (
