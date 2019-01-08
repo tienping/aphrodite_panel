@@ -51,7 +51,7 @@ const tableSetting = {
         title: 'Partners Event',
         link: '/partner_event',
         createButtonWidth: '200px',
-        iconClass: 'fa fa-users',
+        iconClass: 'fas fa-handshake',
         tableWidth: '50rem',
         api: '',
         pathToDataRoot: '',

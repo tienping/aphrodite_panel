@@ -31,7 +31,8 @@ const formSetting = {
     },
     partnerEvent: {
         title: 'Partners Event',
-        formHeight: '505px',
+        formHeight: '495px',
+        formWidth: '280px',
         fields: [
             { key: 'id', label: 'ID', type: 'textfield' },
             { key: 'name', label: 'Name', type: 'textfield' },

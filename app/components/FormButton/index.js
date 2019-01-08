@@ -29,6 +29,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             this.state.formConfig = dataChecking(formSetting, this.props.pageType, 'fields');
             this.state.formHeight = dataChecking(formSetting, this.props.pageType, 'formHeight');
+            this.state.formWidth = dataChecking(formSetting, this.props.pageType, 'formWidth');
 
             if (dataChecking(formSetting, this.props.pageType, 'fields')) {
                 formSetting[this.props.pageType].fields.forEach((field) => {
@@ -173,11 +174,23 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
     }
 
     render() {
+        const getModalWidht = (style) => {
+            if (this.state.showModal) {
+                return this.state.formWidth || '265px';
+            }
+
+            return style.width;
+        };
+
         return (
             <div className="FormButton-component">
                 <div
                     id="page-action-modal"
-                    style={{ ...this.props.style, height: `${this.state.showModal ? this.state.formHeight : '45px'}` }}
+                    style={{
+                        ...this.props.style,
+                        height: `${this.state.showModal ? this.state.formHeight : '45px'}`,
+                        width: `${getModalWidht(this.props.style)}`,
+                    }}
                     className={`page-action-modal gamicenter-button ${this.state.showModal ? 'triggered' : ''}`}
                 >
                     {

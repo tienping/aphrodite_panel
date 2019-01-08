@@ -5,7 +5,8 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 1. Clone the repo
 2. `npm install` to setup the environment
 3. `npm start` to start the instance
-4. `npm run build && aws s3 sync build/ s3://gamicenter$` to push update into s3 instance
+4. AWS CLI (for first time): https://cloudacademy.com/blog/how-to-use-aws-cli/
+5. `sudo npm run build && aws s3 sync build/ s3://gamicenter.hermo.my` to push update into s3 instance
 
 
 # Settings
