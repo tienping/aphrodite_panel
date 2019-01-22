@@ -1,4 +1,4 @@
-import { dataChecking } from 'globalUtils';
+// import { dataChecking } from 'globalUtils';
 
 const tableSetting = {
     // sysvar: {
