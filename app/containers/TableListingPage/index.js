@@ -20,11 +20,12 @@ import { dataChecking } from 'globalUtils';
 import tableSetting from 'utils/globalTableSetting';
 
 import FormButton from 'components/FormButton';
-import { Input } from '@tienping/my-react-kit';
+// import { Input } from '@tienping/my-react-kit';
 
 import makeSelectTableListingPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import * as actions from './actions';
 // import messages from './messages';
 import dataGroup from './mockdata';
 
@@ -38,50 +39,58 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             this.state = {
                 tableConfig: dataChecking(tableSetting, this.props.pageType, 'fields'),
                 tableWidth: dataChecking(tableSetting, this.props.pageType, 'tableWidth'),
-                createButtonWidth: dataChecking(tableSetting, this.props.pageType, 'createButtonWidth'),
+                actionButtons: dataChecking(tableSetting, this.props.pageType, 'actionButtons'),
                 data: dataChecking(dataGroup, this.props.pageType, 'result', 'result'),
             };
         }
     }
 
-    renderMenu = () => {
-        const actionButton = [
+    renderMenu = () => (
+        <section className="page-actions"style={{ width: this.state.tableWidth || 'auto' }}>
             {
-                title: `New ${this.props.pageType}`,
-                type: 'formAction',
-            },
-        ];
-
-        return (
-            <section className="page-actions"style={{ width: this.state.tableWidth || 'auto' }}>
-                {
-                    actionButton.map((item, index) => {
-                        if (item.type === 'formAction') {
-                            return (
+                this.state.actionButtons.map((item, index) => {
+                    if (item.type === 'createNew') {
+                        return (
+                            <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
                                 <FormButton
-                                    key={index}
-                                    style={{ width: this.state.createButtonWidth }}
-                                    pageType={this.props.pageType}
+                                    key="create-button"
+                                    style={{ width: item.width }}
+                                    formId={`create_${this.props.pageType}`}
                                 >
                                     {item.title}
                                 </FormButton>
-                            );
-                        }
-
-                        return (
-                            <div
-                                key={index}
-                                className="gamicenter-button"
-                                onClick={item.action}
-                            >
-                                <span className="text-capitalize">{item.title}</span>
-                            </div>
+                            </span>
                         );
-                    })
-                }
-            </section>
-        );
-    }
+                    } else if (item.type === 'upload') {
+                        return (
+                            <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                                <FormButton
+                                    key="upload-button"
+                                    style={{ width: item.width }}
+                                    formId={'upload'}
+                                >
+                                    {item.title}
+                                </FormButton>
+                            </span>
+                        );
+                    }
+
+                    return (
+                        <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                            <FormButton
+                                key="create-button"
+                                style={{ width: item.width }}
+                                pageType={this.props.pageType}
+                                formId={`create_${this.props.pageType}`}
+                            >
+                                {item.title}
+                            </FormButton>
+                        </span>
+                    );
+                })
+            }
+        </section>
+    );
 
     renderTable() {
         return (
@@ -138,27 +147,32 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         switch (col.type) {
             case 'action':
                 return (
-                    <div className="table-header" style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <div
-                            key="1"
-                            className="action-item"
-                        >
-                            <span
-                                onClick={() => {
-                                    if (dataChecking(this.props, 'changeView')) {
-                                        this.props.changeView('Product');
-                                    }
-                                }}
-                            >
-                                Edit
-                            </span>
-                        </div>
-                        <div
-                            key="2"
-                            className="action-item"
-                        >
-                            <span>Delete</span>
-                        </div>
+                    <div style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                        {
+                            col.items && col.items.map((value, index) => (
+                                <div
+                                    key={index}
+                                    className="action-item"
+                                >
+                                    <a
+                                        className="gamicenter-button invert smaller px-1 py-half my-quater"
+                                        onClick={(value2, index2) => {
+                                            if (value.onPressHandling) {
+                                                value.onPressHandling(index2, this, row, actions);
+                                            }
+                                        }}
+                                    >
+                                        {
+                                            value.image ?
+                                                <img src={value.image} alt={value.name} width="15px" height="15px" />
+                                                :
+                                                <i className={value.iconClass ? value.iconClass : 'fas fa-exclamation-circle'} />
+                                        }
+                                        <span className="pl-1">{value.name}</span>
+                                    </a>
+                                </div>
+                            ))
+                        }
                     </div>
                 );
             case 'checkbox':
@@ -176,8 +190,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'date':
                 date = new Date(row[col.key]);
                 return <span>{date.toLocaleDateString()}</span>;
+            case 'datetime':
+                date = new Date(row[col.key]);
+                return <span>{date.toLocaleString()}</span>;
             case 'json':
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
+            case 'link':
+                return <a href={dataChecking(row, col.key) ? row[col.key] : ''}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</a>;
             default:
                 return <span>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }
@@ -187,19 +206,19 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         return (
             <div id="TableListingPage-container" className="TableListingPage-page">
                 <Helmet>
-                    <title>
+                    <title style={{ textTransform: 'capitalize' }}>
                         {
-                            dataChecking(this.props, 'id') ?
-                                `${this.props.title} Page` :
+                            dataChecking(this.props, 'pageType') ?
+                                `${this.props.pageType.charAt(0).toUpperCase() + this.props.pageType.substr(1)} Page` :
                                 'Table'
                         }
                     </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
+                <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') ? `${this.props.pageType} Page` : 'Table'}</h1>
                 {/* <div style={{ padding: '1rem', background: 'lime' }}>
                     <Input></Input>
                 </div> */}
-                <div>{dataChecking(this.props, 'id')}</div>
                 {this.renderMenu()}
                 {this.renderTable()}
             </div>
