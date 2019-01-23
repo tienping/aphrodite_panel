@@ -60,6 +60,9 @@ const formSetting = {
         fields: [
             { key: 'file', label: 'File', type: 'file' },
         ],
+        onSubmit: () => {
+            alert('submit action to be configure in globalFormSetting');
+        },
     },
     // partnerEvent: {
     //     title: 'Partners Event',

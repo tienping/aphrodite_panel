@@ -11,8 +11,7 @@ import Switch from 'react-switch';
 
 import formSetting from 'utils/globalFormSetting';
 
-import { FilePond } from 'react-filepond';
-import 'filepond/dist/filepond.min.css';
+import papaparse from 'papaparse';
 
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
@@ -29,9 +28,10 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         };
 
         if (this.props.formId && dataChecking(formSetting, this.props.formId)) {
-            this.state.formConfig = dataChecking(formSetting[this.props.formId], 'fields');
+            this.state.formFields = dataChecking(formSetting[this.props.formId], 'fields');
             this.state.formHeight = dataChecking(formSetting[this.props.formId], 'formHeight');
             this.state.formWidth = dataChecking(formSetting[this.props.formId], 'formWidth');
+            this.state.formOnSubmit = dataChecking(formSetting[this.props.formId], 'onSubmit');
 
             if (dataChecking(formSetting, this.props.formId, 'fields')) {
                 formSetting[this.props.formId].fields.forEach((field) => {
@@ -47,9 +47,10 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         if (nextProps.formId && dataChecking(formSetting, nextProps.formId)) {
             const tempObj = {
                 showModal: false,
-                formConfig: dataChecking(formSetting[nextProps.formId], 'fields'),
+                formFields: dataChecking(formSetting[nextProps.formId], 'fields'),
                 formHeight: dataChecking(formSetting[nextProps.formId], 'formHeight'),
                 formWidth: dataChecking(formSetting[nextProps.formId], 'formWidth'),
+                formOnSubmit: dataChecking(formSetting[nextProps.formId], 'onSubmit'),
             };
 
             if (dataChecking(formSetting[nextProps.formId], 'fields')) {
@@ -93,17 +94,31 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         const { target } = event;
         const obj = {};
         obj[field.key] = {
-            info: null,
-            url: '',
+            message: 'File not found...',
+            loading: false,
         };
 
         if (target.files && target.files[0]) {
-            const data = new FormData();
-            data.append('file', target.files[0], target.files[0].name);
+            papaparse.parse(target.files[0], {
+                skipEmptyLines: true,
+                complete: (results) => {
+                    setTimeout(() => {
+                        obj[field.key] = {
+                            fileName: target.files[0].name,
+                            file: target.files[0],
+                            loading: false,
+                            data: results.data,
+                        };
+                        this.setState(obj);
+                    }, 1000);
+                },
+            });
 
             obj[field.key] = {
                 fileName: target.files[0].name,
-                file: data,
+                file: target.files[0],
+                loading: true,
+                data: null,
             };
         }
 
@@ -119,6 +134,12 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
             value: '',
         };
         this.setState(obj);
+    }
+
+    onSubmit = () => {
+        if (this.state.formOnSubmit) {
+            this.state.formOnSubmit();
+        }
     }
 
     handleTextChange = (event, field) => {
@@ -190,8 +211,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
             case 'file':
                 return (
                     <div className="gamicenter-imageUploader">
-                        <FilePond />
-                        {/* <div className="image-preview">
+                        <div className="image-preview">
                             <span
                                 className="image-holder"
                                 onClick={() => {
@@ -201,7 +221,13 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                             >
                                 {
                                     dataChecking(this.state, field.key, 'fileName') ?
-                                        <div>{dataChecking(this.state, field.key, 'fileName')}</div>
+                                        <div>
+                                            <i className="far fa-file-alt" style={{ fontSize: '5rem', padding: '2rem', display: 'block' }} />
+                                            <span>{dataChecking(this.state, field.key, 'fileName')}</span>
+                                            <span
+                                                style={{ paddingLeft: '0.5rem', fontSize: '75%', color: dataChecking(this.state, field.key, 'loading') ? 'red' : 'green' }}
+                                            >{dataChecking(this.state, field.key, 'loading') ? 'loading...' : 'done'}</span>
+                                        </div>
                                         :
                                         <img
                                             className={'previewer-image previewer-placeholder'}
@@ -243,7 +269,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                 type="file"
                                 onChange={(event) => { this.onSelectFile(event, field); }}
                             ></input>
-                        </div> */}
+                        </div>
                     </div>
                 );
             case 'boolean':
@@ -327,10 +353,10 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         <div>
                             <div>
                                 {
-                                    this.state.formConfig ?
+                                    this.state.formFields ?
                                         <div>
                                             {
-                                                this.state.formConfig.map((field, index) => (
+                                                this.state.formFields.map((field, index) => (
                                                     <div
                                                         key={index}
                                                         className="create-modal-form-field"
@@ -340,12 +366,17 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                                     </div>
                                                 ))
                                             }
-                                            <div className="gamicenter-button smaller">
+                                            <div
+                                                className="gamicenter-button smaller"
+                                                onClick={() => {
+                                                    this.onSubmit();
+                                                }}
+                                            >
                                                 {
                                                     this.state.loading ?
                                                         <span>loading...</span>
                                                         :
-                                                        <span>Create</span>
+                                                        <span>Submit</span>
                                                 }
                                             </div>
                                         </div>

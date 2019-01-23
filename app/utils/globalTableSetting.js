@@ -26,11 +26,11 @@ const tableSetting = {
         api: '',
         pathToDataRoot: '',
         actionButtons: [
-            {
-                title: 'New Partners ',
-                type: 'formAction',
-                width: '165px',
-            },
+            // {
+            //     title: 'New Partners ',
+            //     type: 'formAction',
+            //     width: '165px',
+            // },
             {
                 title: 'Upload Excel',
                 type: 'upload',
@@ -54,11 +54,11 @@ const tableSetting = {
         api: '',
         pathToDataRoot: '',
         actionButtons: [
-            {
-                title: 'New Reward',
-                type: 'formAction',
-                width: '165px',
-            },
+            // {
+            //     title: 'New Reward',
+            //     type: 'formAction',
+            //     width: '165px',
+            // },
             {
                 title: 'Upload Excel',
                 type: 'upload',
@@ -94,11 +94,11 @@ const tableSetting = {
         api: '',
         pathToDataRoot: '',
         actionButtons: [
-            {
-                title: 'New Voucher',
-                type: 'formAction',
-                width: '160px',
-            },
+            // {
+            //     title: 'New Voucher',
+            //     type: 'formAction',
+            //     width: '160px',
+            // },
             {
                 title: 'Upload Excel',
                 type: 'upload',
