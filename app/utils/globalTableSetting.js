@@ -32,9 +32,9 @@ const tableSetting = {
             //     width: '165px',
             // },
             {
-                title: 'Upload Excel',
+                title: 'Upload',
                 type: 'upload',
-                width: '165px',
+                width: '115px',
             },
         ],
         fields: [
@@ -60,9 +60,9 @@ const tableSetting = {
             //     width: '165px',
             // },
             {
-                title: 'Upload Excel',
+                title: 'Upload',
                 type: 'upload',
-                width: '165px',
+                width: '115px',
             },
         ],
         fields: [
@@ -100,9 +100,9 @@ const tableSetting = {
             //     width: '160px',
             // },
             {
-                title: 'Upload Excel',
+                title: 'Upload',
                 type: 'upload',
-                width: '165px',
+                width: '115px',
             },
         ],
         fields: [

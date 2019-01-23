@@ -19,7 +19,7 @@ import injectReducer from 'utils/injectReducer';
 import { dataChecking } from 'globalUtils';
 import tableSetting from 'utils/globalTableSetting';
 
-import FormButton from 'components/FormButton';
+import FormButton from 'containers/FormButton';
 // import { Input } from '@tienping/my-react-kit';
 
 import makeSelectTableListingPage from './selectors';

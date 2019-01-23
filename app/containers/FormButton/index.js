@@ -1,26 +1,30 @@
 /**
-*
-* FormButton
-*
-*/
+ *
+ * FormButton
+ *
+ */
 
 import React from 'react';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+// import { Helmet } from 'react-helmet';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 
 import { dataChecking, getXdp } from 'globalUtils';
 import Switch from 'react-switch';
-
 import formSetting from 'utils/globalFormSetting';
+// import papaparse from 'papaparse';
 
-import papaparse from 'papaparse';
-
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
-
+import makeSelectFormButton from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+import * as actions from './actions';
 import './style.scss';
 
-// import dataGroup from './../../containers/TableListingPage/mockdata';
-
-class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
         super(props);
         this.state = {
@@ -99,26 +103,26 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
         };
 
         if (target.files && target.files[0]) {
-            papaparse.parse(target.files[0], {
-                skipEmptyLines: true,
-                complete: (results) => {
-                    setTimeout(() => {
-                        obj[field.key] = {
-                            fileName: target.files[0].name,
-                            file: target.files[0],
-                            loading: false,
-                            data: results.data,
-                        };
-                        this.setState(obj);
-                    }, 1000);
-                },
-            });
+            const form = new FormData();
+            form.append('file', target.files[0]);
+            // papaparse.parse(target.files[0], {
+            //     skipEmptyLines: true,
+            //     complete: (results) => {
+            //         obj[field.key] = {
+            //             fileName: target.files[0].name,
+            //             file: target.files[0],
+            //             loading: false,
+            //             data: results.data,
+            //         };
+            //         this.setState(obj);
+            //     },
+            // });
 
             obj[field.key] = {
+                form,
                 fileName: target.files[0].name,
-                file: target.files[0],
-                loading: true,
-                data: null,
+                // loading: true,
+                loading: false,
             };
         }
 
@@ -138,7 +142,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
 
     onSubmit = () => {
         if (this.state.formOnSubmit) {
-            this.state.formOnSubmit();
+            this.state.formOnSubmit(this, actions, this.state);
         }
     }
 
@@ -208,7 +212,7 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                         </div>
                     </div>
                 );
-            case 'file':
+            case 'file': // file type cannot be use together with other field, it need to be unique content during ajax call
                 return (
                     <div className="gamicenter-imageUploader">
                         <div className="image-preview">
@@ -366,18 +370,20 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
                                                     </div>
                                                 ))
                                             }
-                                            <div
-                                                className="gamicenter-button smaller"
-                                                onClick={() => {
-                                                    this.onSubmit();
-                                                }}
-                                            >
-                                                {
-                                                    this.state.loading ?
-                                                        <span>loading...</span>
-                                                        :
-                                                        <span>Submit</span>
-                                                }
+                                            <div style={{ textAlign: 'center' }}>
+                                                <div
+                                                    className="gamicenter-button smaller"
+                                                    onClick={() => {
+                                                        this.onSubmit();
+                                                    }}
+                                                >
+                                                    {
+                                                        this.state.loading ?
+                                                            <span>loading...</span>
+                                                            :
+                                                            <span>Submit</span>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                         :
@@ -394,7 +400,26 @@ class FormButton extends React.PureComponent { // eslint-disable-line react/pref
 }
 
 FormButton.propTypes = {
-
+    // dispatch: PropTypes.func.isRequired,
 };
 
-export default FormButton;
+const mapStateToProps = createStructuredSelector({
+    formbutton: makeSelectFormButton(),
+});
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch,
+    };
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'formButton', reducer });
+const withSaga = injectSaga({ key: 'formButton', saga });
+
+export default compose(
+    withReducer,
+    withSaga,
+    withConnect,
+)(FormButton);

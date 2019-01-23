@@ -56,12 +56,16 @@ const formSetting = {
     },
     upload: {
         title: 'Upload',
-        formHeight: '505px',
+        formHeight: '330px',
         fields: [
             { key: 'file', label: 'File', type: 'file' },
         ],
-        onSubmit: () => {
-            alert('submit action to be configure in globalFormSetting');
+        onSubmit: (scope, actions, data) => {
+            scope.props.dispatch(actions.fireApi({
+                data: data.file.form,
+                apiUrl: 'api.hermo.my/test',
+                type: 'post',
+            }));
         },
     },
     // partnerEvent: {
