@@ -3,8 +3,8 @@ import { create } from 'apisauce';
 import globalScope from 'globalScope';
 import Cookies from 'universal-cookie';
 
-export const apiRequest = (path, type, body, url, headerParams) => {
-    const apiObject = addHeaderToAPI(url || globalScope.api);
+export const apiRequest = (path, type, body, baseUrl, headerParams) => {
+    const apiObject = addHeaderToAPI(baseUrl || globalScope.api);
     return apiObject[type](path, body, headerParams);
 };
 

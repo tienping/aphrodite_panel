@@ -63,7 +63,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'api.hermo.my/test',
+                apiUrl: 'http://api.hermo.my/test',
                 type: 'post',
             }));
         },
