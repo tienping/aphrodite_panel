@@ -63,7 +63,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'http://api.hermo.my/test',
+                apiUrl: `http://localhost:9021/services/gami/uploadcsv/${scope.props.type}`,
                 type: 'post',
             }));
         },
