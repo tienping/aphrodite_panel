@@ -54,16 +54,68 @@ const formSetting = {
             { key: 'partner', label: 'Partner', type: 'dropdown' },
         ],
     },
-    upload: {
-        title: 'Upload',
-        formHeight: '330px',
+    upload_partner: {
+        title: 'Upload Partners',
+        formHeight: '350px',
         fields: [
-            { key: 'file', label: 'File', type: 'file' },
+            {
+                key: 'file',
+                label: 'File',
+                type: 'file',
+                sample: {
+                    name: 'Sample for partner',
+                    url: 'https://trello-attachments.s3.amazonaws.com/5bd19731034b528ef18903e9/5c482afb65a4647cff6d7b6a/36428da8fdec3f51edcc5b55442fd934/partner.csv',
+                },
+            },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: `http://localhost:9021/services/gami/uploadcsv/${scope.props.type}`,
+                apiUrl: 'http://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                type: 'post',
+            }));
+        },
+    },
+    upload_reward: {
+        title: 'Upload Reward',
+        formHeight: '350px',
+        fields: [
+            {
+                key: 'file',
+                label: 'File',
+                type: 'file',
+                sample: {
+                    name: 'Sample for reward',
+                    url: 'https://trello-attachments.s3.amazonaws.com/5bd19731034b528ef18903e9/5c482afb65a4647cff6d7b6a/7f807ce57e0c2385555f481a18f42d10/rewardPartner.csv',
+                },
+            },
+        ],
+        onSubmit: (scope, actions, data) => {
+            scope.props.dispatch(actions.fireApi({
+                data: data.file.form,
+                apiUrl: 'http://review-staging.hermo.my/services/gami/uploadcsv/reward',
+                type: 'post',
+            }));
+        },
+    },
+    upload_voucher: {
+        title: 'Upload Voucher',
+        formHeight: '350px',
+        fields: [
+            {
+                key: 'file',
+                label: 'File',
+                type: 'file',
+                sample: {
+                    name: 'Sample for voucher',
+                    url: 'https://trello-attachments.s3.amazonaws.com/5bd19731034b528ef18903e9/5c482afb65a4647cff6d7b6a/e60d64871819b37423e201f31b6bb563/voucher.csv',
+                },
+            },
+        ],
+        onSubmit: (scope, actions, data) => {
+            scope.props.dispatch(actions.fireApi({
+                data: data.file.form,
+                apiUrl: 'http://review-staging.hermo.my/services/gami/uploadcsv/voucher',
                 type: 'post',
             }));
         },

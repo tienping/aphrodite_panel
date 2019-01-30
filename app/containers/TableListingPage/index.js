@@ -67,8 +67,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <FormButton
                                     key="upload-button"
                                     style={{ width: item.width }}
-                                    formId={'upload'}
-                                    type={this.props.pageType}
+                                    formId={`upload_${this.props.pageType}`}
                                 >
                                     {item.title}
                                 </FormButton>

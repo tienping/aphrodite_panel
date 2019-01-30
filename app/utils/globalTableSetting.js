@@ -32,9 +32,9 @@ const tableSetting = {
             //     width: '165px',
             // },
             {
-                title: 'Upload',
+                title: 'Upload Partners',
                 type: 'upload',
-                width: '115px',
+                width: '183px',
             },
         ],
         fields: [
@@ -60,9 +60,9 @@ const tableSetting = {
             //     width: '165px',
             // },
             {
-                title: 'Upload',
+                title: 'Upload Reward',
                 type: 'upload',
-                width: '115px',
+                width: '177px',
             },
         ],
         fields: [
@@ -100,9 +100,9 @@ const tableSetting = {
             //     width: '160px',
             // },
             {
-                title: 'Upload',
+                title: 'Upload Voucher',
                 type: 'upload',
-                width: '115px',
+                width: '181px',
             },
         ],
         fields: [

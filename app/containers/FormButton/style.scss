@@ -30,7 +30,14 @@
 
         .field-label {
             color: black;
-            font-size: 75%;
+            font-size: 85%;
+        }
+
+        .link-for-sample {
+            line-height: 70%;
+            font-size: 70%;
+            text-decoration: underline;
+            a { color: blue; }
         }
 
         input {

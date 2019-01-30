@@ -214,65 +214,77 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 );
             case 'file': // file type cannot be use together with other field, it need to be unique content during ajax call
                 return (
-                    <div className="gamicenter-imageUploader">
-                        <div className="image-preview">
-                            <span
-                                className="image-holder"
-                                onClick={() => {
-                                    const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
-                                    inputEl.click();
-                                }}
-                            >
+                    <div>
+                        {
+                            dataChecking(field, 'sample', 'url') ?
+                                <div className="link-for-sample">
+                                    <a href={field.sample.url}>
+                                        <small>{field.sample.name || 'Sample'}</small>
+                                    </a>
+                                </div>
+                                :
+                                null
+                        }
+                        <div className="gamicenter-imageUploader">
+                            <div className="image-preview">
+                                <span
+                                    className="image-holder"
+                                    onClick={() => {
+                                        const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
+                                        inputEl.click();
+                                    }}
+                                >
+                                    {
+                                        dataChecking(this.state, field.key, 'fileName') ?
+                                            <div>
+                                                <i className="far fa-file-alt" style={{ fontSize: '5rem', padding: '2rem', display: 'block' }} />
+                                                <span>{dataChecking(this.state, field.key, 'fileName')}</span>
+                                                <span
+                                                    style={{ paddingLeft: '0.5rem', fontSize: '75%', color: dataChecking(this.state, field.key, 'loading') ? 'red' : 'green' }}
+                                                >{dataChecking(this.state, field.key, 'loading') ? 'loading...' : 'done'}</span>
+                                            </div>
+                                            :
+                                            <img
+                                                className={'previewer-image previewer-placeholder'}
+                                                style={{ maxHeight: '150px', maxWidth: '80%' }}
+                                                width="70%"
+                                                src={require('../../Resources/arrow_up_upload-512.png')}
+                                                alt="upload placeholder"
+                                            />
+                                    }
+                                </span>
                                 {
                                     dataChecking(this.state, field.key, 'fileName') ?
-                                        <div>
-                                            <i className="far fa-file-alt" style={{ fontSize: '5rem', padding: '2rem', display: 'block' }} />
-                                            <span>{dataChecking(this.state, field.key, 'fileName')}</span>
-                                            <span
-                                                style={{ paddingLeft: '0.5rem', fontSize: '75%', color: dataChecking(this.state, field.key, 'loading') ? 'red' : 'green' }}
-                                            >{dataChecking(this.state, field.key, 'loading') ? 'loading...' : 'done'}</span>
-                                        </div>
+                                        <span
+                                            className="close-btn"
+                                            onClick={(event) => {
+                                                this.onUnselectImage(event, `${this.props.formId}-${field.key}-uploader`, field);
+                                            }}
+                                        >
+                                            <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
+                                        </span>
                                         :
-                                        <img
-                                            className={'previewer-image previewer-placeholder'}
-                                            style={{ maxHeight: '150px', maxWidth: '80%' }}
-                                            width="70%"
-                                            src={require('../../Resources/arrow_up_upload-512.png')}
-                                            alt="upload placeholder"
-                                        />
+                                        null
                                 }
-                            </span>
-                            {
-                                dataChecking(this.state, field.key, 'fileName') ?
-                                    <span
-                                        className="close-btn"
-                                        onClick={(event) => {
-                                            this.onUnselectImage(event, `${this.props.formId}-${field.key}-uploader`, field);
-                                        }}
-                                    >
-                                        <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
-                                    </span>
-                                    :
-                                    null
-                            }
-                        </div>
-                        <div className="upload-action">
-                            <button
-                                htmlFor={`${this.props.formId}-${field.key}-uploader`}
-                                className="upload-button gamicenter-button"
-                                onClick={() => {
-                                    const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
-                                    inputEl.click();
-                                }}
-                            >
-                                <i className="fa fa-cloud-upload"></i> Upload
-                            </button>
-                            <input
-                                id={`${this.props.formId}-${field.key}-uploader`}
-                                className="upload-input"
-                                type="file"
-                                onChange={(event) => { this.onSelectFile(event, field); }}
-                            ></input>
+                            </div>
+                            <div className="upload-action">
+                                <button
+                                    htmlFor={`${this.props.formId}-${field.key}-uploader`}
+                                    className="upload-button gamicenter-button"
+                                    onClick={() => {
+                                        const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
+                                        inputEl.click();
+                                    }}
+                                >
+                                    <i className="fa fa-cloud-upload"></i> Upload
+                                </button>
+                                <input
+                                    id={`${this.props.formId}-${field.key}-uploader`}
+                                    className="upload-input"
+                                    type="file"
+                                    onChange={(event) => { this.onSelectFile(event, field); }}
+                                ></input>
+                            </div>
                         </div>
                     </div>
                 );
