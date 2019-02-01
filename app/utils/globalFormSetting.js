@@ -71,7 +71,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'http://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner',
                 type: 'post',
             }));
         },
@@ -93,7 +93,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'http://review-staging.hermo.my/services/gami/uploadcsv/reward',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/reward',
                 type: 'post',
             }));
         },
@@ -115,7 +115,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'http://review-staging.hermo.my/services/gami/uploadcsv/voucher',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/voucher',
                 type: 'post',
             }));
         },
