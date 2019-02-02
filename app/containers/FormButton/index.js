@@ -48,7 +48,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.formId && dataChecking(formSetting, nextProps.formId)) {
+        const { formbutton } = nextProps;
+        if (nextProps.formId && dataChecking(formSetting, nextProps.formId) && nextProps.formId !== this.props.formId) {
             const tempObj = {
                 showModal: false,
                 formFields: dataChecking(formSetting[nextProps.formId], 'fields'),
@@ -66,6 +67,14 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             }
 
             this.setState(tempObj);
+        }
+
+        if (formbutton.firing !== this.props.formbutton.firing) {
+            this.setState({ firing: formbutton.firing });
+
+            if (!formbutton.firing && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
+                alert(formbutton.fireApiReturnedData.message);
+            }
         }
     }
 
@@ -390,7 +399,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                     }}
                                                 >
                                                     {
-                                                        this.state.loading ?
+                                                        this.state.firing ?
                                                             <span>loading...</span>
                                                             :
                                                             <span>Submit</span>

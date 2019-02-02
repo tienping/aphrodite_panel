@@ -17,14 +17,16 @@ export function fireApi(params) {
     };
 }
 
-export function fireApiSuccess() {
+export function fireApiSuccess(response) {
     return {
         type: FIRE_API_SUCCESS,
+        payload: response,
     };
 }
 
-export function fireApiFail() {
+export function fireApiFail(response) {
     return {
         type: FIRE_API_FAIL,
+        payload: response,
     };
 }
