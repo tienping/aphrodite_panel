@@ -27,7 +27,6 @@ import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
 // import messages from './messages';
-import dataGroup from './mockdata';
 
 import './style.scss';
 
@@ -36,14 +35,60 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         super(props);
 
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
-            this.state = {
-                tableConfig: dataChecking(tableSetting, this.props.pageType, 'fields'),
-                tableWidth: dataChecking(tableSetting, this.props.pageType, 'tableWidth'),
-                actionButtons: dataChecking(tableSetting, this.props.pageType, 'actionButtons'),
-                data: dataChecking(dataGroup, this.props.pageType, 'result', 'result'),
-            };
+            this.state = this.initialiseProps(props);
+            props.dispatch(actions.getList(props.pageType));
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.pageType !== this.props.pageType) {
+            this.setState(this.initialiseProps(nextProps));
+            this.props.dispatch(actions.getList(nextProps.pageType));
+        }
+
+        // if (nextProps.tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
+        //     const { data, field } = nextProps.tablelistingpage.getItemData;
+
+        //     const arr = dataChecking(data, field.itemDataPath);
+        //     const tempItems = [];
+        //     arr.forEach((value) => {
+        //         tempItems.push({ id: `${field.itemKey}_${value.id}`, name: `${dataChecking(value, field.itemDataValuePath)}` });
+        //     });
+
+        //     globalScope[field.itemKey] = tempItems;
+        // }
+
+        // if (nextProps.tablelistingpage.createItemLoading !== this.props.tablelistingpage.createItemLoading) {
+        //     if (nextProps.tablelistingpage.createItemLoading) {
+        //         this.setState({ formActionLoading: true });
+        //     } else if (nextProps.tablelistingpage.createItemError) {
+        //         this.setState({ formActionLoading: false });
+        //     } else {
+        //         this.setState({ showModalType: '', formActionLoading: false });
+        //     }
+        // }
+
+        // if (nextProps.tablelistingpage.updateItemLoading !== this.props.tablelistingpage.updateItemLoading) {
+        //     if (nextProps.tablelistingpage.updateItemLoading) {
+        //         this.setState({ formActionLoading: true });
+        //     } else if (nextProps.tablelistingpage.updateItemError) {
+        //         this.setState({ formActionLoading: false });
+        //     } else {
+        //         this.setState({ showModalType: '', formActionLoading: false });
+        //     }
+        // }
+
+        // if (nextProps.tablelistingpage.deleteItemLoading !== this.props.tablelistingpage.deleteItemLoading && !nextProps.tablelistingpage.deleteItemLoading) {
+        //     this.props.dispatch(actions.getList(this.props.pageType));
+        // }
+    }
+
+    initialiseProps = (theProps) => ({
+        tableConfig: dataChecking(tableSetting, theProps.pageType, 'fields'),
+        tableWidth: dataChecking(tableSetting, theProps.pageType, 'tableWidth'),
+        actionButtons: dataChecking(tableSetting, theProps.pageType, 'actionButtons'),
+        data: [],
+    });
 
     renderMenu = () => (
         <section className="page-actions"style={{ width: this.state.tableWidth || 'auto' }}>
