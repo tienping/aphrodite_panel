@@ -45,7 +45,8 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                     items.push({
                         code: key,
                         require_login: false,
-                        type: 'internal_url',
+                        type: 'external_url',
+                        // type: 'internal_url',
                         title: dataChecking(tableSetting, key, 'title'),
                         verticalText: dataChecking(tableSetting, key, 'title'),
                         url: dataChecking(tableSetting, key, 'link'),

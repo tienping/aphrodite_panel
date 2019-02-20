@@ -120,27 +120,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     :
                     null
             }
-            <button
-                onClick={() => {
-                    if (tableSetting[this.props.pageType].api) {
-                        this.props.dispatch(actions.getList({ api: 'https://review-staging.hermo.my/services/gami/partners/list' }));
-                    }
-                }}
-            >Show Partner</button>
-            <button
-                onClick={() => {
-                    if (tableSetting[this.props.pageType].api) {
-                        this.props.dispatch(actions.getList({ api: 'https://review-staging.hermo.my/services/gami/rewards/event_list' }));
-                    }
-                }}
-            >Show Reward</button>
-            <button
-                onClick={() => {
-                    if (tableSetting[this.props.pageType].api) {
-                        this.props.dispatch(actions.getList({ api: 'https://review-staging.hermo.my/services/gami/rewards/voucher_list' }));
-                    }
-                }}
-            >Show VOucher</button>
         </section>
     );
 
