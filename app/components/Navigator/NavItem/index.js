@@ -13,7 +13,6 @@ import styled from 'styled-components';
 import NavDropdown from './NavDropdown';
 
 const StyleNavi = styled.span`
-    padding: 1rem;
     cursor: pointer;
 
     &:hover {

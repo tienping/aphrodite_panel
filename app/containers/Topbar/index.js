@@ -62,14 +62,15 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                     title: 'Profile',
                     verticalText: 'Profile',
                     // text: 'Profile',
-                    iconClass: 'fa fa-user',
+                    iconClass: 'fa fa-user p-1',
+                    dropdownClass: 'text-white text-hover-hermo-pink p-1',
                     items: [
                         {
                             code: 'logout',
                             require_login: true,
                             type: 'exec_function',
                             text: 'Logout',
-                            iconClass: 'fa fa-sign-out',
+                            iconClass: 'fas fa-sign-out-alt px-1',
                             handleLinkClick: () => {
                                 globalScope.previousPage = window.location.pathname;
                                 this.props.history.push('/logout');

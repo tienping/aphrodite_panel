@@ -5,7 +5,7 @@ const tableSetting = {
     //     title: 'System Variable',
     //     link: '/sysvar',
     //     createButtonWidth: '150px',
-    //     iconClass: 'fa fa-cogs',
+    //     iconClass: 'fa fa-cogs p-1',
     //     tableWidth: '113.5rem',
     //     api: '',
     //     pathToDataRoot: '',
@@ -21,9 +21,9 @@ const tableSetting = {
     partner: {
         title: 'Partners',
         link: '/partner',
-        iconClass: 'fa fa-users',
+        iconClass: 'fa fa-users p-1',
         tableWidth: '85rem',
-        api: '',
+        api: 'https://review-staging.hermo.my/services/gami/partners/list',
         pathToDataRoot: '',
         actionButtons: [
             // {
@@ -34,7 +34,7 @@ const tableSetting = {
             {
                 title: 'Upload Partners',
                 type: 'upload',
-                width: '183px',
+                width: '185px',
             },
         ],
         fields: [
@@ -49,9 +49,9 @@ const tableSetting = {
     reward: {
         title: 'Reward',
         link: '/reward',
-        iconClass: 'fas fa-gift',
+        iconClass: 'fas fa-gift p-1',
         tableWidth: '209rem',
-        api: '',
+        api: 'https://review-staging.hermo.my/services/gami/rewards/event_list',
         pathToDataRoot: '',
         actionButtons: [
             // {
@@ -62,7 +62,7 @@ const tableSetting = {
             {
                 title: 'Upload Reward',
                 type: 'upload',
-                width: '177px',
+                width: '180px',
             },
         ],
         fields: [
@@ -89,9 +89,9 @@ const tableSetting = {
         title: 'Voucher',
         link: '/voucher',
         createButtonWidth: '160px',
-        iconClass: 'fas fa-ticket-alt',
+        iconClass: 'fas fa-ticket-alt p-1',
         tableWidth: '112rem',
-        api: '',
+        api: 'https://review-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
             // {
@@ -102,7 +102,7 @@ const tableSetting = {
             {
                 title: 'Upload Voucher',
                 type: 'upload',
-                width: '181px',
+                width: '182px',
             },
         ],
         fields: [
@@ -120,7 +120,7 @@ const tableSetting = {
     //     title: 'Partners Event',
     //     link: '/partner_event',
     //     createButtonWidth: '200px',
-    //     iconClass: 'fas fa-handshake',
+    //     iconClass: 'fas fa-handshake p-1',
     //     tableWidth: '50rem',
     //     api: '',
     //     pathToDataRoot: '',
