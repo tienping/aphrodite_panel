@@ -27,12 +27,17 @@ function loginFormReducer(state = initialState, action) {
         case AUTH_LOGIN_SUCCESS:
             return state
                 .set('loginSuccess', true)
-                // .set('loading', false) // no need to remove loading, page will be redirect
+                .set('loading', false) // no need to remove loading, page will be redirect
                 .set('error', false);
         case AUTH_LOGIN_FAILED:
             return state
                 .set('loading', false)
-                .setIn(['error'], action.payload);
+                .setIn(['error'], action.payload || {
+                    messages: [{
+                        text: 'ERROR: Please contact system admin...',
+                        type: 'error',
+                    }],
+                });
         default:
             return state;
     }

@@ -57,12 +57,18 @@ function Section(params) {
         );
     }
 
-    return <NavItem data={params.data} itemClassName={params.itemClassName} clickHandler={params.clickHandler}></NavItem>;
+    return <NavItem data={params.data} itemClassName={params.dropdownClass} clickHandler={params.clickHandler}></NavItem>;
 }
 
 function NavDropdown(props) {
     const sections = props.item.items.map((item) => (
-        <Section data={item} key={item.code} itemClassName={props.itemClassName} clickHandler={props.clickHandler}></Section>
+        <Section
+            data={item}
+            key={item.code}
+            itemClassName={props.itemClassName}
+            dropdownClass={(props.data && props.data.dropdownClass) || ''}
+            clickHandler={props.clickHandler}
+        ></Section>
     ));
 
     if (props.vertical) {

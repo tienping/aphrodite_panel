@@ -46,6 +46,10 @@ export class LoginForm extends React.PureComponent { // eslint-disable-line reac
         if (nextProps.loginSuccess !== this.props.loginSuccess && nextProps.loginSuccess) {
             window.location.href = window.location.pathname;
         }
+
+        if (nextProps.error !== this.props.error && nextProps.error) {
+            console.log(nextProps.error);
+        }
     }
 
     loginAction = (evt) => {
