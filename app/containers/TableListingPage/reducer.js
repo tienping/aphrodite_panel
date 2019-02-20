@@ -14,26 +14,20 @@ import {
 const initialState = fromJS({
     loading: false,
     error: false,
-    data: {},
-    createItemLoading: false,
-    createItemError: false,
-    deleteItemLoading: false,
-    deleteItemError: false,
-    deleting: {},
+    data: [],
 });
 
 function tableListingPageReducer(state = initialState, action) {
     switch (action.type) {
         case TABLE_LISTING_GET_LIST:
             return state
-                .set('deleting', {})
                 .set('loading', true)
                 .set('error', false);
         case TABLE_LISTING_GET_LIST_SUCCESS:
             return state
                 .set('loading', false)
                 .set('error', false)
-                .set('data', action.payload.result);
+                .set('data', action.payload.data);
         case TABLE_LISTING_GET_LIST_FAILED:
             return state
                 .set('loading', false)

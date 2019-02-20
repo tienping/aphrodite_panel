@@ -10,10 +10,10 @@ import {
     TABLE_LISTING_GET_LIST_FAILED,
 } from './constants';
 
-export function getList(pageType) {
+export function getList(params) {
     return {
         type: TABLE_LISTING_GET_LIST,
-        pageType,
+        params,
     };
 }
 

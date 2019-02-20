@@ -9,14 +9,21 @@ import {
 } from './constants';
 
 export function* getTableData(action) {
-    const response = yield call(apiRequest, `/postgres/${action.pageType}`, 'get');
-    if (response && response.ok) {
-        yield put(getListSuccess(response.data));
-    } else {
-        if (response.data && response.data.error) {
-            alert(response.data.error);
+    try {
+        // const response = yield call(apiRequest, 'services/gami/rewards/event_list', 'get', null, 'https://review-staging.hermo.my');
+        const response = yield call(apiRequest, action.params.api, 'get');
+
+        if (response && response.ok) {
+            yield put(getListSuccess(response.data));
+        } else {
+            if (response.data && response.data.error) {
+                alert(response.data.error);
+            }
+            yield put(getListFail(response));
         }
-        yield put(getListFail(response.data));
+    } catch (response) {
+        console.log('getListFail', response);
+        yield put(getListFail(response));
     }
 }
 

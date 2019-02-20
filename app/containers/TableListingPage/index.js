@@ -5,8 +5,9 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -31,56 +32,38 @@ import * as actions from './actions';
 import './style.scss';
 
 export class TableListingPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
+
+    //     if (props.pageType && tableSetting && tableSetting[props.pageType]) {
+    //         this.state = this.initialiseProps(props);
+    //         if (tableSetting[props.pageType].api) {
+    //             props.dispatch(actions.getList({ api: tableSetting[props.pageType].api }));
+    //         }
+    //     }
+    // }
+
+    componentWillMount() {
+        this.setState(this.initialiseProps(this.props));
 
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
-            this.state = this.initialiseProps(props);
-            props.dispatch(actions.getList(props.pageType));
+            if (tableSetting[this.props.pageType].api) {
+                this.props.dispatch(actions.getList({ api: tableSetting[this.props.pageType].api }));
+            }
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.pageType !== this.props.pageType) {
             this.setState(this.initialiseProps(nextProps));
-            this.props.dispatch(actions.getList(nextProps.pageType));
+            if (dataChecking(tableSetting, nextProps.pageType, 'api')) {
+                this.props.dispatch(actions.getList({ api: tableSetting[nextProps.pageType].api }));
+            }
         }
 
-        // if (nextProps.tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
-        //     const { data, field } = nextProps.tablelistingpage.getItemData;
-
-        //     const arr = dataChecking(data, field.itemDataPath);
-        //     const tempItems = [];
-        //     arr.forEach((value) => {
-        //         tempItems.push({ id: `${field.itemKey}_${value.id}`, name: `${dataChecking(value, field.itemDataValuePath)}` });
-        //     });
-
-        //     globalScope[field.itemKey] = tempItems;
-        // }
-
-        // if (nextProps.tablelistingpage.createItemLoading !== this.props.tablelistingpage.createItemLoading) {
-        //     if (nextProps.tablelistingpage.createItemLoading) {
-        //         this.setState({ formActionLoading: true });
-        //     } else if (nextProps.tablelistingpage.createItemError) {
-        //         this.setState({ formActionLoading: false });
-        //     } else {
-        //         this.setState({ showModalType: '', formActionLoading: false });
-        //     }
-        // }
-
-        // if (nextProps.tablelistingpage.updateItemLoading !== this.props.tablelistingpage.updateItemLoading) {
-        //     if (nextProps.tablelistingpage.updateItemLoading) {
-        //         this.setState({ formActionLoading: true });
-        //     } else if (nextProps.tablelistingpage.updateItemError) {
-        //         this.setState({ formActionLoading: false });
-        //     } else {
-        //         this.setState({ showModalType: '', formActionLoading: false });
-        //     }
-        // }
-
-        // if (nextProps.tablelistingpage.deleteItemLoading !== this.props.tablelistingpage.deleteItemLoading && !nextProps.tablelistingpage.deleteItemLoading) {
-        //     this.props.dispatch(actions.getList(this.props.pageType));
-        // }
+        if (nextProps.tablelistingpage.data !== this.props.tablelistingpage.data) {
+            this.setState({ data: nextProps.tablelistingpage.data });
+        }
     }
 
     initialiseProps = (theProps) => ({
@@ -91,83 +74,113 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     });
 
     renderMenu = () => (
-        <section className="page-actions"style={{ width: this.state.tableWidth || 'auto' }}>
+        <section className="page-actions"style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
             {
-                this.state.actionButtons.map((item, index) => {
-                    if (item.type === 'createNew') {
+                dataChecking(this.state, 'actionButtons') ?
+                    this.state.actionButtons.map((item, index) => {
+                        if (item.type === 'createNew') {
+                            return (
+                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                                    <FormButton
+                                        key="create-button"
+                                        style={{ width: item.width }}
+                                        formId={`create_${this.props.pageType}`}
+                                    >
+                                        {item.title}
+                                    </FormButton>
+                                </span>
+                            );
+                        } else if (item.type === 'upload') {
+                            return (
+                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                                    <FormButton
+                                        key="upload-button"
+                                        style={{ width: item.width }}
+                                        formId={`upload_${this.props.pageType}`}
+                                    >
+                                        {item.title}
+                                    </FormButton>
+                                </span>
+                            );
+                        }
+
                         return (
                             <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
                                 <FormButton
                                     key="create-button"
                                     style={{ width: item.width }}
+                                    pageType={this.props.pageType}
                                     formId={`create_${this.props.pageType}`}
                                 >
                                     {item.title}
                                 </FormButton>
                             </span>
                         );
-                    } else if (item.type === 'upload') {
-                        return (
-                            <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
-                                <FormButton
-                                    key="upload-button"
-                                    style={{ width: item.width }}
-                                    formId={`upload_${this.props.pageType}`}
-                                >
-                                    {item.title}
-                                </FormButton>
-                            </span>
-                        );
-                    }
-
-                    return (
-                        <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
-                            <FormButton
-                                key="create-button"
-                                style={{ width: item.width }}
-                                pageType={this.props.pageType}
-                                formId={`create_${this.props.pageType}`}
-                            >
-                                {item.title}
-                            </FormButton>
-                        </span>
-                    );
-                })
+                    })
+                    :
+                    null
             }
+            <button
+                onClick={() => {
+                    if (tableSetting[this.props.pageType].api) {
+                        this.props.dispatch(actions.getList({ api: 'https://review-staging.hermo.my/services/gami/partners/list' }));
+                    }
+                }}
+            >Show Partner</button>
+            <button
+                onClick={() => {
+                    if (tableSetting[this.props.pageType].api) {
+                        this.props.dispatch(actions.getList({ api: 'https://review-staging.hermo.my/services/gami/rewards/event_list' }));
+                    }
+                }}
+            >Show Reward</button>
+            <button
+                onClick={() => {
+                    if (tableSetting[this.props.pageType].api) {
+                        this.props.dispatch(actions.getList({ api: 'https://review-staging.hermo.my/services/gami/rewards/voucher_list' }));
+                    }
+                }}
+            >Show VOucher</button>
         </section>
     );
 
     renderTable() {
         return (
             <section className="table-container">
-                <div className="table-content-wrapper" style={{ width: this.state.tableWidth || 'auto' }}>
+                <div className="table-content-wrapper" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
                     <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         {
-                            this.state.tableConfig.map((head, index) => (
-                                <div
-                                    key={index}
-                                    className="table-header-item table-row-item"
-                                    style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
-                                >
-                                    <span>{ head.label }</span>
-                                </div>
-                            ))
+                            dataChecking(this.state, 'tableConfig') ?
+                                this.state.tableConfig.map((head, index) => (
+                                    <div
+                                        key={index}
+                                        className="table-header-item table-row-item"
+                                        style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
+                                    >
+                                        <span>{ head.label }</span>
+                                    </div>
+                                ))
+                                :
+                                null
                         }
                     </div>
                     {
-                        this.state.data && this.state.data.length ?
+                        this.state && this.state.data && this.state.data.length ?
                             this.state.data.map((row, index) => (
                                 <div key={index} className="table-row">
                                     {
-                                        this.state.tableConfig.map((col, index2) => (
-                                            <div
-                                                key={index2}
-                                                className="table-row-item"
-                                                style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
-                                            >
-                                                { this.renderCell(row, col) }
-                                            </div>
-                                        ))
+                                        dataChecking(this.state, 'tableConfig') ?
+                                            this.state.tableConfig.map((col, index2) => (
+                                                <div
+                                                    key={index2}
+                                                    className="table-row-item"
+                                                    style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
+                                                >
+                                                    { this.renderCell(row, col) }
+                                                </div>
+                                            ))
+                                            :
+                                            null
                                     }
                                 </div>
                             ))
@@ -272,7 +285,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 }
 
 TableListingPage.propTypes = {
-    // dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -294,4 +307,5 @@ export default compose(
     withReducer,
     withSaga,
     withConnect,
+    withRouter,
 )(TableListingPage);
