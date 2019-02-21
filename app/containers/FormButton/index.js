@@ -70,11 +70,14 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
 
         if (formbutton.firing !== this.props.formbutton.firing) {
-            this.setState({ firing: formbutton.firing });
+            const tempObj = { firing: formbutton.firing };
 
             if (!formbutton.firing && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
                 alert(formbutton.fireApiReturnedData.message);
+                tempObj.showModal = false;
             }
+
+            this.setState(tempObj);
         }
     }
 

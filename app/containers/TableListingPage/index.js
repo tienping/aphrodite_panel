@@ -62,8 +62,29 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         if (nextProps.tablelistingpage.data !== this.props.tablelistingpage.data) {
-            this.setState({ data: nextProps.tablelistingpage.data });
+            const { data } = nextProps.tablelistingpage;
+            const fields = tableSetting[nextProps.pageType].fields;
+            const result = this.toggledSortResult(0, fields[0].type, 'asc', data);
+            this.setState({
+                data: result,
+                sorter: 0,
+                sortDirection: 'asc',
+            });
         }
+    }
+
+    toggledSortResult(index, dataType, direction, dataPassed) {
+        const arr = dataPassed || this.state.data;
+        const fields = tableSetting[this.props.pageType].fields;
+
+        const sortType = direction === 'asc' ? 'sort' : 'reverse';
+        if (dataType === 'integer' || dataType === 'datetime') {
+            return arr[sortType]((a, b) => (a[fields[index].key] - b[fields[index].key]));
+        } else if (dataType === 'string') {
+            return arr[sortType]((a, b) => (a[fields[index].key].localeCompare(b[fields[index].key])));
+        }
+
+        return arr;
     }
 
     initialiseProps = (theProps) => ({
@@ -71,6 +92,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         tableWidth: dataChecking(tableSetting, theProps.pageType, 'tableWidth'),
         actionButtons: dataChecking(tableSetting, theProps.pageType, 'actionButtons'),
         data: [],
+        sorter: {},
     });
 
     renderMenu = () => (
@@ -123,6 +145,33 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         </section>
     );
 
+    renderSorter(head, index) {
+        if (head.type === 'integer' || head.type === 'string' || head.type === 'datetime') {
+            return (
+                <i
+                    onClick={() => {
+                        const direction = (dataChecking(this.state, 'sorter') === index) &&
+                            (dataChecking(this.state, 'sortDirection') === 'asc') ? 'desc' : 'asc';
+                        const data = this.toggledSortResult(index, head.type, direction);
+                        this.setState({
+                            sorter: index,
+                            sortDirection: direction,
+                            data,
+                        });
+                    }}
+                    className={
+                        `
+                            sort-container fas
+                            ${dataChecking(this, 'state', 'sorter') === index ? 'active' : ''}
+                            ${dataChecking(this, 'state', 'sortDirection') === 'asc' ? 'fa-sort-down' : 'fa-sort-up'}
+                        `
+                    }
+                />
+            );
+        }
+        return null;
+    }
+
     renderTable() {
         return (
             <section className="table-container">
@@ -137,6 +186,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
                                     >
                                         <span>{ head.label }</span>
+                                        {this.renderSorter(head, index)}
                                     </div>
                                 ))
                                 :

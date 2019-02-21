@@ -38,7 +38,7 @@ const tableSetting = {
             },
         ],
         fields: [
-            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'string' },
+            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer' },
             { key: 'name', label: 'Name', width: '25rem', align: 'left', type: 'string' },
             { key: 'logo', label: 'Logo', width: '10rem', align: 'center', type: 'image' },
             { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean' },
@@ -66,7 +66,7 @@ const tableSetting = {
             },
         ],
         fields: [
-            { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'string' },
+            { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer' },
             { key: 'name', label: 'Name', width: '20rem', align: 'left', type: 'string' },
             { key: 'remarks', label: 'Remarks', width: '20rem', align: 'left', type: 'string' },
             { key: 'tnc_text', label: 'TNC', width: '20rem', align: 'left', type: 'string' },
@@ -106,7 +106,7 @@ const tableSetting = {
             },
         ],
         fields: [
-            { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'string' },
+            { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer' },
             { key: 'code', label: 'Name', width: '20rem', align: 'left', type: 'string' },
             { key: 'event_code', label: 'Remarks', width: '20rem', align: 'left', type: 'string' },
             { key: 'user_id', label: 'TNC', width: '20rem', align: 'left', type: 'string' },

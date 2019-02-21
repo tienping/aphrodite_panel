@@ -28,6 +28,28 @@
                     color: white !important;
                     font-weight: 700;
                     font-size: 110%;
+                    position: relative;
+
+                    .sort-container {
+                        right: 2px;
+                        bottom: 2px;
+                        padding: 2px;
+                        position: absolute;
+                        width: 15px;
+                        height: 15px;
+                        line-height: 20px;
+                        text-align: center;
+                        color: gray;
+                        background-color: RGBA(255, 255, 255, 0.2);
+
+                        &.active {
+                            color: white;
+                        }
+
+                        &.fa-sort-down {
+                            line-height: 10px;
+                        }
+                    }
                 }
 
                 &:nth-child(even) {
