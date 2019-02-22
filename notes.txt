@@ -1,0 +1,58 @@
+add a link in topbar (how to use gamicenter)[a guinnea guide to use gamicenter as a pro]
+
+- add documentation link
+
+
+- where to find this documentation in gamicenter
+-- have a look in the top bar, u will see this button [image] at the left side of the topbar
+-- that's all you need, you can always come back here when you need more help, it's FREE for lifetime
+-- if you need any help or question for this guinnea guide, feel free to drop a email to tplim@hermo.my
+
+
+- type of pages (updated feb 2019)
+-- partners [link to section]
+-- rewards [link to section]
+-- vouchers [link to section]
+-- local event [link to section]
+
+
+PARTNERS (Partner vendor that are providing vouchers to hermo loyalty programme)
+page url -> Partners [link to page]
+fields:
+-   id
+-   name
+-   logo -> upload image, (p/s:  leave this empty in csv)
+-   description: screenshot show in app voucher's last partners
+-   code_type -> [text,qrcode, barcode]
+status: true -> active and false -> inactive
+industry: [food & beverage, services, boutique]
+url: link to partner official portal
+
+
+Reward (partner's promotion event title)
+id
+name -> title of the event
+partner -> id of the partner offering the promotion, can be check at partner page [links]
+remarks: [screenshot]
+tnc_text: [screenshot]
+url -> link to promotion page (prepared by partner if any)
+limit_by_user -< how many voucher one user can redeem
+min user level
+max user level -> 0 for unlimited, 1 for normal, 2 for gold, 3 for platinum, 999 for unlimited
+amount -> credit worth of this type of voucher
+
+Local event (hermo's promotion event)
+id
+amount -> credit worth of this type of voucher
+start_date -> the date where the promotion start showing in Reward section in app/web
+end_date -> the date where the promotion stop showing in Reward section in app/web
+modal id -> promocode -> hermint->master->promotion code-> create new code, after create new code, approach ying rui to activate the pcode and then copy the id of the pcode and paste here
+
+
+voucher (partner voucher, p/s: hermo voucher is not included in this here)
+idcode -> unique code used to generate barcode / qrcode / to simply display in voucher, normally provided by partner but if something out happen, refer yr for consultancy
+start_date -> the start date of the voucher
+end_date -> the expiry date of the voucher
+
+
+
