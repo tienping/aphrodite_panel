@@ -26,11 +26,11 @@ const tableSetting = {
         api: 'https://review-staging.hermo.my/services/gami/partners/list',
         pathToDataRoot: '',
         actionButtons: [
-            // {
-            //     title: 'New Partners ',
-            //     type: 'formAction',
-            //     width: '165px',
-            // },
+            {
+                title: 'New Partners ',
+                type: 'formAction',
+                width: '165px',
+            },
             {
                 title: 'Upload Partners',
                 type: 'upload',
@@ -54,11 +54,11 @@ const tableSetting = {
         api: 'https://review-staging.hermo.my/services/gami/rewards/event_list',
         pathToDataRoot: '',
         actionButtons: [
-            // {
-            //     title: 'New Reward',
-            //     type: 'formAction',
-            //     width: '165px',
-            // },
+            {
+                title: 'New Reward',
+                type: 'formAction',
+                width: '165px',
+            },
             {
                 title: 'Upload Reward',
                 type: 'upload',
@@ -94,11 +94,11 @@ const tableSetting = {
         api: 'https://review-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
-            // {
-            //     title: 'New Voucher',
-            //     type: 'formAction',
-            //     width: '160px',
-            // },
+            {
+                title: 'New Voucher',
+                type: 'formAction',
+                width: '160px',
+            },
             {
                 title: 'Upload Voucher',
                 type: 'upload',
