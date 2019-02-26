@@ -64,7 +64,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for partner',
-                    url: 'https://trello-attachments.s3.amazonaws.com/5bd19731034b528ef18903e9/5c482afb65a4647cff6d7b6a/36428da8fdec3f51edcc5b55442fd934/partner.csv',
+                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/partner',
                 },
             },
         ],
@@ -86,7 +86,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for reward',
-                    url: 'https://trello-attachments.s3.amazonaws.com/5bd19731034b528ef18903e9/5c482afb65a4647cff6d7b6a/7f807ce57e0c2385555f481a18f42d10/rewardPartner.csv',
+                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/reward',
                 },
             },
         ],
@@ -108,7 +108,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for voucher',
-                    url: 'https://trello-attachments.s3.amazonaws.com/5bd19731034b528ef18903e9/5c482afb65a4647cff6d7b6a/e60d64871819b37423e201f31b6bb563/voucher.csv',
+                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/voucher',
                 },
             },
         ],
