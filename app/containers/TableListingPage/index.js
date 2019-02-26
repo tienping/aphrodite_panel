@@ -75,13 +75,18 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
     toggledSortResult(index, dataType, direction, dataPassed) {
         const arr = dataPassed || this.state.data;
-        const fields = tableSetting[this.props.pageType].fields;
 
-        const sortType = direction === 'asc' ? 'sort' : 'reverse';
-        if (dataType === 'integer' || dataType === 'datetime') {
-            return arr[sortType]((a, b) => (a[fields[index].key] - b[fields[index].key]));
-        } else if (dataType === 'string') {
-            return arr[sortType]((a, b) => (a[fields[index].key].localeCompare(b[fields[index].key])));
+        if (arr && arr.length) {
+            const fields = tableSetting[this.props.pageType].fields;
+
+            const sortType = direction === 'asc' ? 'sort' : 'reverse';
+            if (dataType === 'integer' || dataType === 'datetime') {
+                return arr[sortType]((a, b) => (a[fields[index].key] - b[fields[index].key]));
+            } else if (dataType === 'string') {
+                return arr[sortType]((a, b) => (a[fields[index].key].localeCompare(b[fields[index].key])));
+            }
+        } else {
+            console.warn('[TP Warning]: arr is empty in toggledSortResult');
         }
 
         return arr;
@@ -269,7 +274,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     <Switch
                         onChange={() => {}}
                         disabled={true}
-                        checked={row[col.key]}
+                        checked={row[col.key] || false}
                     />
                 );
             case 'image':

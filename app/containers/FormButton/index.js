@@ -307,7 +307,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         onChange={(event) => {
                             this.handleTextChange(event, field);
                         }}
-                        checked={this.state[field.key].value}
+                        checked={this.state[field.key].value || false}
                     />
                 );
             default:

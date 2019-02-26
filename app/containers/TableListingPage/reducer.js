@@ -27,7 +27,7 @@ function tableListingPageReducer(state = initialState, action) {
             return state
                 .set('loading', false)
                 .set('error', false)
-                .set('data', action.payload.data);
+                .set('data', action.payload.data && action.payload.data.items);
         case TABLE_LISTING_GET_LIST_FAILED:
             return state
                 .set('loading', false)
