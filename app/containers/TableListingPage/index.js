@@ -64,17 +64,27 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         if (nextProps.tablelistingpage.data !== this.props.tablelistingpage.data) {
             const { data } = nextProps.tablelistingpage;
             const fields = tableSetting[nextProps.pageType].fields;
-            const result = this.toggledSortResult(0, fields[0].type, 'asc', data);
+            const result = this.toggledSortResult(0, fields[0].type, 'asc', dataChecking(data, 'data', 'items')) || [];
             this.setState({
                 data: result,
+                pagination: {
+                    _meta: dataChecking(data, '_meta'),
+                    _links: dataChecking(data, '_links'),
+                },
                 sorter: 0,
                 sortDirection: 'asc',
             });
         }
     }
 
+    onPageChange(pageApi) {
+        if (pageApi) {
+            this.props.dispatch(actions.getList({ api: pageApi }));
+        }
+    }
+
     toggledSortResult(index, dataType, direction, dataPassed) {
-        const arr = dataPassed || this.state.data;
+        const arr = dataPassed || (this.state.data);
 
         if (arr && arr.length) {
             const fields = tableSetting[this.props.pageType].fields;
@@ -177,57 +187,106 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         return null;
     }
 
-    renderTable() {
+    renderPaginatior() {
+        const { pagination } = this.state;
         return (
-            <section className="table-container">
-                <div className="table-content-wrapper" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
-                    <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            dataChecking(pagination, '_meta', 'currentPage') ?
+                <div className="table-paginator-container">
+                    <div className="table-paginator">
                         {
-                            dataChecking(this.state, 'tableConfig') ?
-                                this.state.tableConfig.map((head, index) => (
-                                    <div
-                                        key={index}
-                                        className="table-header-item table-row-item"
-                                        style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
-                                    >
-                                        <span>{ head.label }</span>
-                                        {this.renderSorter(head, index)}
-                                    </div>
-                                ))
+                            dataChecking(pagination, '_links', 'prev', 'href') ?
+                                <a
+                                    className="pagi-button py-1 px-1"
+                                    onClick={() => {
+                                        this.onPageChange(pagination._links.prev.href);
+                                    }}
+                                >
+                                    <span className="pagi-prev pagi-item">&lt;Prev</span>
+                                </a>
+                                :
+                                null
+                        }
+                        <span className="pagi-current pagi-item py-1">
+                            {(((pagination._meta.currentPage - 1) * pagination._meta.perPage) + 1)}
+                            -
+                            {((pagination._meta.currentPage) * pagination._meta.perPage)}
+                            /
+                            {pagination._meta.totalCount}
+                        </span>
+                        {
+                            dataChecking(pagination, '_links', 'next', 'href') ?
+                                <a
+                                    className="pagi-button py-1 px-1"
+                                    onClick={() => {
+                                        this.onPageChange(pagination._links.next.href);
+                                    }}
+                                >
+                                    <span className="pagi-next pagi-item">Next&gt;</span>
+                                </a>
                                 :
                                 null
                         }
                     </div>
-                    {
-                        this.state && this.state.data && this.state.data.length ?
-                            this.state.data.map((row, index) => (
-                                <div key={index} className="table-row">
-                                    {
-                                        dataChecking(this.state, 'tableConfig') ?
-                                            this.state.tableConfig.map((col, index2) => (
-                                                <div
-                                                    key={index2}
-                                                    className="table-row-item"
-                                                    style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
-                                                >
-                                                    { this.renderCell(row, col) }
-                                                </div>
-                                            ))
-                                            :
-                                            null
-                                    }
+                </div>
+                :
+                null
+        );
+    }
+
+    renderTable() {
+        return (
+            <section className="table-container">
+                {this.renderPaginatior()}
+                <div className="table-content">
+                    <div className="table-content-wrapper" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
+                        <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            {
+                                dataChecking(this.state, 'tableConfig') ?
+                                    this.state.tableConfig.map((head, index) => (
+                                        <div
+                                            key={index}
+                                            className="table-header-item table-row-item"
+                                            style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
+                                        >
+                                            <span>{ head.label }</span>
+                                            {this.renderSorter(head, index)}
+                                        </div>
+                                    ))
+                                    :
+                                    null
+                            }
+                        </div>
+                        {
+                            this.state && this.state.data && this.state.data.length ?
+                                this.state.data.map((row, index) => (
+                                    <div key={index} className="table-row">
+                                        {
+                                            dataChecking(this.state, 'tableConfig') ?
+                                                this.state.tableConfig.map((col, index2) => (
+                                                    <div
+                                                        key={index2}
+                                                        className="table-row-item"
+                                                        style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
+                                                    >
+                                                        { this.renderCell(row, col) }
+                                                    </div>
+                                                ))
+                                                :
+                                                null
+                                        }
+                                    </div>
+                                ))
+                                :
+                                <div className="table-row" >
+                                    <div
+                                        className="table-row-item"
+                                        style={{ display: 'inline-block', padding: '3vh 1vw', width: '100%' }}
+                                    >
+                                        No data found...
+                                    </div>
                                 </div>
-                            ))
-                            :
-                            <div className="table-row" >
-                                <div
-                                    className="table-row-item"
-                                    style={{ display: 'inline-block', padding: '3vh 1vw', width: '100%' }}
-                                >
-                                    No data found...
-                                </div>
-                            </div>
-                    }
+                        }
+                    </div>
                 </div>
             </section>
         );

@@ -8,6 +8,39 @@
     .table-container {
         margin-top: 2rem;
         margin-bottom: 2rem;
+        position: relative;
+
+        .table-paginator-container {
+            height: 4rem;
+
+            .table-paginator {
+                top: 1rem;
+                right: 0;
+                position: absolute;
+                display: inline-block;
+
+                .pagi-button {
+                    cursor: pointer;
+                    color: black;
+                    text-decoration: none;
+
+                    .pagi-item {
+                        border-bottom: 1px solid black;
+                    }
+
+                    &:hover {
+                        color: #FF0068;
+
+                        .pagi-item {
+                            border-color: #FF0068;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .table-content {
         max-width: 100%;
         max-height: 55vh;
         overflow-x: auto;
