@@ -220,11 +220,18 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 null
                         }
                         <span className="pagi-current pagi-item py-1">
+                            [&nbsp;
                             {(((pagination._meta.currentPage - 1) * pagination._meta.perPage) + 1)}
-                            -
-                            {((pagination._meta.currentPage) * pagination._meta.perPage)}
-                            /
+                            &nbsp;to&nbsp;
+                            {
+                                pagination._meta.totalCount > pagination._meta.perPage ?
+                                    ((pagination._meta.currentPage) * pagination._meta.perPage)
+                                    :
+                                    pagination._meta.totalCount
+                            }
+                            &nbsp; out of &nbsp;
                             {pagination._meta.totalCount}
+                            &nbsp;]
                         </span>
                         {
                             dataChecking(pagination, '_links', 'next', 'href') ?

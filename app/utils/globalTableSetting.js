@@ -55,14 +55,14 @@ const tableSetting = {
         pathToDataRoot: '',
         actionButtons: [
             {
-                title: 'New Reward',
+                title: 'New Partner Event',
                 type: 'formAction',
-                width: '165px',
+                width: '205px',
             },
             {
-                title: 'Upload Reward',
+                title: 'Upload Partner Event',
                 type: 'upload',
-                width: '180px',
+                width: '225px',
             },
         ],
         fields: [
@@ -94,14 +94,14 @@ const tableSetting = {
         pathToDataRoot: '',
         actionButtons: [
             {
-                title: 'New Reward',
+                title: 'New Local Event',
                 type: 'formAction',
-                width: '165px',
+                width: '188px',
             },
             {
-                title: 'Upload Reward',
+                title: 'Upload Local Event',
                 type: 'upload',
-                width: '180px',
+                width: '210px',
             },
         ],
         fields: [
@@ -136,7 +136,7 @@ const tableSetting = {
             {
                 title: 'New Voucher',
                 type: 'formAction',
-                width: '160px',
+                width: '170px',
             },
             {
                 title: 'Upload Voucher',
