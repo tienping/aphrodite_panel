@@ -392,8 +392,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 <Helmet>
                     <title style={{ textTransform: 'capitalize' }}>
                         {
-                            dataChecking(this.props, 'pageType') ?
-                                `${this.props.pageType.charAt(0).toUpperCase() + this.props.pageType.substr(1)} Page` :
+                            dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ?
+                                `${tableSetting[this.props.pageType].title} Page`
+                                :
                                 'Table'
                         }
                     </title>
