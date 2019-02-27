@@ -12,10 +12,8 @@ import {
 export function* fireApi(action) {
     const { apiUrl, type, data } = action.payload;
     try {
-        console.log('before fireApi');
-        const response = yield call(apiRequest, '', type, data, apiUrl, { headers: { 'Content-Type': 'multipart/form-data' } });
+        const response = yield call(apiRequest, '', type, data, apiUrl);
 
-        console.log('after fireApi');
         if (response && response.ok) {
             yield put(fireApiSuccess(response.data));
         } else {

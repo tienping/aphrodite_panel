@@ -26,7 +26,7 @@ import Notify from 'containers/Notify';
 
 import HomePage from 'containers/HomePage';
 import TableListingPage from 'containers/TableListingPage';
-// import LoginForm from 'containers/LoginForm';
+import GamiguidePage from 'containers/GamiguidePage';
 import LogoutForm from 'containers/LogoutForm';
 import NotFoundPage from 'containers/NotFoundPage';
 
@@ -70,6 +70,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                     <Switch>
                         {/* <Route exact={true} path="/login" component={globalScope.token ? LogoutForm : LoginForm} /> */}
                         <Route exact={true} path="/logout" component={LogoutForm} />
+                        <Route exact={true} path="/howto" component={GamiguidePage} />
                         <Route exact={true} path="/" component={pageReference.home} />
                         {
                             Object.keys(tableSetting).map((key, index) => (

@@ -30,6 +30,20 @@
         }
     }
 
+    .gami-how-to {
+        position: absolute;
+        left: 1rem;
+        top: .75rem;
+        font-weight: bold;
+        border-radius: 15px;
+        padding: 0.15rem 0.65rem;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #FF0066;
+        }
+    }
+
     .top-bar-side-title {
         padding: 8px;
         font-size: 50%;

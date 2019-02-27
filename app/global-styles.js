@@ -64,4 +64,8 @@ injectGlobal`
     .bg-tertiary-color {
         background-color: ${theme.tertiary_bg};
     }
+
+    .bg-white {
+        background-color: white;
+    }
 `;

@@ -142,13 +142,21 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                     </div>
                 </div>
                 <div>
-                    <NavLink to="/" title="Go to homepage" className="gami-header-logo" type="default">
-                        <div>
+                    <NavLink
+                        to="/howto"
+                        title="How to use Gamicenter"
+                        className="gami-how-to hidden-xs bg-white"
+                        type="default"
+                    >
+                        <span className="text-secondary-color hidden-xs" title="How to use Gamicenter">&#63;</span>
+                    </NavLink>
+                    <div>
+                        <NavLink to="/" title="Go to homepage" className="gami-header-logo" type="default">
                             <span className="top-bar-side-title text-main-color hidden-xs">HERMO</span>
                             <span className="top-bar-title big text-main-color text-hover-hermo-pink">GAMICENTER</span>
                             <span className="top-bar-side-title text-main-color hidden-xs">HERMO</span>
-                        </div>
-                    </NavLink>
+                        </NavLink>
+                    </div>
                 </div>
                 <Navigator
                     className="visible-sm visible-md visible-lg"

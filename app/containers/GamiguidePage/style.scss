@@ -1,0 +1,24 @@
+.gami-guide-page {
+    background-color: #EDEDED;
+    padding: 3rem;
+
+    hr {
+        height: 2px;
+        background-color: RGBA(255, 0, 125, 0.2);
+        border: none;
+    }
+
+    .doc-table-row {
+        .doc-table-cell {
+            border: 1px solid lightgray;
+            padding: 1rem;
+            min-width: 8rem;
+            max-width: 37rem;
+
+            &.header-cell {
+                font-weight: bolder;
+                text-align: center;
+            }
+        }
+    }
+}
