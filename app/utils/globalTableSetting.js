@@ -49,7 +49,7 @@ const tableSetting = {
     pevent: {
         title: 'Partner Event',
         link: '/partner_event',
-        iconClass: 'fas fa-gift p-1',
+        iconClass: 'fab fa-product-hunt p-1',
         tableWidth: '209rem',
         api: 'https://review-staging.hermo.my/services/gami/rewards/partner_event_list',
         pathToDataRoot: '',
@@ -88,7 +88,7 @@ const tableSetting = {
     levent: {
         title: 'Local Event',
         link: '/local_event',
-        iconClass: 'fas fa-gift p-1',
+        iconClass: 'fas fa-hospital-symbol p-1',
         tableWidth: '209rem',
         api: 'https://review-staging.hermo.my/services/gami/rewards/local_event_list',
         pathToDataRoot: '',

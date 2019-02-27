@@ -194,6 +194,19 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 <div className="table-paginator-container">
                     <div className="table-paginator">
                         {
+                            dataChecking(pagination, '_links', 'first', 'href') ?
+                                <a
+                                    className="pagi-button py-1 px-1"
+                                    onClick={() => {
+                                        this.onPageChange(pagination._links.last.href);
+                                    }}
+                                >
+                                <span className="pagi-next pagi-item" title="First">&lt;&lt;</span>
+                                </a>
+                                :
+                                null
+                        }
+                        {
                             dataChecking(pagination, '_links', 'prev', 'href') ?
                                 <a
                                     className="pagi-button py-1 px-1"
@@ -201,7 +214,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         this.onPageChange(pagination._links.prev.href);
                                     }}
                                 >
-                                    <span className="pagi-prev pagi-item">&lt;Prev</span>
+                                    <span className="pagi-prev pagi-item" title="Prev">&lt;</span>
                                 </a>
                                 :
                                 null
@@ -221,7 +234,20 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         this.onPageChange(pagination._links.next.href);
                                     }}
                                 >
-                                    <span className="pagi-next pagi-item">Next&gt;</span>
+                                    <span className="pagi-next pagi-item" title="Next">&gt;</span>
+                                </a>
+                                :
+                                null
+                        }
+                        {
+                            dataChecking(pagination, '_links', 'last', 'href') ?
+                                <a
+                                    className="pagi-button py-1 px-1"
+                                    onClick={() => {
+                                        this.onPageChange(pagination._links.last.href);
+                                    }}
+                                >
+                                <span className="pagi-next pagi-item" title="Last">&gt;&gt;</span>
                                 </a>
                                 :
                                 null
@@ -366,7 +392,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
-                <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') ? `${this.props.pageType} Page` : 'Table'}</h1>
+                <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ? `${tableSetting[this.props.pageType].title} Page` : 'Table'}</h1>
                 {/* <div style={{ padding: '1rem', background: 'lime' }}>
                     <Input></Input>
                 </div> */}
