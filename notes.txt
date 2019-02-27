@@ -53,16 +53,16 @@ Local event (hermo's promotion event)
 
 
 voucher (partner voucher, p/s: hermo voucher is not included in this here)
-idcode -> unique code used to generate barcode / qrcode / to simply display in voucher, normally provided by partner but if something out happen, refer yr for consultancy
-start_date -> the start date of the voucher
-end_date -> the expiry date of the voucher
+-      id
+- [<>] code -> unique code used to generate barcode / qrcode / to simply display in voucher, normally provided by partner but if something out happen, refer yr for consultancy
+- [<>] start_date -> the start date of the voucher
+- [<>] end_date -> the expiry date of the voucher
 
 
 
 
 Gami
 Form button
-Add desc for reward
 Support edit
 Gamification documentation
 calender picker
