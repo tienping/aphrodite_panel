@@ -219,7 +219,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 :
                                 null
                         }
-                        <span className="pagi-current pagi-item py-1">
+                        <span className="pagi-current pagi-item px-1 py-1">
                             [&nbsp;
                             {(((pagination._meta.currentPage - 1) * pagination._meta.perPage) + 1)}
                             &nbsp;to&nbsp;

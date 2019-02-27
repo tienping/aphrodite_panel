@@ -12,46 +12,52 @@ const formSetting = {
     // },
     create_partner: {
         title: 'Partners',
-        formHeight: '505px',
+        formHeight: '550px',
         fields: [
-            { key: 'id', label: 'ID', type: 'textfield' },
             { key: 'name', label: 'Name', type: 'textfield' },
             { key: 'logo', label: 'Logo', type: 'image' },
-            { key: 'status', label: 'Status', type: 'boolean', default: true },
+            { key: 'description', label: 'Description', type: 'textbox' },
+            { key: 'code_type', label: 'Code Type', type: 'dropdown' },
+            { key: 'status', label: 'Status', type: 'boolean', default: false },
+            { key: 'industry', label: 'Industry', type: 'textfield' },
+            { key: 'url', label: 'Url to partner site', type: 'textfield' },
         ],
     },
-    create_reward: {
-        title: 'Import voucher',
-        formHeight: '300px',
+    create_pevent: {
+        title: 'Create Partner Event',
+        formHeight: '550px',
         fields: [
-            { key: 'id', label: 'ID', type: 'textfield' },
             { key: 'name', label: 'Name', type: 'textfield' },
+            { key: 'partner', label: 'Partner', type: 'dropdown' },
             { key: 'remarks', label: 'Remarks', type: 'textbox' },
-            { key: 'tnc_text', label: 'TNC', type: 'textbox' },
-            { key: 'event_code', label: 'Event Code', type: 'textfield' },
+            { key: 'tnc_text', label: 'TNC Text', type: 'textbox' },
             { key: 'url', label: 'Url', type: 'textfield' },
-            { key: 'limit_by_user', label: 'Limit', type: 'textbox' },
+            { key: 'limit_by_user', label: 'Limit per user', type: 'textbox' },
+            { key: 'start_date', label: 'Start Date', type: 'date' },
+            { key: 'end_date', label: 'End Date', type: 'date' },
             { key: 'min_user_level', label: 'Min User Level', type: 'dropdown' },
             { key: 'max_user_level', label: 'Max User Level', type: 'dropdown' },
             { key: 'amount', label: 'Amount', type: 'textbox' },
-            { key: 'partner', label: 'Partner', type: 'dropdown' },
+        ],
+    },
+    create_levent: {
+        title: 'Create Local Event',
+        formHeight: '380px',
+        fields: [
+            { key: 'amount', label: 'Amount', type: 'textbox' },
+            { key: 'start_date', label: 'Start Date', type: 'date' },
+            { key: 'end_date', label: 'End Date', type: 'date' },
+            { key: 'modal_id', label: 'Modal Id', type: 'textfield' },
         ],
     },
     create_voucher: {
-        title: 'Import voucher',
-        formHeight: '300px',
+        title: 'Create Partner Voucher',
+        formHeight: '375px',
         fields: [
-            { key: 'id', label: 'ID', type: 'textfield' },
-            { key: 'name', label: 'Name', type: 'textfield' },
-            { key: 'remarks', label: 'Remarks', type: 'textbox' },
-            { key: 'tnc_text', label: 'TNC', type: 'textbox' },
-            { key: 'event_code', label: 'Event Code', type: 'textfield' },
-            { key: 'url', label: 'Url', type: 'textfield' },
-            { key: 'limit_by_user', label: 'Limit', type: 'textbox' },
-            { key: 'min_user_level', label: 'Min User Level', type: 'dropdown' },
-            { key: 'max_user_level', label: 'Max User Level', type: 'dropdown' },
-            { key: 'amount', label: 'Amount', type: 'textbox' },
-            { key: 'partner', label: 'Partner', type: 'dropdown' },
+            { key: 'code', label: 'Unique Code', type: 'textfield' },
+            { key: 'event_code', label: 'Event Code', type: 'dropdown' },
+            { key: 'start_date', label: 'Start Date', type: 'date' },
+            { key: 'end_date', label: 'End Date', type: 'date' },
         ],
     },
     upload_partner: {
@@ -76,7 +82,29 @@ const formSetting = {
             }));
         },
     },
-    upload_reward: {
+    upload_pevent: {
+        title: 'Upload Reward',
+        formHeight: '350px',
+        fields: [
+            {
+                key: 'file',
+                label: 'File',
+                type: 'file',
+                sample: {
+                    name: 'Sample for reward',
+                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/reward',
+                },
+            },
+        ],
+        onSubmit: (scope, actions, data) => {
+            scope.props.dispatch(actions.fireApi({
+                data: data.file.form,
+                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/reward',
+                type: 'post',
+            }));
+        },
+    },
+    upload_levent: {
         title: 'Upload Reward',
         formHeight: '350px',
         fields: [

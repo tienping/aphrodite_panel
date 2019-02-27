@@ -178,7 +178,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         switch (field.type) {
             case 'image':
                 return (
-                    <div className="gamicenter-imageUploader">
+                    <div className="gamicenter-imageUploader pt-1">
                         <div className="image-preview">
                             <span
                                 className="image-holder"
@@ -209,7 +209,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     null
                             }
                         </div>
-                        <div className="upload-action">
+                        <div className="upload-action pt-1">
                             <button
                                 htmlFor={`${this.props.formId}-${field.key}-uploader`}
                                 className="upload-button gamicenter-button"
@@ -359,12 +359,13 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <div className="page-action-modal-toggle">
                         <div
                             style={{
-                                position: 'absolute',
-                                right: '.5rem',
-                                top: '.5rem',
-                                backgroundColor: 'rgba(0,0,0,0.3)',
-                                borderRadius: 100,
                                 zIndex: 100,
+                                top: '.5rem',
+                                right: '.5rem',
+                                cursor: 'pointer',
+                                borderRadius: 100,
+                                position: 'absolute',
+                                backgroundColor: 'rgba(0,0,0,0.3)',
                             }}
                             onClick={() => { this.setState({ showModal: false }); }}
                         >

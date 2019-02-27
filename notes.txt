@@ -19,34 +19,37 @@ add a link in topbar (how to use gamicenter)[a guinnea guide to use gamicenter a
 PARTNERS (Partner vendor that are providing vouchers to hermo loyalty programme)
 page url -> Partners [link to page]
 fields:
--   id
--   name
--   logo -> upload image, (p/s:  leave this empty in csv)
--   description: screenshot show in app voucher's last partners
--   code_type -> [text,qrcode, barcode]
-status: true -> active and false -> inactive
-industry: [food & beverage, services, boutique]
-url: link to partner official portal
+-      id
+- [<>] name
+- [<>] logo -> upload image, (p/s:  leave this empty in csv)
+- [<>] description: screenshot show in app voucher's last partners
+- [<>] code_type -> [text,qrcode, barcode] [<>]
+-      status: true -> active and false -> inactive
+- [<>] industry: [food & beverage, services, boutique]
+- [<>] url: link to partner official portal
 
 
-Reward (partner's promotion event title)
-id
-name -> title of the event
-partner -> id of the partner offering the promotion, can be check at partner page [links]
-remarks: [screenshot]
-tnc_text: [screenshot]
-url -> link to promotion page (prepared by partner if any)
-limit_by_user -< how many voucher one user can redeem
-min user level
-max user level -> 0 for unlimited, 1 for normal, 2 for gold, 3 for platinum, 999 for unlimited
-amount -> credit worth of this type of voucher
+Partner Event
+-      id
+- [<>] name -> title of the event
+- [<>] partner -> id of the partner offering the promotion, can be check at partner page [links]
+- [<>] remarks: [screenshot]
+- [<>] tnc_text: [screenshot]
+- [<>] url -> link to promotion page (prepared by partner if any)
+- [<>] limit_by_user -< how many voucher one user can redeem
+- [<>] start_date -> the date where the promotion start showing in Reward section in app/web
+- [<>] end_date -> the date where the promotion stop showing in Reward section in app/web
+- [<>] min user level
+- [<>] max user level -> 0 for unlimited, 1 for normal, 2 for gold, 3 for platinum, 999 for unlimited
+- [<>] amount -> credit worth of this type of voucher
+
 
 Local event (hermo's promotion event)
-id
-amount -> credit worth of this type of voucher
-start_date -> the date where the promotion start showing in Reward section in app/web
-end_date -> the date where the promotion stop showing in Reward section in app/web
-modal id -> promocode -> hermint->master->promotion code-> create new code, after create new code, approach ying rui to activate the pcode and then copy the id of the pcode and paste here
+-      id
+- [<>] amount -> credit worth of this type of voucher
+- [<>] start_date -> the date where the promotion start showing in Reward section in app/web
+- [<>] end_date -> the date where the promotion stop showing in Reward section in app/web
+- [<>] modal id -> promocode -> hermint->master->promotion code-> create new code, after create new code, approach ying rui to activate the pcode and then copy the id of the pcode and paste here
 
 
 voucher (partner voucher, p/s: hermo voucher is not included in this here)
@@ -62,3 +65,7 @@ Form button
 Add desc for reward
 Support edit
 Gamification documentation
+calender picker
+dropdown handling
+textarea
+creation form, title and close button need to exclude from the scroll

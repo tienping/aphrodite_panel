@@ -41,9 +41,9 @@ const tableSetting = {
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer' },
             { key: 'name', label: 'Name', width: '25rem', align: 'left', type: 'string' },
             { key: 'logo', label: 'Logo', width: '10rem', align: 'center', type: 'image' },
-            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean' },
             { key: 'industry', label: 'industry', width: '15rem', align: 'center', type: 'string' },
             { key: 'url', label: 'url', width: '20rem', align: 'left', type: 'link' },
+            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'string' },
         ],
     },
     pevent: {
@@ -125,7 +125,7 @@ const tableSetting = {
         ],
     },
     voucher: {
-        title: 'Voucher',
+        title: 'Partner Voucher',
         link: '/voucher',
         createButtonWidth: '160px',
         iconClass: 'fas fa-ticket-alt p-1',
@@ -134,14 +134,14 @@ const tableSetting = {
         pathToDataRoot: '',
         actionButtons: [
             {
-                title: 'New Voucher',
+                title: 'New Partner Voucher',
                 type: 'formAction',
-                width: '170px',
+                width: '225px',
             },
             {
-                title: 'Upload Voucher',
+                title: 'Upload Partner Voucher',
                 type: 'upload',
-                width: '182px',
+                width: '240px',
             },
         ],
         fields: [

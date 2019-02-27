@@ -48,7 +48,7 @@
             box-shadow: 0px 0px 1px 0px RGBA(0, 0, 0, 0.3);
 
             .image-preview {
-                height: 150px;
+                height: 130px;
                 text-align: center;
                 padding: .5rem 1rem;
                 position: relative;
@@ -117,7 +117,6 @@
 
     &.gamicenter-button {
         padding: 0;
-
         .default-button-text { padding: 1.1rem 3rem; }
     }
 
@@ -131,9 +130,10 @@
         z-index: 2;
         padding: 1.1rem 3rem;
         background-color: white;
-        height: 430px;
+        height: 530px;
         color: black;
-        overflow: hidden;
+        cursor: default;
+        overflow: overlay;
         box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
 
         .become-title {
