@@ -83,7 +83,7 @@ const formSetting = {
         },
     },
     upload_pevent: {
-        title: 'Upload Reward',
+        title: 'Upload Partner Event',
         formHeight: '350px',
         fields: [
             {
@@ -92,20 +92,20 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for reward',
-                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/reward',
+                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/partner_event',
                 },
             },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/reward',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner_event',
                 type: 'post',
             }));
         },
     },
     upload_levent: {
-        title: 'Upload Reward',
+        title: 'Upload Local Event',
         formHeight: '350px',
         fields: [
             {
@@ -114,14 +114,14 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for reward',
-                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/reward',
+                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/local_event',
                 },
             },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/reward',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/local_event',
                 type: 'post',
             }));
         },
