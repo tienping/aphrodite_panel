@@ -21,4 +21,22 @@
             }
         }
     }
+
+    .anchor-target {
+        padding-top: 5rem;
+        margin-top: -5rem;
+        padding-bottom: 1rem;
+        background-color: transprent;
+
+        &.highlighted {
+            background-color: lightgoldenrodyellow;
+            padding-left: 7rem;
+            padding-right: 3rem;
+            margin-left: -7rem;
+            margin-right: -3rem;
+            padding-top: 1rem;
+            margin-top: -1rem;
+            transition: padding-top 1s, margin-top 1s, background-color 1.5s;
+        }
+    }
 }

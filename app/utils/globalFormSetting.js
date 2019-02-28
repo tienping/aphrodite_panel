@@ -14,18 +14,18 @@ const formSetting = {
         title: 'Create Partner',
         formHeight: '550px',
         fields: [
-            { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'desc' } },
-            { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'desc' } },
-            { key: 'description', label: 'Description', type: 'textbox', doc: { description: 'desc' } },
-            { key: 'code_type', label: 'Code Type', type: 'dropdown', doc: { description: 'desc' } },
+            { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'Partner name' } },
+            { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
+            { key: 'description', label: 'Description', type: 'textbox', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
+            { key: 'code_type', label: 'Code Type', type: 'dropdown', doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
             { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
-            { key: 'industry', label: 'Industry', type: 'textfield', doc: { description: 'desc' } },
-            { key: 'url', label: 'Url to partner site', type: 'textfield', doc: { description: 'desc' } },
+            { key: 'industry', label: 'Industry', type: 'textfield', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
+            { key: 'url', label: 'Url to partner site', type: 'textfield', doc: { description: 'URL link to partner vendor official site (if any)' } },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/partners',
                 type: 'post',
             }));
         },
@@ -34,22 +34,22 @@ const formSetting = {
         title: 'Create Partner Event',
         formHeight: '550px',
         fields: [
-            { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'desc' } },
-            { key: 'partner', label: 'Partner', type: 'dropdown', doc: { description: 'desc' } },
-            { key: 'remarks', label: 'Remarks', type: 'textbox', doc: { description: 'desc' } },
-            { key: 'tnc_text', label: 'TNC Text', type: 'textbox', doc: { description: 'desc' } },
-            { key: 'url', label: 'Url', type: 'textfield', doc: { description: 'desc' } },
-            { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', doc: { description: 'desc' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'desc' } },
-            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'desc' } },
-            { key: 'min_user_level', label: 'Min User Level', type: 'dropdown', doc: { description: 'desc' } },
-            { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'desc' } },
-            { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'desc' } },
+            { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'Name or label for the promotion' } },
+            { key: 'partner', label: 'Partner', type: 'dropdown', doc: { description: 'The ID of corresponding partner vendor' } },
+            { key: 'remarks', label: 'Remarks', type: 'textbox', doc: { description: 'Event description' } },
+            { key: 'tnc_text', label: 'TNC Text', type: 'textbox', doc: { description: 'Terms and condition in html format' } },
+            { key: 'url', label: 'Url', type: 'textfield', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
+            { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', doc: { description: 'Maximun number of which each user can redempt' } },
+            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
+            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
+            { key: 'min_user_level', label: 'Min User Level', type: 'dropdown', doc: { description: 'Minimun requirement for user to redempt target voucher' } },
+            { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'Minimun user level allowed for user to redempt target voucher' } },
+            { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'The cost of each voucher undert this one' } },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/rewards/partners',
                 type: 'post',
             }));
         },
@@ -58,15 +58,15 @@ const formSetting = {
         title: 'Create Partner Voucher',
         formHeight: '375px',
         fields: [
-            { key: 'code', label: 'Unique Code', type: 'textfield', doc: { description: 'desc' } },
-            { key: 'event_code', label: 'Event Code', type: 'dropdown', doc: { description: 'desc' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'desc' } },
-            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'desc' } },
+            { key: 'code', label: 'Unique Code', type: 'textfield', doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
+            { key: 'event_code', label: 'Event Code', type: 'dropdown', doc: { description: 'ID of the parent Partner Event' } },
+            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The date which voucher can start to be use' } },
+            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The date voucher get expired' } },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/vouchers/partners',
                 type: 'post',
             }));
         },
@@ -75,15 +75,15 @@ const formSetting = {
         title: 'Create Local Event',
         formHeight: '380px',
         fields: [
-            { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'desc' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'desc' } },
-            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'desc' } },
-            { key: 'modal_id', label: 'Modal Id', type: 'textfield', doc: { description: 'desc' } },
+            { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'Amount used to redempt this voucher' } },
+            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
+            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
+            { key: 'modal_id', label: 'Modal Id', type: 'textfield', doc: { description: 'Unique ID of the modal created in hermint' } },
         ],
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                apiUrl: 'https://review-staging.hermo.my/services/gami/rewards/locals',
                 type: 'post',
             }));
         },

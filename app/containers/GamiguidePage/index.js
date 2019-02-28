@@ -19,6 +19,11 @@ import formSetting from 'utils/globalFormSetting';
 import './style.scss';
 
 export class GamiguidePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     render() {
         return (
             <div className="gami-guide-page">
@@ -26,40 +31,87 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                     <title>How to use Gamicenter</title>
                     <meta name="description" content="Documentation for Gamicenter" />
                 </Helmet>
-                <h1>How to use Gamicenter</h1>
+                <h1>How to use Gamicenter [Updated Feb 2019]</h1>
+                <hr />
+                <div className="smaller">
+                    <p>Where to find this documentation in gamicenter?</p>
+                    <p>
+                        Have a look in the top bar, u will a question mark button at the left side of the topbar.
+                        Yes, that&apos;s it, you can always come back here when you need more help (it&apos;s FREE for lifetime!!!).
+                        If you need any help or question for this genuine guide, feel free to drop a email to tplim@hermo.my.
+                    </p>
+                </div>
                 <hr />
                 <div className="documentation-content">
-                    <section className="doc-pagetype">
+                    <section clssName="doc-step-by-step">
+                        <h3>Step by Step, 1 2 3</h3>
+                        <ol>
+                            <li>Go to Gamicenter</li>
+                            <li>Choose the page that you want to view/edit</li>
+                            <li>To View</li>
+                            <ul style={{ 'list-style-type': 'square' }}>
+                                <li>Just go to the url listed in this <a href="#doc-pagetype">section</a></li>
+                                <li>simply click it on the top bar.</li>
+                            </ul>
+                            <li>To Create new</li>
+                            <ul style={{ 'list-style-type': 'square' }}>
+                                <li>Click on the create button provided</li>
+                                <li>Click on the Upload CSV button provided</li>
+                            </ul>
+                            <li>To update/delete</li>
+                            <ul style={{ 'list-style-type': 'square' }}>
+                                <li>Go to Action culumn and you will see the pencil icon over there (if supported by APIs)</li>
+                            </ul>
+                        </ol>
+                    </section>
+                    <section id="doc-pagetype" className="doc-pagetype anchor-target">
                         <h3>Type of pages</h3>
                         <ul>
                             {
                                 Object.keys(tableSetting).map((key) => (
-                                    <li key={key}>
-                                        <NavLink
-                                            to={dataChecking(tableSetting, key, 'link')}
-                                            title="Go to homepage"
-                                            className=""
-                                            type="default"
-                                            onClick={() => {
-                                                this.setState({ showSideMenu: false });
-                                            }}
-                                        >
-                                            <span>{dataChecking(tableSetting, key, 'title')}</span>
-                                        </NavLink>
-                                        <div className="pl-2 pb-1">{dataChecking(tableSetting, key, 'description')}</div>
+                                    <li key={key} id={`sect-pagetype-${key}`} className={`anchor-target ${this.state.highlight === `sect-pagetype-${key}` ? 'highlighted' : null}`}>
+                                        <span className="bigger">{dataChecking(tableSetting, key, 'title')} </span>
+                                        <div className="pl-2 pb-1">
+                                            <div className="desc">{dataChecking(tableSetting, key, 'description')}</div>
+                                            <div className="pagetype-links-container">
+                                                <ul style={{ 'list-style-type': 'square' }}>
+                                                    <li>
+                                                        <a
+                                                            href={`#sect-tablefields-${key}`}
+                                                            onClick={() => { this.setState({ highlight: `sect-tablefields-${key}` }); }}
+                                                        >
+                                                            link to table's fields
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a
+                                                            href={`#sect-formfields-create_${key}`}
+                                                            onClick={() => { this.setState({ highlight: `sect-formfields-create_${key}` }); }}
+                                                        >
+                                                            link to creation form's fields
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to={dataChecking(tableSetting, key, 'link')} type="default">
+                                                            <span>{`link to ${dataChecking(tableSetting, key, 'title')} Page`}</span>
+                                                        </NavLink>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </li>
                                 ))
                             }
                         </ul>
                     </section>
                     <hr />
-                    <section className="doc-tables">
+                    <section className="doc-tablefields">
                         <h3>Tables and their fields</h3>
                         <ul>
                             {
                                 Object.keys(tableSetting).map((key) => (
-                                    <li key={key}>
-                                        <span>{dataChecking(tableSetting, key, 'title')}</span>
+                                    <li key={key} id={`sect-tablefields-${key}`} className={`anchor-target ${this.state.highlight === `sect-tablefields-${key}` ? 'highlighted' : null}`}>
+                                        <span className="bigger">{dataChecking(tableSetting, key, 'title')}</span>
                                         <div className="pl-2 pb-1">
                                             <table className="doc-table">
                                                 {
@@ -81,13 +133,13 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         </ul>
                     </section>
                     <hr />
-                    <section className="doc-tables">
+                    <section className="doc-formfields">
                         <h3>Form and their fields</h3>
                         <ul>
                             {
                                 Object.keys(formSetting).map((key) => (
-                                    <li key={key}>
-                                        <span>{dataChecking(formSetting, key, 'title')}</span>
+                                    <li key={key} id={`sect-formfields-${key}`} className={`anchor-target ${this.state.highlight === `sect-formfields-${key}` ? 'highlighted' : null}`}>
+                                        <span className="bigger">{dataChecking(formSetting, key, 'title')}</span>
                                         <div className="pl-2 pb-1">
                                             <table className="doc-table">
                                                 {
