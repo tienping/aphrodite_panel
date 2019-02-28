@@ -80,7 +80,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                                                             href={`#sect-tablefields-${key}`}
                                                             onClick={() => { this.setState({ highlight: `sect-tablefields-${key}` }); }}
                                                         >
-                                                            link to table's fields
+                                                            link to table&apos;s fields
                                                         </a>
                                                     </li>
                                                     <li>
@@ -88,7 +88,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                                                             href={`#sect-formfields-create_${key}`}
                                                             onClick={() => { this.setState({ highlight: `sect-formfields-create_${key}` }); }}
                                                         >
-                                                            link to creation form's fields
+                                                            link to creation form&apos;s fields
                                                         </a>
                                                     </li>
                                                     <li>
