@@ -1,6 +1,5 @@
-Gami:
-- Support edit
-- calender picker
-- dropdown handling
-- textarea
-- creation form, title and close button need to exclude from the scroll
+Gami:- Support row edit
+- calender picker for form
+- dropdown handling for form
+- textarea for form
+- creation form's title&close button need to stay on top
