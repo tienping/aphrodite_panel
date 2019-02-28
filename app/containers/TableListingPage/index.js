@@ -315,7 +315,12 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         className="table-row-item"
                                         style={{ display: 'inline-block', padding: '3vh 1vw', width: '100%' }}
                                     >
-                                        No data found...
+                                        {
+                                            dataChecking(this.props, 'tablelistingpage', 'loading') ?
+                                                'loading'
+                                                :
+                                                'No data found...'
+                                        }
                                     </div>
                                 </div>
                         }
