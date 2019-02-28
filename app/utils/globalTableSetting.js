@@ -23,7 +23,7 @@ const tableSetting = {
         link: '/partner',
         description: 'A page to view, add and edit participating vendors in Hermo Loyalty Programme.',
         iconClass: 'fa fa-users p-1',
-        tableWidth: '85rem',
+        tableWidth: '95rem',
         api: 'https://review-staging.hermo.my/services/gami/partners/list',
         pathToDataRoot: '',
         actionButtons: [
@@ -42,7 +42,7 @@ const tableSetting = {
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'name', label: 'Name', width: '25rem', align: 'left', type: 'string', doc: { description: 'Partner name' } },
             { key: 'logo', label: 'Logo', width: '10rem', align: 'center', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
-            { key: 'code_type', label: 'Code Type', width: '5rem', align: 'center', type: 'string', doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
+            { key: 'code_type', label: 'Code Type', width: '10rem', align: 'center', type: 'string', doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
             { key: 'industry', label: 'industry', width: '15rem', align: 'center', type: 'string', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'url', width: '20rem', align: 'left', type: 'link', doc: { description: 'URL link to partner vendor official site (if any)' } },
             { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Avtive or inactive entry' } },
@@ -53,7 +53,7 @@ const tableSetting = {
         link: '/partner_event',
         description: 'A page to view, add and edit Partners\' promotion event (a folder to keep partner vouchers)',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '209rem',
+        tableWidth: '199rem',
         api: 'https://review-staging.hermo.my/services/gami/rewards/partner_event_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -124,7 +124,7 @@ const tableSetting = {
         link: '/local_event',
         description: 'A page to view, add and edit Hermo\'s promotion event (a folder to pcode vouchers)',
         iconClass: 'fas fa-hospital-symbol p-1',
-        tableWidth: '209rem',
+        tableWidth: '45rem',
         api: 'https://review-staging.hermo.my/services/gami/rewards/local_event_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -144,7 +144,7 @@ const tableSetting = {
             { key: 'amount', label: 'Amount', width: '8rem', align: 'center', type: 'string', doc: { description: 'The amount of credit used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The start of the redemption period' } },
             { key: 'end_date', label: 'End Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The end of the redemption period' } },
-            { key: 'modal_id', label: 'Modal ID', width: '4rem', align: 'center', type: 'string', doc: { description: 'Modal ID for the pcode (can be found in hermint)' } },
+            { key: 'modal_id', label: 'Modal ID', width: '10rem', align: 'center', type: 'string', doc: { description: 'Modal ID for the pcode (can be found in hermint)' } },
         ],
     },
     // partnerEvent: {

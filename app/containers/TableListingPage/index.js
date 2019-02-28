@@ -187,6 +187,33 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         return null;
     }
 
+    renderHelp(head, index) {
+        if (dataChecking(head, 'doc', 'description')) {
+            return (
+                <div className={`help-container ${index < 2 ? 'x-axis-adjustment' : ''}`}>
+                    <i
+                        onClick={() => {
+                            this.setState({ showHelp: index });
+                        }}
+                        className="far fa-question-circle"
+                    />
+                    <div className={`content-container ${this.state.showHelp === index ? 'active' : ''}`}>
+                        <div
+                            className="close-btn"
+                            onClick={() => {
+                                this.setState({ showHelp: null });
+                            }}
+                        >
+                            <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
+                        </div>
+                        <div className="content">{head.doc.description}</div>
+                    </div>
+                </div>
+            );
+        }
+        return null;
+    }
+
     renderPaginatior() {
         const { pagination } = this.state;
         return (
@@ -283,6 +310,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         >
                                             <span>{ head.label }</span>
                                             {this.renderSorter(head, index)}
+                                            {this.renderHelp(head, index)}
                                         </div>
                                     ))
                                     :

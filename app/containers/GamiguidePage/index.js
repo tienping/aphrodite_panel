@@ -69,7 +69,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         <ul>
                             {
                                 Object.keys(tableSetting).map((key) => (
-                                    <li key={key} id={`sect-pagetype-${key}`} className={`anchor-target ${this.state.highlight === `sect-pagetype-${key}` ? 'highlighted' : null}`}>
+                                    <li key={key} id={`sect-pagetype-${key}`} className={`anchor-target ${this.state.highlight === `sect-pagetype-${key}` ? 'highlighted' : ''}`}>
                                         <span className="bigger">{dataChecking(tableSetting, key, 'title')} </span>
                                         <div className="pl-2 pb-1">
                                             <div className="desc">{dataChecking(tableSetting, key, 'description')}</div>
@@ -110,7 +110,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         <ul>
                             {
                                 Object.keys(tableSetting).map((key) => (
-                                    <li key={key} id={`sect-tablefields-${key}`} className={`anchor-target ${this.state.highlight === `sect-tablefields-${key}` ? 'highlighted' : null}`}>
+                                    <li key={key} id={`sect-tablefields-${key}`} className={`anchor-target ${this.state.highlight === `sect-tablefields-${key}` ? 'highlighted' : ''}`}>
                                         <span className="bigger">{dataChecking(tableSetting, key, 'title')}</span>
                                         <div className="pl-2 pb-1">
                                             <table className="doc-table">
@@ -138,7 +138,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         <ul>
                             {
                                 Object.keys(formSetting).map((key) => (
-                                    <li key={key} id={`sect-formfields-${key}`} className={`anchor-target ${this.state.highlight === `sect-formfields-${key}` ? 'highlighted' : null}`}>
+                                    <li key={key} id={`sect-formfields-${key}`} className={`anchor-target ${this.state.highlight === `sect-formfields-${key}` ? 'highlighted' : ''}`}>
                                         <span className="bigger">{dataChecking(formSetting, key, 'title')}</span>
                                         <div className="pl-2 pb-1">
                                             <table className="doc-table">
