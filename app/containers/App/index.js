@@ -49,7 +49,7 @@ import PrivateRoute from './PrivateRoute';
 const topbarHeight = '40px';
 
 const HershopContent = styled.div`
-    margin-top: ${topbarHeight};
+    // margin-top: ${topbarHeight};
 `;
 
 const pageReference = {

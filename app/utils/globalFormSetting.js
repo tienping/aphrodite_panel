@@ -56,7 +56,7 @@ const formSetting = {
     },
     create_voucher: {
         title: 'Create Partner Voucher',
-        formHeight: '375px',
+        formHeight: '385px',
         fields: [
             { key: 'code', label: 'Unique Code', type: 'textfield', doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
             { key: 'event_code', label: 'Event Code', type: 'dropdown', doc: { description: 'ID of the parent Partner Event' } },

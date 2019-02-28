@@ -117,7 +117,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     this.state.actionButtons.map((item, index) => {
                         if (item.type === 'createNew') {
                             return (
-                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                     <FormButton
                                         key="create-button"
                                         style={{ width: item.width }}
@@ -129,7 +129,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                             );
                         } else if (item.type === 'upload') {
                             return (
-                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                     <FormButton
                                         key="upload-button"
                                         style={{ width: item.width }}
@@ -142,7 +142,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         }
 
                         return (
-                            <span key={index} style={{ display: 'inline-block', width: item.width, margin: '1rem' }}>
+                            <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                 <FormButton
                                     key="create-button"
                                     style={{ width: item.width }}
