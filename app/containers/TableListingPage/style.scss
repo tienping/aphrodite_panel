@@ -101,6 +101,7 @@
                         .content-container {
                             top: 0;
                             right: 0;
+                            z-index: 2;
                             width: 15rem;
                             display: none;
                             color: black;
@@ -131,8 +132,6 @@
                         &.x-axis-adjustment {
                             .content-container {
                                 right: -12.5rem;
-                                z-index: 2;
-
 
                                 .close-btn {
                                     text-align: left;
