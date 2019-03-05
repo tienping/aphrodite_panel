@@ -52,10 +52,6 @@ const HershopContent = styled.div`
     // margin-top: ${topbarHeight};
 `;
 
-const pageReference = {
-    home: HomePage,
-};
-
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     componentDidMount() {
         this.props.dispatch(fetchConfig());
@@ -71,7 +67,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                         {/* <Route exact={true} path="/login" component={globalScope.token ? LogoutForm : LoginForm} /> */}
                         <Route exact={true} path="/logout" component={LogoutForm} />
                         <Route exact={true} path="/howto" component={GamiguidePage} />
-                        <Route exact={true} path="/" component={pageReference.home} />
+                        <PrivateRoute
+                            exact={true}
+                            path="/"
+                            token={globalScope.token || ''}
+                            render={() => <HomePage />}
+                        />
                         {
                             Object.keys(tableSetting).map((key, index) => (
                                 <PrivateRoute

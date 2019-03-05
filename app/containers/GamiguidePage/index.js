@@ -36,7 +36,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                 <div className="smaller">
                     <p>Where to find this documentation in gamicenter?</p>
                     <p>
-                        Have a look in the top bar, u will a question mark button at the left side of the topbar.
+                        Have a look in the top bar, you will find a question mark button at the left side of the topbar.
                         Yes, that&apos;s it, you can always come back here when you need more help (it&apos;s FREE for lifetime!!!).
                         If you need any help or question for this genuine guide, feel free to drop a email to tplim@hermo.my.
                     </p>
