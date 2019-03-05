@@ -10,9 +10,9 @@ import {
 } from './actions';
 
 export function* fireApi(action) {
-    const { apiUrl, type, data } = action.payload;
+    const { apiUrl, type, params } = action.payload;
     try {
-        const response = yield call(apiRequest, '', type, data, apiUrl);
+        const response = yield call(apiRequest, '', type, params, apiUrl);
 
         if (response && response.ok) {
             yield put(fireApiSuccess(response.data));

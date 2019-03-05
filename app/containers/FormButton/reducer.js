@@ -28,7 +28,7 @@ function formButtonReducer(state = initialState, action) {
         case FIRE_API_FAIL:
             return state
                 .set('firing', false)
-                .set('error', true);
+                .set('error', action.payload);
         default:
             return state;
     }

@@ -1,3 +1,5 @@
+import { dataChecking } from 'globalUtils';
+
 const formSetting = {
     // sysvar: {
     //     title: 'System Variable',
@@ -14,17 +16,22 @@ const formSetting = {
         title: 'Create Partner',
         formHeight: '550px',
         fields: [
-            { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'Partner name' } },
-            { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
-            { key: 'description', label: 'Description', type: 'textbox', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
-            { key: 'code_type', label: 'Code Type', type: 'dropdown', doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
+            { key: 'name', label: 'Name', type: 'textfield', mandatory: true, doc: { description: 'Partner name' } },
+            // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
+            { key: 'description', label: 'Description', type: 'textbox', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
+            { key: 'code_type', label: 'Code Type', type: 'dropdown', mandatory: true, doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
             { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
             { key: 'industry', label: 'Industry', type: 'textfield', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'Url to partner site', type: 'textfield', doc: { description: 'URL link to partner vendor official site (if any)' } },
         ],
-        onSubmit: (scope, actions, data) => {
+        onSubmit: (scope, actions, data, fields) => {
+            const params = {};
+            fields.forEach((field) => {
+                params[field.key] = dataChecking(data, field.key, 'value');
+            });
+
             scope.props.dispatch(actions.fireApi({
-                data,
+                params,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/partners',
                 type: 'post',
             }));
@@ -46,9 +53,14 @@ const formSetting = {
             { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'Minimun user level allowed for user to redempt target voucher' } },
             { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'The cost of each voucher undert this one' } },
         ],
-        onSubmit: (scope, actions, data) => {
+        onSubmit: (scope, actions, data, fields) => {
+            const params = {};
+            fields.forEach((field) => {
+                params[field.key] = dataChecking(data, field.key, 'value');
+            });
+
             scope.props.dispatch(actions.fireApi({
-                data,
+                params,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/partners',
                 type: 'post',
             }));
@@ -63,16 +75,21 @@ const formSetting = {
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The date which voucher can start to be use' } },
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The date voucher get expired' } },
         ],
-        onSubmit: (scope, actions, data) => {
+        onSubmit: (scope, actions, data, fields) => {
+            const params = {};
+            fields.forEach((field) => {
+                params[field.key] = dataChecking(data, field.key, 'value');
+            });
+
             scope.props.dispatch(actions.fireApi({
-                data,
+                params,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/vouchers/partners',
                 type: 'post',
             }));
         },
     },
     create_levent: {
-        title: 'Create Local Event',
+        title: 'Create Local Event, fields',
         formHeight: '380px',
         fields: [
             { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'Amount used to redempt this voucher' } },
@@ -80,9 +97,14 @@ const formSetting = {
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
             { key: 'modal_id', label: 'Modal Id', type: 'textfield', doc: { description: 'Unique ID of the modal created in hermint' } },
         ],
-        onSubmit: (scope, actions, data) => {
+        onSubmit: (scope, actions, data, fields) => {
+            const params = {};
+            fields.forEach((field) => {
+                params[field.key] = dataChecking(data, field.key, 'value');
+            });
+
             scope.props.dispatch(actions.fireApi({
-                data,
+                params,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/locals',
                 type: 'post',
             }));

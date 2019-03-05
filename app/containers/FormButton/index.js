@@ -16,12 +16,14 @@ import injectReducer from 'utils/injectReducer';
 import { dataChecking, getXdp } from 'globalUtils';
 import Switch from 'react-switch';
 import formSetting from 'utils/globalFormSetting';
+import tableSetting from 'utils/globalTableSetting';
 // import papaparse from 'papaparse';
 
 import makeSelectFormButton from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
+import * as tableListingActions from './../TableListingPage/actions';
 import './style.scss';
 
 export class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -73,11 +75,19 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             const tempObj = { firing: formbutton.firing };
 
             if (!formbutton.firing && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
-                alert(formbutton.fireApiReturnedData.message);
+                alert(formbutton.fireApiReturnedData.message.content);
                 tempObj.showModal = false;
+                if (this.props.formId === 'create_partner') { // wonder why upload will be trigerred as well
+                    this.props.dispatch(tableListingActions.getList({ api: tableSetting[this.props.pageType].api }));
+                }
             }
 
             this.setState(tempObj);
+        }
+
+        if (formbutton.error && formbutton.error !== this.props.formbutton.error) {
+            alert(formbutton.error.message);
+            console.log(formbutton.error);
         }
     }
 
@@ -154,7 +164,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     onSubmit = () => {
         if (this.state.formOnSubmit) {
-            this.state.formOnSubmit(this, actions, this.state);
+            this.state.formOnSubmit(this, actions, this.state, this.state.formFields);
         }
     }
 
