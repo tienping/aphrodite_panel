@@ -24,7 +24,7 @@ const tableSetting = {
         description: 'A page to view, add and edit participating vendors in Hermo Loyalty Programme.',
         iconClass: 'fa fa-users p-1',
         tableWidth: '95rem',
-        api: 'https://review-staging.hermo.my/services/gami/partners/list',
+        api: 'https://api-staging.hermo.my/services/gami/partners/list',
         pathToDataRoot: '',
         actionButtons: [
             {
@@ -54,7 +54,7 @@ const tableSetting = {
         description: 'A page to view, add and edit Partners\' promotion event (a folder to keep partner vouchers)',
         iconClass: 'fab fa-product-hunt p-1',
         tableWidth: '199rem',
-        api: 'https://review-staging.hermo.my/services/gami/rewards/partner_event_list',
+        api: 'https://api-staging.hermo.my/services/gami/rewards/partner_event_list',
         pathToDataRoot: '',
         actionButtons: [
             {
@@ -94,7 +94,7 @@ const tableSetting = {
         createButtonWidth: '160px',
         iconClass: 'fas fa-ticket-alt p-1',
         tableWidth: '112rem',
-        api: 'https://review-staging.hermo.my/services/gami/rewards/voucher_list',
+        api: 'https://api-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
             {
@@ -125,7 +125,7 @@ const tableSetting = {
         description: 'A page to view, add and edit Hermo\'s promotion event (a folder to pcode vouchers)',
         iconClass: 'fas fa-hospital-symbol p-1',
         tableWidth: '45rem',
-        api: 'https://review-staging.hermo.my/services/gami/rewards/local_event_list',
+        api: 'https://api-staging.hermo.my/services/gami/rewards/local_event_list',
         pathToDataRoot: '',
         actionButtons: [
             {

@@ -10,7 +10,7 @@ import {
 
 export function* getTableData(action) {
     try {
-        // const response = yield call(apiRequest, 'services/gami/rewards/event_list', 'get', null, 'https://review-staging.hermo.my');
+        // const response = yield call(apiRequest, 'services/gami/rewards/event_list', 'get', null, 'https://api-staging.hermo.my');
         const response = yield call(apiRequest, action.params.api, 'get');
 
         if (response && response.ok) {

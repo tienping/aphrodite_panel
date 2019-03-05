@@ -25,7 +25,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/partners',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/partners',
                 type: 'post',
             }));
         },
@@ -49,7 +49,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/rewards/partners',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/partners',
                 type: 'post',
             }));
         },
@@ -66,7 +66,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/vouchers/partners',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/vouchers/partners',
                 type: 'post',
             }));
         },
@@ -83,7 +83,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/rewards/locals',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/locals',
                 type: 'post',
             }));
         },
@@ -98,7 +98,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for partner',
-                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/partner',
+                    url: 'https://api-staging.hermo.my/services/gami/downloadfile/partner',
                 },
                 doc: {
                     description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
@@ -108,7 +108,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/partner',
                 type: 'post',
             }));
         },
@@ -123,7 +123,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for reward',
-                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/partner_event',
+                    url: 'https://api-staging.hermo.my/services/gami/downloadfile/partner_event',
                 },
                 doc: {
                     description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
@@ -133,7 +133,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/partner_event',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/partner_event',
                 type: 'post',
             }));
         },
@@ -148,7 +148,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for voucher',
-                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/voucher',
+                    url: 'https://api-staging.hermo.my/services/gami/downloadfile/voucher',
                 },
                 doc: {
                     description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
@@ -158,7 +158,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/voucher',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/voucher',
                 type: 'post',
             }));
         },
@@ -173,7 +173,7 @@ const formSetting = {
                 type: 'file',
                 sample: {
                     name: 'Sample for reward',
-                    url: 'https://review-staging.hermo.my/services/gami/downloadfile/local_event',
+                    url: 'https://api-staging.hermo.my/services/gami/downloadfile/local_event',
                 },
                 doc: {
                     description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
@@ -183,7 +183,7 @@ const formSetting = {
         onSubmit: (scope, actions, data) => {
             scope.props.dispatch(actions.fireApi({
                 data: data.file.form,
-                apiUrl: 'https://review-staging.hermo.my/services/gami/uploadcsv/local_event',
+                apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/local_event',
                 type: 'post',
             }));
         },
