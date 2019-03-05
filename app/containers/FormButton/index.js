@@ -368,7 +368,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     style={{
                                         zIndex: 100,
                                         top: '.5rem',
-                                        right: '-1.5rem',
+                                        right: '-0.5rem',
                                         cursor: 'pointer',
                                         borderRadius: 100,
                                         position: 'absolute',

@@ -23,8 +23,9 @@
         transition: background-color 1s, height 1s, width 1s, left 1s, font-size 1s, font-weight 1s;
         top: 0;
         position: sticky;
-        background: white;
-        padding: 1.1rem;
+        padding: 1rem;
+        margin: 0 -1rem;
+        background-color: RGBA(255, 255, 255, 0.85);
     }
 
     &.triggered {
