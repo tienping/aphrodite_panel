@@ -358,37 +358,41 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         height: `${this.state.showModal ? this.state.formHeight : '45px'}`,
                         width: `${getModalWidht(this.props.style)}`,
                     }}
-                    className={`page-action-modal gamicenter-button ${this.state.showModal ? 'triggered' : ''}`}
+                    className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
                 >
                     {
                         this.state.showModal ?
-                            <div className="become-title">{this.props.children}</div>
+                            <div className="become-title">
+                                <span>{this.props.children}</span>
+                                <div
+                                    style={{
+                                        zIndex: 100,
+                                        top: '.5rem',
+                                        right: '-1.5rem',
+                                        cursor: 'pointer',
+                                        borderRadius: 100,
+                                        position: 'absolute',
+                                        lineHeight: '24px',
+                                        backgroundColor: 'rgba(0,0,0,0.3)',
+                                    }}
+                                    onClick={() => { this.setState({ showModal: false }); }}
+                                >
+                                    <span
+                                        style={{
+                                            padding: getXdp(0.7),
+                                            fontWeight: '700',
+                                            color: 'white',
+                                            fontSize: '50%',
+                                        }}
+                                    >
+                                        X
+                                    </span>
+                                </div>
+                            </div>
                             :
                             <div className="default-button-text button-text text-capitalize" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
                     }
                     <div className="page-action-modal-toggle">
-                        <div
-                            style={{
-                                zIndex: 100,
-                                top: '.5rem',
-                                right: '.5rem',
-                                cursor: 'pointer',
-                                borderRadius: 100,
-                                position: 'absolute',
-                                backgroundColor: 'rgba(0,0,0,0.3)',
-                            }}
-                            onClick={() => { this.setState({ showModal: false }); }}
-                        >
-                            <span
-                                style={{
-                                    padding: getXdp(1),
-                                    fontWeight: '700',
-                                    color: 'white',
-                                }}
-                            >
-                                X
-                            </span>
-                        </div>
                         <div>
                             <div>
                                 {

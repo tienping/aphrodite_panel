@@ -3,4 +3,3 @@ Gami:
 - calender picker for form
 - dropdown handling for form
 - textarea for form
-- creation form's title&close button need to stay on top

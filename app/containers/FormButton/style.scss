@@ -4,6 +4,52 @@
     position: relative;
 }
 
+#page-action-modal {
+    height: 45px;
+    z-index: 10;
+    right: 0;
+    position: absolute;
+    box-shadow: 0px 0px 0px transparent;
+    transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
+
+    &.gamicenter-button {
+        padding: 0;
+        .default-button-text { padding: 1.1rem 3rem; }
+    }
+
+    .become-title {
+        height: 50px;
+        white-space: nowrap;
+        transition: background-color 1s, height 1s, width 1s, left 1s, font-size 1s, font-weight 1s;
+        top: 0;
+        position: sticky;
+        background: white;
+        padding: 1.1rem;
+    }
+
+    &.triggered {
+        z-index: 2;
+        padding: 0 3rem;
+        background-color: white;
+        height: 530px;
+        color: black;
+        cursor: default;
+        overflow: overlay;
+        box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
+
+        .become-title {
+            font-family: cursive;
+            font-size: 135%;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .page-action-modal-toggle {
+            display: block;
+        }
+    }
+}
+
 #page-action-modal-wrapper {
     z-index: -1000;
     opacity: 0;
@@ -105,46 +151,5 @@
         }
 
         .switch-button { vertical-align: middle; }
-    }
-}
-
-#page-action-modal {
-    height: 45px;
-    right: 0;
-    position: absolute;
-    box-shadow: 0px 0px 0px transparent;
-    transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
-
-    &.gamicenter-button {
-        padding: 0;
-        .default-button-text { padding: 1.1rem 3rem; }
-    }
-
-    .become-title {
-        height: 32px;
-        white-space: nowrap;
-        transition: background-color 1s, height 1s, width 1s, left 1s, font-size 1s, font-weight 1s;
-    }
-
-    &.triggered {
-        z-index: 2;
-        padding: 1.1rem 3rem;
-        background-color: white;
-        height: 530px;
-        color: black;
-        cursor: default;
-        overflow: overlay;
-        box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
-
-        .become-title {
-            font-family: cursive;
-            font-size: 135%;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        .page-action-modal-toggle {
-            display: block;
-        }
     }
 }

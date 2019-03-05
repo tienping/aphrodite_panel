@@ -12,6 +12,7 @@ import {
 export function* fireApi(action) {
     const { apiUrl, type, params } = action.payload;
     try {
+        // const response = yield call(apiRequest, '', type, params, apiUrl, { headers: { 'Content-Type': 'multipart/form-data' } });
         const response = yield call(apiRequest, '', type, params, apiUrl);
 
         if (response && response.ok) {
