@@ -5,6 +5,8 @@
  */
 
 import React from 'react';
+import { NotificationManager } from 'react-notifications';
+
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { Helmet } from 'react-helmet';
@@ -19,7 +21,7 @@ import formSetting from 'utils/globalFormSetting';
 import tableSetting from 'utils/globalTableSetting';
 // import papaparse from 'papaparse';
 
-import makeSelectFormButton from './selectors';
+// import makeSelectFormButton from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as actions from './actions';
@@ -75,19 +77,25 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             const tempObj = { firing: formbutton.firing };
 
             if (!formbutton.firing && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
-                alert(formbutton.fireApiReturnedData.message.content);
+                if (dataChecking(formbutton, 'fireApiReturnedData', 'message', 'content')) {
+                    console.log(formbutton.fireApiReturnedData);
+                    NotificationManager.success(formbutton.fireApiReturnedData.message.content, 'Error!!', 3000, () => {
+                        // alert(formbutton.fireApiReturnedData);
+                    });
+                }
                 tempObj.showModal = false;
                 if (this.props.formId === 'create_partner') { // wonder why upload will be trigerred as well
                     this.props.dispatch(tableListingActions.getList({ api: tableSetting[this.props.pageType].api }));
                 }
             }
-
             this.setState(tempObj);
         }
 
-        if (formbutton.error && formbutton.error !== this.props.formbutton.error) {
-            alert(formbutton.error.message);
-            console.log(formbutton.error);
+        if (formbutton.fireApiError && formbutton.fireApiError !== this.props.formbutton.fireApiError && formbutton.fireApiError.message) {
+            NotificationManager.error(formbutton.fireApiError.message, 'Error!!', 3000, () => {
+                // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
+            });
+            console.log(formbutton.fireApiError);
         }
     }
 
@@ -164,7 +172,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     onSubmit = () => {
         if (this.state.formOnSubmit) {
-            this.state.formOnSubmit(this, actions, this.state, this.state.formFields);
+            this.state.formOnSubmit(this, actions, tableListingActions, this.state, this.state.formFields);
         }
     }
 
@@ -368,7 +376,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     style={{
                                         zIndex: 100,
                                         top: '.5rem',
-                                        right: '-0.5rem',
+                                        right: '0',
                                         cursor: 'pointer',
                                         borderRadius: 100,
                                         position: 'absolute',
@@ -442,9 +450,7 @@ FormButton.propTypes = {
     // dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-    formbutton: makeSelectFormButton(),
-});
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
     return {

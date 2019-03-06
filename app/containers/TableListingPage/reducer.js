@@ -9,6 +9,9 @@ import {
     TABLE_LISTING_GET_LIST,
     TABLE_LISTING_GET_LIST_SUCCESS,
     TABLE_LISTING_GET_LIST_FAILED,
+    FIRE_API,
+    FIRE_API_SUCCESS,
+    FIRE_API_FAIL,
 } from './constants';
 
 const initialState = fromJS({
@@ -18,6 +21,7 @@ const initialState = fromJS({
 });
 
 function tableListingPageReducer(state = initialState, action) {
+    let tempObj = {};
     switch (action.type) {
         case TABLE_LISTING_GET_LIST:
             return state
@@ -32,6 +36,30 @@ function tableListingPageReducer(state = initialState, action) {
             return state
                 .set('loading', false)
                 .set('error', true);
+        case FIRE_API:
+            tempObj = {
+                fireApiReturnedData: null,
+                firing: true,
+                fireApiError: false,
+            };
+            return state
+                .set(`formButton_${action.formId}`, tempObj);
+        case FIRE_API_SUCCESS:
+            tempObj = {
+                fireApiReturnedData: action.payload.data,
+                firing: false,
+                fireApiError: false,
+            };
+            return state
+                .set(`formButton_${action.formId}`, tempObj);
+        case FIRE_API_FAIL:
+            tempObj = {
+                fireApiReturnedData: null,
+                firing: false,
+                fireApiError: action.payload.errors || action.payload,
+            };
+            return state
+                .set(`formButton_${action.formId}`, tempObj);
         default:
             return state;
     }

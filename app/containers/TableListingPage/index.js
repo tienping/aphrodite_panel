@@ -32,16 +32,12 @@ import * as actions from './actions';
 import './style.scss';
 
 export class TableListingPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    // constructor(props) {
-    //     super(props);
-
-    //     if (props.pageType && tableSetting && tableSetting[props.pageType]) {
-    //         this.state = this.initialiseProps(props);
-    //         if (tableSetting[props.pageType].api) {
-    //             props.dispatch(actions.getList({ api: tableSetting[props.pageType].api }));
-    //         }
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false,
+        };
+    }
 
     componentWillMount() {
         this.setState(this.initialiseProps(this.props));
@@ -54,6 +50,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     }
 
     componentWillReceiveProps(nextProps) {
+        const obj = {};
+
         if (nextProps.pageType !== this.props.pageType) {
             this.setState(this.initialiseProps(nextProps));
             if (dataChecking(tableSetting, nextProps.pageType, 'api')) {
@@ -75,6 +73,15 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 sortDirection: 'asc',
             });
         }
+
+        this.state.formButtonList.map((buttonKey) => {
+            if (nextProps.tablelistingpage[buttonKey] &&
+                    nextProps.tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
+                obj[buttonKey] = nextProps.tablelistingpage[buttonKey];
+                this.setState(obj);
+            }
+            return true;
+        });
     }
 
     onPageChange(pageApi) {
@@ -102,13 +109,23 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         return arr;
     }
 
-    initialiseProps = (theProps) => ({
-        tableConfig: dataChecking(tableSetting, theProps.pageType, 'fields'),
-        tableWidth: dataChecking(tableSetting, theProps.pageType, 'tableWidth'),
-        actionButtons: dataChecking(tableSetting, theProps.pageType, 'actionButtons'),
-        data: [],
-        sorter: {},
-    });
+    initialiseProps = (theProps) => {
+        const obj = {
+            tableConfig: dataChecking(tableSetting, theProps.pageType, 'fields') || [],
+            tableWidth: dataChecking(tableSetting, theProps.pageType, 'tableWidth') || 150,
+            actionButtons: dataChecking(tableSetting, theProps.pageType, 'actionButtons') || [],
+            data: [],
+            sorter: {},
+            formButtonList: [],
+        };
+
+        obj.actionButtons.map((item) => {
+            obj.formButtonList.push(`formButton_${item.type === 'upload' ? 'upload' : 'create'}_${this.props.pageType}`);
+            return true;
+        });
+
+        return obj;
+    };
 
     renderMenu = () => (
         <section className="page-actions"style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
@@ -134,6 +151,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         key="upload-button"
                                         style={{ width: item.width }}
                                         formId={`upload_${this.props.pageType}`}
+                                        formbutton={this.state[`formButton_upload_$${this.props.pageType}`] || {}}
                                     >
                                         {item.title}
                                     </FormButton>
@@ -148,6 +166,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     style={{ width: item.width }}
                                     pageType={this.props.pageType}
                                     formId={`create_${this.props.pageType}`}
+                                    formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                 >
                                     {item.title}
                                 </FormButton>
@@ -228,7 +247,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         this.onPageChange(pagination._links.last.href);
                                     }}
                                 >
-                                <span className="pagi-next pagi-item" title="First">&lt;&lt;</span>
+                                    <span className="pagi-next pagi-item" title="First">&lt;&lt;</span>
                                 </a>
                                 :
                                 null
@@ -281,7 +300,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         this.onPageChange(pagination._links.last.href);
                                     }}
                                 >
-                                <span className="pagi-next pagi-item" title="Last">&gt;&gt;</span>
+                                    <span className="pagi-next pagi-item" title="Last">&gt;&gt;</span>
                                 </a>
                                 :
                                 null

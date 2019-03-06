@@ -7,6 +7,8 @@
 
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
 
 // Import all the third party stuff
 import React from 'react';
@@ -45,6 +47,7 @@ import configureStore from './configureStore';
 import { translationMessages } from './i18n';
 import './global-styles';
 
+
 const topbarHeight = '40px';
 
 export const HershopTopbar = styled.div`
@@ -70,6 +73,7 @@ const render = (messages) => {
                 <ThemeProvider theme={theme}>
                     <ConnectedRouter history={history}>
                         <div>
+                            <NotificationContainer />
                             <HershopTopbar
                                 id="hershop-topbar-container"
                                 className=""

@@ -24,17 +24,17 @@ const formSetting = {
             { key: 'industry', label: 'Industry', type: 'textfield', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'Url to partner site', type: 'textfield', doc: { description: 'URL link to partner vendor official site (if any)' } },
         ],
-        onSubmit: (scope, actions, data, fields) => {
-            const params = {};
+        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+            const extractedData = {};
             fields.forEach((field) => {
-                params[field.key] = dataChecking(data, field.key, 'value');
+                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
             });
 
-            scope.props.dispatch(actions.fireApi({
-                params,
+            scope.props.dispatch(tableListingActions.fireApi({
+                data: extractedData,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/partners',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     create_pevent: {
@@ -43,7 +43,7 @@ const formSetting = {
         fields: [
             { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'Name or label for the promotion' } },
             { key: 'partner', label: 'Partner', type: 'dropdown', doc: { description: 'The ID of corresponding partner vendor' } },
-            { key: 'remarks', label: 'Remarks', type: 'textbox', doc: { description: 'Event description' } },
+            { key: 'remark', label: 'Remark', type: 'textbox', doc: { description: 'Event description' } },
             { key: 'tnc_text', label: 'TNC Text', type: 'textbox', doc: { description: 'Terms and condition in html format' } },
             { key: 'url', label: 'Url', type: 'textfield', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', doc: { description: 'Maximun number of which each user can redempt' } },
@@ -53,17 +53,17 @@ const formSetting = {
             { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'Minimun user level allowed for user to redempt target voucher' } },
             { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'The cost of each voucher undert this one' } },
         ],
-        onSubmit: (scope, actions, data, fields) => {
-            const params = {};
+        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+            const extractedData = {};
             fields.forEach((field) => {
-                params[field.key] = dataChecking(data, field.key, 'value');
+                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
             });
 
-            scope.props.dispatch(actions.fireApi({
-                params,
+            scope.props.dispatch(tableListingActions.fireApi({
+                data: extractedData,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/partners',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     create_voucher: {
@@ -75,17 +75,17 @@ const formSetting = {
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The date which voucher can start to be use' } },
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The date voucher get expired' } },
         ],
-        onSubmit: (scope, actions, data, fields) => {
-            const params = {};
+        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+            const extractedData = {};
             fields.forEach((field) => {
-                params[field.key] = dataChecking(data, field.key, 'value');
+                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
             });
 
-            scope.props.dispatch(actions.fireApi({
-                params,
+            scope.props.dispatch(tableListingActions.fireApi({
+                data: extractedData,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/vouchers/partners',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     create_levent: {
@@ -97,17 +97,17 @@ const formSetting = {
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
             { key: 'modal_id', label: 'Modal Id', type: 'textfield', doc: { description: 'Unique ID of the modal created in hermint' } },
         ],
-        onSubmit: (scope, actions, data, fields) => {
-            const params = {};
+        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+            const extractedData = {};
             fields.forEach((field) => {
-                params[field.key] = dataChecking(data, field.key, 'value');
+                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
             });
 
-            scope.props.dispatch(actions.fireApi({
-                params,
+            scope.props.dispatch(tableListingActions.fireApi({
+                data: extractedData,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/locals',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     upload_partner: {
@@ -127,12 +127,12 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, data) => {
-            scope.props.dispatch(actions.fireApi({
+        onSubmit: (scope, actions, tableListingActions, data) => {
+            scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/partner',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     upload_pevent: {
@@ -152,12 +152,12 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, data) => {
-            scope.props.dispatch(actions.fireApi({
+        onSubmit: (scope, actions, tableListingActions, data) => {
+            scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/partner_event',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     upload_voucher: {
@@ -177,12 +177,12 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, data) => {
-            scope.props.dispatch(actions.fireApi({
+        onSubmit: (scope, actions, tableListingActions, data) => {
+            scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/voucher',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
     upload_levent: {
@@ -202,12 +202,12 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, data) => {
-            scope.props.dispatch(actions.fireApi({
+        onSubmit: (scope, actions, tableListingActions, data) => {
+            scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/local_event',
                 type: 'post',
-            }));
+            }, scope.props.formId));
         },
     },
 };
