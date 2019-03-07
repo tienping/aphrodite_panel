@@ -12,6 +12,7 @@ import {
     FIRE_API,
     FIRE_API_SUCCESS,
     FIRE_API_FAIL,
+    ADD_NEW_BUTTON_TO_LIST,
 } from './constants';
 
 const initialState = fromJS({
@@ -56,10 +57,13 @@ function tableListingPageReducer(state = initialState, action) {
             tempObj = {
                 fireApiReturnedData: null,
                 firing: false,
-                fireApiError: action.payload.errors || action.payload,
+                fireApiError: action.payload.errors || action.payload.errors || action.payload,
             };
             return state
                 .set(`formButton_${action.formId}`, tempObj);
+        case ADD_NEW_BUTTON_TO_LIST:
+            return state
+                .set('addNewButtonToList', action.newButtonId);
         default:
             return state;
     }

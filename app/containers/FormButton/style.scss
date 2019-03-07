@@ -2,6 +2,22 @@
     display: inline-block;
     height: 33px;
     position: relative;
+
+    &.popout-form {
+        position: unset;
+
+        .page-action-modal {
+            display: none;
+
+            &.triggered{
+                display: block;
+                top: 0;
+                margin: auto;
+                left: 0 !important;
+                right: 0 !important;
+            }
+        }
+    }
 }
 
 #page-action-modal.page-action-modal {

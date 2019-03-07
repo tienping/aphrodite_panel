@@ -11,6 +11,7 @@ import {
     FIRE_API,
     FIRE_API_SUCCESS,
     FIRE_API_FAIL,
+    ADD_NEW_BUTTON_TO_LIST,
 } from './constants';
 
 export function getList(params) {
@@ -58,5 +59,12 @@ export function fireApiFail(response, formId) {
         type: FIRE_API_FAIL,
         formId,
         payload: response,
+    };
+}
+
+export function addNewButtonToList(newButtonId) {
+    return {
+        type: ADD_NEW_BUTTON_TO_LIST,
+        newButtonId,
     };
 }

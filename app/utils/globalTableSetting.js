@@ -1,4 +1,4 @@
-// import { dataChecking } from 'globalUtils';
+import { dataChecking } from 'globalUtils';
 
 const tableSetting = {
     // sysvar: {
@@ -23,8 +23,8 @@ const tableSetting = {
         link: '/partner',
         description: 'A page to view, add and edit participating vendors in Hermo Loyalty Programme.',
         iconClass: 'fa fa-users p-1',
-        tableWidth: '95rem',
-        api: 'https://api-staging.hermo.my/services/gami/partners/list',
+        tableWidth: '110rem',
+        api: 'https://api-staging.hermo.my/services/gami/partners/list?per-page=2',
         pathToDataRoot: '',
         actionButtons: [
             {
@@ -46,6 +46,37 @@ const tableSetting = {
             { key: 'industry', label: 'industry', width: '15rem', align: 'center', type: 'string', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'url', width: '20rem', align: 'left', type: 'link', doc: { description: 'URL link to partner vendor official site (if any)' } },
             { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Avtive or inactive entry' } },
+            {
+                label: 'Action',
+                width: '15rem',
+                key: '',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'edit',
+                        special: 'edit-form',
+                        formWidth: '15rem',
+                        image: 'https://img.icons8.com/material/24/000000/pencil.png',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'edit',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+            },
         ],
     },
     pevent: {
@@ -53,7 +84,7 @@ const tableSetting = {
         link: '/partner_event',
         description: 'A page to view, add and edit Partners\' promotion event (a folder to keep partner vouchers)',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '199rem',
+        tableWidth: '214rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/partner_event_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -85,6 +116,37 @@ const tableSetting = {
             { key: 'max_user_level', label: 'Max User Level', width: '7rem', align: 'center', type: 'string', doc: { description: 'The max user level capable of redempt the voucher under this promotion event' } },
             { key: 'amount', label: 'Amount', width: '8rem', align: 'center', type: 'integer', doc: { description: 'The cost of voucher under this promotion event' } },
             { key: 'partner', label: 'Partner', width: '8rem', align: 'center', type: 'string', doc: { description: 'The ID of corresponding partner vendor' } },
+            {
+                label: 'Action',
+                width: '15rem',
+                key: '',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'edit',
+                        special: 'edit-form',
+                        formWidth: '15rem',
+                        image: 'https://img.icons8.com/material/24/000000/pencil.png',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'edit',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+            },
         ],
     },
     voucher: {
@@ -93,7 +155,7 @@ const tableSetting = {
         description: 'A page to view, add and edit Partners\' voucher',
         createButtonWidth: '160px',
         iconClass: 'fas fa-ticket-alt p-1',
-        tableWidth: '112rem',
+        tableWidth: '127rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -117,6 +179,37 @@ const tableSetting = {
             { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this voucher is created' } },
             { key: 'start_date', label: 'Start Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date which voucher can start to be use' } },
             { key: 'end_date', label: 'End Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date voucher get expired' } },
+            {
+                label: 'Action',
+                width: '15rem',
+                key: '',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'edit',
+                        special: 'edit-form',
+                        formWidth: '15rem',
+                        image: 'https://img.icons8.com/material/24/000000/pencil.png',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'edit',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+            },
         ],
     },
     levent: {
@@ -124,7 +217,7 @@ const tableSetting = {
         link: '/local_event',
         description: 'A page to view, add and edit Hermo\'s promotion event (a folder to pcode vouchers)',
         iconClass: 'fas fa-hospital-symbol p-1',
-        tableWidth: '45rem',
+        tableWidth: '60rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/local_event_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -141,10 +234,42 @@ const tableSetting = {
         ],
         fields: [
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
+            { key: 'name', label: 'Name', width: '7rem', align: 'center', type: 'string', doc: { description: 'Name for the item' } },
             { key: 'amount', label: 'Amount', width: '8rem', align: 'center', type: 'string', doc: { description: 'The amount of credit used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The start of the redemption period' } },
             { key: 'end_date', label: 'End Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The end of the redemption period' } },
-            { key: 'modal_id', label: 'Modal ID', width: '10rem', align: 'center', type: 'string', doc: { description: 'Modal ID for the pcode (can be found in hermint)' } },
+            { key: 'model_id', label: 'Model ID', width: '10rem', align: 'center', type: 'string', doc: { description: 'Modal ID for the pcode (can be found in hermint)' } },
+            {
+                label: 'Action',
+                width: '15rem',
+                key: '',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'edit',
+                        special: 'edit-form',
+                        formWidth: '15rem',
+                        image: 'https://img.icons8.com/material/24/000000/pencil.png',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'edit',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+            },
         ],
     },
     // partnerEvent: {

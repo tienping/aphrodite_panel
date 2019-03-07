@@ -50,7 +50,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     }
 
     componentWillReceiveProps(nextProps) {
-        const obj = {};
+        let obj = {};
 
         if (nextProps.pageType !== this.props.pageType) {
             this.setState(this.initialiseProps(nextProps));
@@ -78,10 +78,18 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             if (nextProps.tablelistingpage[buttonKey] &&
                     nextProps.tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
                 obj[buttonKey] = nextProps.tablelistingpage[buttonKey];
+                obj[buttonKey].getListApi = tableSetting[this.props.pageType].api;
                 this.setState(obj);
             }
             return true;
         });
+
+        if (nextProps.tablelistingpage.addNewButtonToList !== this.props.tablelistingpage.addNewButtonToList
+                && !this.state.formButtonList[nextProps.tablelistingpage.addNewButtonToList]) {
+            obj = this.state.formButtonList;
+            obj.push(nextProps.tablelistingpage.addNewButtonToList);
+            this.setState({ formButtonList: obj });
+        }
     }
 
     onPageChange(pageApi) {
@@ -152,6 +160,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         key="create-button"
                                         style={{ width: item.width }}
                                         formId={`create_${this.props.pageType}`}
+                                        formbutton={this.state[`formButton_create_$${this.props.pageType}`] || {}}
                                     >
                                         {item.title}
                                     </FormButton>
@@ -382,7 +391,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                                         className="table-row-item"
                                                         style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
                                                     >
-                                                        { this.renderCell(row, col) }
+                                                        { this.renderCell(row, col, index) }
                                                     </div>
                                                 ))
                                                 :
@@ -411,7 +420,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         );
     }
 
-    renderCell = (row, col) => {
+    renderCell = (row, col, rowIndex) => {
         let date = null;
 
         switch (col.type) {
@@ -424,22 +433,40 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     key={index}
                                     className="action-item"
                                 >
-                                    <a
-                                        className="gamicenter-button invert smaller px-1 py-half my-quater"
-                                        onClick={(value2, index2) => {
-                                            if (value.onPressHandling) {
-                                                value.onPressHandling(index2, this, row, actions);
-                                            }
-                                        }}
-                                    >
-                                        {
-                                            value.image ?
-                                                <img src={value.image} alt={value.name} width="15px" height="15px" />
-                                                :
-                                                <i className={value.iconClass ? value.iconClass : 'fas fa-exclamation-circle'} />
-                                        }
-                                        <span className="pl-1">{value.name}</span>
-                                    </a>
+                                    {
+                                        value.special === 'edit-form' ?
+                                            <FormButton
+                                                key="create-button"
+                                                formTitle={`Edit ${this.props.pageType}`}
+                                                formType="popout"
+                                                formId={`edit_${this.props.pageType}__#__${rowIndex}`}
+                                                targetForm={`edit_${this.props.pageType}`}
+                                                initialData={row}
+                                                formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
+                                            >
+                                                <div className="gamicenter-button invert smaller px-1 py-half my-quater">
+                                                    <i className="fas fa-edit"></i>
+                                                    <span className="pl-1">Edit</span>
+                                                </div>
+                                            </FormButton>
+                                            :
+                                            <a
+                                                className="gamicenter-button invert smaller px-1 py-half my-quater"
+                                                onClick={(value2, index2) => {
+                                                    if (value.onPressHandling) {
+                                                        value.onPressHandling(index2, this, row, actions);
+                                                    }
+                                                }}
+                                            >
+                                                {
+                                                    value.image ?
+                                                        <img src={value.image} alt={value.name} width="15px" height="15px" />
+                                                        :
+                                                        <i className={value.iconClass ? value.iconClass : 'fas fa-exclamation-circle'} />
+                                                }
+                                                <span className="pl-1">{value.name}</span>
+                                            </a>
+                                    }
                                 </div>
                             ))
                         }

@@ -24,7 +24,7 @@ const formSetting = {
             { key: 'industry', label: 'Industry', type: 'textfield', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'Url to partner site', type: 'textfield', doc: { description: 'URL link to partner vendor official site (if any)' } },
         ],
-        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+        onSubmit: (scope, tableListingActions, data, fields) => {
             const extractedData = {};
             fields.forEach((field) => {
                 extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
@@ -53,7 +53,7 @@ const formSetting = {
             { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'Minimun user level allowed for user to redempt target voucher' } },
             { key: 'amount', label: 'Amount', type: 'textbox', mandatory: true, doc: { description: 'The cost of each voucher undert this one' } },
         ],
-        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+        onSubmit: (scope, tableListingActions, data, fields) => {
             const extractedData = {};
             fields.forEach((field) => {
                 extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
@@ -71,11 +71,11 @@ const formSetting = {
         formHeight: '363px',
         fields: [
             { key: 'code', label: 'Unique Code', type: 'textfield', mandatory: true, doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
-            { key: 'event_id', label: 'Event\'s ID', type: 'dropdown', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
+            { key: 'event_id', label: 'Event\'s ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
             { key: 'start_date', label: 'Start Date', type: 'date', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
             { key: 'end_date', label: 'End Date', type: 'date', mandatory: true, doc: { description: 'The date voucher get expired' } },
         ],
-        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+        onSubmit: (scope, tableListingActions, data, fields) => {
             const extractedData = {};
             fields.forEach((field) => {
                 extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
@@ -93,11 +93,12 @@ const formSetting = {
         formHeight: '363px',
         fields: [
             { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'Amount used to redempt this voucher' } },
+            { key: 'name', label: 'Name', type: 'textbox', doc: { description: 'Name of this voucher' } },
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
-            { key: 'modal_id', label: 'Modal Id', type: 'textfield', doc: { description: 'Unique ID of the modal created in hermint' } },
+            { key: 'model_id', label: 'Model Id', type: 'textfield', doc: { description: 'Unique ID of the modal created in hermint' } },
         ],
-        onSubmit: (scope, actions, tableListingActions, data, fields) => {
+        onSubmit: (scope, tableListingActions, data, fields) => {
             const extractedData = {};
             fields.forEach((field) => {
                 extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
@@ -127,7 +128,7 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, tableListingActions, data) => {
+        onSubmit: (scope, tableListingActions, data) => {
             scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/partner',
@@ -152,7 +153,7 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, tableListingActions, data) => {
+        onSubmit: (scope, tableListingActions, data) => {
             scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/partner_event',
@@ -177,7 +178,7 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, tableListingActions, data) => {
+        onSubmit: (scope, tableListingActions, data) => {
             scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/voucher',
@@ -202,7 +203,7 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, actions, tableListingActions, data) => {
+        onSubmit: (scope, tableListingActions, data) => {
             scope.props.dispatch(tableListingActions.fireApi({
                 data: data.file.form,
                 apiUrl: 'https://api-staging.hermo.my/services/gami/uploadcsv/local_event',
@@ -211,6 +212,74 @@ const formSetting = {
         },
     },
 };
+
+formSetting.edit_partner = { ...formSetting.create_partner };
+formSetting.edit_partner.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_partner.onSubmit = (scope, tableListingActions, data, fields) => {
+    const extractedData = {};
+    fields.forEach((field) => {
+        extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
+    });
+
+    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
+    scope.props.dispatch(tableListingActions.fireApi({
+        data: extractedData,
+        apiUrl: `https://api-staging.hermo.my/services/gami/partners/update/${extractedData.id}`,
+        type: 'post',
+    }, scope.props.formId));
+};
+
+formSetting.edit_pevent = { ...formSetting.create_pevent };
+formSetting.edit_pevent.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_pevent.onSubmit = (scope, tableListingActions, data, fields) => {
+    const extractedData = {};
+    fields.forEach((field) => {
+        const value = dataChecking(data, field.key, 'value') || null;
+        extractedData[field.key] = field.type === 'textbox' ? `${value}` : value;
+    });
+
+    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
+    scope.props.dispatch(tableListingActions.fireApi({
+        data: extractedData,
+        apiUrl: `https://api-staging.hermo.my/services/gami/rewards/partners/update/${extractedData.id}`,
+        type: 'post',
+    }, scope.props.formId));
+};
+
+formSetting.edit_voucher = { ...formSetting.create_voucher };
+formSetting.edit_voucher.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_voucher.onSubmit = (scope, tableListingActions, data, fields) => {
+    const extractedData = {};
+    fields.forEach((field) => {
+        const value = dataChecking(data, field.key, 'value') || null;
+        extractedData[field.key] = field.type === 'textbox' ? `${value}` : value;
+    });
+
+    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
+    scope.props.dispatch(tableListingActions.fireApi({
+        data: extractedData,
+        apiUrl: `https://api-staging.hermo.my/services/gami/vouchers/partners/update/${extractedData.id}`,
+        type: 'post',
+    }, scope.props.formId));
+};
+
+formSetting.edit_levent = { ...formSetting.create_levent };
+formSetting.edit_levent.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_levent.onSubmit = (scope, tableListingActions, data, fields) => {
+    const extractedData = {};
+    fields.forEach((field) => {
+        const value = dataChecking(data, field.key, 'value') || null;
+        extractedData[field.key] = (field.type === 'textbox' || field.type === 'textfield') ? `${value}` : value;
+    });
+
+    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
+    scope.props.dispatch(tableListingActions.fireApi({
+        data: extractedData,
+        apiUrl: `https://api-staging.hermo.my/services/gami/rewards/locals/update/${extractedData.id}`,
+        type: 'post',
+    }, scope.props.formId));
+};
+
 export default formSetting;
 
 export const formAction = () => {

@@ -45,10 +45,10 @@
             overflow: auto;
             background-color: #FDFDFD;
             border-top: 1px dashed #D0D0FD;
-            border-left: 1px dashed #D0D0FD;
 
             .table-row {
                 border-bottom: 1px double #D0D0FD;
+                border-left: 1px dashed #D0D0FD;
 
                 &.table-header .table-header-item {
                     padding: 15px 10px;

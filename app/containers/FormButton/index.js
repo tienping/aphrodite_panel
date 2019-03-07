@@ -24,7 +24,6 @@ import tableSetting from 'utils/globalTableSetting';
 // import makeSelectFormButton from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import * as actions from './actions';
 import * as tableListingActions from './../TableListingPage/actions';
 import './style.scss';
 
@@ -35,16 +34,24 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             showModal: false,
         };
 
-        if (this.props.formId && dataChecking(formSetting, this.props.formId)) {
-            this.state.formFields = dataChecking(formSetting[this.props.formId], 'fields');
-            this.state.formHeight = dataChecking(formSetting[this.props.formId], 'formHeight');
-            this.state.formWidth = dataChecking(formSetting[this.props.formId], 'formWidth');
-            this.state.formOnSubmit = dataChecking(formSetting[this.props.formId], 'onSubmit');
+        const { targetForm, formId, initialData } = this.props;
 
-            if (dataChecking(formSetting, this.props.formId, 'fields')) {
-                formSetting[this.props.formId].fields.forEach((field) => {
+        const targetFormName = targetForm || formId;
+
+        if (formId && dataChecking(formSetting, targetFormName)) {
+            this.state.formFields = dataChecking(formSetting[targetFormName], 'fields');
+            this.state.formHeight = dataChecking(formSetting[targetFormName], 'formHeight');
+            this.state.formWidth = dataChecking(formSetting[targetFormName], 'formWidth');
+            this.state.formOnSubmit = dataChecking(formSetting[targetFormName], 'onSubmit');
+
+            if (dataChecking(formSetting, targetFormName, 'fields')) {
+                formSetting[targetFormName].fields.forEach((field) => {
+                    let value = field.type === 'boolean' ? field.default || false : '';
+                    if (initialData && initialData[field.key] && initialData && initialData[field.key] !== null) {
+                        value = initialData[field.key];
+                    }
                     this.state[field.key] = {
-                        value: field.type === 'boolean' ? field.default || false : '',
+                        value,
                     };
                 });
             }
@@ -53,17 +60,18 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     componentWillReceiveProps(nextProps) {
         const { formbutton } = nextProps;
-        if (nextProps.formId && dataChecking(formSetting, nextProps.formId) && nextProps.formId !== this.props.formId) {
+        const comingformId = nextProps.formId.split('__#__')[0];
+        if (nextProps.formId && dataChecking(formSetting, comingformId) && nextProps.formId !== this.props.formId) {
             const tempObj = {
                 showModal: false,
-                formFields: dataChecking(formSetting[nextProps.formId], 'fields'),
-                formHeight: dataChecking(formSetting[nextProps.formId], 'formHeight'),
-                formWidth: dataChecking(formSetting[nextProps.formId], 'formWidth'),
-                formOnSubmit: dataChecking(formSetting[nextProps.formId], 'onSubmit'),
+                formFields: dataChecking(formSetting[comingformId], 'fields'),
+                formHeight: dataChecking(formSetting[comingformId], 'formHeight'),
+                formWidth: dataChecking(formSetting[comingformId], 'formWidth'),
+                formOnSubmit: dataChecking(formSetting[comingformId], 'onSubmit'),
             };
 
-            if (dataChecking(formSetting[nextProps.formId], 'fields')) {
-                formSetting[nextProps.formId].fields.forEach((field) => {
+            if (dataChecking(formSetting[comingformId], 'fields')) {
+                formSetting[comingformId].fields.forEach((field) => {
                     tempObj[field.key] = {
                         value: field.type === 'boolean' ? field.default || false : '',
                     };
@@ -76,12 +84,16 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         if (formbutton.firing !== this.props.formbutton.firing) {
             const tempObj = { firing: formbutton.firing };
 
-            if (!formbutton.firing && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
+            if (!formbutton.firing && formbutton.fireApiReturnedData && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
                 if (dataChecking(formbutton, 'fireApiReturnedData', 'message', 'content')) {
-                    console.log(formbutton.fireApiReturnedData);
-                    NotificationManager.success(formbutton.fireApiReturnedData.message.content, 'Error!!', 3000, () => {
-                        // alert(formbutton.fireApiReturnedData);
+                    NotificationManager.success(formbutton.fireApiReturnedData.message.content, 'Success!!', 3000, () => {
+                        if (dataChecking(formSetting[comingformId], 'successCallback')) {
+                            formSetting[comingformId].successCallback();
+                        }
                     });
+                    if (formbutton.getListApi) {
+                        this.props.dispatch(tableListingActions.getList({ api: formbutton.getListApi }));
+                    }
                 }
                 tempObj.showModal = false;
                 if (this.props.formId === 'create_partner') { // wonder why upload will be trigerred as well
@@ -172,7 +184,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     onSubmit = () => {
         if (this.state.formOnSubmit) {
-            this.state.formOnSubmit(this, actions, tableListingActions, this.state, this.state.formFields);
+            this.state.formOnSubmit(this, tableListingActions, this.state, this.state.formFields);
         }
     }
 
@@ -323,13 +335,15 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             case 'boolean':
                 return (
                     <Switch
-                        className="switch-button"
+                        className="switch-button px-1"
                         onChange={(event) => {
                             this.handleTextChange(event, field);
                         }}
                         checked={this.state[field.key].value || false}
                     />
                 );
+            case 'hidden':
+                return null;
             default:
                 return (
                     <input
@@ -343,36 +357,47 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     renderField(field) {
         return (
-            <div className={`field-input input-${field.type}`}>
-                <span className="field-label">{`${field.label}:`}</span>
-                {
-                    field.mandatory ?
-                        <span className="mandatory-indicator">*</span>
-                        :
-                        null
-                }
-                { this.renderInput(field) }
-            </div>
+            field.type !== 'hidden' ?
+                <div className={`field-input input-${field.type}`}>
+                    <span className="field-label">{`${field.label}:`}</span>
+                    {
+                        field.mandatory ?
+                            <span className="mandatory-indicator">*</span>
+                            :
+                            null
+                    }
+                    { this.renderInput(field) }
+                </div>
+                :
+                null
         );
     }
 
     render() {
-        const getModalWidht = (style) => {
+        const getModalWidth = (style) => {
             if (this.state.showModal) {
                 return this.state.formWidth || '265px';
             }
 
-            return style.width;
+            return (style && style.width) || '2rem';
         };
 
         return (
-            <div className="FormButton-component">
+            <div className={`FormButton-component ${this.props.formType === 'popout' ? 'popout-form' : 'p-relative'}`}>
+                {
+                    this.props.formType === 'popout' ?
+                        <div onClick={() => this.setState({ showModal: true })}>
+                            {this.props.children}
+                        </div>
+                        :
+                        null
+                }
                 <div
                     id="page-action-modal"
                     style={{
                         ...this.props.style,
                         height: `${this.state.showModal ? this.state.formHeight : '45px'}`,
-                        width: `${getModalWidht(this.props.style)}`,
+                        width: `${getModalWidth(this.props.style)}`,
                     }}
                     className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
                 >
@@ -392,7 +417,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             {
                                 this.state.showModal ?
                                     <div className="become-title">
-                                        <span>{this.props.children}</span>
+                                        <span className="text-capitalize">{ this.props.formType === 'popout' ? this.props.formTitle : this.props.children}</span>
                                         <div className="title-underline" />
                                     </div>
                                     :
