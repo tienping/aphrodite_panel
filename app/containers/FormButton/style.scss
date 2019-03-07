@@ -4,7 +4,7 @@
     position: relative;
 }
 
-#page-action-modal {
+#page-action-modal.page-action-modal {
     height: 45px;
     z-index: 2;
     right: 0;
@@ -17,15 +17,35 @@
         .default-button-text { padding: 1.1rem 3rem; }
     }
 
-    .become-title {
-        height: 50px;
-        white-space: nowrap;
-        transition: background-color 1s, height 1s, width 1s, left 1s, font-size 1s, font-weight 1s;
-        top: 0;
+    .sticky-container {
         position: sticky;
-        padding: 1rem;
-        margin: 0 -1rem;
-        background-color: RGBA(255, 255, 255, 0.85);
+        top: 0;
+
+        .modal-close-button {
+            z-index: 100;
+            top: 0rem;
+            right: 0rem;
+            cursor: pointer;
+            position: absolute;
+            margin-right: -2rem;
+
+            i { padding: 0.3rem }
+        }
+
+        .become-title {
+            height: 35px;
+            white-space: nowrap;
+            transition: background-color 1s, height 1s, width 1s, left 1s, font-size 1s, font-weight 1s;
+            padding: .6rem 1rem;
+            margin: 1rem -1rem;
+            background-color: RGBA(255, 255, 255, 0.85);
+        }
+
+        .title-underline {
+            background-color: gray;
+            margin: 0.2rem -1.5rem;
+            padding-bottom: 0.1rem;
+        }
     }
 
     &.triggered {
@@ -35,7 +55,7 @@
         height: 530px;
         color: black;
         cursor: default;
-        overflow: overlay;
+        overflow: auto;
         box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
 
         .become-title {
@@ -43,7 +63,6 @@
             font-size: 120%;
             font-weight: 600;
             text-align: left;
-            position: relative;
         }
 
         .page-action-modal-toggle {
@@ -73,12 +92,21 @@
     display: none;
     text-align: left;
 
+    .modal-form-fields-container {
+        margin-bottom: 1.5rem;
+    }
+
     .field-input {
         padding: 0.5rem 0;
 
         .field-label {
             color: black;
             font-size: 85%;
+        }
+
+        .mandatory-indicator {
+            color: red;
+            font-weight: 700;
         }
 
         .link-for-sample {
@@ -93,6 +121,8 @@
         }
 
         .gamicenter-imageUploader {
+            margin-top: 1rem;
+            padding: 0.5rem;
             box-shadow: 0px 0px 1px 0px RGBA(0, 0, 0, 0.3);
 
             .image-preview {
@@ -141,6 +171,7 @@
                     font-size: 75%;
                     padding: .5rem 1.5rem;
                     margin-bottom: .75rem;
+                    margin: 0.5rem 0;
                     border-radius: 10px;
                 }
 

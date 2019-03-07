@@ -14,7 +14,7 @@ const formSetting = {
     // },
     create_partner: {
         title: 'Create Partner',
-        formHeight: '550px',
+        formHeight: '460px',
         fields: [
             { key: 'name', label: 'Name', type: 'textfield', mandatory: true, doc: { description: 'Partner name' } },
             // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
@@ -39,19 +39,19 @@ const formSetting = {
     },
     create_pevent: {
         title: 'Create Partner Event',
-        formHeight: '550px',
+        formHeight: '555px',
         fields: [
-            { key: 'name', label: 'Name', type: 'textfield', doc: { description: 'Name or label for the promotion' } },
-            { key: 'partner', label: 'Partner', type: 'dropdown', doc: { description: 'The ID of corresponding partner vendor' } },
-            { key: 'remark', label: 'Remark', type: 'textbox', doc: { description: 'Event description' } },
-            { key: 'tnc_text', label: 'TNC Text', type: 'textbox', doc: { description: 'Terms and condition in html format' } },
+            { key: 'name', label: 'Name', type: 'textfield', mandatory: true, doc: { description: 'Name or label for the promotion' } },
+            { key: 'partner', label: 'Partner\'s ID', type: 'dropdown', mandatory: true, doc: { description: 'The ID of corresponding partner vendor' } },
+            { key: 'remark', label: 'Remark', type: 'textbox', mandatory: true, doc: { description: 'Event description' } },
+            { key: 'tnc_text', label: 'TNC Text', type: 'textbox', mandatory: true, doc: { description: 'Terms and condition in html format' } },
             { key: 'url', label: 'Url', type: 'textfield', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
-            { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', doc: { description: 'Maximun number of which each user can redempt' } },
+            { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', mandatory: true, doc: { description: 'Maximun number of which each user can redempt' } },
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
             { key: 'min_user_level', label: 'Min User Level', type: 'dropdown', doc: { description: 'Minimun requirement for user to redempt target voucher' } },
             { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'Minimun user level allowed for user to redempt target voucher' } },
-            { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'The cost of each voucher undert this one' } },
+            { key: 'amount', label: 'Amount', type: 'textbox', mandatory: true, doc: { description: 'The cost of each voucher undert this one' } },
         ],
         onSubmit: (scope, actions, tableListingActions, data, fields) => {
             const extractedData = {};
@@ -68,12 +68,12 @@ const formSetting = {
     },
     create_voucher: {
         title: 'Create Partner Voucher',
-        formHeight: '385px',
+        formHeight: '363px',
         fields: [
-            { key: 'code', label: 'Unique Code', type: 'textfield', doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
-            { key: 'event_code', label: 'Event Code', type: 'dropdown', doc: { description: 'ID of the parent Partner Event' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The date which voucher can start to be use' } },
-            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The date voucher get expired' } },
+            { key: 'code', label: 'Unique Code', type: 'textfield', mandatory: true, doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
+            { key: 'event_id', label: 'Event\'s ID', type: 'dropdown', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
+            { key: 'start_date', label: 'Start Date', type: 'date', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
+            { key: 'end_date', label: 'End Date', type: 'date', mandatory: true, doc: { description: 'The date voucher get expired' } },
         ],
         onSubmit: (scope, actions, tableListingActions, data, fields) => {
             const extractedData = {};
@@ -90,7 +90,7 @@ const formSetting = {
     },
     create_levent: {
         title: 'Create Local Event, fields',
-        formHeight: '380px',
+        formHeight: '363px',
         fields: [
             { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'Amount used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
@@ -112,7 +112,7 @@ const formSetting = {
     },
     upload_partner: {
         title: 'Upload Partners',
-        formHeight: '350px',
+        formHeight: '355px',
         fields: [
             {
                 key: 'file',
@@ -137,7 +137,7 @@ const formSetting = {
     },
     upload_pevent: {
         title: 'Upload Partner Event',
-        formHeight: '350px',
+        formHeight: '355px',
         fields: [
             {
                 key: 'file',
@@ -162,7 +162,7 @@ const formSetting = {
     },
     upload_voucher: {
         title: 'Upload Voucher',
-        formHeight: '350px',
+        formHeight: '355px',
         fields: [
             {
                 key: 'file',
@@ -187,7 +187,7 @@ const formSetting = {
     },
     upload_levent: {
         title: 'Upload Local Event',
-        formHeight: '350px',
+        formHeight: '355px',
         fields: [
             {
                 key: 'file',

@@ -15,7 +15,7 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
-import { dataChecking, getXdp } from 'globalUtils';
+import { dataChecking } from 'globalUtils';
 import Switch from 'react-switch';
 import formSetting from 'utils/globalFormSetting';
 import tableSetting from 'utils/globalTableSetting';
@@ -196,49 +196,51 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         switch (field.type) {
             case 'image':
                 return (
-                    <div className="gamicenter-imageUploader pt-1">
-                        <div className="image-preview">
-                            <span
-                                className="image-holder"
-                                onClick={() => {
-                                    const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
-                                    inputEl.click();
-                                }}
-                            >
-                                <img
-                                    className={`previewer-image ${dataChecking(this.state, field.key, 'url') ? '' : 'previewer-placeholder'}`}
-                                    style={{ maxHeight: '150px', maxWidth: '80%' }}
-                                    width={dataChecking(this.state, field.key, 'url') ? '' : '70%'}
-                                    src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
-                                    alt="preview upload"
-                                />
-                            </span>
-                            {
-                                dataChecking(this.state, field.key, 'url') ?
-                                    <span
-                                        className="close-btn"
-                                        onClick={(event) => {
-                                            this.onUnselectImage(event, `${this.props.formId}-${field.key}-uploader`, field);
-                                        }}
-                                    >
-                                        <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
-                                    </span>
-                                    :
-                                    null
-                            }
-                        </div>
-                        <div className="upload-action pt-1">
-                            <button
-                                htmlFor={`${this.props.formId}-${field.key}-uploader`}
-                                className="upload-button gamicenter-button"
-                                onClick={() => {
-                                    const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
-                                    inputEl.click();
-                                }}
-                            >
-                                <i className="fa fa-cloud-upload"></i> Upload
-                            </button>
-                            <input id={`${this.props.formId}-${field.key}-uploader`} className="upload-input" type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
+                    <div>
+                        <div className="gamicenter-imageUploader">
+                            <div className="image-preview">
+                                <span
+                                    className="image-holder"
+                                    onClick={() => {
+                                        const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
+                                        inputEl.click();
+                                    }}
+                                >
+                                    <img
+                                        className={`previewer-image ${dataChecking(this.state, field.key, 'url') ? '' : 'previewer-placeholder'}`}
+                                        style={{ maxHeight: '150px', maxWidth: '80%' }}
+                                        width={dataChecking(this.state, field.key, 'url') ? '' : '70%'}
+                                        src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
+                                        alt="preview upload"
+                                    />
+                                </span>
+                                {
+                                    dataChecking(this.state, field.key, 'url') ?
+                                        <span
+                                            className="close-btn"
+                                            onClick={(event) => {
+                                                this.onUnselectImage(event, `${this.props.formId}-${field.key}-uploader`, field);
+                                            }}
+                                        >
+                                            <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
+                                        </span>
+                                        :
+                                        null
+                                }
+                            </div>
+                            <div className="upload-action">
+                                <button
+                                    htmlFor={`${this.props.formId}-${field.key}-uploader`}
+                                    className="upload-button gamicenter-button"
+                                    onClick={() => {
+                                        const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
+                                        inputEl.click();
+                                    }}
+                                >
+                                    <i className="fa fa-cloud-upload"></i> Upload
+                                </button>
+                                <input id={`${this.props.formId}-${field.key}-uploader`} className="upload-input" type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
+                            </div>
                         </div>
                     </div>
                 );
@@ -342,7 +344,13 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     renderField(field) {
         return (
             <div className={`field-input input-${field.type}`}>
-                <span className="field-label">{`${field.label}: `}</span>
+                <span className="field-label">{`${field.label}:`}</span>
+                {
+                    field.mandatory ?
+                        <span className="mandatory-indicator">*</span>
+                        :
+                        null
+                }
                 { this.renderInput(field) }
             </div>
         );
@@ -368,76 +376,64 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     }}
                     className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
                 >
-                    {
-                        this.state.showModal ?
-                            <div className="become-title">
-                                <span>{this.props.children}</span>
-                                <div
-                                    style={{
-                                        zIndex: 100,
-                                        top: '.5rem',
-                                        right: '0',
-                                        cursor: 'pointer',
-                                        borderRadius: 100,
-                                        position: 'absolute',
-                                        lineHeight: '24px',
-                                        backgroundColor: 'rgba(0,0,0,0.3)',
-                                    }}
-                                    onClick={() => { this.setState({ showModal: false }); }}
-                                >
-                                    <span
-                                        style={{
-                                            padding: getXdp(0.7),
-                                            fontWeight: '700',
-                                            color: 'white',
-                                            fontSize: '50%',
-                                        }}
+                    <div className="sticky-container">
+                        <div style={{ position: 'relative' }}>
+                            {
+                                this.state.showModal ?
+                                    <div
+                                        className="modal-close-button"
+                                        onClick={() => { this.setState({ showModal: false }); }}
                                     >
-                                        X
-                                    </span>
-                                </div>
-                            </div>
-                            :
-                            <div className="default-button-text button-text text-capitalize" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
-                    }
-                    <div className="page-action-modal-toggle">
-                        <div>
-                            <div>
-                                {
-                                    this.state.formFields ?
-                                        <div>
-                                            {
-                                                this.state.formFields.map((field, index) => (
-                                                    <div
-                                                        key={index}
-                                                        className="create-modal-form-field"
-                                                    >
-                                                        <span style={{ color: 'red' }}>{dataChecking(this.state, field.key, 'error')}</span>
-                                                        { this.renderField(field) }
-                                                    </div>
-                                                ))
-                                            }
-                                            <div style={{ textAlign: 'center' }}>
-                                                <div
-                                                    className="gamicenter-button smaller"
-                                                    onClick={() => {
-                                                        this.onSubmit();
-                                                    }}
-                                                >
-                                                    {
-                                                        this.state.firing ?
-                                                            <span>loading...</span>
-                                                            :
-                                                            <span>Submit</span>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                        :
-                                        null
-                                }
-                            </div>
+                                        <i className="fas fa-window-close text-secondary-color bigger"></i>
+                                    </div>
+                                    :
+                                    null
+                            }
+                            {
+                                this.state.showModal ?
+                                    <div className="become-title">
+                                        <span>{this.props.children}</span>
+                                        <div className="title-underline" />
+                                    </div>
+                                    :
+                                    <div className="default-button-text button-text text-capitalize" onClick={() => this.setState({ showModal: true })}>{this.props.children}</div>
+                            }
                         </div>
+                    </div>
+                    <div className="page-action-modal-toggle">
+                        {
+                            this.state.formFields ?
+                                <div className="modal-form-fields-container">
+                                    {
+                                        this.state.formFields.map((field, index) => (
+                                            <div
+                                                key={index}
+                                                className="modal-form-field"
+                                            >
+                                                <span style={{ color: 'red' }}>{dataChecking(this.state, field.key, 'error')}</span>
+                                                { this.renderField(field) }
+                                            </div>
+                                        ))
+                                    }
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div
+                                            className="gamicenter-button smaller"
+                                            onClick={() => {
+                                                this.onSubmit();
+                                            }}
+                                        >
+                                            {
+                                                this.state.firing ?
+                                                    <span>loading...</span>
+                                                    :
+                                                    <span>Submit</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                :
+                                null
+                        }
                     </div>
                 </div>
                 <div id="page-action-modal-wrapper" className={`page-action-modal-wrapper ${this.state.showModal ? 'triggered' : ''}`}></div>

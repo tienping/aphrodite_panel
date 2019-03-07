@@ -10,26 +10,24 @@
         margin-bottom: 2rem;
         position: relative;
 
-        .table-paginator-container {
+        .table-paginator {
             height: 4rem;
+            width: 95rem;
+            margin: auto;
+            padding: 1rem;
+            max-width: 100%;
+            text-align: right;
 
-            .table-paginator {
-                top: 1rem;
-                right: 0;
-                position: absolute;
-                display: inline-block;
+            .pagi-button {
+                cursor: pointer;
+                color: black;
+                text-decoration: none;
 
-                .pagi-button {
-                    cursor: pointer;
-                    color: black;
-                    text-decoration: none;
+                &:hover {
+                    color: #FF0068;
 
-                    &:hover {
-                        color: #FF0068;
-
-                        .pagi-item {
-                            border-color: #FF0068;
-                        }
+                    .pagi-item {
+                        border-color: #FF0068;
                     }
                 }
             }
@@ -43,6 +41,7 @@
 
         .table-content-wrapper {
             margin: auto;
+            min-height: 30vw;
             overflow: auto;
             background-color: #FDFDFD;
             border-top: 1px dashed #D0D0FD;
@@ -52,7 +51,7 @@
                 border-bottom: 1px double #D0D0FD;
 
                 &.table-header .table-header-item {
-                    padding: 10px 10px;
+                    padding: 15px 10px;
                     background-color: black !important;
                     color: white !important;
                     font-weight: 700;
@@ -60,36 +59,41 @@
                     position: relative;
 
                     .sort-container {
-                        right: 2px;
+                        right: 4px;
                         bottom: 2px;
-                        padding: 5px;
                         position: absolute;
-                        width: 20px;
-                        height: 25px;
-                        line-height: 20px;
-                        text-align: center;
-                        color: gray;
-                        background-color: RGBA(255, 255, 255, 0.2);
 
-                        &.active {
-                            color: white;
-                        }
+                        i {
+                            width: 18px;
+                            height: 18px;
+                            padding: 5px;
+                            text-align: center;
+                            color: gray;
+                            line-height: 1;
+                            background-color: RGBA(255, 255, 255, 0.2);
 
-                        &.fa-sort-down {
-                            line-height: 10px;
+                            &:hover { background-color: RGBA(255, 255, 255, 0.3); }
+
+                            &.active {
+                                color: white;
+                            }
+
+                            &.fa-sort-down {
+                                line-height: 0;
+                            }
                         }
                     }
 
                     .help-container {
                         text-align: left;
+                        right: 2px;
+                        top: 2px;
+                        position: absolute;
 
                         i {
-                            right: 2px;
-                            top: 2px;
+                            width: 22px;
+                            height: 22px;
                             padding: 5px;
-                            position: absolute;
-                            width: 25px;
-                            height: 25px;
                             color: RGBA(255, 0, 125, 0.6);
                             cursor: pointer;
 

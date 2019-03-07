@@ -1,11 +1,12 @@
 a {outline : none !important;}
 
-.bigger {
-    font-size: 130%;
-}
+body { font-size: 12px; }
+
+.bigger { font-size: 130%; }
 
 .gamicenter-button {
     font-size: 120%;
+    text-align: center;
     margin: .5rem 1rem;
     padding: 1.1rem 3rem;
     display: inline-block;

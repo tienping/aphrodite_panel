@@ -62,7 +62,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         if (nextProps.tablelistingpage.data !== this.props.tablelistingpage.data) {
             const { data } = nextProps.tablelistingpage;
             const fields = tableSetting[nextProps.pageType].fields;
-            const result = this.toggledSortResult(0, fields[0].type, 'asc', dataChecking(data, 'data', 'items')) || [];
+            const result = this.toggledSortResult(0, fields[0].type, dataChecking(data, 'data', 'items')) || [];
             this.setState({
                 data: result,
                 pagination: {
@@ -90,23 +90,36 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
     }
 
-    toggledSortResult(index, dataType, direction, dataPassed) {
+    customSorting(data1, data2, dataType) {
+        if (dataType === 'datetime') {
+            const firstDate = data1 ? new Date(data1) : 0;
+            const secondDate = data2 ? new Date(data2) : 0;
+            return firstDate > secondDate;
+        } else if (dataType === 'integer') {
+            return (data1 || 0) - (data2 || 0);
+        } else if (dataType === 'string') {
+            return `${data1 || ''}`.localeCompare(`${data2 || ''}`);
+        }
+        return true;
+    }
+
+    toggledSortResult(index, dataType, dataPassed) {
         const arr = dataPassed || (this.state.data);
 
         if (arr && arr.length) {
             const fields = tableSetting[this.props.pageType].fields;
-
-            const sortType = direction === 'asc' ? 'sort' : 'reverse';
-            if (dataType === 'integer' || dataType === 'datetime') {
-                return arr[sortType]((a, b) => (a[fields[index].key] - b[fields[index].key]));
-            } else if (dataType === 'string') {
-                return arr[sortType]((a, b) => (a[fields[index].key].localeCompare(b[fields[index].key])));
-            }
-        } else {
-            console.warn('[TP Warning]: arr is empty in toggledSortResult');
+            return arr.sort((a, b) => this.customSorting(a[fields[index].key], b[fields[index].key], dataType));
         }
 
+        console.warn('[TP Warning]: arr is empty in toggledSortResult');
+
         return arr;
+    }
+
+    toggleReverseResult(dataPassed) {
+        const arr = dataPassed || (this.state.data);
+
+        return arr.reverse();
     }
 
     initialiseProps = (theProps) => {
@@ -128,7 +141,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     };
 
     renderMenu = () => (
-        <section className="page-actions"style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
+        <section className="page-actions" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
             {
                 dataChecking(this.state, 'actionButtons') ?
                     this.state.actionButtons.map((item, index) => {
@@ -182,25 +195,42 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     renderSorter(head, index) {
         if (head.type === 'integer' || head.type === 'string' || head.type === 'datetime') {
             return (
-                <i
+                <div
                     onClick={() => {
-                        const direction = (dataChecking(this.state, 'sorter') === index) &&
-                            (dataChecking(this.state, 'sortDirection') === 'asc') ? 'desc' : 'asc';
-                        const data = this.toggledSortResult(index, head.type, direction);
+                        let data = {};
+                        let direction = 'asc';
+
+                        if (dataChecking(this.state, 'sorter') === index) {
+                            data = this.toggleReverseResult();
+                            direction = (dataChecking(this.state, 'sortDirection') === 'asc') ? 'desc' : 'asc';
+                        } else {
+                            data = this.toggledSortResult(index, head.type);
+                        }
+
                         this.setState({
                             sorter: index,
                             sortDirection: direction,
                             data,
                         });
                     }}
-                    className={
-                        `
-                            sort-container fas
-                            ${dataChecking(this, 'state', 'sorter') === index ? 'active' : ''}
-                            ${dataChecking(this, 'state', 'sortDirection') === 'asc' ? 'fa-sort-down' : 'fa-sort-up'}
-                        `
-                    }
-                />
+                    className="sort-container"
+                    title={`${
+                        dataChecking(this, 'state', 'sorter') === index ?
+                            dataChecking(this, 'state', 'sortDirection') === 'asc' ? 'Change to Descending' : 'Change to Ascending'
+                            :
+                            'Toggle Ascending Sort'
+                    }`}
+                >
+                    <i
+                        className={
+                            `
+                                fas
+                                ${dataChecking(this, 'state', 'sorter') === index ? 'active' : ''}
+                                ${dataChecking(this, 'state', 'sortDirection') && dataChecking(this, 'state', 'sorter') === index === 'asc' ? 'fa-sort-down' : 'fa-sort-up'}
+                            `
+                        }
+                    />
+                </div>
             );
         }
         return null;
@@ -225,7 +255,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         >
                             <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
                         </div>
-                        <div className="content">{head.doc.description}</div>
+                        <div className="content">
+                            <div className="pb-1">
+                                <span>Data type: </span>
+                                <span className="text-secondary-color bigger">{head.type}</span>
+                            </div>
+                            <div>{head.doc.description}</div>
+                        </div>
                     </div>
                 </div>
             );
@@ -237,75 +273,73 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         const { pagination } = this.state;
         return (
             dataChecking(pagination, '_meta', 'currentPage') ?
-                <div className="table-paginator-container">
-                    <div className="table-paginator">
+                <div className="table-paginator" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
+                    {
+                        dataChecking(pagination, '_links', 'first', 'href') ?
+                            <a
+                                className="pagi-button py-1 px-1"
+                                onClick={() => {
+                                    this.onPageChange(pagination._links.last.href);
+                                }}
+                            >
+                                <span className="pagi-next pagi-item" title="First">&lt;&lt;</span>
+                            </a>
+                            :
+                            null
+                    }
+                    {
+                        dataChecking(pagination, '_links', 'prev', 'href') ?
+                            <a
+                                className="pagi-button py-1 px-1"
+                                onClick={() => {
+                                    this.onPageChange(pagination._links.prev.href);
+                                }}
+                            >
+                                <span className="pagi-prev pagi-item" title="Prev">&lt;</span>
+                            </a>
+                            :
+                            null
+                    }
+                    <span className="pagi-current pagi-item px-1 py-1">
+                        [&nbsp;
+                        {(((pagination._meta.currentPage - 1) * pagination._meta.perPage) + 1)}
+                        &nbsp;to&nbsp;
                         {
-                            dataChecking(pagination, '_links', 'first', 'href') ?
-                                <a
-                                    className="pagi-button py-1 px-1"
-                                    onClick={() => {
-                                        this.onPageChange(pagination._links.last.href);
-                                    }}
-                                >
-                                    <span className="pagi-next pagi-item" title="First">&lt;&lt;</span>
-                                </a>
+                            pagination._meta.totalCount > pagination._meta.perPage ?
+                                ((pagination._meta.currentPage) * pagination._meta.perPage)
                                 :
-                                null
+                                pagination._meta.totalCount
                         }
-                        {
-                            dataChecking(pagination, '_links', 'prev', 'href') ?
-                                <a
-                                    className="pagi-button py-1 px-1"
-                                    onClick={() => {
-                                        this.onPageChange(pagination._links.prev.href);
-                                    }}
-                                >
-                                    <span className="pagi-prev pagi-item" title="Prev">&lt;</span>
-                                </a>
-                                :
-                                null
-                        }
-                        <span className="pagi-current pagi-item px-1 py-1">
-                            [&nbsp;
-                            {(((pagination._meta.currentPage - 1) * pagination._meta.perPage) + 1)}
-                            &nbsp;to&nbsp;
-                            {
-                                pagination._meta.totalCount > pagination._meta.perPage ?
-                                    ((pagination._meta.currentPage) * pagination._meta.perPage)
-                                    :
-                                    pagination._meta.totalCount
-                            }
-                            &nbsp; out of &nbsp;
-                            {pagination._meta.totalCount}
-                            &nbsp;]
-                        </span>
-                        {
-                            dataChecking(pagination, '_links', 'next', 'href') ?
-                                <a
-                                    className="pagi-button py-1 px-1"
-                                    onClick={() => {
-                                        this.onPageChange(pagination._links.next.href);
-                                    }}
-                                >
-                                    <span className="pagi-next pagi-item" title="Next">&gt;</span>
-                                </a>
-                                :
-                                null
-                        }
-                        {
-                            dataChecking(pagination, '_links', 'last', 'href') ?
-                                <a
-                                    className="pagi-button py-1 px-1"
-                                    onClick={() => {
-                                        this.onPageChange(pagination._links.last.href);
-                                    }}
-                                >
-                                    <span className="pagi-next pagi-item" title="Last">&gt;&gt;</span>
-                                </a>
-                                :
-                                null
-                        }
-                    </div>
+                        &nbsp; out of &nbsp;
+                        {pagination._meta.totalCount}
+                        &nbsp;]
+                    </span>
+                    {
+                        dataChecking(pagination, '_links', 'next', 'href') ?
+                            <a
+                                className="pagi-button py-1 px-1"
+                                onClick={() => {
+                                    this.onPageChange(pagination._links.next.href);
+                                }}
+                            >
+                                <span className="pagi-next pagi-item" title="Next">&gt;</span>
+                            </a>
+                            :
+                            null
+                    }
+                    {
+                        dataChecking(pagination, '_links', 'last', 'href') ?
+                            <a
+                                className="pagi-button py-1 px-1"
+                                onClick={() => {
+                                    this.onPageChange(pagination._links.last.href);
+                                }}
+                            >
+                                <span className="pagi-next pagi-item" title="Last">&gt;&gt;</span>
+                            </a>
+                            :
+                            null
+                    }
                 </div>
                 :
                 null
