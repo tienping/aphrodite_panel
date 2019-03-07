@@ -103,7 +103,7 @@ const tableSetting = {
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'name', label: 'Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
             { key: 'remarks', label: 'Remarks', width: '20rem', align: 'left', type: 'string', doc: { description: 'Event description' } },
-            { key: 'tnc_text', label: 'TNC', width: '20rem', align: 'left', type: 'string', doc: { description: 'Terms and condition' } },
+            { key: 'tnc_text', label: 'TNC', width: '20rem', align: 'left', type: 'html', doc: { description: 'Terms and condition' } },
             { key: 'url', label: 'Url', width: '25rem', align: 'left', type: 'link', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
             { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is created' } },

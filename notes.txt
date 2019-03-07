@@ -1,5 +1,4 @@
 Gami:
-- Support row edit
 - calender picker for form
 - dropdown handling for form
 - textarea for form

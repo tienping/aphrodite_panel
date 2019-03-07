@@ -388,7 +388,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                                 this.state.tableConfig.map((col, index2) => (
                                                     <div
                                                         key={index2}
-                                                        className="table-row-item"
+                                                        className={`table-row-item ${col.type === 'html' ? 'posi-relative' : ''}`}
                                                         style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
                                                     >
                                                         { this.renderCell(row, col, index) }
@@ -494,6 +494,31 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
             case 'link':
                 return <a href={dataChecking(row, col.key) ? row[col.key] : ''}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</a>;
+            case 'html':
+                return (
+                    <div>
+                        <span
+                            className={`html-indicator ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? 'hide-it' : ''}`}
+                            dangerouslySetInnerHTML={{ __html: dataChecking(row, col.key) ? row[col.key] : '' }}
+                        ></span>
+                        <span className={`html-indicator code-type ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? '' : 'hide-it'}`}>
+                            { dataChecking(row, col.key) ? row[col.key] : '\u00A0' }
+                        </span>
+                        <div
+                            title="toggle html mode"
+                            className="html-mode-toggler"
+                            onClick={() => {
+                                const tempObj = {};
+                                const htmlmode = { ...this.state[`htmlmode_${col.key}`] } || {};
+                                htmlmode[rowIndex] = !htmlmode[rowIndex];
+                                tempObj[`htmlmode_${col.key}`] = htmlmode;
+                                this.setState(tempObj);
+                            }}
+                        >
+                            <i className="fas fa-code" />
+                        </div>
+                    </div>
+                );
             default:
                 return <span>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }

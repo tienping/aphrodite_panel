@@ -383,7 +383,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         };
 
         return (
-            <div className={`FormButton-component ${this.props.formType === 'popout' ? 'popout-form' : 'p-relative'}`}>
+            <div className={`FormButton-component ${this.props.formType === 'popout' ? 'popout-form' : 'posi-relative'}`}>
                 {
                     this.props.formType === 'popout' ?
                         <div onClick={() => this.setState({ showModal: true })}>

@@ -158,6 +158,42 @@
                     border-right: 1px dashed #D0D0FD;
                     word-wrap: break-word;
                     vertical-align: middle;
+
+                    .html-indicator {
+                        display: inline-block;
+                        transition: opacity .5s, padding .5s, height .5s;
+                        opacity: 1;
+                        height: auto;
+
+                        &.code-type {
+                            border: 1px solid white;
+                            background-color: rgb(107, 106, 106);
+                            color: white;
+                            padding: .75rem 1rem;
+                            border-radius: 5px;
+                        }
+
+                        &.hide-it {
+                            opacity: 0;
+                            height: 0;
+                            padding: 0;
+                            position: absolute;
+                        }
+                    }
+
+                    .html-mode-toggler {
+                        border: 1px solid RGBA(255, 0, 125, 0.3);
+                        display: inline-block;
+                        padding: 2px 4px;
+                        background-color: lightgray;
+                        color: white;
+                        font-weight: 300;
+                        font-size: 80%;
+                        position: absolute;
+                        bottom: 1px;
+                        right: 1px;
+                    }
+
                 }
             }
         }
