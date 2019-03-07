@@ -5,6 +5,8 @@
  */
 
 import React from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { NotificationManager } from 'react-notifications';
 
 // import PropTypes from 'prop-types';
@@ -193,6 +195,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         let newValue = null;
         if (field.type === 'boolean') {
             newValue = event;
+        } else if (field.type === 'date') {
+            newValue = event.getTime();
         } else if (event && event.target) {
             newValue = event.target.value;
         } else {
@@ -342,15 +346,47 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         checked={this.state[field.key].value || false}
                     />
                 );
-            case 'hidden':
-                return null;
-            default:
+            case 'date':
                 return (
-                    <input
-                        placeholder={field.placeholder}
-                        value={dataChecking(this.state, field.key, 'value')}
+                    <DatePicker
+                        selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
                         onChange={(value) => this.handleTextChange(value, field)}
                     />
+                );
+            case 'hidden':
+                return null;
+            case 'textbox':
+                return (
+                    <div>
+                        <input
+                            className="default-input-textbox"
+                            placeholder={field.placeholder}
+                            value={dataChecking(this.state, field.key, 'value')}
+                            onChange={(value) => this.handleTextChange(value, field)}
+                        />
+                    </div>
+                );
+            case 'textarea':
+                return (
+                    <div>
+                        <input
+                            className="default-input-textarea"
+                            placeholder={field.placeholder}
+                            value={dataChecking(this.state, field.key, 'value')}
+                            onChange={(value) => this.handleTextChange(value, field)}
+                        />
+                    </div>
+                );
+            default:
+                return (
+                    <div>
+                        <input
+                            className="default-input-type"
+                            placeholder={field.placeholder}
+                            value={dataChecking(this.state, field.key, 'value')}
+                            onChange={(value) => this.handleTextChange(value, field)}
+                        />
+                    </div>
                 );
         }
     }
