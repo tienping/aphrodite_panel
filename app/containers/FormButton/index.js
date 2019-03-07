@@ -369,7 +369,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             case 'textarea':
                 return (
                     <div>
-                        <input
+                        <textarea
                             className="default-input-textarea"
                             placeholder={field.placeholder}
                             value={dataChecking(this.state, field.key, 'value')}

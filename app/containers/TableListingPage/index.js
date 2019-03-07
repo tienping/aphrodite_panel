@@ -13,7 +13,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import ReactJson from 'react-json-view';
-import Switch from 'react-switch';
+// import Switch from 'react-switch';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -476,11 +476,15 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 return <span>[ ]</span>;
             case 'boolean':
                 return (
-                    <Switch
-                        onChange={() => {}}
-                        disabled={true}
-                        checked={row[col.key] || false}
-                    />
+                    // <Switch
+                    //     onChange={() => {}}
+                    //     disabled={true}
+                    //     checked={row[col.key] || false}
+                    // />
+                    <div className="bigger">
+                        <i className={`fas fa-circle ${row[col.key] ? 'text-success' : 'text-danger'}`}></i>
+                        <span className="pl-1">{row[col.key] ? 'True' : 'False'}</span>
+                    </div>
                 );
             case 'image':
                 return <img src={row[col.key]} alt={row.name} width={row.width || '100%'} height={row.height || ''} />;

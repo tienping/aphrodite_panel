@@ -1,3 +1,2 @@
 Gami:
 - dropdown handling for form
-- textarea for form

@@ -18,7 +18,7 @@ const formSetting = {
         fields: [
             { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
             // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
-            { key: 'description', label: 'Description', type: 'textbox', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
+            { key: 'description', label: 'Description', type: 'textarea', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'code_type', label: 'Code Type', type: 'dropdown', mandatory: true, doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
             { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
             { key: 'industry', label: 'Industry', type: 'textbox', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
@@ -43,8 +43,8 @@ const formSetting = {
         fields: [
             { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
             { key: 'partner', label: 'Partner\'s ID', type: 'dropdown', mandatory: true, doc: { description: 'The ID of corresponding partner vendor' } },
-            { key: 'remark', label: 'Remark', type: 'textbox', mandatory: true, doc: { description: 'Event description' } },
-            { key: 'tnc_text', label: 'TNC Text', type: 'textbox', mandatory: true, doc: { description: 'Terms and condition in html format' } },
+            { key: 'remark', label: 'Remark', type: 'textarea', mandatory: true, doc: { description: 'Event description' } },
+            { key: 'tnc_text', label: 'TNC Text', type: 'textarea', mandatory: true, doc: { description: 'Terms and condition in html format' } },
             { key: 'url', label: 'Url', type: 'textbox', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', mandatory: true, doc: { description: 'Maximun number of which each user can redempt' } },
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
