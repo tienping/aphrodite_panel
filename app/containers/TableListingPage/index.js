@@ -160,7 +160,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         key="create-button"
                                         style={{ width: item.width }}
                                         formId={`create_${this.props.pageType}`}
-                                        formbutton={this.state[`formButton_create_$${this.props.pageType}`] || {}}
+                                        formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     >
                                         {item.title}
                                     </FormButton>
@@ -173,7 +173,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         key="upload-button"
                                         style={{ width: item.width }}
                                         formId={`upload_${this.props.pageType}`}
-                                        formbutton={this.state[`formButton_upload_$${this.props.pageType}`] || {}}
+                                        formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
                                     >
                                         {item.title}
                                     </FormButton>

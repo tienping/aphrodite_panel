@@ -19,7 +19,26 @@ const formSetting = {
             { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
             // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
             { key: 'description', label: 'Description', type: 'textarea', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
-            { key: 'code_type', label: 'Code Type', type: 'dropdown', mandatory: true, doc: { description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]' } },
+            {
+                key: 'code_type',
+                label: 'Code Type',
+                type: 'selection',
+                isMulti: false,
+                mandatory: true,
+                items: [
+                    { value: 'text', label: 'Text Only' },
+                    { value: 'barcode', label: 'With Barcode' },
+                    { value: 'qrcode', label: 'With QR Code' },
+                ],
+                closeMenuOnSelect: false,
+                // itemApi: '/postgres/menu',
+                // itemDataPath: ['result'],
+                // itemKey: 'menuList',
+                // itemDataValuePath: ['menu_name'],
+                doc: {
+                    description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]',
+                },
+            },
             { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
             { key: 'industry', label: 'Industry', type: 'textbox', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'Url to partner site', type: 'textbox', doc: { description: 'URL link to partner vendor official site (if any)' } },
@@ -42,15 +61,53 @@ const formSetting = {
         formHeight: '555px',
         fields: [
             { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
-            { key: 'partner', label: 'Partner\'s ID', type: 'dropdown', mandatory: true, doc: { description: 'The ID of corresponding partner vendor' } },
+            { key: 'partner', label: 'Partner\'s ID', type: 'textbox', mandatory: true, doc: { description: 'The ID of corresponding partner vendor' } },
+            // {
+            //     key: 'partner',
+            //     label: 'Partner\'s ID',
+            //     type: 'selection',
+            //     items: [
+            //         { value: 'text', label: 'Text Only' },
+            //         { value: 'barcode', label: 'With Barcode' },
+            //         { value: 'qrcode', label: 'With QR Code' },
+            //     ],
+            //     mandatory: true,
+            //     doc: {
+            //         description: 'The ID of corresponding partner vendor'
+            //     },
+            // },
             { key: 'remark', label: 'Remark', type: 'textarea', mandatory: true, doc: { description: 'Event description' } },
             { key: 'tnc_text', label: 'TNC Text', type: 'textarea', mandatory: true, doc: { description: 'Terms and condition in html format' } },
             { key: 'url', label: 'Url', type: 'textbox', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', mandatory: true, doc: { description: 'Maximun number of which each user can redempt' } },
             { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
             { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
-            { key: 'min_user_level', label: 'Min User Level', type: 'dropdown', doc: { description: 'Minimun requirement for user to redempt target voucher' } },
-            { key: 'max_user_level', label: 'Max User Level', type: 'dropdown', doc: { description: 'Minimun user level allowed for user to redempt target voucher' } },
+            {
+                key: 'min_user_level',
+                label: 'Min User Level',
+                type: 'selection',
+                items: [
+                    { value: '1', label: 'Normal Member' },
+                    { value: '2', label: 'Gold Member' },
+                    { value: '3', label: 'Platinum Member' },
+                ],
+                doc: {
+                    description: 'Minimun requirement for user to redempt target voucher',
+                },
+            },
+            {
+                key: 'max_user_level',
+                label: 'Max User Level',
+                type: 'selection',
+                items: [
+                    { value: '3', label: 'Platinum Member' },
+                    { value: '2', label: 'Gold Member' },
+                    { value: '999', label: 'Normal Member' },
+                ],
+                doc: {
+                    description: 'Minimun user level allowed for user to redempt target voucher',
+                },
+            },
             { key: 'amount', label: 'Amount', type: 'textbox', mandatory: true, doc: { description: 'The cost of each voucher undert this one' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {

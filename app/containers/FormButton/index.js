@@ -5,8 +5,13 @@
  */
 
 import React from 'react';
+
+import Select from 'react-select';
+import makeAnimated from 'react-select/lib/animated';
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
 import { NotificationManager } from 'react-notifications';
 
 // import PropTypes from 'prop-types';
@@ -35,64 +40,58 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         this.state = {
             showModal: false,
         };
+    }
 
-        const { targetForm, formId, initialData } = this.props;
-
+    componentWillMount() {
+        const { targetForm, formId } = this.props;
         const targetFormName = targetForm || formId;
+        let tempObj = {};
 
         if (formId && dataChecking(formSetting, targetFormName)) {
-            this.state.formFields = dataChecking(formSetting[targetFormName], 'fields');
-            this.state.formHeight = dataChecking(formSetting[targetFormName], 'formHeight');
-            this.state.formWidth = dataChecking(formSetting[targetFormName], 'formWidth');
-            this.state.formOnSubmit = dataChecking(formSetting[targetFormName], 'onSubmit');
-
-            if (dataChecking(formSetting, targetFormName, 'fields')) {
-                formSetting[targetFormName].fields.forEach((field) => {
-                    let value = field.type === 'boolean' ? field.default || false : '';
-                    if (initialData && initialData[field.key] && initialData && initialData[field.key] !== null) {
-                        value = initialData[field.key];
-                    }
-                    this.state[field.key] = {
-                        value,
-                    };
-                });
-            }
+            tempObj.formFields = dataChecking(formSetting[targetFormName], 'fields');
+            tempObj.formHeight = dataChecking(formSetting[targetFormName], 'formHeight');
+            tempObj.formWidth = dataChecking(formSetting[targetFormName], 'formWidth');
+            tempObj.formOnSubmit = dataChecking(formSetting[targetFormName], 'onSubmit');
+            tempObj = this.initializedFormData(tempObj, targetFormName);
         }
+        this.setState(tempObj);
     }
 
     componentWillReceiveProps(nextProps) {
         const { formbutton } = nextProps;
         const comingformId = nextProps.formId.split('__#__')[0];
-        if (nextProps.formId && dataChecking(formSetting, comingformId) && nextProps.formId !== this.props.formId) {
-            const tempObj = {
-                showModal: false,
-                formFields: dataChecking(formSetting[comingformId], 'fields'),
-                formHeight: dataChecking(formSetting[comingformId], 'formHeight'),
-                formWidth: dataChecking(formSetting[comingformId], 'formWidth'),
-                formOnSubmit: dataChecking(formSetting[comingformId], 'onSubmit'),
-            };
+        // if (nextProps.formId && dataChecking(formSetting, comingformId)) {
+        //     const tempObj = {
+        //         showModal: false,
+        //         formFields: dataChecking(formSetting[comingformId], 'fields'),
+        //         formHeight: dataChecking(formSetting[comingformId], 'formHeight'),
+        //         formWidth: dataChecking(formSetting[comingformId], 'formWidth'),
+        //         formOnSubmit: dataChecking(formSetting[comingformId], 'onSubmit'),
+        //     };
 
-            if (dataChecking(formSetting[comingformId], 'fields')) {
-                formSetting[comingformId].fields.forEach((field) => {
-                    tempObj[field.key] = {
-                        value: field.type === 'boolean' ? field.default || false : '',
-                    };
-                });
-            }
+        //     if (dataChecking(formSetting[comingformId], 'fields')) {
+        //         formSetting[comingformId].fields.forEach((field) => {
+        //             tempObj[field.key] = {
+        //                 value: field.type === 'boolean' ? field.default || false : '',
+        //             };
+        //         });
+        //     }
 
-            this.setState(tempObj);
-        }
+        //     this.setState(tempObj);
+        // }
 
         if (formbutton.firing !== this.props.formbutton.firing) {
-            const tempObj = { firing: formbutton.firing };
+            let tempObj = { firing: formbutton.firing };
 
             if (!formbutton.firing && formbutton.fireApiReturnedData && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
                 if (dataChecking(formbutton, 'fireApiReturnedData', 'message', 'content')) {
-                    NotificationManager.success(formbutton.fireApiReturnedData.message.content, 'Success!!', 3000, () => {
+                    NotificationManager.success(formbutton.fireApiReturnedData.message.content, formbutton.fireApiReturnedData.message.title, 3000, () => {
                         if (dataChecking(formSetting[comingformId], 'successCallback')) {
                             formSetting[comingformId].successCallback();
                         }
                     });
+
+                    tempObj = this.initializedFormData(tempObj, nextProps.formId); // hmm... apparently form get reset after submit anyways
                     if (formbutton.getListApi) {
                         this.props.dispatch(tableListingActions.getList({ api: formbutton.getListApi }));
                     }
@@ -106,7 +105,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
 
         if (formbutton.fireApiError && formbutton.fireApiError !== this.props.formbutton.fireApiError && formbutton.fireApiError.message) {
-            NotificationManager.error(formbutton.fireApiError.message, 'Error!!', 3000, () => {
+            NotificationManager.error(formbutton.fireApiError.message, 'Error!! (click to dismiss)', 0, () => {
                 // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
             });
             console.log(formbutton.fireApiError);
@@ -190,21 +189,39 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
     }
 
+    initializedFormData(objPassed, targetFormName) {
+        const { initialData } = this.props;
+        const tempObj = objPassed;
+
+        if (dataChecking(formSetting, targetFormName, 'fields')) {
+            formSetting[targetFormName].fields.forEach((field) => {
+                let value = field.type === 'boolean' ? field.default || false : '';
+                if (initialData && initialData[field.key] && initialData && initialData[field.key] !== null) {
+                    value = initialData[field.key];
+                }
+                tempObj[field.key] = {
+                    value,
+                };
+            });
+        }
+
+        return tempObj;
+    }
+
     handleTextChange = (event, field) => {
         const obj = {};
-        let newValue = null;
+        obj[field.key] = { value: null };
         if (field.type === 'boolean') {
-            newValue = event;
+            obj[field.key].value = event;
+        } else if (field.type === 'selection') {
+            obj[field.key] = event;
         } else if (field.type === 'date') {
-            newValue = event.getTime();
+            obj[field.key].value = event.getTime();
         } else if (event && event.target) {
-            newValue = event.target.value;
+            obj[field.key].value = event.target.value;
         } else {
             alert('unhandled change...');
         }
-        obj[field.key] = {
-            value: newValue,
-        };
         this.setState(obj);
     }
 
@@ -253,7 +270,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                         inputEl.click();
                                     }}
                                 >
-                                    <i className="fa fa-cloud-upload"></i> Upload
+                                    <i className="fas fa-cloud-upload-alt"></i> Upload
                                 </button>
                                 <input id={`${this.props.formId}-${field.key}-uploader`} className="upload-input" type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
                             </div>
@@ -324,7 +341,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                         inputEl.click();
                                     }}
                                 >
-                                    <i className="fa fa-cloud-upload"></i> Upload
+                                    <i className="fas fa-cloud-upload-alt"></i> Upload
                                 </button>
                                 <input
                                     id={`${this.props.formId}-${field.key}-uploader`}
@@ -376,6 +393,17 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             onChange={(value) => this.handleTextChange(value, field)}
                         />
                     </div>
+                );
+            case 'selection':
+                return (
+                    <Select
+                        value={this.state[field.key]}
+                        closeMenuOnSelect={true}
+                        components={makeAnimated()}
+                        isMulti={field.isMulti || false}
+                        onChange={(value) => this.handleTextChange(value, field)}
+                        options={field.items || []}
+                    />
                 );
             default:
                 return (
