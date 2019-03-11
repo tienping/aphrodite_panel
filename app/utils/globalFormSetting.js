@@ -1,5 +1,32 @@
 import { dataChecking } from 'globalUtils';
 
+const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewButton) => {
+    const extractedData = {};
+    fields.forEach((field) => {
+        if (dataChecking(data, field.key, 'value')) {
+            extractedData[field.key] = data[field.key].value;
+
+            if (field.type === 'date') {
+                const dateValue = new Date(data[field.key].value);
+                extractedData[field.key] = dateValue.toISOString();
+            } else if (field.type === 'textbox' || field.type === 'textbox') {
+                extractedData[field.key] = `${data[field.key].value}`;
+            } else {
+                extractedData[field.key] = data[field.key].value;
+            }
+        }
+    });
+
+    if (addNewButton) {
+        scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${addNewButton}`));
+    }
+    scope.props.dispatch(tableListingActions.fireApi({
+        data: extractedData,
+        apiUrl: `https://api-staging.hermo.my/services/gami/${apiUrl}`,
+        type: 'post',
+    }, scope.props.formId));
+};
+
 const formSetting = {
     // sysvar: {
     //     title: 'System Variable',
@@ -14,11 +41,24 @@ const formSetting = {
     // },
     create_partner: {
         title: 'Create Partner',
-        formHeight: '460px',
+        formHeight: '480px',
         fields: [
             { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
             // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
             { key: 'description', label: 'Description', type: 'textarea', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
+            {
+                key: 'industry',
+                label: 'Industry',
+                type: 'selection',
+                items: [
+                    { value: 'Food & Beverage', label: 'Food & Beverage' },
+                    { value: 'Lifestyle', label: 'Lifestyle' },
+                    { value: 'Fashion', label: 'Fashion' },
+                    { value: 'Travel', label: 'Travel' },
+                    { value: 'Beauty Products', label: 'Beauty Products' },
+                ],
+                doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' },
+            },
             {
                 key: 'code_type',
                 label: 'Code Type',
@@ -39,25 +79,15 @@ const formSetting = {
                     description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]',
                 },
             },
-            { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
-            { key: 'industry', label: 'Industry', type: 'textbox', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'Url to partner site', type: 'textbox', doc: { description: 'URL link to partner vendor official site (if any)' } },
+            { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
-            const extractedData = {};
-            fields.forEach((field) => {
-                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
-            });
-
-            scope.props.dispatch(tableListingActions.fireApi({
-                data: extractedData,
-                apiUrl: 'https://api-staging.hermo.my/services/gami/partners',
-                type: 'post',
-            }, scope.props.formId));
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'partners');
         },
     },
     create_pevent: {
-        title: 'Create Partner Event',
+        title: 'Create Partner\'s Event',
         formHeight: '555px',
         fields: [
             { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
@@ -111,16 +141,7 @@ const formSetting = {
             { key: 'amount', label: 'Amount', type: 'textbox', mandatory: true, doc: { description: 'The cost of each voucher undert this one' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
-            const extractedData = {};
-            fields.forEach((field) => {
-                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
-            });
-
-            scope.props.dispatch(tableListingActions.fireApi({
-                data: extractedData,
-                apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/partners',
-                type: 'post',
-            }, scope.props.formId));
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'rewards/partners');
         },
     },
     create_voucher: {
@@ -133,16 +154,7 @@ const formSetting = {
             { key: 'end_date', label: 'End Date', type: 'date', mandatory: true, doc: { description: 'The date voucher get expired' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
-            const extractedData = {};
-            fields.forEach((field) => {
-                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
-            });
-
-            scope.props.dispatch(tableListingActions.fireApi({
-                data: extractedData,
-                apiUrl: 'https://api-staging.hermo.my/services/gami/vouchers/partners',
-                type: 'post',
-            }, scope.props.formId));
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'vouchers/partners');
         },
     },
     create_levent: {
@@ -156,16 +168,7 @@ const formSetting = {
             { key: 'model_id', label: 'Model Id', type: 'textbox', doc: { description: 'Unique ID of the modal created in hermint' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
-            const extractedData = {};
-            fields.forEach((field) => {
-                extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
-            });
-
-            scope.props.dispatch(tableListingActions.fireApi({
-                data: extractedData,
-                apiUrl: 'https://api-staging.hermo.my/services/gami/rewards/locals',
-                type: 'post',
-            }, scope.props.formId));
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'rewards/locals');
         },
     },
     upload_partner: {
@@ -181,7 +184,7 @@ const formSetting = {
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/partner',
                 },
                 doc: {
-                    description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
+                    description: 'CSV file (with .csv extension) with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
                 },
             },
         ],
@@ -206,7 +209,7 @@ const formSetting = {
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/partner_event',
                 },
                 doc: {
-                    description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
+                    description: 'CSV file (with .csv extension) with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
                 },
             },
         ],
@@ -231,7 +234,7 @@ const formSetting = {
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/voucher',
                 },
                 doc: {
-                    description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
+                    description: 'CSV file (with .csv extension) with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
                 },
             },
         ],
@@ -256,7 +259,7 @@ const formSetting = {
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/local_event',
                 },
                 doc: {
-                    description: 'CSV file with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
+                    description: 'CSV file (with .csv extension) with Local Event detail, refer to the sample downloadable from the link in hte form and refer to the table field documentation details about each fields',
                 },
             },
         ],
@@ -271,70 +274,31 @@ const formSetting = {
 };
 
 formSetting.edit_partner = { ...formSetting.create_partner };
-formSetting.edit_partner.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_partner.title = 'Edit Partner';
+formSetting.edit_partner.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
 formSetting.edit_partner.onSubmit = (scope, tableListingActions, data, fields) => {
-    const extractedData = {};
-    fields.forEach((field) => {
-        extractedData[field.key] = dataChecking(data, field.key, 'value') || null;
-    });
-
-    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
-    scope.props.dispatch(tableListingActions.fireApi({
-        data: extractedData,
-        apiUrl: `https://api-staging.hermo.my/services/gami/partners/update/${extractedData.id}`,
-        type: 'post',
-    }, scope.props.formId));
+    fieldOnSubmit(scope, tableListingActions, data, fields, `partners/update/${data.id.value}`, scope.props.formId);
 };
 
 formSetting.edit_pevent = { ...formSetting.create_pevent };
-formSetting.edit_pevent.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_pevent.title = 'Edit Partner\'s Event';
+formSetting.edit_pevent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
 formSetting.edit_pevent.onSubmit = (scope, tableListingActions, data, fields) => {
-    const extractedData = {};
-    fields.forEach((field) => {
-        const value = dataChecking(data, field.key, 'value') || null;
-        extractedData[field.key] = field.type === 'textbox' ? `${value}` : value;
-    });
-
-    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
-    scope.props.dispatch(tableListingActions.fireApi({
-        data: extractedData,
-        apiUrl: `https://api-staging.hermo.my/services/gami/rewards/partners/update/${extractedData.id}`,
-        type: 'post',
-    }, scope.props.formId));
+    fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/partners/update/${data.id.value}`, scope.props.formId);
 };
 
 formSetting.edit_voucher = { ...formSetting.create_voucher };
-formSetting.edit_voucher.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_voucher.title = 'Edit Partner Voucher';
+formSetting.edit_voucher.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
 formSetting.edit_voucher.onSubmit = (scope, tableListingActions, data, fields) => {
-    const extractedData = {};
-    fields.forEach((field) => {
-        const value = dataChecking(data, field.key, 'value') || null;
-        extractedData[field.key] = field.type === 'textbox' ? `${value}` : value;
-    });
-
-    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
-    scope.props.dispatch(tableListingActions.fireApi({
-        data: extractedData,
-        apiUrl: `https://api-staging.hermo.my/services/gami/vouchers/partners/update/${extractedData.id}`,
-        type: 'post',
-    }, scope.props.formId));
+    fieldOnSubmit(scope, tableListingActions, data, fields, `vouchers/partners/update/${data.id.value}`, scope.props.formId);
 };
 
 formSetting.edit_levent = { ...formSetting.create_levent };
-formSetting.edit_levent.fields.push({ key: 'id', label: '', type: 'hidden' });
+formSetting.edit_levent.title = 'Edit Local Event';
+formSetting.edit_levent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
 formSetting.edit_levent.onSubmit = (scope, tableListingActions, data, fields) => {
-    const extractedData = {};
-    fields.forEach((field) => {
-        const value = dataChecking(data, field.key, 'value') || null;
-        extractedData[field.key] = (field.type === 'textbox' || field.type === 'textbox') ? `${value}` : value;
-    });
-
-    scope.props.dispatch(tableListingActions.addNewButtonToList(`formButton_${scope.props.formId}`));
-    scope.props.dispatch(tableListingActions.fireApi({
-        data: extractedData,
-        apiUrl: `https://api-staging.hermo.my/services/gami/rewards/locals/update/${extractedData.id}`,
-        type: 'post',
-    }, scope.props.formId));
+    fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/locals/update/${data.id.value}`, scope.props.formId);
 };
 
 export default formSetting;
