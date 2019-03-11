@@ -16,20 +16,20 @@ body { font-size: 12px; }
     margin: .5rem 1rem;
     padding: 1.1rem 3rem;
     display: inline-block;
-    border-radius: 15px;
+    border-radius: 10px;
     color: #FDFDFD;
     background-color: #660033;
     cursor: pointer;
     outline: none;
 
     &.invert {
-        background-color: transparent;
-        color: #660033;
-        border: 1px dashed #660033;
+        // background-color: transparent;
+        // color: #660033;
+        // border: 1px dashed #660033;
 
         &:hover {
-            color: #FF0068;
-            background-color: RGBA(255, 255, 255, 0.85)
+            background-color: #FF0068;
+            color: RGBA(255, 255, 255, 0.85)
         }
     }
 

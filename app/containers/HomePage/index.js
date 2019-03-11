@@ -18,6 +18,7 @@ import { dataChecking } from 'globalUtils';
 // import Fancy from '@tienping/my-react-dom';
 
 import messages from './messages';
+import './style.scss';
 
 const Header = styled.h1`
     text-align: center;
@@ -40,7 +41,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                     {
                         Object.keys(tableSetting).map((key, index) => (
                             <div key={index}>
-                                <NavLink to={dataChecking(tableSetting, key, 'link')} className="gamicenter-button" title={dataChecking(tableSetting, key, 'title')}>
+                                <NavLink to={dataChecking(tableSetting, key, 'link')} className="page-select-button gamicenter-button" title={dataChecking(tableSetting, key, 'title')}>
                                     {dataChecking(tableSetting, key, 'title')}
                                 </NavLink>
                             </div>

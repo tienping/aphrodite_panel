@@ -34,16 +34,17 @@ const formSetting = {
     //     fields: [
     //         { key: 'key', label: 'Key', type: 'textbox', placeholder: 'Key of variable', mandatory: true, doc: { description: 'desc' } },
     //         { key: 'category', label: 'Category', type: 'textbox', placeholder: 'Category', doc: { description: 'desc' } },
-    //         { key: 'start', label: 'Start Date', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
-    //         { key: 'end', label: 'End Date', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
+    //         { key: 'start', label: 'Start Date & Time', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
+    //         { key: 'end', label: 'End Date & Time', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
     //         { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value', doc: { description: 'desc' } },
     //     ],
     // },
     create_partner: {
         title: 'Create Partner',
         formHeight: '480px',
+        formWidth: '335px',
         fields: [
-            { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
+            { key: 'name', label: 'Partner Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
             // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
             { key: 'description', label: 'Description', type: 'textarea', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             {
@@ -76,7 +77,7 @@ const formSetting = {
                 // itemKey: 'menuList',
                 // itemDataValuePath: ['menu_name'],
                 doc: {
-                    description: 'The ways unique code of vouchers displayed under this partner [text only, barcode or QR code]',
+                    description: 'Method of voucher code displayed under this partner [text only, barcode or QR code]',
                 },
             },
             { key: 'url', label: 'Url to partner site', type: 'textbox', doc: { description: 'URL link to partner vendor official site (if any)' } },
@@ -89,8 +90,9 @@ const formSetting = {
     create_pevent: {
         title: 'Create Partner\'s Event',
         formHeight: '555px',
+        formWidth: '335px',
         fields: [
-            { key: 'name', label: 'Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
+            { key: 'name', label: 'Event Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
             { key: 'partner', label: 'Partner\'s ID', type: 'textbox', mandatory: true, doc: { description: 'The ID of corresponding partner vendor' } },
             // {
             //     key: 'partner',
@@ -110,8 +112,8 @@ const formSetting = {
             { key: 'tnc_text', label: 'TNC Text', type: 'textarea', mandatory: true, doc: { description: 'Terms and condition in html format' } },
             { key: 'url', label: 'Url', type: 'textbox', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', mandatory: true, doc: { description: 'Maximun number of which each user can redempt' } },
-            { key: 'start_date', label: 'Start Date', type: 'datetime', doc: { description: 'The start of the exchangeble period' } },
-            { key: 'end_date', label: 'End Date', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
+            { key: 'start_date', label: 'Start Date & Time', type: 'datetime', doc: { description: 'The start of the exchangeble period' } },
+            { key: 'end_date', label: 'End Date & Time', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
             {
                 key: 'min_user_level',
                 label: 'Min User Level',
@@ -140,7 +142,8 @@ const formSetting = {
                     description: 'Minimun user level allowed for user to redempt target voucher',
                 },
             },
-            { key: 'amount', label: 'Amount', type: 'textbox', mandatory: true, doc: { description: 'The cost of each voucher undert this one' } },
+            { key: 'amount', label: 'Credit Amount Value', type: 'textbox', mandatory: true, doc: { description: 'The cost of each voucher undert this one' } },
+            { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
             fieldOnSubmit(scope, tableListingActions, data, fields, 'rewards/partners');
@@ -149,11 +152,12 @@ const formSetting = {
     create_voucher: {
         title: 'Create Partner Voucher',
         formHeight: '363px',
+        formWidth: '335px',
         fields: [
-            { key: 'code', label: 'Unique Code', type: 'textbox', mandatory: true, doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
-            { key: 'event_id', label: 'Event\'s ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
-            { key: 'start_date', label: 'Start Date', type: 'datetime', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
-            { key: 'end_date', label: 'End Date', type: 'datetime', mandatory: true, doc: { description: 'The date voucher get expired' } },
+            { key: 'event_id', label: 'Event ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
+            { key: 'code', label: 'Voucher Code', type: 'textbox', mandatory: true, doc: { description: 'Method of voucher code displayed [text only, barcode or QR code]' } },
+            { key: 'start_date', label: 'Start Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
+            { key: 'end_date', label: 'End Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The date voucher get expired' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
             fieldOnSubmit(scope, tableListingActions, data, fields, 'vouchers/partners');
@@ -162,12 +166,14 @@ const formSetting = {
     create_levent: {
         title: 'Create Local Event, fields',
         formHeight: '363px',
+        formWidth: '335px',
         fields: [
-            { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'Amount used to redempt this voucher' } },
-            { key: 'name', label: 'Name', type: 'textbox', doc: { description: 'Name of this voucher' } },
-            { key: 'start_date', label: 'Start Date', type: 'datetime', doc: { description: 'The start of the exchangeble period' } },
-            { key: 'end_date', label: 'End Date', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
-            { key: 'model_id', label: 'Model Id', type: 'textbox', doc: { description: 'Unique ID of the modal created in hermint' } },
+            { key: 'name', label: 'Event Name', type: 'textbox', mandatory: true, doc: { description: 'Name of this voucher' } },
+            { key: 'model_id', label: 'Model Id', type: 'textbox', mandatory: true, doc: { description: 'Unique ID of the modal created in hermint' } },
+            { key: 'amount', label: 'Credit Amount Value', type: 'textbox', mandatory: true, doc: { description: 'Amount used to redempt this voucher' } },
+            { key: 'start_date', label: 'Start Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The start of the exchangeble period' } },
+            { key: 'end_date', label: 'End Date & Time', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
+            { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
             fieldOnSubmit(scope, tableListingActions, data, fields, 'rewards/locals');
@@ -176,13 +182,14 @@ const formSetting = {
     upload_partner: {
         title: 'Upload Partners',
         formHeight: '355px',
+        formWidth: '320px',
         fields: [
             {
                 key: 'file',
                 label: 'File',
                 type: 'file',
                 sample: {
-                    name: 'Sample for partner',
+                    name: 'Sample for Partner Profile',
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/partner',
                 },
                 doc: {
@@ -201,13 +208,14 @@ const formSetting = {
     upload_pevent: {
         title: 'Upload Partner Event',
         formHeight: '355px',
+        formWidth: '320px',
         fields: [
             {
                 key: 'file',
                 label: 'File',
                 type: 'file',
                 sample: {
-                    name: 'Sample for reward',
+                    name: 'Sample for Partner Event',
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/partner_event',
                 },
                 doc: {
@@ -226,13 +234,14 @@ const formSetting = {
     upload_voucher: {
         title: 'Upload Voucher',
         formHeight: '355px',
+        formWidth: '320px',
         fields: [
             {
                 key: 'file',
                 label: 'File',
                 type: 'file',
                 sample: {
-                    name: 'Sample for voucher',
+                    name: 'Sample for Voucher',
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/voucher',
                 },
                 doc: {
@@ -251,13 +260,14 @@ const formSetting = {
     upload_levent: {
         title: 'Upload Local Event',
         formHeight: '355px',
+        formWidth: '320px',
         fields: [
             {
                 key: 'file',
                 label: 'File',
                 type: 'file',
                 sample: {
-                    name: 'Sample for reward',
+                    name: 'Sample for Hermo Event',
                     url: 'https://api-staging.hermo.my/services/gami/downloadfile/local_event',
                 },
                 doc: {
@@ -276,29 +286,33 @@ const formSetting = {
 };
 
 formSetting.edit_partner = { ...formSetting.create_partner };
-formSetting.edit_partner.title = 'Edit Partner';
+formSetting.edit_partner.title = 'Edit Partner Profile';
 formSetting.edit_partner.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
+formSetting.edit_partner.formWidth = null;
 formSetting.edit_partner.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `partners/update/${data.id.value}`, scope.props.formId);
 };
 
 formSetting.edit_pevent = { ...formSetting.create_pevent };
-formSetting.edit_pevent.title = 'Edit Partner\'s Event';
+formSetting.edit_pevent.title = 'Edit Partner Event Details';
 formSetting.edit_pevent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
+formSetting.edit_pevent.formWidth = null;
 formSetting.edit_pevent.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/partners/update/${data.id.value}`, scope.props.formId);
 };
 
 formSetting.edit_voucher = { ...formSetting.create_voucher };
-formSetting.edit_voucher.title = 'Edit Partner Voucher';
+formSetting.edit_voucher.title = 'Edit Partner Voucher Details';
 formSetting.edit_voucher.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
+formSetting.edit_voucher.formWidth = null;
 formSetting.edit_voucher.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `vouchers/partners/update/${data.id.value}`, scope.props.formId);
 };
 
 formSetting.edit_levent = { ...formSetting.create_levent };
-formSetting.edit_levent.title = 'Edit Local Event';
+formSetting.edit_levent.title = 'Edit Hermo Event Details';
 formSetting.edit_levent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
+formSetting.edit_levent.formWidth = null;
 formSetting.edit_levent.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/locals/update/${data.id.value}`, scope.props.formId);
 };

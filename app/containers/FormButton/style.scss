@@ -1,20 +1,16 @@
 .FormButton-component {
     display: inline-block;
     height: 33px;
-    position: relative;
 
-    &.popout-form {
-        position: unset;
+    &.attach {
+        position: relative;
 
         .page-action-modal {
-            display: none;
+            display: block !important;
 
             &.triggered{
-                display: block;
-                top: 0;
-                margin: auto;
-                left: 0 !important;
-                right: 0 !important;
+                top: inherit !important;
+                left: inherit !important;
             }
         }
     }
@@ -25,6 +21,7 @@
     z-index: 2;
     right: 0;
     position: absolute;
+    display: none;
     box-shadow: 0px 0px 0px transparent;
     transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
 
@@ -34,6 +31,10 @@
     }
 
     .sticky-container {
+        position: -webkit-sticky;
+        position: -moz-sticky;
+        position: -ms-sticky;
+        position: -o-sticky;
         position: sticky;
         top: 0;
 
@@ -73,6 +74,13 @@
         cursor: default;
         overflow: auto;
         box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: block;
+
+        @media screen and (min-width: 1100px) { width: 1000px; }
 
         .become-title {
             font-family: cursive;
@@ -115,6 +123,9 @@
     .field-input {
         padding: 0.5rem 0;
 
+        .default-input-textarea { width: 100%; min-height: 80px; }
+        .default-input-textbox { width: 100%; }
+
         .field-label {
             color: black;
             font-size: 85%;
@@ -123,6 +134,13 @@
         .mandatory-indicator {
             color: red;
             font-weight: 700;
+
+            .mandatory-text {
+                font-weight: 300;
+                font-size: 60%;
+                vertical-align: text-top;
+                padding-left: 3px;
+            }
         }
 
         .link-for-sample {
@@ -160,6 +178,11 @@
                 }
 
                 .image-holder { cursor: pointer; }
+
+                .previewer-image {
+                    max-height: 150px;
+                    max-width: 120px;
+                }
 
                 .previewer-image,
                 .previewer-placeholder {

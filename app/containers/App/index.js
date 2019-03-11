@@ -62,7 +62,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
             <section>
                 <Notify></Notify>
 
-                <HershopContent id="hershop-content-container" className="container">
+                <HershopContent id="hershop-content-container">
                     <Switch>
                         {/* <Route exact={true} path="/login" component={globalScope.token ? LogoutForm : LoginForm} /> */}
                         <Route exact={true} path="/logout" component={LogoutForm} />

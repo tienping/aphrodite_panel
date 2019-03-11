@@ -48,6 +48,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         let tempObj = {};
 
         if (formId && dataChecking(formSetting, targetFormName)) {
+            tempObj.formTitle = dataChecking(formSetting[targetFormName], 'title');
             tempObj.formFields = dataChecking(formSetting[targetFormName], 'fields');
             tempObj.formHeight = dataChecking(formSetting[targetFormName], 'formHeight');
             tempObj.formWidth = dataChecking(formSetting[targetFormName], 'formWidth');
@@ -244,7 +245,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                 >
                                     <img
                                         className={`previewer-image ${dataChecking(this.state, field.key, 'url') ? '' : 'previewer-placeholder'}`}
-                                        style={{ maxHeight: '150px', maxWidth: '80%' }}
                                         width={dataChecking(this.state, field.key, 'url') ? '' : '70%'}
                                         src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
                                         alt="preview upload"
@@ -313,8 +313,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             </div>
                                             :
                                             <img
-                                                className={'previewer-image previewer-placeholder'}
-                                                style={{ maxHeight: '150px', maxWidth: '80%' }}
+                                                className="previewer-image previewer-placeholder"
                                                 width="70%"
                                                 src={require('../../Resources/arrow_up_upload-512.png')}
                                                 alt="upload placeholder"
@@ -410,6 +409,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             case 'selection':
                 return (
                     <Select
+                        style={{ cursor: 'pointer' }}
                         value={this.state[field.key]}
                         default={field.items[0]}
                         closeMenuOnSelect={true}
@@ -440,7 +440,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <span className="field-label">{`${field.label}:`}</span>
                     {
                         field.mandatory ?
-                            <span className="mandatory-indicator">*</span>
+                            <span className="mandatory-indicator">*<span className="mandatory-text">required</span></span>
                             :
                             null
                     }
@@ -454,27 +454,27 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     render() {
         const getModalWidth = (style) => {
             if (this.state.showModal) {
-                return this.state.formWidth || '265px';
+                return this.state.formWidth || '';
             }
 
             return (style && style.width) || '2rem';
         };
 
         return (
-            <div className={`FormButton-component ${this.props.formType === 'popout' ? 'popout-form' : 'posi-relative'}`}>
+            <div className={`FormButton-component ${this.props.formType === 'attach' ? 'attach' : ''}`}>
                 {
-                    this.props.formType === 'popout' ?
+                    this.props.formType === 'attach' ?
+                        null
+                        :
                         <div onClick={() => this.setState({ showModal: true })}>
                             {this.props.children}
                         </div>
-                        :
-                        null
                 }
                 <div
                     id="page-action-modal"
                     style={{
                         ...this.props.style,
-                        height: `${this.state.showModal ? this.state.formHeight : '45px'}`,
+                        maxHeight: `${this.state.showModal ? this.state.formHeight : '45px'}`,
                         width: `${getModalWidth(this.props.style)}`,
                     }}
                     className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
@@ -495,7 +495,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             {
                                 this.state.showModal ?
                                     <div className="become-title">
-                                        <span className="text-capitalize">{ this.props.formType === 'popout' ? this.props.formTitle : this.props.children}</span>
+                                        <span className="text-capitalize">{ this.props.formType === 'attach' ? this.props.children : this.state.formTitle}</span>
                                         <div className="title-underline" />
                                     </div>
                                     :

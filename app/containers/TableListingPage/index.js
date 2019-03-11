@@ -160,6 +160,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         key="create-button"
                                         style={{ width: item.width }}
                                         formId={`create_${this.props.pageType}`}
+                                        formType="attach"
                                         formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     >
                                         {item.title}
@@ -173,6 +174,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         key="upload-button"
                                         style={{ width: item.width }}
                                         formId={`upload_${this.props.pageType}`}
+                                        formType="attach"
                                         formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
                                     >
                                         {item.title}
@@ -188,6 +190,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     style={{ width: item.width }}
                                     pageType={this.props.pageType}
                                     formId={`create_${this.props.pageType}`}
+                                    formType="attach"
                                     formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                 >
                                     {item.title}
@@ -437,8 +440,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         value.special === 'edit-form' ?
                                             <FormButton
                                                 key="create-button"
-                                                formTitle={`Edit ${this.props.pageType}`}
-                                                formType="popout"
                                                 formId={`edit_${this.props.pageType}__#__${rowIndex}`}
                                                 targetForm={`edit_${this.props.pageType}`}
                                                 initialData={row}
@@ -483,7 +484,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     // />
                     <div className="bigger">
                         <i className={`fas fa-circle ${row[col.key] ? 'text-success' : 'text-danger'}`}></i>
-                        <span className="pl-1">{row[col.key] ? 'True' : 'False'}</span>
+                        <span className="pl-1">{row[col.key] ? 'Active' : 'Inactive'}</span>
                     </div>
                 );
             case 'image':
