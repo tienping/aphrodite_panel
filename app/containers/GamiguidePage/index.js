@@ -43,23 +43,23 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                 </div>
                 <hr />
                 <div className="documentation-content">
-                    <section clssName="doc-step-by-step">
+                    <section className="doc-step-by-step">
                         <h3>Step by Step, 1 2 3</h3>
                         <ol>
                             <li>Go to Gamicenter</li>
                             <li>Choose the page that you want to view/edit</li>
                             <li>To View</li>
-                            <ul style={{ 'list-style-type': 'square' }}>
+                            <ul style={{ listStyleType: 'square' }}>
                                 <li>Just go to the url listed in this <a href="#doc-pagetype">section</a></li>
                                 <li>simply click it on the top bar.</li>
                             </ul>
                             <li>To Create new</li>
-                            <ul style={{ 'list-style-type': 'square' }}>
+                            <ul style={{ listStyleType: 'square' }}>
                                 <li>Click on the create button provided</li>
                                 <li>Click on the Upload CSV button provided</li>
                             </ul>
                             <li>To update/delete</li>
-                            <ul style={{ 'list-style-type': 'square' }}>
+                            <ul style={{ listStyleType: 'square' }}>
                                 <li>Go to Action culumn and you will see the pencil icon over there (if supported by APIs)</li>
                             </ul>
                         </ol>
@@ -74,7 +74,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                                         <div className="pl-2 pb-1">
                                             <div className="desc">{dataChecking(tableSetting, key, 'description')}</div>
                                             <div className="pagetype-links-container">
-                                                <ul style={{ 'list-style-type': 'square' }}>
+                                                <ul style={{ listStyleType: 'square' }}>
                                                     <li>
                                                         <a
                                                             href={`#sect-tablefields-${key}`}
@@ -114,17 +114,26 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                                         <span className="bigger">{dataChecking(tableSetting, key, 'title')}</span>
                                         <div className="pl-2 pb-1">
                                             <table className="doc-table">
-                                                {
-                                                    dataChecking(tableSetting, key, 'fields', 'length') ?
-                                                        tableSetting[key].fields.map((value, index) => (
-                                                            <tr key={index} className="doc-table-row">
-                                                                <td className="header-cell field-key doc-table-cell">{dataChecking(value, 'key')}</td>
-                                                                <td colSpan="5" className="field-desc doc-table-cell">{dataChecking(value, 'doc', 'description')}</td>
-                                                            </tr>
-                                                        ))
-                                                        :
-                                                        null
-                                                }
+                                                <tbody>
+                                                    {
+                                                        dataChecking(tableSetting, key, 'fields', 'length') ?
+                                                            tableSetting[key].fields.map((value, index) => (
+                                                                <tr key={index} className="doc-table-row">
+                                                                    <td className={`header-cell field-key doc-table-cell key-${dataChecking(value, 'key')}`}>
+                                                                        {dataChecking(value, 'key')}
+                                                                    </td>
+                                                                    <td className={`text-center field-type doc-table-cell type-${dataChecking(value, 'type')}`}>
+                                                                        [ {dataChecking(value, 'type')} ]
+                                                                    </td>
+                                                                    <td colSpan="5" className="field-desc doc-table-cell">
+                                                                        {dataChecking(value, 'doc', 'description')}
+                                                                    </td>
+                                                                </tr>
+                                                            ))
+                                                            :
+                                                            null
+                                                    }
+                                                </tbody>
                                             </table>
                                         </div>
                                     </li>
@@ -142,17 +151,26 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                                         <span className="bigger">{dataChecking(formSetting, key, 'title')}</span>
                                         <div className="pl-2 pb-1">
                                             <table className="doc-table">
-                                                {
-                                                    dataChecking(formSetting, key, 'fields', 'length') ?
-                                                        formSetting[key].fields.map((value, index) => (
-                                                            <tr key={index} className="doc-table-row">
-                                                                <td className="header-cell field-key doc-table-cell">{dataChecking(value, 'key')}</td>
-                                                                <td colSpan="5" className="field-desc doc-table-cell">{dataChecking(value, 'doc', 'description')}</td>
-                                                            </tr>
-                                                        ))
-                                                        :
-                                                        null
-                                                }
+                                                <tbody>
+                                                    {
+                                                        dataChecking(formSetting, key, 'fields', 'length') ?
+                                                            formSetting[key].fields.map((value, index) => (
+                                                                <tr key={index} className="doc-table-row">
+                                                                    <td className={`header-cell field-key doc-table-cell key-${dataChecking(value, 'key')}`}>
+                                                                        {dataChecking(value, 'key')}
+                                                                    </td>
+                                                                    <td className={`text-center field-type doc-table-cell type-${dataChecking(value, 'type')}`}>
+                                                                        [ {dataChecking(value, 'type')} ]
+                                                                    </td>
+                                                                    <td colSpan="5" className="field-desc doc-table-cell">
+                                                                        {dataChecking(value, 'doc', 'description')}
+                                                                    </td>
+                                                                </tr>
+                                                            ))
+                                                            :
+                                                            null
+                                                    }
+                                                </tbody>
                                             </table>
                                         </div>
                                     </li>

@@ -49,7 +49,7 @@ const tableSetting = {
             {
                 label: 'Action',
                 width: '15rem',
-                key: '',
+                key: 'Action',
                 align: 'center',
                 type: 'action',
                 items: [
@@ -76,6 +76,7 @@ const tableSetting = {
                         },
                     },
                 ],
+                doc: { description: 'The actions' },
             },
         ],
     },
@@ -84,7 +85,7 @@ const tableSetting = {
         link: '/partner_event',
         description: 'A page to view, add and edit Partners\' promotion event (a folder to keep partner vouchers)',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '214rem',
+        tableWidth: '254rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/partner_event_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -103,7 +104,7 @@ const tableSetting = {
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'name', label: 'Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
             { key: 'remarks', label: 'Remarks', width: '20rem', align: 'left', type: 'string', doc: { description: 'Event description' } },
-            { key: 'tnc_text', label: 'TNC', width: '20rem', align: 'left', type: 'html', doc: { description: 'Terms and condition' } },
+            { key: 'tnc_text', label: 'TNC', width: '60rem', align: 'left', type: 'html', doc: { description: 'Terms and condition' } },
             { key: 'url', label: 'Url', width: '25rem', align: 'left', type: 'link', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
             { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is created' } },
@@ -119,7 +120,7 @@ const tableSetting = {
             {
                 label: 'Action',
                 width: '15rem',
-                key: '',
+                key: 'Action',
                 align: 'center',
                 type: 'action',
                 items: [
@@ -146,6 +147,7 @@ const tableSetting = {
                         },
                     },
                 ],
+                doc: { description: 'The actions' },
             },
         ],
     },
@@ -155,7 +157,7 @@ const tableSetting = {
         description: 'A page to view, add and edit Partners\' voucher',
         createButtonWidth: '160px',
         iconClass: 'fas fa-ticket-alt p-1',
-        tableWidth: '127rem',
+        tableWidth: '167rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -174,7 +176,7 @@ const tableSetting = {
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'code', label: 'Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Unique code given by vendor (consult tech team if having trouble getting codes)' } },
             { key: 'event_code', label: 'Remarks', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
-            { key: 'user_id', label: 'TNC', width: '20rem', align: 'left', type: 'string', doc: { description: 'The user/customer which own this voucher' } },
+            { key: 'user_id', label: 'TNC', width: '60rem', align: 'left', type: 'string', doc: { description: 'The user/customer which own this voucher' } },
             { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this voucher' } },
             { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this voucher is created' } },
             { key: 'start_date', label: 'Start Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date which voucher can start to be use' } },
@@ -182,7 +184,7 @@ const tableSetting = {
             {
                 label: 'Action',
                 width: '15rem',
-                key: '',
+                key: 'Action',
                 align: 'center',
                 type: 'action',
                 items: [
@@ -209,6 +211,7 @@ const tableSetting = {
                         },
                     },
                 ],
+                doc: { description: 'The actions' },
             },
         ],
     },
@@ -242,7 +245,7 @@ const tableSetting = {
             {
                 label: 'Action',
                 width: '15rem',
-                key: '',
+                key: 'Action',
                 align: 'center',
                 type: 'action',
                 items: [
@@ -269,6 +272,7 @@ const tableSetting = {
                         },
                     },
                 ],
+                doc: { description: 'The actions' },
             },
         ],
     },
