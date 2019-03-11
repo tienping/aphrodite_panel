@@ -202,6 +202,9 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 tempObj[field.key] = {
                     value,
                 };
+                if (field.type === 'selection' && typeof field.defaultIndex === 'number') {
+                    tempObj[field.key] = dataChecking(field, 'items', field.defaultIndex);
+                }
             });
         }
 
@@ -408,6 +411,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 return (
                     <Select
                         value={this.state[field.key]}
+                        default={field.items[0]}
                         closeMenuOnSelect={true}
                         components={makeAnimated()}
                         isMulti={field.isMulti || false}

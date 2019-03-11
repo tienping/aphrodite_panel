@@ -121,6 +121,7 @@ const formSetting = {
                     { value: '2', label: 'Gold Member' },
                     { value: '3', label: 'Platinum Member' },
                 ],
+                defaultIndex: 0,
                 doc: {
                     description: 'Minimun requirement for user to redempt target voucher',
                 },
@@ -134,6 +135,7 @@ const formSetting = {
                     { value: '2', label: 'Gold Member' },
                     { value: '999', label: 'Normal Member' },
                 ],
+                defaultIndex: 0,
                 doc: {
                     description: 'Minimun user level allowed for user to redempt target voucher',
                 },
