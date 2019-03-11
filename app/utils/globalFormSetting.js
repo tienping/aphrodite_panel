@@ -34,8 +34,8 @@ const formSetting = {
     //     fields: [
     //         { key: 'key', label: 'Key', type: 'textbox', placeholder: 'Key of variable', mandatory: true, doc: { description: 'desc' } },
     //         { key: 'category', label: 'Category', type: 'textbox', placeholder: 'Category', doc: { description: 'desc' } },
-    //         { key: 'start', label: 'Start Date', type: 'date', placeholder: 'Start date', doc: { description: 'desc' } },
-    //         { key: 'end', label: 'End Date', type: 'date', placeholder: 'End date', doc: { description: 'desc' } },
+    //         { key: 'start', label: 'Start Date', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
+    //         { key: 'end', label: 'End Date', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
     //         { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value', doc: { description: 'desc' } },
     //     ],
     // },
@@ -110,8 +110,8 @@ const formSetting = {
             { key: 'tnc_text', label: 'TNC Text', type: 'textarea', mandatory: true, doc: { description: 'Terms and condition in html format' } },
             { key: 'url', label: 'Url', type: 'textbox', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             { key: 'limit_by_user', label: 'Limit per user', type: 'textbox', mandatory: true, doc: { description: 'Maximun number of which each user can redempt' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
-            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
+            { key: 'start_date', label: 'Start Date', type: 'datetime', doc: { description: 'The start of the exchangeble period' } },
+            { key: 'end_date', label: 'End Date', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
             {
                 key: 'min_user_level',
                 label: 'Min User Level',
@@ -150,8 +150,8 @@ const formSetting = {
         fields: [
             { key: 'code', label: 'Unique Code', type: 'textbox', mandatory: true, doc: { description: 'Method the unique displayed [text only, barcode or QR code]' } },
             { key: 'event_id', label: 'Event\'s ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
-            { key: 'end_date', label: 'End Date', type: 'date', mandatory: true, doc: { description: 'The date voucher get expired' } },
+            { key: 'start_date', label: 'Start Date', type: 'datetime', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
+            { key: 'end_date', label: 'End Date', type: 'datetime', mandatory: true, doc: { description: 'The date voucher get expired' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {
             fieldOnSubmit(scope, tableListingActions, data, fields, 'vouchers/partners');
@@ -163,8 +163,8 @@ const formSetting = {
         fields: [
             { key: 'amount', label: 'Amount', type: 'textbox', doc: { description: 'Amount used to redempt this voucher' } },
             { key: 'name', label: 'Name', type: 'textbox', doc: { description: 'Name of this voucher' } },
-            { key: 'start_date', label: 'Start Date', type: 'date', doc: { description: 'The start of the exchangeble period' } },
-            { key: 'end_date', label: 'End Date', type: 'date', doc: { description: 'The end of the exchangeble period' } },
+            { key: 'start_date', label: 'Start Date', type: 'datetime', doc: { description: 'The start of the exchangeble period' } },
+            { key: 'end_date', label: 'End Date', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
             { key: 'model_id', label: 'Model Id', type: 'textbox', doc: { description: 'Unique ID of the modal created in hermint' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {

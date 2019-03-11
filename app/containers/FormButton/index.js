@@ -215,7 +215,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             obj[field.key].value = event;
         } else if (field.type === 'selection') {
             obj[field.key] = event;
-        } else if (field.type === 'date') {
+        } else if (field.type === 'datetime' || field.type === 'date') {
             obj[field.key].value = event.getTime();
         } else if (event && event.target) {
             obj[field.key].value = event.target.value;
@@ -361,6 +361,16 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             this.handleTextChange(event, field);
                         }}
                         checked={this.state[field.key].value || false}
+                    />
+                );
+            case 'datetime':
+                return (
+                    <DatePicker
+                        showTimeSelect={true}
+                        timeFormat="HH:mm"
+                        dateFormat="dd/mm/yyyy  HH:mm"
+                        selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
+                        onChange={(value) => this.handleTextChange(value, field)}
                     />
                 );
             case 'date':
