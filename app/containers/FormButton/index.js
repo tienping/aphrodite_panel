@@ -105,7 +105,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
 
         if (formbutton.fireApiError && formbutton.fireApiError !== this.props.formbutton.fireApiError && formbutton.fireApiError.message) {
-            NotificationManager.error(formbutton.fireApiError.message, 'Error!! (click to dismiss)', 0, () => {
+            NotificationManager.error(formbutton.fireApiError.message, 'Error!! (click to dismiss)', 5000, () => {
                 // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
             });
             console.log(formbutton.fireApiError);
