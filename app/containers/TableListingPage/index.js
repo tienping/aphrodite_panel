@@ -489,37 +489,65 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'image':
                 return <img src={row[col.key]} alt={row.name} width={row.width || '100%'} height={row.height || ''} />;
             case 'date':
-                date = new Date(row[col.key]);
-                return <span>{date.toLocaleDateString()}</span>;
+                if (row[col.key]) {
+                    date = new Date(row[col.key]);
+                    return <span>{date.toLocaleDateString()}</span>;
+                }
+                return null;
             case 'datetime':
-                date = new Date(row[col.key]);
-                return <span>{date.toLocaleString()}</span>;
+                if (row[col.key]) {
+                    date = new Date(row[col.key]);
+                    return <span>{date.toLocaleString()}</span>;
+                }
+                return null;
             case 'json':
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
             case 'link':
                 return <a href={dataChecking(row, col.key) ? row[col.key] : ''}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</a>;
             case 'html':
                 return (
-                    <div>
-                        <span
-                            className={`html-indicator ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? 'hide-it' : ''}`}
-                            dangerouslySetInnerHTML={{ __html: dataChecking(row, col.key) ? row[col.key] : '' }}
-                        ></span>
-                        <span className={`html-indicator code-type ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? '' : 'hide-it'}`}>
-                            { dataChecking(row, col.key) ? row[col.key] : '\u00A0' }
-                        </span>
-                        <div
-                            title="toggle html mode"
-                            className="html-mode-toggler"
-                            onClick={() => {
-                                const tempObj = {};
-                                const htmlmode = { ...this.state[`htmlmode_${col.key}`] } || {};
-                                htmlmode[rowIndex] = !htmlmode[rowIndex];
-                                tempObj[`htmlmode_${col.key}`] = htmlmode;
-                                this.setState(tempObj);
-                            }}
-                        >
-                            <i className="fas fa-code" />
+                    <div className={`html-cell-block ${dataChecking(this.state, `fullmode_${col.key}`, rowIndex) ? 'full-mode' : ''}`}>
+                        <div className="html-cell-container">
+                            <span
+                                className={`html-indicator ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? 'hide-it' : ''}`}
+                                dangerouslySetInnerHTML={{ __html: dataChecking(row, col.key) ? row[col.key] : '' }}
+                            ></span>
+                            <span className={`html-indicator code-type ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? '' : 'hide-it'}`}>
+                                { dataChecking(row, col.key) ? row[col.key] : '\u00A0' }
+                            </span>
+                            <div className="toggle-actions">
+                                <div
+                                    title="toggle full mode"
+                                    className="toggler full-mode-toggler"
+                                    onClick={() => {
+                                        const tempObj = {};
+                                        const fullmode = { ...this.state[`fullmode_${col.key}`] } || {};
+                                        fullmode[rowIndex] = !fullmode[rowIndex];
+                                        tempObj[`fullmode_${col.key}`] = fullmode;
+                                        this.setState(tempObj);
+                                    }}
+                                >
+                                    {
+                                        dataChecking(this.state, `fullmode_${col.key}`, rowIndex) ?
+                                            <i className="fas fa-compress-arrows-alt"></i>
+                                            :
+                                            <i className="fas fa-expand"></i>
+                                    }
+                                </div>
+                                <div
+                                    title="toggle html mode"
+                                    className="toggler html-mode-toggler"
+                                    onClick={() => {
+                                        const tempObj = {};
+                                        const htmlmode = { ...this.state[`htmlmode_${col.key}`] } || {};
+                                        htmlmode[rowIndex] = !htmlmode[rowIndex];
+                                        tempObj[`htmlmode_${col.key}`] = htmlmode;
+                                        this.setState(tempObj);
+                                    }}
+                                >
+                                    <i className="fas fa-code" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 );
