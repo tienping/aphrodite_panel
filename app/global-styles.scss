@@ -8,6 +8,8 @@ body { font-size: 12px; }
     font-size: 80%;
 }
 
+ol, ul { margin: 0; padding-left: 2rem; }
+
 .bigger { font-size: 130%; }
 
 .gamicenter-button {
@@ -73,6 +75,7 @@ body { font-size: 12px; }
 
 .my-quater { margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
 
+.pb-half { padding-bottom: 0.5rem !important; }
 .pb-1 { padding-bottom: 1rem !important; }
 .pb-2 { padding-bottom: 2rem !important; }
 

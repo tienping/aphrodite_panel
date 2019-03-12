@@ -45,7 +45,7 @@ const tableSetting = {
             { key: 'code_type', label: 'Code Type', width: '10rem', align: 'center', type: 'string', doc: { description: 'Method of voucher code displayed under this partner [text only, barcode or QR code]' } },
             { key: 'industry', label: 'industry', width: '15rem', align: 'center', type: 'string', doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             { key: 'url', label: 'url', width: '20rem', align: 'left', type: 'link', doc: { description: 'URL link to partner vendor official site (if any)' } },
-            { key: 'status', label: 'Status', width: '11rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
+            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
             {
                 label: 'Action',
                 width: '10rem',
@@ -117,7 +117,7 @@ const tableSetting = {
             { key: 'max_user_level', label: 'Max User Level', width: '7rem', align: 'center', type: 'string', doc: { description: 'The max user level capable of redempt the voucher under this promotion event' } },
             { key: 'amount', label: 'Credit Amount Value', width: '8rem', align: 'center', type: 'integer', doc: { description: 'The cost of voucher under this promotion event' } },
             // { key: 'partner', label: 'Partner', width: '8rem', align: 'center', type: 'string', doc: { description: 'The ID of corresponding partner vendor' } },
-            { key: 'status', label: 'Status', width: '11rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
+            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
             {
                 label: 'Action',
                 width: '10rem',
@@ -243,7 +243,7 @@ const tableSetting = {
             { key: 'amount', label: 'Credit Amount Value', width: '8rem', align: 'center', type: 'string', doc: { description: 'The amount of credit used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The start of the redemption period' } },
             { key: 'end_date', label: 'End Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The end of the redemption period' } },
-            { key: 'status', label: 'Status', width: '11rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
+            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
             {
                 label: 'Action',
                 width: '10rem',

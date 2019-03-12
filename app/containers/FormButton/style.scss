@@ -131,6 +131,46 @@
             font-size: 85%;
         }
 
+        .field-info {
+            position: relative;
+
+            .info-icon {
+                margin-left: 1rem;
+                color: #FF0066;
+                border-radius: 50%;
+            }
+            .info-content {
+                display: none;
+                position: absolute;
+                font-size: 80%;
+                color: gray;
+                border: 2px solid #FF0066;
+                background-color: #FAFAFA;
+                border-radius: 15px;
+                padding: 5px;
+                left: -50px;
+                width: 150px;
+            }
+
+            &:hover {
+                .info-icon {
+                    color: #660033;
+                }
+
+                .info-content {
+                    z-index: 10;
+                    display: inline-block;
+                }
+            }
+        }
+
+        .field-hint {
+            .hint-content {
+                font-size: 70%;
+                color: #AAAAAA;
+            }
+        }
+
         .mandatory-indicator {
             color: red;
             font-weight: 700;

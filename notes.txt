@@ -1,12 +1,2 @@
 Gami TODOs:
-1. support hint for form field:
-
--Model ID add gray text:
-(Refer to Hermint > Promotion
-Code > Code list) = Grey muted
-
--State the characters limit
-for Unique Code in grey:
-1. text: 12-20
-2. qrcode:12-20
-3.barcode:12
+1.

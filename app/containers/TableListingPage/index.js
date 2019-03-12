@@ -34,9 +34,7 @@ import './style.scss';
 export class TableListingPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
         super(props);
-        this.state = {
-            showModal: false,
-        };
+        this.state = {};
     }
 
     componentWillMount() {
@@ -482,7 +480,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     //     disabled={true}
                     //     checked={row[col.key] || false}
                     // />
-                    <div className="bigger">
+                    <div className="">
                         <i className={`fas fa-circle ${row[col.key] ? 'text-success' : 'text-danger'}`}></i>
                         <span className="pl-1">{row[col.key] ? 'Active' : 'Inactive'}</span>
                     </div>

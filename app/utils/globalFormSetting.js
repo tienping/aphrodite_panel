@@ -155,7 +155,23 @@ const formSetting = {
         formWidth: '335px',
         fields: [
             { key: 'event_id', label: 'Event ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
-            { key: 'code', label: 'Voucher Code', type: 'textbox', mandatory: true, doc: { description: 'Method of voucher code displayed [text only, barcode or QR code]' } },
+            {
+                key: 'code',
+                label: 'Voucher Code',
+                type: 'textbox',
+                mandatory: true,
+                doc: { description: 'Method of voucher code displayed [text only, barcode or QR code]' },
+                hint: `
+                    <div style="">
+                        <div>Character limit:</div>
+                        <ul>
+                            <li>Text: up to 20</li>
+                            <li>Barcode: up to 12</li>
+                            <li>QR Code: up to 20</li>
+                        </ul>
+                    </div>
+                `,
+            },
             { key: 'start_date', label: 'Start Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The date which voucher can start to be use' } },
             { key: 'end_date', label: 'End Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The date voucher get expired' } },
         ],
@@ -169,7 +185,16 @@ const formSetting = {
         formWidth: '335px',
         fields: [
             { key: 'name', label: 'Event Name', type: 'textbox', mandatory: true, doc: { description: 'Name of this voucher' } },
-            { key: 'model_id', label: 'Model Id', type: 'textbox', mandatory: true, doc: { description: 'Unique ID of the modal created in hermint' } },
+            {
+                key: 'model_id',
+                label: 'Model Id',
+                type: 'textbox',
+                mandatory: true,
+                doc: { description: 'Unique ID of the modal created in hermint' },
+                info: `
+                    <div class="pb-half">Refer to Hermint > Promotion Code > Code list</div>
+                `,
+            },
             { key: 'amount', label: 'Credit Amount Value', type: 'textbox', mandatory: true, doc: { description: 'Amount used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The start of the exchangeble period' } },
             { key: 'end_date', label: 'End Date & Time', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },

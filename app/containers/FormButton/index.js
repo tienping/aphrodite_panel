@@ -444,6 +444,23 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             :
                             null
                     }
+                    {
+                        field.info ?
+                            <span className="field-info">
+                                <i className="info-icon fas fa-exclamation-circle" aria-hidden="true"></i>
+                                <div className="info-content" dangerouslySetInnerHTML={{ __html: field.info }}></div>
+                            </span>
+                            :
+                            null
+                    }
+                    {
+                        field.hint ?
+                            <span className="field-hint">
+                                <div className="hint-content" dangerouslySetInnerHTML={{ __html: field.hint }}></div>
+                            </span>
+                            :
+                            null
+                    }
                     { this.renderInput(field) }
                 </div>
                 :
