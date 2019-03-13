@@ -42,16 +42,18 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
 
             if (Object.keys(tableSetting)) {
                 Object.keys(tableSetting).forEach((key) => {
-                    items.push({
-                        code: key,
-                        require_login: false,
-                        type: 'external_url',
-                        // type: 'internal_url',
-                        title: dataChecking(tableSetting, key, 'title'),
-                        verticalText: dataChecking(tableSetting, key, 'title'),
-                        url: dataChecking(tableSetting, key, 'link'),
-                        iconClass: dataChecking(tableSetting, key, 'iconClass'),
-                    });
+                    if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                        items.push({
+                            code: key,
+                            require_login: false,
+                            type: 'external_url',
+                            // type: 'internal_url',
+                            title: dataChecking(tableSetting, key, 'title'),
+                            verticalText: dataChecking(tableSetting, key, 'title'),
+                            url: dataChecking(tableSetting, key, 'link'),
+                            iconClass: dataChecking(tableSetting, key, 'iconClass'),
+                        });
+                    }
                 });
             }
 

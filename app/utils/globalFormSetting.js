@@ -28,17 +28,17 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
 };
 
 const formSetting = {
-    // sysvar: {
-    //     title: 'System Variable',
-    //     formHeight: '430px',
-    //     fields: [
-    //         { key: 'key', label: 'Key', type: 'textbox', placeholder: 'Key of variable', mandatory: true, doc: { description: 'desc' } },
-    //         { key: 'category', label: 'Category', type: 'textbox', placeholder: 'Category', doc: { description: 'desc' } },
-    //         { key: 'start', label: 'Start Date & Time', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
-    //         { key: 'end', label: 'End Date & Time', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
-    //         { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value', doc: { description: 'desc' } },
-    //     ],
-    // },
+    sysvar: {
+        title: 'System Variable',
+        formHeight: '430px',
+        fields: [
+            { key: 'key', label: 'Key', type: 'textbox', placeholder: 'Key of variable', mandatory: true, doc: { description: 'desc' } },
+            { key: 'category', label: 'Category', type: 'textbox', placeholder: 'Category', doc: { description: 'desc' } },
+            { key: 'start', label: 'Start Date & Time', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
+            { key: 'end', label: 'End Date & Time', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
+            { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value', doc: { description: 'desc' } },
+        ],
+    },
     create_partner: {
         title: 'Create Partner',
         formHeight: '480px',

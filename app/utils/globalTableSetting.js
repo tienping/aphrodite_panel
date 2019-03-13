@@ -1,23 +1,24 @@
 import { dataChecking } from 'globalUtils';
 
 const tableSetting = {
-    // sysvar: {
-    //     title: 'System Variable',
-    //     link: '/sysvar',
-    //     createButtonWidth: '150px',
-    //     iconClass: 'fa fa-cogs p-1',
-    //     tableWidth: '113.5rem',
-    //     api: '',
-    //     pathToDataRoot: '',
-    //     fields: [
-    //         { key: 'key', label: 'Key', width: '6.5rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-    //         { key: 'category', label: 'Category', width: '11rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-    //         { key: 'start', label: 'Start Date', width: '13rem', align: 'center', type: 'datetime', doc: { description: 'desc' } },
-    //         { key: 'end', label: 'End Date', width: '13rem', align: 'center', type: 'datetime', doc: { description: 'desc' } },
-    //         { key: 'value', label: 'Value', width: '30rem', align: 'left', type: 'json', doc: { description: 'desc' } },
-    //         { key: 'va2lue', label: 'Value', width: '40rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-    //     ],
-    // },
+    sysvar: {
+        title: 'System Variable',
+        hideFromUser: true,
+        link: '/sysvar',
+        createButtonWidth: '150px',
+        iconClass: 'fa fa-cogs p-1',
+        tableWidth: '113.5rem',
+        api: '',
+        pathToDataRoot: '',
+        fields: [
+            { key: 'key', label: 'Key', width: '6.5rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'category', label: 'Category', width: '11rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'start', label: 'Start Date', width: '13rem', align: 'center', type: 'datetime', doc: { description: 'desc' } },
+            { key: 'end', label: 'End Date', width: '13rem', align: 'center', type: 'datetime', doc: { description: 'desc' } },
+            { key: 'value', label: 'Value', width: '30rem', align: 'left', type: 'json', doc: { description: 'desc' } },
+            { key: 'va2lue', label: 'Value', width: '40rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+        ],
+    },
     partner: {
         title: 'Partner Profile',
         link: '/partner',
