@@ -68,39 +68,44 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         <h3>Type of pages</h3>
                         <ul>
                             {
-                                Object.keys(tableSetting).map((key) => (
-                                    <li key={key} id={`sect-pagetype-${key}`} className={`anchor-target ${this.state.highlight === `sect-pagetype-${key}` ? 'highlighted' : ''}`}>
-                                        <span className="bigger">{dataChecking(tableSetting, key, 'title')} </span>
-                                        <div className="pl-2 pb-1">
-                                            <div className="desc">{dataChecking(tableSetting, key, 'description')}</div>
-                                            <div className="pagetype-links-container">
-                                                <ul style={{ listStyleType: 'square' }}>
-                                                    <li>
-                                                        <a
-                                                            href={`#sect-tablefields-${key}`}
-                                                            onClick={() => { this.setState({ highlight: `sect-tablefields-${key}` }); }}
-                                                        >
-                                                            link to table&apos;s fields
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            href={`#sect-formfields-create_${key}`}
-                                                            onClick={() => { this.setState({ highlight: `sect-formfields-create_${key}` }); }}
-                                                        >
-                                                            link to creation form&apos;s fields
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <NavLink to={dataChecking(tableSetting, key, 'link')} type="default">
-                                                            <span>{`link to ${dataChecking(tableSetting, key, 'title')} Page`}</span>
-                                                        </NavLink>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                ))
+                                Object.keys(tableSetting).map((key) => {
+                                    if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                                        return (
+                                            <li key={key} id={`sect-pagetype-${key}`} className={`anchor-target ${this.state.highlight === `sect-pagetype-${key}` ? 'highlighted' : ''}`}>
+                                                <span className="bigger">{dataChecking(tableSetting, key, 'title')} </span>
+                                                <div className="pl-2 pb-1">
+                                                    <div className="desc">{dataChecking(tableSetting, key, 'description')}</div>
+                                                    <div className="pagetype-links-container">
+                                                        <ul style={{ listStyleType: 'square' }}>
+                                                            <li>
+                                                                <a
+                                                                    href={`#sect-tablefields-${key}`}
+                                                                    onClick={() => { this.setState({ highlight: `sect-tablefields-${key}` }); }}
+                                                                >
+                                                                    link to table&apos;s fields
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a
+                                                                    href={`#sect-formfields-create_${key}`}
+                                                                    onClick={() => { this.setState({ highlight: `sect-formfields-create_${key}` }); }}
+                                                                >
+                                                                    link to creation form&apos;s fields
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <NavLink to={dataChecking(tableSetting, key, 'link')} type="default">
+                                                                    <span>{`link to ${dataChecking(tableSetting, key, 'title')} Page`}</span>
+                                                                </NavLink>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        );
+                                    }
+                                    return null;
+                                })
                             }
                         </ul>
                     </section>
@@ -109,35 +114,40 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         <h3>Tables and their fields</h3>
                         <ul>
                             {
-                                Object.keys(tableSetting).map((key) => (
-                                    <li key={key} id={`sect-tablefields-${key}`} className={`anchor-target ${this.state.highlight === `sect-tablefields-${key}` ? 'highlighted' : ''}`}>
-                                        <span className="bigger">{dataChecking(tableSetting, key, 'title')}</span>
-                                        <div className="pl-2 pb-1">
-                                            <table className="doc-table">
-                                                <tbody>
-                                                    {
-                                                        dataChecking(tableSetting, key, 'fields', 'length') ?
-                                                            tableSetting[key].fields.map((value, index) => (
-                                                                <tr key={index} className="doc-table-row">
-                                                                    <td className={`header-cell field-key doc-table-cell key-${dataChecking(value, 'key')}`}>
-                                                                        {dataChecking(value, 'key')}
-                                                                    </td>
-                                                                    <td className={`text-center field-type doc-table-cell type-${dataChecking(value, 'type')}`}>
-                                                                        [ {dataChecking(value, 'type')} ]
-                                                                    </td>
-                                                                    <td colSpan="5" className="field-desc doc-table-cell">
-                                                                        {dataChecking(value, 'doc', 'description')}
-                                                                    </td>
-                                                                </tr>
-                                                            ))
-                                                            :
-                                                            null
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-                                ))
+                                Object.keys(tableSetting).map((key) => {
+                                    if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                                        return (
+                                            <li key={key} id={`sect-tablefields-${key}`} className={`anchor-target ${this.state.highlight === `sect-tablefields-${key}` ? 'highlighted' : ''}`}>
+                                                <span className="bigger">{dataChecking(tableSetting, key, 'title')}</span>
+                                                <div className="pl-2 pb-1">
+                                                    <table className="doc-table">
+                                                        <tbody>
+                                                            {
+                                                                dataChecking(tableSetting, key, 'fields', 'length') ?
+                                                                    tableSetting[key].fields.map((value, index) => (
+                                                                        <tr key={index} className="doc-table-row">
+                                                                            <td className={`header-cell field-key doc-table-cell key-${dataChecking(value, 'key')}`}>
+                                                                                {dataChecking(value, 'key')}
+                                                                            </td>
+                                                                            <td className={`text-center field-type doc-table-cell type-${dataChecking(value, 'type')}`}>
+                                                                                [ {dataChecking(value, 'type')} ]
+                                                                            </td>
+                                                                            <td colSpan="5" className="field-desc doc-table-cell">
+                                                                                {dataChecking(value, 'doc', 'description')}
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))
+                                                                    :
+                                                                    null
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </li>
+                                        );
+                                    }
+                                    return null;
+                                })
                             }
                         </ul>
                     </section>
@@ -146,35 +156,40 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                         <h3>Form and their fields</h3>
                         <ul>
                             {
-                                Object.keys(formSetting).map((key) => (
-                                    <li key={key} id={`sect-formfields-${key}`} className={`anchor-target ${this.state.highlight === `sect-formfields-${key}` ? 'highlighted' : ''}`}>
-                                        <span className="bigger">{dataChecking(formSetting, key, 'title')}</span>
-                                        <div className="pl-2 pb-1">
-                                            <table className="doc-table">
-                                                <tbody>
-                                                    {
-                                                        dataChecking(formSetting, key, 'fields', 'length') ?
-                                                            formSetting[key].fields.map((value, index) => (
-                                                                <tr key={index} className="doc-table-row">
-                                                                    <td className={`header-cell field-key doc-table-cell key-${dataChecking(value, 'key')}`}>
-                                                                        {dataChecking(value, 'key')}
-                                                                    </td>
-                                                                    <td className={`text-center field-type doc-table-cell type-${dataChecking(value, 'type')}`}>
-                                                                        [ {dataChecking(value, 'type')} ]
-                                                                    </td>
-                                                                    <td colSpan="5" className="field-desc doc-table-cell">
-                                                                        {dataChecking(value, 'doc', 'description')}
-                                                                    </td>
-                                                                </tr>
-                                                            ))
-                                                            :
-                                                            null
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-                                ))
+                                Object.keys(formSetting).map((key) => {
+                                    if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                                        return (
+                                            <li key={key} id={`sect-formfields-${key}`} className={`anchor-target ${this.state.highlight === `sect-formfields-${key}` ? 'highlighted' : ''}`}>
+                                                <span className="bigger">{dataChecking(formSetting, key, 'title')}</span>
+                                                <div className="pl-2 pb-1">
+                                                    <table className="doc-table">
+                                                        <tbody>
+                                                            {
+                                                                dataChecking(formSetting, key, 'fields', 'length') ?
+                                                                    formSetting[key].fields.map((value, index) => (
+                                                                        <tr key={index} className="doc-table-row">
+                                                                            <td className={`header-cell field-key doc-table-cell key-${dataChecking(value, 'key')}`}>
+                                                                                {dataChecking(value, 'key')}
+                                                                            </td>
+                                                                            <td className={`text-center field-type doc-table-cell type-${dataChecking(value, 'type')}`}>
+                                                                                [ {dataChecking(value, 'type')} ]
+                                                                            </td>
+                                                                            <td colSpan="5" className="field-desc doc-table-cell">
+                                                                                {dataChecking(value, 'doc', 'description')}
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))
+                                                                    :
+                                                                    null
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </li>
+                                        );
+                                    }
+                                    return null;
+                                })
                             }
                         </ul>
                     </section>
