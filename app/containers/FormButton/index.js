@@ -312,12 +312,18 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                 >{dataChecking(this.state, field.key, 'loading') ? 'loading...' : 'done'}</span>
                                             </div>
                                             :
-                                            <img
-                                                className="previewer-image previewer-placeholder"
-                                                width="70%"
-                                                src={require('../../Resources/arrow_up_upload-512.png')}
-                                                alt="upload placeholder"
-                                            />
+                                            // <img
+                                            //     className="previewer-image previewer-placeholder"
+                                            //     width="70%"
+                                            //     src={require('../../Resources/arrow_up_upload-512.png')}
+                                            //     alt="upload placeholder"
+                                            //     srcSet="https://via.placeholder.com/150/55F?text=small 756w, https://via.placeholder.com/150/F55?text=big 1280w"
+                                            //     // onLoad={this.onLoad}
+                                            // />
+                                            <picture>
+                                                <source media="(min-width: 650px)" srcSet="https://via.placeholder.com/150/F55?text=big" />
+                                                <img src="https://via.placeholder.com/150/55F?text=small" alt="Flowers" />
+                                            </picture>
                                     }
                                 </span>
                                 {
@@ -370,7 +376,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <DatePicker
                         showTimeSelect={true}
                         timeFormat="HH:mm"
-                        dateFormat="dd/mm/yyyy  HH:mm"
+                        dateFormat="dd/MM/yyyy  HH:mm"
                         selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
                         onChange={(value) => this.handleTextChange(value, field)}
                     />
@@ -440,7 +446,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <span className="field-label">{`${field.label}:`}</span>
                     {
                         field.mandatory ?
-                            <span className="mandatory-indicator">*<span className="mandatory-text">required</span></span>
+                            <span className="mandatory-indicator">*<span className="mandatory-text hidden">required</span></span>
                             :
                             null
                     }
