@@ -14,10 +14,16 @@
             }
         }
     }
+
+    &.popout {
+        .page-action-modal.triggered{
+            position: fixed !important;
+            top: 10% !important;
+        }
+    }
 }
 
 #page-action-modal.page-action-modal {
-    height: 45px;
     z-index: 2;
     right: 0;
     position: absolute;
@@ -69,7 +75,7 @@
         z-index: 10;
         padding: 0 3rem;
         background-color: white;
-        height: 530px;
+        max-height: 80vh;
         color: black;
         cursor: default;
         overflow: auto;
@@ -118,6 +124,11 @@
 
     .modal-form-fields-container {
         margin-bottom: 3rem;
+
+        .submit-button {
+            text-align: center;
+            padding-top: 7rem;
+        }
     }
 
     .field-input {

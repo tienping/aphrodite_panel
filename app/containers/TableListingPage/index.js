@@ -21,6 +21,7 @@ import { dataChecking } from 'globalUtils';
 import tableSetting from 'utils/globalTableSetting';
 
 import FormButton from 'containers/FormButton';
+import globalScope from 'globalScope';
 // import { Input } from '@tienping/my-react-kit';
 
 import makeSelectTableListingPage from './selectors';
@@ -88,6 +89,22 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             obj.push(nextProps.tablelistingpage.addNewButtonToList);
             this.setState({ formButtonList: obj });
         }
+
+        if (nextProps.tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
+            const { data, field } = nextProps.tablelistingpage.getItemData;
+
+            const arr = dataChecking(data, field.itemDataPath) || [];
+            const tempItems = [];
+            arr.forEach((value) => {
+                tempItems.push({
+                    id: `${field.itemKey}_${value.id}`,
+                    value: `${dataChecking(value, field.itemDataValuePath)}`,
+                    label: `${dataChecking(value, field.itemDataLabelPath)}`,
+                });
+            });
+
+            globalScope[field.itemKey] = tempItems;
+        }
     }
 
     onPageChange(pageApi) {
@@ -101,7 +118,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             const firstDate = data1 ? new Date(data1) : 0;
             const secondDate = data2 ? new Date(data2) : 0;
             return firstDate > secondDate;
-        } else if (dataType === 'integer') {
+        } else if (dataType === 'integer' || dataType === 'boolean') {
             return (data1 || 0) - (data2 || 0);
         } else if (dataType === 'string') {
             return `${data1 || ''}`.localeCompare(`${data2 || ''}`);
@@ -156,12 +173,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                     <FormButton
                                         key="create-button"
-                                        style={{ width: item.width }}
                                         formId={`create_${this.props.pageType}`}
-                                        formType="attach"
+                                        // formType="attach"
                                         formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     >
-                                        {item.title}
+                                        <div className="gamicenter-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
                                 </span>
                             );
@@ -170,12 +186,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                     <FormButton
                                         key="upload-button"
-                                        style={{ width: item.width }}
                                         formId={`upload_${this.props.pageType}`}
-                                        formType="attach"
+                                        // formType="attach"
                                         formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
                                     >
-                                        {item.title}
+                                        <div className="gamicenter-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
                                 </span>
                             );
@@ -203,7 +218,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     );
 
     renderSorter(head, index) {
-        if (head.type === 'integer' || head.type === 'string' || head.type === 'datetime') {
+        if (head.type === 'integer' || head.type === 'string' || head.type === 'datetime' || head.type === 'boolean') {
             return (
                 <div
                     onClick={() => {

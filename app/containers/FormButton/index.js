@@ -26,7 +26,7 @@ import { dataChecking } from 'globalUtils';
 import Switch from 'react-switch';
 import formSetting from 'utils/globalFormSetting';
 import tableSetting from 'utils/globalTableSetting';
-// import papaparse from 'papaparse';
+import globalScope from 'globalScope';
 
 // import makeSelectFormButton from './selectors';
 import reducer from './reducer';
@@ -50,7 +50,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         if (formId && dataChecking(formSetting, targetFormName)) {
             tempObj.formTitle = dataChecking(formSetting[targetFormName], 'title');
             tempObj.formFields = dataChecking(formSetting[targetFormName], 'fields');
-            tempObj.formHeight = dataChecking(formSetting[targetFormName], 'formHeight');
+            tempObj.maxFormHeight = dataChecking(formSetting[targetFormName], 'maxFormHeight');
             tempObj.formWidth = dataChecking(formSetting[targetFormName], 'formWidth');
             tempObj.formOnSubmit = dataChecking(formSetting[targetFormName], 'onSubmit');
             tempObj = this.initializedFormData(tempObj, targetFormName);
@@ -61,25 +61,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     componentWillReceiveProps(nextProps) {
         const { formbutton } = nextProps;
         const comingformId = nextProps.formId.split('__#__')[0];
-        // if (nextProps.formId && dataChecking(formSetting, comingformId)) {
-        //     const tempObj = {
-        //         showModal: false,
-        //         formFields: dataChecking(formSetting[comingformId], 'fields'),
-        //         formHeight: dataChecking(formSetting[comingformId], 'formHeight'),
-        //         formWidth: dataChecking(formSetting[comingformId], 'formWidth'),
-        //         formOnSubmit: dataChecking(formSetting[comingformId], 'onSubmit'),
-        //     };
-
-        //     if (dataChecking(formSetting[comingformId], 'fields')) {
-        //         formSetting[comingformId].fields.forEach((field) => {
-        //             tempObj[field.key] = {
-        //                 value: field.type === 'boolean' ? field.default || false : '',
-        //             };
-        //         });
-        //     }
-
-        //     this.setState(tempObj);
-        // }
 
         if (formbutton.firing !== this.props.formbutton.firing) {
             let tempObj = { firing: formbutton.firing };
@@ -149,18 +130,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         if (target.files && target.files[0]) {
             const form = new FormData();
             form.append('file', target.files[0]);
-            // papaparse.parse(target.files[0], {
-            //     skipEmptyLines: true,
-            //     complete: (results) => {
-            //         obj[field.key] = {
-            //             fileName: target.files[0].name,
-            //             file: target.files[0],
-            //             loading: false,
-            //             data: results.data,
-            //         };
-            //         this.setState(obj);
-            //     },
-            // });
 
             obj[field.key] = {
                 form,
@@ -230,6 +199,16 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     }
 
     renderInput(field) {
+        let itemsData = field.items || [];
+        if (field.itemKey && field.itemApi) {
+            if (globalScope[field.itemKey]) {
+                itemsData = globalScope[field.itemKey];
+            } else {
+                globalScope[field.itemKey] = [];
+                this.props.dispatch(tableListingActions.getDataKeyValue(field));
+            }
+        }
+
         switch (field.type) {
             case 'image':
                 return (
@@ -312,18 +291,17 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                 >{dataChecking(this.state, field.key, 'loading') ? 'loading...' : 'done'}</span>
                                             </div>
                                             :
-                                            // <img
-                                            //     className="previewer-image previewer-placeholder"
-                                            //     width="70%"
-                                            //     src={require('../../Resources/arrow_up_upload-512.png')}
-                                            //     alt="upload placeholder"
-                                            //     srcSet="https://via.placeholder.com/150/55F?text=small 756w, https://via.placeholder.com/150/F55?text=big 1280w"
-                                            //     // onLoad={this.onLoad}
-                                            // />
-                                            <picture>
-                                                <source media="(min-width: 650px)" srcSet="https://via.placeholder.com/150/F55?text=big" />
-                                                <img src="https://via.placeholder.com/150/55F?text=small" alt="Flowers" />
-                                            </picture>
+                                            <img
+                                                className="previewer-image previewer-placeholder"
+                                                width="70%"
+                                                src={require('../../Resources/arrow_up_upload-512.png')}
+                                                alt="upload placeholder"
+                                                // onLoad={this.onLoad}
+                                            />
+                                            // <picture>
+                                            //     <source media="(min-width: 650px)" srcSet="https://via.placeholder.com/150/F55?text=big" />
+                                            //     <img src="https://via.placeholder.com/150/55F?text=small" alt="Flowers" />
+                                            // </picture>
                                     }
                                 </span>
                                 {
@@ -417,12 +395,12 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <Select
                         style={{ cursor: 'pointer' }}
                         value={this.state[field.key]}
-                        default={field.items[0]}
+                        default={itemsData[0]}
                         closeMenuOnSelect={true}
                         components={makeAnimated()}
                         isMulti={field.isMulti || false}
                         onChange={(value) => this.handleTextChange(value, field)}
-                        options={field.items || []}
+                        options={itemsData || []}
                     />
                 );
             default:
@@ -484,7 +462,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         };
 
         return (
-            <div className={`FormButton-component ${this.props.formType === 'attach' ? 'attach' : ''}`}>
+            <div className={`FormButton-component ${this.props.formType === 'attach' ? 'attach' : 'popout'}`}>
                 {
                     this.props.formType === 'attach' ?
                         null
@@ -497,7 +475,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     id="page-action-modal"
                     style={{
                         ...this.props.style,
-                        maxHeight: `${this.state.showModal ? this.state.formHeight : '45px'}`,
+                        maxHeight: `${this.state.showModal ? this.state.maxFormHeight : ''}`,
                         width: `${getModalWidth(this.props.style)}`,
                     }}
                     className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
@@ -541,7 +519,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             </div>
                                         ))
                                     }
-                                    <div style={{ textAlign: 'center' }}>
+                                    <div className="submit-button">
+                                        <hr />
                                         <div
                                             className="gamicenter-button smaller"
                                             onClick={() => {

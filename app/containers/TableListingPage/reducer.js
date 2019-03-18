@@ -6,13 +6,16 @@
 
 import { fromJS } from 'immutable';
 import {
-    TABLE_LISTING_GET_LIST,
-    TABLE_LISTING_GET_LIST_SUCCESS,
-    TABLE_LISTING_GET_LIST_FAILED,
+    GET_LIST,
+    GET_LIST_SUCCESS,
+    GET_LIST_FAILED,
     FIRE_API,
     FIRE_API_SUCCESS,
     FIRE_API_FAIL,
     ADD_NEW_BUTTON_TO_LIST,
+    GET_DATA_KEY_VALUE,
+    GET_DATA_KEY_VALUE_SUCCESS,
+    GET_DATA_KEY_VALUE_FAILED,
 } from './constants';
 
 const initialState = fromJS({
@@ -24,16 +27,16 @@ const initialState = fromJS({
 function tableListingPageReducer(state = initialState, action) {
     let tempObj = {};
     switch (action.type) {
-        case TABLE_LISTING_GET_LIST:
+        case GET_LIST:
             return state
                 .set('loading', true)
                 .set('error', false);
-        case TABLE_LISTING_GET_LIST_SUCCESS:
+        case GET_LIST_SUCCESS:
             return state
                 .set('loading', false)
                 .set('error', false)
                 .set('data', action.payload);
-        case TABLE_LISTING_GET_LIST_FAILED:
+        case GET_LIST_FAILED:
             return state
                 .set('loading', false)
                 .set('error', true);
@@ -64,6 +67,20 @@ function tableListingPageReducer(state = initialState, action) {
         case ADD_NEW_BUTTON_TO_LIST:
             return state
                 .set('addNewButtonToList', action.newButtonId);
+        // -------------------------- end of GET_LIST -------------------------------
+        case GET_DATA_KEY_VALUE:
+            return state
+                .set('getItemLoading', true)
+                .set('getItemError', false);
+        case GET_DATA_KEY_VALUE_SUCCESS:
+            return state
+                .set('getItemLoading', false)
+                .set('getItemError', false)
+                .set('getItemData', { data: action.payload, field: action.field });
+        case GET_DATA_KEY_VALUE_FAILED:
+            return state
+                .set('getItemLoading', false)
+                .set('getItemError', true);
         default:
             return state;
     }

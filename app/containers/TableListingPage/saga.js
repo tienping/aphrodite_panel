@@ -5,10 +5,13 @@ import {
     getListFail,
     fireApiSuccess,
     fireApiFail,
+    getDataKeyValueSuccess,
+    getDataKeyValueFail,
 } from './actions';
 import {
-    TABLE_LISTING_GET_LIST,
+    GET_LIST,
     FIRE_API,
+    GET_DATA_KEY_VALUE,
 } from './constants';
 
 export function* getTableData(action) {
@@ -51,7 +54,22 @@ export function* fireApi(action) {
     }
 }
 
+export function* getDataKeyValue(action) {
+    const { field } = action;
+    const response = yield call(apiRequest, field.itemApi, 'get');
+    if (response && response.ok) {
+        yield put(getDataKeyValueSuccess(response.data, field));
+    } else {
+        if (response.data && response.data.error) {
+            alert(JSON.stringify(response.data.error));
+            console.log(response.data.error);
+        }
+        yield put(getDataKeyValueFail(response.data));
+    }
+}
+
 export default function* defaultSaga() {
-    yield takeLatest(TABLE_LISTING_GET_LIST, getTableData);
+    yield takeLatest(GET_LIST, getTableData);
     yield takeLatest(FIRE_API, fireApi);
+    yield takeLatest(GET_DATA_KEY_VALUE, getDataKeyValue);
 }

@@ -30,7 +30,7 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
 const formSetting = {
     sysvar: {
         title: 'System Variable',
-        formHeight: '430px',
+        // maxFormHeight: '430px',
         fields: [
             { key: 'key', label: 'Key', type: 'textbox', placeholder: 'Key of variable', mandatory: true, doc: { description: 'desc' } },
             { key: 'category', label: 'Category', type: 'textbox', placeholder: 'Category', doc: { description: 'desc' } },
@@ -41,8 +41,8 @@ const formSetting = {
     },
     create_partner: {
         title: 'Create Partner',
-        formHeight: '480px',
-        formWidth: '335px',
+        // maxFormHeight: '480px',
+        buttonWidth: '335px',
         fields: [
             { key: 'name', label: 'Partner Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
             // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
@@ -89,11 +89,22 @@ const formSetting = {
     },
     create_pevent: {
         title: 'Create Partner\'s Event',
-        formHeight: '555px',
-        formWidth: '335px',
+        // maxFormHeight: '555px',
+        buttonWidth: '335px',
         fields: [
             { key: 'name', label: 'Event Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
-            { key: 'partner', label: 'Partner\'s ID', type: 'textbox', mandatory: true, doc: { description: 'The ID of corresponding partner vendor' } },
+            {
+                key: 'partner',
+                label: 'Partner ID',
+                type: 'selection',
+                mandatory: true,
+                doc: { description: 'The ID of corresponding partner vendor' },
+                itemApi: 'https://api-staging.hermo.my/services/gami/partners/list?pe',
+                itemDataPath: ['data', 'items'],
+                itemKey: 'partnerId',
+                itemDataValuePath: ['id'],
+                itemDataLabelPath: ['name'],
+            },
             // {
             //     key: 'partner',
             //     label: 'Partner\'s ID',
@@ -151,8 +162,8 @@ const formSetting = {
     },
     create_voucher: {
         title: 'Create Partner Voucher',
-        formHeight: '363px',
-        formWidth: '335px',
+        // maxFormHeight: '363px',
+        buttonWidth: '335px',
         fields: [
             { key: 'event_id', label: 'Event ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
             {
@@ -165,9 +176,9 @@ const formSetting = {
                     <div style="">
                         <div>Character limit:</div>
                         <ul>
-                            <li>Text: up to 20</li>
+                            <li>Text: 12 - 20 Characters</li>
+                            <li>QR Code: 12 - 20 Characters</li>
                             <li>Barcode: up to 12</li>
-                            <li>QR Code: up to 20</li>
                         </ul>
                     </div>
                 `,
@@ -181,8 +192,8 @@ const formSetting = {
     },
     create_levent: {
         title: 'Create Local Event, fields',
-        formHeight: '363px',
-        formWidth: '335px',
+        // maxFormHeight: '363px',
+        buttonWidth: '335px',
         fields: [
             { key: 'name', label: 'Event Name', type: 'textbox', mandatory: true, doc: { description: 'Name of this voucher' } },
             {
@@ -206,8 +217,8 @@ const formSetting = {
     },
     upload_partner: {
         title: 'Upload Partners',
-        formHeight: '355px',
-        formWidth: '320px',
+        // maxFormHeight: '355px',
+        buttonWidth: '320px',
         fields: [
             {
                 key: 'file',
@@ -232,8 +243,8 @@ const formSetting = {
     },
     upload_pevent: {
         title: 'Upload Partner Event',
-        formHeight: '355px',
-        formWidth: '320px',
+        // maxFormHeight: '355px',
+        buttonWidth: '320px',
         fields: [
             {
                 key: 'file',
@@ -258,8 +269,8 @@ const formSetting = {
     },
     upload_voucher: {
         title: 'Upload Voucher',
-        formHeight: '355px',
-        formWidth: '320px',
+        // maxFormHeight: '355px',
+        buttonWidth: '320px',
         fields: [
             {
                 key: 'file',
@@ -284,8 +295,8 @@ const formSetting = {
     },
     upload_levent: {
         title: 'Upload Local Event',
-        formHeight: '355px',
-        formWidth: '320px',
+        // maxFormHeight: '355px',
+        buttonWidth: '320px',
         fields: [
             {
                 key: 'file',
@@ -313,7 +324,7 @@ const formSetting = {
 formSetting.edit_partner = { ...formSetting.create_partner };
 formSetting.edit_partner.title = 'Edit Partner Profile';
 formSetting.edit_partner.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
-formSetting.edit_partner.formWidth = null;
+formSetting.edit_partner.buttonWidth = null;
 formSetting.edit_partner.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `partners/update/${data.id.value}`, scope.props.formId);
 };
@@ -321,7 +332,7 @@ formSetting.edit_partner.onSubmit = (scope, tableListingActions, data, fields) =
 formSetting.edit_pevent = { ...formSetting.create_pevent };
 formSetting.edit_pevent.title = 'Edit Partner Event Details';
 formSetting.edit_pevent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
-formSetting.edit_pevent.formWidth = null;
+formSetting.edit_pevent.buttonWidth = null;
 formSetting.edit_pevent.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/partners/update/${data.id.value}`, scope.props.formId);
 };
@@ -329,7 +340,7 @@ formSetting.edit_pevent.onSubmit = (scope, tableListingActions, data, fields) =>
 formSetting.edit_voucher = { ...formSetting.create_voucher };
 formSetting.edit_voucher.title = 'Edit Partner Voucher Details';
 formSetting.edit_voucher.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
-formSetting.edit_voucher.formWidth = null;
+formSetting.edit_voucher.buttonWidth = null;
 formSetting.edit_voucher.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `vouchers/partners/update/${data.id.value}`, scope.props.formId);
 };
@@ -337,7 +348,7 @@ formSetting.edit_voucher.onSubmit = (scope, tableListingActions, data, fields) =
 formSetting.edit_levent = { ...formSetting.create_levent };
 formSetting.edit_levent.title = 'Edit Hermo Event Details';
 formSetting.edit_levent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
-formSetting.edit_levent.formWidth = null;
+formSetting.edit_levent.buttonWidth = null;
 formSetting.edit_levent.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/locals/update/${data.id.value}`, scope.props.formId);
 };

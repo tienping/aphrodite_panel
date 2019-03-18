@@ -34,7 +34,7 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 > object key will be the table's id
 
 * title `string`
-* formHeight `xxpx or xxrem or xx% or xxvw`
+* maxFormHeight `xxpx or xxrem or xx% or xxvw`
 * fields `array of object`
     * key `string`
     * label `string`

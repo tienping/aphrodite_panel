@@ -24,13 +24,13 @@ const tableSetting = {
         link: '/partner',
         description: 'A page to view, add and edit participating vendors in Hermo Loyalty Programme.',
         iconClass: 'fa fa-users p-1',
-        tableWidth: '106rem',
-        api: 'https://api-staging.hermo.my/services/gami/partners/list?per-page=2',
+        tableWidth: '105rem',
+        api: 'https://api-staging.hermo.my/services/gami/partners/list',
         pathToDataRoot: '',
         actionButtons: [
             {
                 title: 'Upload Single Partner (Form)',
-                type: 'formAction',
+                type: 'createNew',
                 width: '255px',
             },
             {
@@ -57,7 +57,6 @@ const tableSetting = {
                     {
                         name: 'edit',
                         special: 'edit-form',
-                        formWidth: '15rem',
                         image: 'https://img.icons8.com/material/24/000000/pencil.png',
                         onPressHandling: (index, scope, data) => {
                             const tempState = {
@@ -86,13 +85,13 @@ const tableSetting = {
         link: '/partner_event',
         description: 'A page to view, add and edit Partners\' promotion event (a folder to keep partner vouchers)',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '142rem',
+        tableWidth: '161rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/partner_event_list',
         pathToDataRoot: '',
         actionButtons: [
             {
                 title: 'Upload Single Event (Form)',
-                type: 'formAction',
+                type: 'createNew',
                 width: '245px',
             },
             {
@@ -104,6 +103,7 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'name', label: 'Event Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
+            { key: 'partner_name', label: 'Partner Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
             { key: 'remarks', label: 'Remarks', width: '20rem', align: 'left', type: 'string', doc: { description: 'Event description' } },
             // { key: 'tnc_text', label: 'TNC', width: '60rem', align: 'left', type: 'html', doc: { description: 'Terms and condition' } },
             { key: 'url', label: 'Url', width: '25rem', align: 'left', type: 'link', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
@@ -129,7 +129,6 @@ const tableSetting = {
                     {
                         name: 'edit',
                         special: 'edit-form',
-                        formWidth: '15rem',
                         image: 'https://img.icons8.com/material/24/000000/pencil.png',
                         onPressHandling: (index, scope, data) => {
                             const tempState = {
@@ -159,13 +158,13 @@ const tableSetting = {
         description: 'A page to view, add and edit Partners\' voucher',
         createButtonWidth: '160px',
         iconClass: 'fas fa-ticket-alt p-1',
-        tableWidth: '78rem',
+        tableWidth: '97rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
             {
                 title: 'Upload Single Voucher (Form)',
-                type: 'formAction',
+                type: 'createNew',
                 width: '260px',
             },
             {
@@ -176,8 +175,10 @@ const tableSetting = {
         ],
         fields: [
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
-            { key: 'event_code', label: 'Remarks', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
-            { key: 'code', label: 'Voucher Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Voucher code given by vendor (consult tech team if having trouble getting codes)' } },
+            // { key: 'event_code', label: 'Event Code', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
+            { key: 'event_name', label: 'Event Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
+            { key: 'partner_name', label: 'Partner Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
+            { key: 'code', label: 'Voucher Code', width: '20rem', align: 'left', type: 'string', doc: { description: 'Voucher code given by vendor (consult tech team if having trouble getting codes)' } },
             // { key: 'user_id', label: 'TNC', width: '60rem', align: 'left', type: 'string', doc: { description: 'The user/customer which own this voucher' } },
             // { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this voucher' } },
             // { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this voucher is created' } },
@@ -193,7 +194,6 @@ const tableSetting = {
                     {
                         name: 'edit',
                         special: 'edit-form',
-                        formWidth: '15rem',
                         image: 'https://img.icons8.com/material/24/000000/pencil.png',
                         onPressHandling: (index, scope, data) => {
                             const tempState = {
@@ -222,13 +222,13 @@ const tableSetting = {
         link: '/local_event',
         description: 'A page to view, add and edit Hermo\'s promotion event (a folder to pcode vouchers)',
         iconClass: 'fas fa-hospital-symbol p-1',
-        tableWidth: '73rem',
+        tableWidth: '72rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/local_event_list',
         pathToDataRoot: '',
         actionButtons: [
             {
                 title: 'Upload Single Event (Form)',
-                type: 'formAction',
+                type: 'createNew',
                 width: '245px',
             },
             {
@@ -255,7 +255,6 @@ const tableSetting = {
                     {
                         name: 'edit',
                         special: 'edit-form',
-                        formWidth: '15rem',
                         image: 'https://img.icons8.com/material/24/000000/pencil.png',
                         onPressHandling: (index, scope, data) => {
                             const tempState = {
