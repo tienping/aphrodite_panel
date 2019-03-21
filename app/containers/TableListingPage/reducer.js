@@ -76,7 +76,7 @@ function tableListingPageReducer(state = initialState, action) {
             return state
                 .set('getItemLoading', false)
                 .set('getItemError', false)
-                .set('getItemData', { data: action.payload, field: action.field });
+                .set('getItemData', { data: action.payload, field: action.field, buttonId: action.buttonId });
         case GET_DATA_KEY_VALUE_FAILED:
             return state
                 .set('getItemLoading', false)

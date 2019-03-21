@@ -43,17 +43,16 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     }
 
     componentWillMount() {
-        const { targetForm, formId } = this.props;
-        const targetFormName = targetForm || formId;
-        let tempObj = {};
+        const { formSettingKey, formId } = this.props;
+        const tempObj = {};
 
-        if (formId && dataChecking(formSetting, targetFormName)) {
-            tempObj.formTitle = dataChecking(formSetting[targetFormName], 'title');
-            tempObj.formFields = dataChecking(formSetting[targetFormName], 'fields');
-            tempObj.maxFormHeight = dataChecking(formSetting[targetFormName], 'maxFormHeight');
-            tempObj.formWidth = dataChecking(formSetting[targetFormName], 'formWidth');
-            tempObj.formOnSubmit = dataChecking(formSetting[targetFormName], 'onSubmit');
-            tempObj = this.initializedFormData(tempObj, targetFormName);
+        if (formId && dataChecking(formSetting, formSettingKey)) {
+            tempObj.formSettingKey = formSettingKey;
+            tempObj.formTitle = dataChecking(formSetting[formSettingKey], 'title');
+            tempObj.formFields = dataChecking(formSetting[formSettingKey], 'fields');
+            tempObj.maxFormHeight = dataChecking(formSetting[formSettingKey], 'maxFormHeight');
+            tempObj.formWidth = dataChecking(formSetting[formSettingKey], 'formWidth');
+            tempObj.formOnSubmit = dataChecking(formSetting[formSettingKey], 'onSubmit');
         }
         this.setState(tempObj);
     }
@@ -63,7 +62,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         const comingformId = nextProps.formId.split('__#__')[0];
 
         if (formbutton.firing !== this.props.formbutton.firing) {
-            let tempObj = { firing: formbutton.firing };
+            const tempObj = { firing: formbutton.firing };
 
             if (!formbutton.firing && formbutton.fireApiReturnedData && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
                 if (dataChecking(formbutton, 'fireApiReturnedData', 'message', 'content')) {
@@ -73,13 +72,12 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         }
                     });
 
-                    tempObj = this.initializedFormData(tempObj, nextProps.formId); // hmm... apparently form get reset after submit anyways
                     if (formbutton.getListApi) {
                         this.props.dispatch(tableListingActions.getList({ api: formbutton.getListApi }));
                     }
                 }
                 tempObj.showModal = false;
-                if (this.props.formId === 'create_partner') { // wonder why upload will be trigerred as well
+                if (this.props.formId === 'create_partner') {
                     this.props.dispatch(tableListingActions.getList({ api: tableSetting[this.props.pageType].api }));
                 }
             }
@@ -159,12 +157,12 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
     }
 
-    initializedFormData(objPassed, targetFormName) {
+    initializedFormData(objPassed, formSettingKey) {
         const { initialData } = this.props;
         const tempObj = objPassed;
 
-        if (dataChecking(formSetting, targetFormName, 'fields')) {
-            formSetting[targetFormName].fields.forEach((field) => {
+        if (dataChecking(formSetting, formSettingKey, 'fields')) {
+            formSetting[formSettingKey].fields.forEach((field) => {
                 let value = field.type === 'boolean' ? field.default || false : '';
                 if (initialData && initialData[field.key] && initialData && initialData[field.key] !== null) {
                     value = initialData[field.key];
@@ -172,8 +170,21 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 tempObj[field.key] = {
                     value,
                 };
-                if (field.type === 'selection' && typeof field.defaultIndex === 'number') {
-                    tempObj[field.key] = dataChecking(field, 'items', field.defaultIndex);
+                if (field.type === 'selection') {
+                    if (value) {
+                        if (field.items && field.items.constructor === Array) {
+                            tempObj[field.key] = field.items.find((item) => {
+                                if (parseInt(item.value, 10) && parseInt(value, 10)) {
+                                    return parseInt(item.value, 10) === parseInt(value, 10);
+                                }
+                                return item.value === value;
+                            });
+                        } else if (dataChecking(globalScope, 'selectionData', field.key)) {
+                            tempObj[field.key] = globalScope.selectionData[field.key].find((item) => JSON.parse(item.value) === JSON.parse(value));
+                        }
+                    } else if (typeof field.defaultIndex === 'number') {
+                        tempObj[field.key] = dataChecking(field, 'items', field.defaultIndex);
+                    }
                 }
             });
         }
@@ -200,11 +211,11 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     renderInput(field) {
         let itemsData = field.items || [];
-        if (field.itemKey && field.itemApi) {
-            if (globalScope[field.itemKey]) {
-                itemsData = globalScope[field.itemKey];
+        if (field.itemApi) {
+            if (globalScope.selectionData[field.key]) {
+                itemsData = dataChecking(globalScope, 'selectionData', field.key);
             } else {
-                globalScope[field.itemKey] = [];
+                globalScope.selectionData[field.key] = [];
                 this.props.dispatch(tableListingActions.getDataKeyValue(field));
             }
         }
@@ -346,7 +357,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         onChange={(event) => {
                             this.handleTextChange(event, field);
                         }}
-                        checked={this.state[field.key].value || false}
+                        checked={(this.state[field.key] && this.state[field.key].value) || false}
                     />
                 );
             case 'datetime':
@@ -374,7 +385,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         <input
                             className="default-input-textbox"
                             placeholder={field.placeholder}
-                            value={dataChecking(this.state, field.key, 'value')}
+                            value={dataChecking(this.state, field.key, 'value') || ''}
                             onChange={(value) => this.handleTextChange(value, field)}
                         />
                     </div>
@@ -385,7 +396,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         <textarea
                             className="default-input-textarea"
                             placeholder={field.placeholder}
-                            value={dataChecking(this.state, field.key, 'value')}
+                            value={dataChecking(this.state, field.key, 'value') || ''}
                             onChange={(value) => this.handleTextChange(value, field)}
                         />
                     </div>
@@ -467,7 +478,12 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     this.props.formType === 'attach' ?
                         null
                         :
-                        <div onClick={() => this.setState({ showModal: true })}>
+                        <div
+                            onClick={() => {
+                                this.setState({ showModal: true });
+                                this.initializedFormData(this.state, this.state.formSettingKey);
+                            }}
+                        >
                             {this.props.children}
                         </div>
                 }

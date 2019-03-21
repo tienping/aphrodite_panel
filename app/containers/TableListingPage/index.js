@@ -60,16 +60,16 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         if (nextProps.tablelistingpage.data !== this.props.tablelistingpage.data) {
             const { data } = nextProps.tablelistingpage;
-            const fields = tableSetting[nextProps.pageType].fields;
-            const result = this.toggledSortResult(0, fields[0].type, dataChecking(data, 'data', 'items')) || [];
+            // const fields = tableSetting[nextProps.pageType].fields;
+            // const result = this.toggledSortResult(0, fields[0].type, dataChecking(data, 'data', 'items')) || [];
             this.setState({
-                data: result,
+                data: dataChecking(data, 'data', 'items'),
                 pagination: {
                     _meta: dataChecking(data, '_meta'),
                     _links: dataChecking(data, '_links'),
                 },
-                sorter: 0,
-                sortDirection: 'asc',
+                sorter: null,
+                sortDirection: 'desc',
             });
         }
 
@@ -91,19 +91,22 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         if (nextProps.tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
-            const { data, field } = nextProps.tablelistingpage.getItemData;
+            const { data, field, buttonId } = nextProps.tablelistingpage.getItemData;
 
             const arr = dataChecking(data, field.itemDataPath) || [];
             const tempItems = [];
             arr.forEach((value) => {
                 tempItems.push({
-                    id: `${field.itemKey}_${value.id}`,
+                    id: `${field.key}_${value.id}`,
                     value: `${dataChecking(value, field.itemDataValuePath)}`,
                     label: `${dataChecking(value, field.itemDataLabelPath)}`,
                 });
             });
 
-            globalScope[field.itemKey] = tempItems;
+            globalScope.selectionData[field.key] = tempItems;
+            if (buttonId) {
+                console.log(buttonId);
+            }
         }
     }
 
@@ -174,6 +177,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     <FormButton
                                         key="create-button"
                                         formId={`create_${this.props.pageType}`}
+                                        formSettingKey={`create_${this.props.pageType}`}
                                         // formType="attach"
                                         formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     >
@@ -187,6 +191,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     <FormButton
                                         key="upload-button"
                                         formId={`upload_${this.props.pageType}`}
+                                        formSettingKey={`upload_${this.props.pageType}`}
                                         // formType="attach"
                                         formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
                                     >
@@ -203,6 +208,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     style={{ width: item.width }}
                                     pageType={this.props.pageType}
                                     formId={`create_${this.props.pageType}`}
+                                    formSettingKey={`create_${this.props.pageType}`}
                                     formType="attach"
                                     formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                 >
@@ -227,7 +233,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
                         if (dataChecking(this.state, 'sorter') === index) {
                             data = this.toggleReverseResult();
-                            direction = (dataChecking(this.state, 'sortDirection') === 'asc') ? 'desc' : 'asc';
+                            direction = (dataChecking(this.state, 'sortDirection') === 'desc') ? 'asc' : 'desc';
                         } else {
                             data = this.toggledSortResult(index, head.type);
                         }
@@ -241,7 +247,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     className="sort-container"
                     title={`${
                         dataChecking(this, 'state', 'sorter') === index ?
-                            dataChecking(this, 'state', 'sortDirection') === 'asc' ? 'Change to Descending' : 'Change to Ascending'
+                            dataChecking(this, 'state', 'sortDirection') === 'desc' ? 'Change to Descending' : 'Change to Ascending'
                             :
                             'Toggle Ascending Sort'
                     }`}
@@ -251,7 +257,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                             `
                                 fas
                                 ${dataChecking(this, 'state', 'sorter') === index ? 'active' : ''}
-                                ${dataChecking(this, 'state', 'sortDirection') && dataChecking(this, 'state', 'sorter') === index === 'asc' ? 'fa-sort-down' : 'fa-sort-up'}
+                                ${dataChecking(this, 'state', 'sorter') === index && dataChecking(this, 'state', 'sortDirection') === 'desc' ? 'fa-sort-down' : 'fa-sort-up'}
                             `
                         }
                     />
@@ -454,7 +460,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             <FormButton
                                                 key="create-button"
                                                 formId={`edit_${this.props.pageType}__#__${rowIndex}`}
-                                                targetForm={`edit_${this.props.pageType}`}
+                                                formSettingKey={`edit_${this.props.pageType}`}
                                                 initialData={row}
                                                 formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
                                             >
@@ -577,14 +583,14 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     <title style={{ textTransform: 'capitalize' }}>
                         {
                             dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ?
-                                `${tableSetting[this.props.pageType].title} Page`
+                                `${tableSetting[this.props.pageType].title}`
                                 :
                                 'Table'
                         }
                     </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
-                <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ? `${tableSetting[this.props.pageType].title} Page` : 'Table'}</h1>
+                <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ? `${tableSetting[this.props.pageType].title}` : 'Table'}</h1>
                 {/* <div style={{ padding: '1rem', background: 'lime' }}>
                     <Input></Input>
                 </div> */}

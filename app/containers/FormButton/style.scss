@@ -42,6 +42,7 @@
         position: -ms-sticky;
         position: -o-sticky;
         position: sticky;
+        z-index: 1;
         top: 0;
 
         .modal-close-button {
@@ -134,7 +135,7 @@
     .field-input {
         padding: 0.5rem 0;
 
-        .default-input-textarea { width: 100%; min-height: 80px; }
+        .default-input-textarea { width: 100%; min-height: 135px; }
         .default-input-textbox { width: 100%; }
 
         .field-label {

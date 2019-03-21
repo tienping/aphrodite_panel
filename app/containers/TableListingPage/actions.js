@@ -72,17 +72,19 @@ export function addNewButtonToList(newButtonId) {
 }
 
 // getDataKeyValue
-export function getDataKeyValue(field) {
+export function getDataKeyValue(field, buttonId) {
     return {
         type: GET_DATA_KEY_VALUE,
+        buttonId,
         field,
     };
 }
 
-export function getDataKeyValueSuccess(response, field) {
+export function getDataKeyValueSuccess(response, field, buttonId) {
     return {
         type: GET_DATA_KEY_VALUE_SUCCESS,
         payload: response,
+        buttonId,
         field,
     };
 }

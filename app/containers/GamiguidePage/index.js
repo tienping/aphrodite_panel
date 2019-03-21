@@ -95,7 +95,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                                                             </li>
                                                             <li>
                                                                 <NavLink to={dataChecking(tableSetting, key, 'link')} type="default">
-                                                                    <span>{`link to ${dataChecking(tableSetting, key, 'title')} Page`}</span>
+                                                                    <span>{`link to ${dataChecking(tableSetting, key, 'title')}`}</span>
                                                                 </NavLink>
                                                             </li>
                                                         </ul>

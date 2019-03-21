@@ -103,8 +103,8 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'name', label: 'Event Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
-            { key: 'partner_name', label: 'Partner Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
-            { key: 'remarks', label: 'Remarks', width: '20rem', align: 'left', type: 'string', doc: { description: 'Event description' } },
+            { key: 'partner', label: 'Partner', width: '20rem', align: 'left', type: 'string', doc: { description: 'Partner offering the promotion' } },
+            { key: 'remark', label: 'Remark', width: '20rem', align: 'left', type: 'string', doc: { description: 'Event description' } },
             // { key: 'tnc_text', label: 'TNC', width: '60rem', align: 'left', type: 'html', doc: { description: 'Terms and condition' } },
             { key: 'url', label: 'Url', width: '25rem', align: 'left', type: 'link', doc: { description: 'URL link to more info about this redemption promotion (if any)' } },
             // { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
@@ -158,7 +158,7 @@ const tableSetting = {
         description: 'A page to view, add and edit Partners\' voucher',
         createButtonWidth: '160px',
         iconClass: 'fas fa-ticket-alt p-1',
-        tableWidth: '97rem',
+        tableWidth: '107rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/voucher_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -176,9 +176,10 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '7rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             // { key: 'event_code', label: 'Event Code', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
-            { key: 'event_name', label: 'Event Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
-            { key: 'partner_name', label: 'Partner Name', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
-            { key: 'code', label: 'Voucher Code', width: '20rem', align: 'left', type: 'string', doc: { description: 'Voucher code given by vendor (consult tech team if having trouble getting codes)' } },
+            { key: 'event', label: 'Event', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
+            { key: 'partner', label: 'Partner', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
+            { key: 'user_id', label: 'User', width: '10rem', align: 'left', type: 'string', doc: { description: 'User that owning the voucher' } },
+            { key: 'voucher_code', label: 'Voucher Code', width: '20rem', align: 'center', type: 'string', doc: { description: 'Voucher code given by vendor (consult tech team if having trouble getting codes)' } },
             // { key: 'user_id', label: 'TNC', width: '60rem', align: 'left', type: 'string', doc: { description: 'The user/customer which own this voucher' } },
             // { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this voucher' } },
             // { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this voucher is created' } },
@@ -222,7 +223,7 @@ const tableSetting = {
         link: '/local_event',
         description: 'A page to view, add and edit Hermo\'s promotion event (a folder to pcode vouchers)',
         iconClass: 'fas fa-hospital-symbol p-1',
-        tableWidth: '72rem',
+        tableWidth: '86rem',
         api: 'https://api-staging.hermo.my/services/gami/rewards/local_event_list',
         pathToDataRoot: '',
         actionButtons: [
@@ -244,6 +245,8 @@ const tableSetting = {
             { key: 'amount', label: 'Credit Amount Value', width: '8rem', align: 'center', type: 'string', doc: { description: 'The amount of credit used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The start of the redemption period' } },
             { key: 'end_date', label: 'End Date', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The end of the redemption period' } },
+            { key: 'min_user_level', label: 'Min User Level', width: '7rem', align: 'center', type: 'string', doc: { description: 'The minimun user level require to redempt the voucher under this promotion event' } },
+            { key: 'max_user_level', label: 'Max User Level', width: '7rem', align: 'center', type: 'string', doc: { description: 'The max user level capable of redempt the voucher under this promotion event' } },
             { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
             {
                 label: 'Action',

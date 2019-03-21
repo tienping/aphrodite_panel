@@ -3,17 +3,14 @@ import { dataChecking } from 'globalUtils';
 const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewButton) => {
     const extractedData = {};
     fields.forEach((field) => {
-        if (dataChecking(data, field.key, 'value')) {
+        extractedData[field.key] = data[field.key].value;
+        if ((field.type === 'date' || field.type === 'datetime') && dataChecking(data, field.key, 'value')) {
+            const dateValue = new Date(data[field.key].value);
+            extractedData[field.key] = dateValue.toISOString();
+        } else if (field.type === 'textbox' || field.type === 'textbox') {
+            extractedData[field.key] = `${data[field.key].value}`;
+        } else {
             extractedData[field.key] = data[field.key].value;
-
-            if (field.type === 'date') {
-                const dateValue = new Date(data[field.key].value);
-                extractedData[field.key] = dateValue.toISOString();
-            } else if (field.type === 'textbox' || field.type === 'textbox') {
-                extractedData[field.key] = `${data[field.key].value}`;
-            } else {
-                extractedData[field.key] = data[field.key].value;
-            }
         }
     });
 
@@ -74,7 +71,6 @@ const formSetting = {
                 closeMenuOnSelect: false,
                 // itemApi: '/postgres/menu',
                 // itemDataPath: ['result'],
-                // itemKey: 'menuList',
                 // itemDataValuePath: ['menu_name'],
                 doc: {
                     description: 'Method of voucher code displayed under this partner [text only, barcode or QR code]',
@@ -94,14 +90,13 @@ const formSetting = {
         fields: [
             { key: 'name', label: 'Event Name', type: 'textbox', mandatory: true, doc: { description: 'Name or label for the promotion' } },
             {
-                key: 'partner',
+                key: 'partner_id',
                 label: 'Partner ID',
                 type: 'selection',
                 mandatory: true,
                 doc: { description: 'The ID of corresponding partner vendor' },
-                itemApi: 'https://api-staging.hermo.my/services/gami/partners/list?pe',
+                itemApi: 'https://api-staging.hermo.my/services/gami/partners/list?page_size=999999',
                 itemDataPath: ['data', 'items'],
-                itemKey: 'partnerId',
                 itemDataValuePath: ['id'],
                 itemDataLabelPath: ['name'],
             },
@@ -167,7 +162,7 @@ const formSetting = {
         fields: [
             { key: 'event_id', label: 'Event ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
             {
-                key: 'code',
+                key: 'voucher_code',
                 label: 'Voucher Code',
                 type: 'textbox',
                 mandatory: true,
@@ -209,6 +204,34 @@ const formSetting = {
             { key: 'amount', label: 'Credit Amount Value', type: 'textbox', mandatory: true, doc: { description: 'Amount used to redempt this voucher' } },
             { key: 'start_date', label: 'Start Date & Time', type: 'datetime', mandatory: true, doc: { description: 'The start of the exchangeble period' } },
             { key: 'end_date', label: 'End Date & Time', type: 'datetime', doc: { description: 'The end of the exchangeble period' } },
+            {
+                key: 'min_user_level',
+                label: 'Min User Level',
+                type: 'selection',
+                items: [
+                    { value: '1', label: 'Normal Member' },
+                    { value: '2', label: 'Gold Member' },
+                    { value: '3', label: 'Platinum Member' },
+                ],
+                defaultIndex: 0,
+                doc: {
+                    description: 'Minimun requirement for user to redempt target voucher',
+                },
+            },
+            {
+                key: 'max_user_level',
+                label: 'Max User Level',
+                type: 'selection',
+                items: [
+                    { value: '3', label: 'Platinum Member' },
+                    { value: '2', label: 'Gold Member' },
+                    { value: '999', label: 'Normal Member' },
+                ],
+                defaultIndex: 0,
+                doc: {
+                    description: 'Minimun user level allowed for user to redempt target voucher',
+                },
+            },
             { key: 'status', label: 'Status', type: 'boolean', default: false, doc: { description: 'desc' } },
         ],
         onSubmit: (scope, tableListingActions, data, fields) => {

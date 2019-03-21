@@ -55,10 +55,10 @@ export function* fireApi(action) {
 }
 
 export function* getDataKeyValue(action) {
-    const { field } = action;
+    const { field, buttonId } = action;
     const response = yield call(apiRequest, field.itemApi, 'get');
     if (response && response.ok) {
-        yield put(getDataKeyValueSuccess(response.data, field));
+        yield put(getDataKeyValueSuccess(response.data, field, buttonId));
     } else {
         if (response.data && response.data.error) {
             alert(JSON.stringify(response.data.error));

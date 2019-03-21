@@ -252,7 +252,7 @@
                 "functions-bk": 98,
                 "lines-bk": 98,
                 "statements": 50,
-                "branches": 50,
+                "branches": 40,
                 "functions": 50,
                 "lines": 50
             }
