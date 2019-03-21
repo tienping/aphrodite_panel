@@ -54,6 +54,7 @@ const formSetting = {
                     { value: 'Fashion', label: 'Fashion' },
                     { value: 'Travel', label: 'Travel' },
                     { value: 'Beauty Products', label: 'Beauty Products' },
+                    { value: 'Telecommunication', label: 'Telecommunication' },
                 ],
                 doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' },
             },
