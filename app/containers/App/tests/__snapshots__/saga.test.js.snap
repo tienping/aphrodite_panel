@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fetchConfig() Getting the data Failed Scenarios not a valid response from server 1`] = `
+exports[`getConfigData() Getting the data Failed Scenarios not a valid response from server 1`] = `
 Object {
   "done": false,
   "value": Object {
@@ -22,7 +22,7 @@ Object {
 }
 `;
 
-exports[`fetchConfig() Getting the data Failed Scenarios not a valid response from server 2`] = `
+exports[`getConfigData() Getting the data Failed Scenarios not a valid response from server 2`] = `
 Object {
   "done": false,
   "value": Object {
@@ -45,7 +45,7 @@ Object {
 }
 `;
 
-exports[`fetchConfig() Getting the data Failed Scenarios with server error 1`] = `
+exports[`getConfigData() Getting the data Failed Scenarios with server error 1`] = `
 Object {
   "done": false,
   "value": Object {
@@ -67,7 +67,7 @@ Object {
 }
 `;
 
-exports[`fetchConfig() Getting the data Failed Scenarios with server error 2`] = `
+exports[`getConfigData() Getting the data Failed Scenarios with server error 2`] = `
 Object {
   "done": false,
   "value": Object {
@@ -90,7 +90,7 @@ Object {
 }
 `;
 
-exports[`fetchConfig() Getting the data should trigger fetchConfigSuccess() when response.success is true 1`] = `
+exports[`getConfigData() Getting the data should trigger fetchConfigSuccess() when response.success is true 1`] = `
 Object {
   "done": false,
   "value": Object {
@@ -112,7 +112,7 @@ Object {
 }
 `;
 
-exports[`fetchConfig() Getting the data should trigger fetchConfigSuccess() when response.success is true 2`] = `
+exports[`getConfigData() Getting the data should trigger fetchConfigSuccess() when response.success is true 2`] = `
 Object {
   "done": false,
   "value": Object {

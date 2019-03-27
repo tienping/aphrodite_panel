@@ -2,88 +2,28 @@
 
 exports[`getToken() should throw loginFailed() if the generator throws error 1`] = `
 Object {
-  "done": false,
-  "value": Object {
-    "@@redux-saga/IO": true,
-    "CALL": Object {
-      "args": Array [
-        "undefined/auth/token",
-        Object {
-          "headers": Object {
-            "authorization": "Basic Og==",
-          },
-          "method": "POST",
-        },
-      ],
-      "context": null,
-      "fn": [Function],
-    },
-  },
+  "done": true,
+  "value": undefined,
 }
 `;
 
 exports[`getToken() should trigger loginFailed() no response returned 1`] = `
 Object {
-  "done": false,
-  "value": Object {
-    "@@redux-saga/IO": true,
-    "CALL": Object {
-      "args": Array [
-        "undefined/auth/token",
-        Object {
-          "headers": Object {
-            "authorization": "Basic Og==",
-          },
-          "method": "POST",
-        },
-      ],
-      "context": null,
-      "fn": [Function],
-    },
-  },
+  "done": true,
+  "value": undefined,
 }
 `;
 
 exports[`getToken() should trigger loginFailed() when API returned falsy success 1`] = `
 Object {
-  "done": false,
-  "value": Object {
-    "@@redux-saga/IO": true,
-    "CALL": Object {
-      "args": Array [
-        "undefined/auth/token",
-        Object {
-          "headers": Object {
-            "authorization": "Basic Og==",
-          },
-          "method": "POST",
-        },
-      ],
-      "context": null,
-      "fn": [Function],
-    },
-  },
+  "done": true,
+  "value": undefined,
 }
 `;
 
 exports[`getToken() should trigger loginSuccess() when success 1`] = `
 Object {
-  "done": false,
-  "value": Object {
-    "@@redux-saga/IO": true,
-    "CALL": Object {
-      "args": Array [
-        "undefined/auth/token",
-        Object {
-          "headers": Object {
-            "authorization": "Basic Og==",
-          },
-          "method": "POST",
-        },
-      ],
-      "context": null,
-      "fn": [Function],
-    },
-  },
+  "done": true,
+  "value": undefined,
 }
 `;
