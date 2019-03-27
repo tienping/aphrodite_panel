@@ -520,6 +520,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     return <span>{date.toLocaleString()}</span>;
                 }
                 return null;
+            case 'object':
+                return <ReactJson src={row[col.key]} name={false} enableClipboard={false}></ReactJson>;
             case 'json':
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
             case 'link':
