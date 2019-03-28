@@ -209,7 +209,10 @@
         .gamicenter-imageUploader {
             margin-top: 1rem;
             padding: 0.5rem;
+            max-width: 50rem;
             box-shadow: 0px 0px 1px 0px RGBA(0, 0, 0, 0.3);
+
+            .filepond--root { margin-bottom: 0; }
 
             .image-preview {
                 height: 130px;
@@ -273,6 +276,8 @@
 
             input { font-size: 80%; max-width: 100%; cursor: pointer; }
         }
+
+        &.input-selection { max-width: 50rem; }
 
         .switch-button { vertical-align: middle; }
     }

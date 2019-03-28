@@ -28,6 +28,9 @@ import formSetting from 'utils/globalFormSetting';
 import tableSetting from 'utils/globalTableSetting';
 import globalScope from 'globalScope';
 
+import { FilePond } from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
+
 // import makeSelectFormButton from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -223,9 +226,20 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         switch (field.type) {
             case 'image':
                 return (
-                    <div>
+                    <div className="input-container input-type-image">
+                        <div>
+                            <span>Temporary input:</span>
+                            <input
+                                className=""
+                                placeholder="provide image server url here"
+                                value={dataChecking(this.state, 'imageServer', 'value') || ''}
+                                onChange={(value) => this.handleTextChange(value, { key: 'imageServer' })}
+                            />
+                            <div className="small">{`Detected server url: ${dataChecking(this.state, 'imageServer', 'value')}`}</div>
+                        </div>
                         <div className="gamicenter-imageUploader">
-                            <div className="image-preview">
+                            <FilePond allowMultiple={true} server={dataChecking(this.state, 'imageServer', 'value') || ''} />
+                            {/* <div className="image-preview">
                                 <span
                                     className="image-holder"
                                     onClick={() => {
@@ -266,13 +280,13 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     <i className="fas fa-cloud-upload-alt"></i> Upload
                                 </button>
                                 <input id={`${this.props.formId}-${field.key}-uploader`} className="upload-input" type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 );
             case 'file': // file type cannot be use together with other field, it need to be unique content during ajax call
                 return (
-                    <div>
+                    <div className="input-container input-type-file">
                         {
                             dataChecking(field, 'sample', 'url') ?
                                 <div className="link-for-sample">
@@ -352,36 +366,42 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 );
             case 'boolean':
                 return (
-                    <Switch
-                        className="switch-button px-1"
-                        onChange={(event) => {
-                            this.handleTextChange(event, field);
-                        }}
-                        checked={(this.state[field.key] && this.state[field.key].value) || false}
-                    />
+                    <span className="input-container input-type-boolean">
+                        <Switch
+                            className="switch-button px-1"
+                            onChange={(event) => {
+                                this.handleTextChange(event, field);
+                            }}
+                            checked={(this.state[field.key] && this.state[field.key].value) || false}
+                        />
+                    </span>
                 );
             case 'datetime':
                 return (
-                    <DatePicker
-                        showTimeSelect={true}
-                        timeFormat="HH:mm"
-                        dateFormat="dd/MM/yyyy  HH:mm"
-                        selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
-                        onChange={(value) => this.handleTextChange(value, field)}
-                    />
+                    <div className="input-container input-type-datetime">
+                        <DatePicker
+                            showTimeSelect={true}
+                            timeFormat="HH:mm"
+                            dateFormat="dd/MM/yyyy  HH:mm"
+                            selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
+                            onChange={(value) => this.handleTextChange(value, field)}
+                        />
+                    </div>
                 );
             case 'date':
                 return (
-                    <DatePicker
-                        selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
-                        onChange={(value) => this.handleTextChange(value, field)}
-                    />
+                    <div className="input-container input-type-date">
+                        <DatePicker
+                            selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
+                            onChange={(value) => this.handleTextChange(value, field)}
+                        />
+                    </div>
                 );
             case 'hidden':
                 return null;
             case 'textbox':
                 return (
-                    <div>
+                    <div className="input-container input-type-textbox">
                         <input
                             className="default-input-textbox"
                             placeholder={field.placeholder}
@@ -392,7 +412,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 );
             case 'textarea':
                 return (
-                    <div>
+                    <div className="input-container input-type-textarea">
                         <textarea
                             className="default-input-textarea"
                             placeholder={field.placeholder}
@@ -403,20 +423,22 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 );
             case 'selection':
                 return (
-                    <Select
-                        style={{ cursor: 'pointer' }}
-                        value={this.state[field.key]}
-                        default={itemsData[0]}
-                        closeMenuOnSelect={true}
-                        components={makeAnimated()}
-                        isMulti={field.isMulti || false}
-                        onChange={(value) => this.handleTextChange(value, field)}
-                        options={itemsData || []}
-                    />
+                    <div className="input-container input-type-selection">
+                        <Select
+                            style={{ cursor: 'pointer' }}
+                            value={this.state[field.key]}
+                            default={itemsData[0]}
+                            closeMenuOnSelect={true}
+                            components={makeAnimated()}
+                            isMulti={field.isMulti || false}
+                            onChange={(value) => this.handleTextChange(value, field)}
+                            options={itemsData || []}
+                        />
+                    </div>
                 );
             default:
                 return (
-                    <div>
+                    <div className="input-container input-type-default">
                         <input
                             className="default-input-type"
                             placeholder={field.placeholder}
