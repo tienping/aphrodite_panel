@@ -521,6 +521,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 }
                 return null;
             case 'object':
+                if (row[col.key] === null) {
+                    return <span className="text-danger text-strong">null</span>;
+                }
                 return <ReactJson src={row[col.key]} name={false} enableClipboard={false}></ReactJson>;
             case 'json':
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
