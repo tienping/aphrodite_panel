@@ -238,7 +238,11 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             <div className="small">{`Detected server url: ${dataChecking(this.state, 'imageServer', 'value')}`}</div>
                         </div>
                         <div className="gamicenter-imageUploader">
-                            <FilePond allowMultiple={true} server={dataChecking(this.state, 'imageServer', 'value') || ''} />
+                            <FilePond
+                                name={`image_${field.key}`}
+                                allowMultiple={true}
+                                server={dataChecking(this.state, 'imageServer', 'value') || ''}
+                            />
                             {/* <div className="image-preview">
                                 <span
                                     className="image-holder"
