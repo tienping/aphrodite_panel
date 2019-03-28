@@ -25,7 +25,7 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
 };
 
 const formSetting = {
-    sysvar: {
+    create_sysvar: {
         title: 'System Variable',
         // maxFormHeight: '430px',
         fields: [
@@ -34,6 +34,13 @@ const formSetting = {
             { key: 'start', label: 'Start Date & Time', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
             { key: 'end', label: 'End Date & Time', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
             { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value', doc: { description: 'desc' } },
+        ],
+    },
+    create_testing: {
+        title: 'Testing',
+        buttonWidth: '335px',
+        fields: [
+            { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
         ],
     },
     create_partner: {
