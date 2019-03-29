@@ -239,9 +239,38 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         </div>
                         <div className="gamicenter-imageUploader">
                             <FilePond
-                                name={`image_${field.key}`}
+                                name="file"
                                 allowMultiple={true}
-                                server={dataChecking(this.state, 'imageServer', 'value') || ''}
+                                // server="https://api-staging.hermo.my/services/fileman/public"
+                                server={{
+                                    url: dataChecking(this.state, 'imageServer', 'value') || '',
+                                    process: {
+                                        headers: {
+                                            'hertoken': globalScope.token,
+                                        },
+                                        // ondata: (fd) => {
+                                        //     console.log(fd);
+                                        //     fd.append('foo', 'bar');
+                                        //     return fd;
+                                        // },
+                                    },
+                                }}
+                                // server={{
+                                //     // fake server to simulate loading a 'local' server file and processing a file
+                                //     process: (fieldName, file, metadata, load) => {
+                                //         // simulates uploading a file
+                                //         setTimeout(() => {
+                                //             load(Date.now());
+                                //         }, 1500);
+                                //     },
+                                //     load: (source, load) => {
+                                //         // simulates loading a file from the server
+                                //         fetch(source).then((res) => res.blob()).then(load);
+                                //     },
+                                // }}
+                                // onupdatefiles={(fileItems) => {
+                                //     alert('onupdatefiles');
+                                // }}
                             />
                             {/* <div className="image-preview">
                                 <span

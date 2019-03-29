@@ -49,6 +49,7 @@ const tableSetting = {
     testing: {
         title: 'Just for testing',
         link: '/testing',
+        hideFromUser: true,
         description: 'just for testing',
         tableWidth: '35rem',
         api: 'https://api-staging.hermo.my/services/gami/partners/list',
