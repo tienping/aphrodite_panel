@@ -49,7 +49,7 @@ const formSetting = {
         buttonWidth: '335px',
         fields: [
             { key: 'name', label: 'Partner Name', type: 'textbox', mandatory: true, doc: { description: 'Partner name' } },
-            // { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
+            { key: 'logo', label: 'Logo', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
             { key: 'description', label: 'Description', type: 'textarea', mandatory: true, doc: { description: 'Example: [Food & beverage, Lifestyle, Fashion, Travel, Beauty Products]' } },
             {
                 key: 'industry',

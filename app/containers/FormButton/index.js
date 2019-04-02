@@ -28,7 +28,7 @@ import formSetting from 'utils/globalFormSetting';
 import tableSetting from 'utils/globalTableSetting';
 import globalScope from 'globalScope';
 
-import { FilePond } from 'react-filepond';
+import { FilePond } from 'assets/react-filepond.js';
 import 'filepond/dist/filepond.min.css';
 
 // import makeSelectFormButton from './selectors';
@@ -227,93 +227,28 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             case 'image':
                 return (
                     <div className="input-container input-type-image">
-                        <div>
-                            <span>Temporary input:</span>
-                            <input
-                                className=""
-                                placeholder="provide image server url here"
-                                value={dataChecking(this.state, 'imageServer', 'value') || ''}
-                                onChange={(value) => this.handleTextChange(value, { key: 'imageServer' })}
-                            />
-                            <div className="small">{`Detected server url: ${dataChecking(this.state, 'imageServer', 'value')}`}</div>
-                        </div>
                         <div className="gamicenter-imageUploader">
                             <FilePond
+                                id="gamicenter-imageUploader"
                                 name="file"
+                                ref={(ref) => (this.pond = ref)}
+                                files={this.state.filepondFiles}
+                                fileMetadata={{ hi: 'halo' }}
+                                onupdatefiles={(fileItems) => {
+                                    this.setState({
+                                        filepondFiles: fileItems.map((fileItem) => fileItem.file),
+                                    });
+                                }}
                                 allowMultiple={true}
-                                // server="https://api-staging.hermo.my/services/fileman/public"
                                 server={{
-                                    url: dataChecking(this.state, 'imageServer', 'value') || '',
+                                    url: 'https://api-staging.hermo.my/services/fileman/public',
                                     process: {
                                         headers: {
                                             'hertoken': globalScope.token,
                                         },
-                                        // ondata: (fd) => {
-                                        //     console.log(fd);
-                                        //     fd.append('foo', 'bar');
-                                        //     return fd;
-                                        // },
                                     },
                                 }}
-                                // server={{
-                                //     // fake server to simulate loading a 'local' server file and processing a file
-                                //     process: (fieldName, file, metadata, load) => {
-                                //         // simulates uploading a file
-                                //         setTimeout(() => {
-                                //             load(Date.now());
-                                //         }, 1500);
-                                //     },
-                                //     load: (source, load) => {
-                                //         // simulates loading a file from the server
-                                //         fetch(source).then((res) => res.blob()).then(load);
-                                //     },
-                                // }}
-                                // onupdatefiles={(fileItems) => {
-                                //     alert('onupdatefiles');
-                                // }}
                             />
-                            {/* <div className="image-preview">
-                                <span
-                                    className="image-holder"
-                                    onClick={() => {
-                                        const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
-                                        inputEl.click();
-                                    }}
-                                >
-                                    <img
-                                        className={`previewer-image ${dataChecking(this.state, field.key, 'url') ? '' : 'previewer-placeholder'}`}
-                                        width={dataChecking(this.state, field.key, 'url') ? '' : '70%'}
-                                        src={dataChecking(this.state, field.key, 'url') || require('../../Resources/arrow_up_upload-512.png')}
-                                        alt="preview upload"
-                                    />
-                                </span>
-                                {
-                                    dataChecking(this.state, field.key, 'url') ?
-                                        <span
-                                            className="close-btn"
-                                            onClick={(event) => {
-                                                this.onUnselectImage(event, `${this.props.formId}-${field.key}-uploader`, field);
-                                            }}
-                                        >
-                                            <img alt="unselect-upload" width="18px" src={require('../../Resources/ic-close.png')} />
-                                        </span>
-                                        :
-                                        null
-                                }
-                            </div>
-                            <div className="upload-action">
-                                <button
-                                    htmlFor={`${this.props.formId}-${field.key}-uploader`}
-                                    className="upload-button gamicenter-button"
-                                    onClick={() => {
-                                        const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
-                                        inputEl.click();
-                                    }}
-                                >
-                                    <i className="fas fa-cloud-upload-alt"></i> Upload
-                                </button>
-                                <input id={`${this.props.formId}-${field.key}-uploader`} className="upload-input" type="file" onChange={(event) => { this.onSelectImage(event, field); }}></input>
-                            </div> */}
                         </div>
                     </div>
                 );
