@@ -3195,8 +3195,7 @@
       // add metadata under same name
 
       // HERMO-CUSTOMIZATION-START: dont append metadata if it's empty
-      // if (isObject(metadata)) {
-      if (isObject(metadata) && Object.keys(metadata).length) {
+      if (false && isObject(metadata)) {
       // HERMO-CUSTOMIZATION-END: dont append metadata if it's empty
         formData.append(name, JSON.stringify(metadata));
       }

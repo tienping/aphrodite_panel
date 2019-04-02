@@ -280,6 +280,7 @@
         "cross-env": "5.0.0",
         "express": "^4.16.4",
         "filepond": "^4.3.5",
+        "filepond-plugin-image-preview": "^4.0.5",
         "fontfaceobserver": "2.0.9",
         "history": "4.6.3",
         "hoist-non-react-statics": "2.1.1",

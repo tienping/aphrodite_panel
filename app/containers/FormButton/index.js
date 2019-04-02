@@ -28,14 +28,18 @@ import formSetting from 'utils/globalFormSetting';
 import tableSetting from 'utils/globalTableSetting';
 import globalScope from 'globalScope';
 
-import { FilePond } from 'assets/react-filepond.js';
+import { FilePond, registerPlugin } from 'assets/react-filepond.js';
 import 'filepond/dist/filepond.min.css';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 // import makeSelectFormButton from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import * as tableListingActions from './../TableListingPage/actions';
 import './style.scss';
+
+registerPlugin(FilePondPluginImagePreview);
 
 export class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
@@ -232,20 +236,38 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                 id="gamicenter-imageUploader"
                                 name="file"
                                 ref={(ref) => (this.pond = ref)}
-                                files={this.state.filepondFiles}
+                                // files={dataChecking(this.state, field.key, 'preview')}
                                 fileMetadata={{ hi: 'halo' }}
-                                onupdatefiles={(fileItems) => {
-                                    this.setState({
-                                        filepondFiles: fileItems.map((fileItem) => fileItem.file),
-                                    });
-                                }}
-                                allowMultiple={true}
+                                // onupdatefiles={(fileItems) => {
+                                //     const obj = {};
+                                //     obj[field.key] = { preview: fileItems.map(
+                                //         (fileItem) => fileItem.file
+                                //     ) };
+                                //     this.setState(obj);
+                                // }}
+                                allowMultiple={false}
                                 server={{
-                                    url: 'https://api-staging.hermo.my/services/fileman/public',
                                     process: {
                                         headers: {
                                             'hertoken': globalScope.token,
                                         },
+                                        onload: (responseString) => {
+                                            try {
+                                                const response = JSON.parse(responseString);
+                                                const obj = {};
+                                                obj[field.key] = { value: {
+                                                    id: response.data[0].id,
+                                                    url: response.data[0].location,
+                                                } };
+                                                this.setState(obj);
+                                            } catch (error) {
+                                                console.warn('Invalid JSON from server', error);
+                                            }
+                                        },
+                                        onerror: (error) => {
+                                            console.warn('Upload image failed', error);
+                                        },
+                                        url: 'https://api-staging.hermo.my/services/fileman/public',
                                     },
                                 }}
                             />
