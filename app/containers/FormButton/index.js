@@ -235,9 +235,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             <FilePond
                                 id="gamicenter-imageUploader"
                                 name="file"
-                                ref={(ref) => (this.pond = ref)}
                                 // files={dataChecking(this.state, field.key, 'preview')}
-                                fileMetadata={{ hi: 'halo' }}
                                 // onupdatefiles={(fileItems) => {
                                 //     const obj = {};
                                 //     obj[field.key] = { preview: fileItems.map(
