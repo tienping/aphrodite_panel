@@ -16,7 +16,6 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 
 * title `string`
 * link `string`
-* createButtonWidth `xxpx or xxrem or xx% or xxvw`
 * iconClass `string`
 * tableWidth `xxpx or xxrem or xx% or xxvw`
 * api `string`

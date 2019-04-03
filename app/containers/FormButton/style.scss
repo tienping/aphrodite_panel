@@ -19,6 +19,11 @@
         .page-action-modal.triggered{
             position: fixed !important;
             top: 10% !important;
+
+            &.hide-first{
+                position: unset !important;
+                height: 0;
+            }
         }
     }
 }

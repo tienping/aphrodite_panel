@@ -10,7 +10,16 @@ body { font-size: 12px; }
 
 ol, ul { margin: 0; padding-left: 2rem; }
 
+.smaller { font-size: 75%; }
 .bigger { font-size: 130%; }
+
+.button-disabled {
+    color: gray !important;
+    border: 1px solid gray !important;
+    background-color: lightgray !important;
+    cursor: not-allowed !important;
+    transform: unset !important;
+}
 
 .gamicenter-button {
     font-size: 120%;
@@ -25,20 +34,20 @@ ol, ul { margin: 0; padding-left: 2rem; }
     outline: none;
 
     &.invert {
-        // background-color: transparent;
-        // color: #660033;
-        // border: 1px dashed #660033;
-
-        &:hover {
-            background-color: #FF0068;
-            color: RGBA(255, 255, 255, 0.85)
-        }
+        background-color: transparent;
+        color: #660033;
+        border: 1px dashed #660033;
     }
 
     &.smaller {
         font-size: 100%;
         padding: .75rem 3rem;
         margin: 1rem 0;
+
+        &:hover {
+            background-color: #FF0068;
+            color: RGBA(255, 255, 255, 0.85)
+        }
     }
 
     &:hover {

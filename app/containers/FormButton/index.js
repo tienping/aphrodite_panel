@@ -25,7 +25,6 @@ import injectReducer from 'utils/injectReducer';
 import { dataChecking } from 'globalUtils';
 import Switch from 'react-switch';
 import formSetting from 'utils/globalFormSetting';
-import tableSetting from 'utils/globalTableSetting';
 import globalScope from 'globalScope';
 
 import { FilePond, registerPlugin } from 'assets/react-filepond.js';
@@ -46,6 +45,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         super(props);
         this.state = {
             showModal: false,
+            uploadingImage: false,
         };
     }
 
@@ -69,26 +69,21 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         const comingformId = nextProps.formId.split('__#__')[0];
 
         if (formbutton.firing !== this.props.formbutton.firing) {
-            const tempObj = { firing: formbutton.firing };
-
             if (!formbutton.firing && formbutton.fireApiReturnedData && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
+                const tempObj = { firing: formbutton.firing };
+                const pageType = formbutton.pageType || this.props.pageType || '';
+
                 if (dataChecking(formbutton, 'fireApiReturnedData', 'message', 'content')) {
                     NotificationManager.success(formbutton.fireApiReturnedData.message.content, formbutton.fireApiReturnedData.message.title, 3000, () => {
                         if (dataChecking(formSetting[comingformId], 'successCallback')) {
                             formSetting[comingformId].successCallback();
                         }
                     });
-
-                    if (formbutton.getListApi) {
-                        this.props.dispatch(tableListingActions.getList({ api: formbutton.getListApi }));
-                    }
                 }
                 tempObj.showModal = false;
-                if (this.props.formId === 'create_partner') {
-                    this.props.dispatch(tableListingActions.getList({ api: tableSetting[this.props.pageType].api }));
-                }
+                tempObj.pageType = pageType;
+                this.onCompleting(tempObj);
             }
-            this.setState(tempObj);
         }
 
         if (formbutton.fireApiError && formbutton.fireApiError !== this.props.formbutton.fireApiError && formbutton.fireApiError.message) {
@@ -96,6 +91,20 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
             });
             console.log(formbutton.fireApiError);
+        }
+    }
+
+    onCompleting = (newState) => {
+        this.setState(newState);
+        if (this.props.onModalComplete && this.props.onModalComplete.constructor === Function) {
+            this.props.onModalComplete(newState);
+        }
+    }
+
+    onCancelling = (newState) => {
+        this.setState(newState);
+        if (this.props.onModalCancel && this.props.onModalCancel.constructor === Function) {
+            this.props.onModalCancel(newState);
         }
     }
 
@@ -192,6 +201,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     } else if (typeof field.defaultIndex === 'number') {
                         tempObj[field.key] = dataChecking(field, 'items', field.defaultIndex);
                     }
+                } else if (field.type === 'image' && value) {
+                    tempObj[field.key].current = value;
                 }
             });
         }
@@ -228,21 +239,60 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
 
         switch (field.type) {
+            case 'imagelink':
+                return (
+                    <div className="input-container input-type-image pb-2">
+                        <FormButton
+                            key="create-button"
+                            formId="create_imagelink"
+                            formSettingKey="create_imagelink"
+                            submitButtonText="Create Imagelink Now"
+                            formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
+                            onModalCancel={() => {
+                                this.setState({ showChildModal: false });
+                            }}
+                            onModalComplete={() => {
+                                this.setState({ showChildModal: false });
+                                alert('modal complete');
+                            }}
+                        >
+                            <div
+                                className="gamicenter-button smaller invert"
+                                onClick={() => {
+                                    this.setState({ showChildModal: true });
+                                }}
+                            >Create Imagelink</div>
+                        </FormButton>
+                    </div>
+                );
             case 'image':
                 return (
                     <div className="input-container input-type-image">
+                        {
+                            dataChecking(this.state, field.key, 'current') &&
+                                <div className="current-image-previewer">
+                                    <img
+                                        width="100px"
+                                        src={this.state[field.key].current}
+                                        alt="current-graphic-previewer"
+                                    />
+                                    <i className="fas fa-long-arrow-alt-left px-1"></i>
+                                    <span className="pr-1">current image</span>
+                                </div>
+                        }
                         <div className="gamicenter-imageUploader">
                             <FilePond
                                 id="gamicenter-imageUploader"
                                 name="file"
                                 // files={dataChecking(this.state, field.key, 'preview')}
-                                // onupdatefiles={(fileItems) => {
-                                //     const obj = {};
-                                //     obj[field.key] = { preview: fileItems.map(
-                                //         (fileItem) => fileItem.file
-                                //     ) };
-                                //     this.setState(obj);
-                                // }}
+                                onupdatefiles={() => {
+                                    const obj = {};
+                                    // obj[field.key] = { preview: fileItems.map(
+                                    //     (fileItem) => fileItem.file
+                                    // ) };
+                                    obj.uploadingImage = true;
+                                    this.setState(obj);
+                                }}
                                 allowMultiple={false}
                                 server={{
                                     process: {
@@ -253,19 +303,32 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             try {
                                                 const response = JSON.parse(responseString);
                                                 const obj = {};
-                                                obj[field.key] = { value: {
+                                                obj[field.key] = { ...this.state[field.key] };
+                                                obj[field.key].value = {
                                                     id: response.data[0].id,
                                                     url: response.data[0].location,
-                                                } };
+                                                };
                                                 this.setState(obj);
                                             } catch (error) {
                                                 console.warn('Invalid JSON from server', error);
                                             }
+                                            this.setState({
+                                                uploadingImage: false,
+                                            });
                                         },
                                         onerror: (error) => {
                                             console.warn('Upload image failed', error);
+                                            this.setState({
+                                                uploadingImage: false,
+                                            });
                                         },
-                                        url: 'https://api-staging.hermo.my/services/fileman/public',
+                                        onabort: (error) => {
+                                            console.warn('Upload image aborted', error);
+                                            this.setState({
+                                                uploadingImage: false,
+                                            });
+                                        },
+                                        url: field.serverUrl,
                                     },
                                 }}
                             />
@@ -369,6 +432,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <div className="input-container input-type-datetime">
                         <DatePicker
                             showTimeSelect={true}
+                            timeIntervals={1}
                             timeFormat="HH:mm"
                             dateFormat="dd/MM/yyyy  HH:mm"
                             selected={dataChecking(this.state, field.key, 'value') ? new Date(this.state[field.key].value) : null}
@@ -504,7 +568,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         maxHeight: `${this.state.showModal ? this.state.maxFormHeight : ''}`,
                         width: `${getModalWidth(this.props.style)}`,
                     }}
-                    className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
+                    className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''} ${this.state.showChildModal ? 'hide-first' : ''}`}
                 >
                     <div className="sticky-container">
                         <div style={{ position: 'relative' }}>
@@ -512,7 +576,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                 this.state.showModal ?
                                     <div
                                         className="modal-close-button"
-                                        onClick={() => { this.setState({ showModal: false }); }}
+                                        onClick={() => { this.onCancelling({ showModal: false }); }}
                                     >
                                         <i className="fas fa-window-close text-secondary-color bigger"></i>
                                     </div>
@@ -548,16 +612,20 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     <div className="submit-button">
                                         <hr />
                                         <div
-                                            className="gamicenter-button smaller"
+                                            className={`gamicenter-button smaller ${this.state.uploadingImage ? 'button-disabled' : ''}`}
                                             onClick={() => {
-                                                this.onSubmit();
+                                                if (this.state.uploadingImage) {
+                                                    alert('Please be patient until the image upload process to complete.');
+                                                } else {
+                                                    this.onSubmit();
+                                                }
                                             }}
                                         >
                                             {
                                                 this.state.firing ?
                                                     <span>loading...</span>
                                                     :
-                                                    <span>Submit</span>
+                                                    <span>{`${this.props.submitButtonText || 'Submit'}`}</span>
                                             }
                                         </div>
                                     </div>

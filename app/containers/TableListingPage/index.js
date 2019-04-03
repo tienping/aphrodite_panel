@@ -77,7 +77,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             if (nextProps.tablelistingpage[buttonKey] &&
                     nextProps.tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
                 obj[buttonKey] = nextProps.tablelistingpage[buttonKey];
-                obj[buttonKey].getListApi = tableSetting[this.props.pageType].api;
+                obj[buttonKey].pageType = this.props.pageType;
                 this.setState(obj);
             }
             return true;
@@ -180,6 +180,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         formSettingKey={`create_${this.props.pageType}`}
                                         // formType="attach"
                                         formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
+                                        onModalComplete={(newState) => {
+                                            this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                        }}
                                     >
                                         <div className="gamicenter-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
@@ -194,6 +197,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         formSettingKey={`upload_${this.props.pageType}`}
                                         // formType="attach"
                                         formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
+                                        onModalComplete={(newState) => {
+                                            this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                        }}
                                     >
                                         <div className="gamicenter-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
@@ -211,6 +217,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     formSettingKey={`create_${this.props.pageType}`}
                                     formType="attach"
                                     formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
+                                    onModalComplete={(newState) => {
+                                        this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                    }}
                                 >
                                     {item.title}
                                 </FormButton>
@@ -458,20 +467,23 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     {
                                         value.special === 'edit-form' ?
                                             <FormButton
-                                                key="create-button"
+                                                key="edit-button"
                                                 formId={`edit_${this.props.pageType}__#__${rowIndex}`}
                                                 formSettingKey={`edit_${this.props.pageType}`}
                                                 initialData={row}
                                                 formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
+                                                onModalComplete={(newState) => {
+                                                    this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                                }}
                                             >
-                                                <div className="gamicenter-button invert smaller px-1 py-half my-quater">
+                                                <div className="gamicenter-button smaller px-1 py-half my-quater">
                                                     <i className="fas fa-edit"></i>
                                                     <span className="pl-1">Edit</span>
                                                 </div>
                                             </FormButton>
                                             :
                                             <a
-                                                className="gamicenter-button invert smaller px-1 py-half my-quater"
+                                                className="gamicenter-button smaller px-1 py-half my-quater"
                                                 onClick={(value2, index2) => {
                                                     if (value.onPressHandling) {
                                                         value.onPressHandling(index2, this, row, actions);
