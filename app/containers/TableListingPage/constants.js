@@ -13,6 +13,7 @@ export const FIRE_API_SUCCESS = 'app/TableListing/FIRE_API_SUCCESS';
 export const FIRE_API_FAIL = 'app/TableListing/FIRE_API_FAIL';
 
 export const ADD_NEW_BUTTON_TO_LIST = 'app/TableListing/ADD_NEW_BUTTON_TO_LIST';
+export const TOGGLE_UTIL_FORM_BUTTON = 'app/TableListing/TOGGLE_UTIL_FORM_BUTTON';
 
 export const GET_DATA_KEY_VALUE = 'app/TableListing/GET_DATA_KEY_VALUE';
 export const GET_DATA_KEY_VALUE_SUCCESS = 'app/TableListing/GET_DATA_KEY_VALUE_SUCCESS';

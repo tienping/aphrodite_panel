@@ -13,6 +13,7 @@ import {
     FIRE_API_SUCCESS,
     FIRE_API_FAIL,
     ADD_NEW_BUTTON_TO_LIST,
+    TOGGLE_UTIL_FORM_BUTTON,
     GET_DATA_KEY_VALUE,
     GET_DATA_KEY_VALUE_SUCCESS,
     GET_DATA_KEY_VALUE_FAILED,
@@ -64,9 +65,21 @@ function tableListingPageReducer(state = initialState, action) {
             };
             return state
                 .set(`formButton_${action.formId}`, tempObj);
+        // -------------------------- end of GET_LIST -------------------------------
         case ADD_NEW_BUTTON_TO_LIST:
             return state
                 .set('addNewButtonToList', action.newButtonId);
+        // -------------------------- end of ADD_NEW_BUTTON_TO_LIST -------------------------------
+        case TOGGLE_UTIL_FORM_BUTTON:
+            // tempObj = state.get('toggleUtilFormButton') || {};
+            // tempObj[action.utilButtonId] = !tempObj[action.utilButtonId] || true;
+            return state
+                .set('toggleUtilFormButton', {
+                    id: action.utilButtonId,
+                    status: action.status,
+                    onSuccessCallback: action.onSuccessCallback,
+                    onFailureCallback: action.onFailureCallback,
+                });
         // -------------------------- end of GET_LIST -------------------------------
         case GET_DATA_KEY_VALUE:
             return state
@@ -81,6 +94,7 @@ function tableListingPageReducer(state = initialState, action) {
             return state
                 .set('getItemLoading', false)
                 .set('getItemError', true);
+        // -------------------------- end of GET_DATA_KEY_VALUE -------------------------------
         default:
             return state;
     }

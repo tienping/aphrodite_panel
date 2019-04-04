@@ -12,6 +12,7 @@ import {
     FIRE_API_SUCCESS,
     FIRE_API_FAIL,
     ADD_NEW_BUTTON_TO_LIST,
+    TOGGLE_UTIL_FORM_BUTTON,
     GET_DATA_KEY_VALUE,
     GET_DATA_KEY_VALUE_SUCCESS,
     GET_DATA_KEY_VALUE_FAILED,
@@ -68,6 +69,17 @@ export function addNewButtonToList(newButtonId) {
     return {
         type: ADD_NEW_BUTTON_TO_LIST,
         newButtonId,
+    };
+}
+
+// toggleUtilFormButton
+export function toggleUtilFormButton(utilButtonId, status, onSuccessCallback, onFailureCallback) {
+    return {
+        type: TOGGLE_UTIL_FORM_BUTTON,
+        utilButtonId,
+        status,
+        onSuccessCallback,
+        onFailureCallback,
     };
 }
 

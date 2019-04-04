@@ -70,7 +70,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
         if (formbutton.firing !== this.props.formbutton.firing) {
             if (!formbutton.firing && formbutton.fireApiReturnedData && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
-                const tempObj = { firing: formbutton.firing };
+                const params = { ...this.state };
                 const pageType = formbutton.pageType || this.props.pageType || '';
 
                 if (dataChecking(formbutton, 'fireApiReturnedData', 'message', 'content')) {
@@ -80,9 +80,10 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         }
                     });
                 }
-                tempObj.showModal = false;
-                tempObj.pageType = pageType;
-                this.onCompleting(tempObj);
+                params.firing = formbutton.firing;
+                params.pageType = pageType;
+                params.fireApiReturnedData = formbutton.fireApiReturnedData;
+                this.onCompleting({ showModal: false }, params);
             }
         }
 
@@ -92,19 +93,38 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             });
             console.log(formbutton.fireApiError);
         }
-    }
 
-    onCompleting = (newState) => {
-        this.setState(newState);
-        if (this.props.onModalComplete && this.props.onModalComplete.constructor === Function) {
-            this.props.onModalComplete(newState);
+        if (formbutton.toggleModal !== this.props.toggleModal) {
+            this.setState({ showModal: formbutton.toggleModal });
+        }
+
+        if (formbutton.onSuccessCallback && formbutton.onSuccessCallback !== this.props.onSuccessCallback) {
+            this.setState({ onSuccessCallback: formbutton.onSuccessCallback });
+        }
+
+        if (formbutton.onFailureCallback && formbutton.onFailureCallback !== this.props.onFailureCallback) {
+            this.setState({ onFailureCallback: formbutton.onFailureCallback });
         }
     }
 
-    onCancelling = (newState) => {
+    onCompleting = (newState, params) => {
+        this.setState(newState);
+        if (this.props.onModalComplete && this.props.onModalComplete.constructor === Function) {
+            this.props.onModalComplete(params);
+        }
+        if (this.state.onSuccessCallback && this.state.onSuccessCallback.constructor === Function) {
+            this.state.onSuccessCallback(params);
+        }
+    }
+
+    onCancelling = (newState, params) => {
         this.setState(newState);
         if (this.props.onModalCancel && this.props.onModalCancel.constructor === Function) {
             this.props.onModalCancel(newState);
+        }
+
+        if (this.state.onFailureCallback && this.state.onFailureCallback.constructor === Function) {
+            this.state.onFailureCallback(params);
         }
     }
 
@@ -241,28 +261,74 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         switch (field.type) {
             case 'imagelink':
                 return (
-                    <div className="input-container input-type-image pb-2">
-                        <FormButton
-                            key="create-button"
-                            formId="create_imagelink"
-                            formSettingKey="create_imagelink"
-                            submitButtonText="Create Imagelink Now"
-                            formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
-                            onModalCancel={() => {
-                                this.setState({ showChildModal: false });
-                            }}
-                            onModalComplete={() => {
-                                this.setState({ showChildModal: false });
-                                alert('modal complete');
-                            }}
-                        >
-                            <div
-                                className="gamicenter-button smaller invert"
-                                onClick={() => {
-                                    this.setState({ showChildModal: true });
-                                }}
-                            >Create Imagelink</div>
-                        </FormButton>
+                    <div className="input-container input-type-imagelink pb-2">
+                        {
+                            dataChecking(this.state, field.key, 'value') &&
+                                <div className="imagelink-previewer">
+                                    <div className="imagelink-previewer-item">
+                                        <div className="mobile-graphic-previewer">
+                                            {
+                                                dataChecking(this.state, field.key, 'preview', 'mobile') ?
+                                                    <img
+                                                        width="100px"
+                                                        src={this.state[field.key].preview.mobile}
+                                                        alt="current-mobile-graphic-previewer"
+                                                    />
+                                                    :
+                                                    <div className="no-image-placeholder">
+                                                        <div className="middle-align">No Image</div>
+                                                    </div>
+                                            }
+                                            <div className="smaller pt-half">Mobile Image</div>
+                                        </div>
+                                        <div className="desktop-graphic-previewer">
+                                            {
+                                                dataChecking(this.state, field.key, 'preview', 'desktop') ?
+                                                    <img
+                                                        width="100px"
+                                                        src={this.state[field.key].preview.desktop}
+                                                        alt="current-desktop-graphic-previewer"
+                                                    />
+                                                    :
+                                                    <div className="no-image-placeholder">
+                                                        <div className="middle-align">No Image</div>
+                                                    </div>
+                                            }
+                                            <div className="smaller pt-half">Desktop Image</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                        {
+                            !dataChecking(this.state, field.key, 'value') || field.allowMultiple ?
+                                <div
+                                    className="gamicenter-button smaller invert"
+                                    onClick={() => {
+                                        this.setState({ showingUtilModal: true });
+                                        this.props.dispatch(tableListingActions.toggleUtilFormButton(
+                                            'formButton_util_create_imagelink',
+                                            true,
+                                            (response) => {
+                                                const obj = {};
+                                                obj[field.key] = {
+                                                    value: response.fireApiReturnedData,
+                                                    preview: {
+                                                        desktop: dataChecking(response, 'desktop', 'value', 'url'),
+                                                        mobile: dataChecking(response, 'mobile', 'value', 'url'),
+                                                    },
+                                                };
+                                                obj.showingUtilModal = false;
+                                                this.setState(obj);
+                                            },
+                                            () => {
+                                                this.setState({ showingUtilModal: false });
+                                            },
+                                        ));
+                                    }}
+                                >Add Imagelink</div>
+                                :
+                                null
+                        }
                     </div>
                 );
             case 'image':
@@ -546,6 +612,10 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             return (style && style.width) || '2rem';
         };
 
+        if (this.state.showingUtilModal) {
+            return null;
+        }
+
         return (
             <div className={`FormButton-component ${this.props.formType === 'attach' ? 'attach' : 'popout'}`}>
                 {
@@ -568,7 +638,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         maxHeight: `${this.state.showModal ? this.state.maxFormHeight : ''}`,
                         width: `${getModalWidth(this.props.style)}`,
                     }}
-                    className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''} ${this.state.showChildModal ? 'hide-first' : ''}`}
+                    className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
                 >
                     <div className="sticky-container">
                         <div style={{ position: 'relative' }}>

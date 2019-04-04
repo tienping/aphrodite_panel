@@ -50,6 +50,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
     componentWillReceiveProps(nextProps) {
         let obj = {};
+        const { tablelistingpage } = nextProps;
 
         if (nextProps.pageType !== this.props.pageType) {
             this.setState(this.initialiseProps(nextProps));
@@ -58,8 +59,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             }
         }
 
-        if (nextProps.tablelistingpage.data !== this.props.tablelistingpage.data) {
-            const { data } = nextProps.tablelistingpage;
+        if (tablelistingpage.data !== this.props.tablelistingpage.data) {
+            const { data } = tablelistingpage;
             // const fields = tableSetting[nextProps.pageType].fields;
             // const result = this.toggledSortResult(0, fields[0].type, dataChecking(data, 'data', 'items')) || [];
             this.setState({
@@ -74,24 +75,24 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         this.state.formButtonList.map((buttonKey) => {
-            if (nextProps.tablelistingpage[buttonKey] &&
-                    nextProps.tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
-                obj[buttonKey] = nextProps.tablelistingpage[buttonKey];
+            if (tablelistingpage[buttonKey] &&
+                    tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
+                obj[buttonKey] = tablelistingpage[buttonKey];
                 obj[buttonKey].pageType = this.props.pageType;
                 this.setState(obj);
             }
             return true;
         });
 
-        if (nextProps.tablelistingpage.addNewButtonToList !== this.props.tablelistingpage.addNewButtonToList
-                && !this.state.formButtonList[nextProps.tablelistingpage.addNewButtonToList]) {
+        if (tablelistingpage.addNewButtonToList !== this.props.tablelistingpage.addNewButtonToList
+                && !this.state.formButtonList[tablelistingpage.addNewButtonToList]) {
             obj = this.state.formButtonList;
-            obj.push(nextProps.tablelistingpage.addNewButtonToList);
+            obj.push(tablelistingpage.addNewButtonToList);
             this.setState({ formButtonList: obj });
         }
 
-        if (nextProps.tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
-            const { data, field, buttonId } = nextProps.tablelistingpage.getItemData;
+        if (tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
+            const { data, field, buttonId } = tablelistingpage.getItemData;
 
             const arr = dataChecking(data, field.itemDataPath) || [];
             const tempItems = [];
@@ -107,6 +108,30 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             if (buttonId) {
                 console.log(buttonId);
             }
+        }
+
+        this.state.formButtonList.map((buttonKey) => {
+            if (tablelistingpage[buttonKey] &&
+                    tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
+                obj[buttonKey] = tablelistingpage[buttonKey];
+                obj[buttonKey].pageType = this.props.pageType;
+                this.setState(obj);
+            }
+            return true;
+        });
+
+        if (tablelistingpage.toggleUtilFormButton !== this.props.tablelistingpage.toggleUtilFormButton) {
+            const { toggleUtilFormButton } = tablelistingpage;
+            const current = { ...this.state[toggleUtilFormButton.id] };
+            current.toggleModal = toggleUtilFormButton.status;
+            current.onSuccessCallback = toggleUtilFormButton.onSuccessCallback;
+            current.onFailureCallback = toggleUtilFormButton.onFailureCallback;
+
+            obj = this.state.formButtonList;
+            if (toggleUtilFormButton.status && !obj.includes(toggleUtilFormButton.id)) {
+                obj.push(toggleUtilFormButton.id);
+            }
+            this.setState({ formButtonList: obj, [toggleUtilFormButton.id]: current });
         }
     }
 
@@ -451,6 +476,25 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         );
     }
 
+    renderUtilModals = () => (
+        <div>
+            <FormButton
+                key="util-create-imagelink"
+                formId="util_create_imagelink"
+                formSettingKey="create_imagelink"
+                submitButtonText="Create Imagelink Now"
+                formbutton={this.state.formButton_util_create_imagelink || {}}
+                onModalCancel={() => {
+                    this.props.dispatch(actions.toggleUtilFormButton('formButton_util_create_imagelink', false));
+                }}
+                onModalComplete={() => {
+                    this.props.dispatch(actions.toggleUtilFormButton('formButton_util_create_imagelink', false));
+                }}
+                dispatch={this.props.dispatch}
+            ></FormButton>
+        </div>
+    );
+
     renderCell = (row, col, rowIndex) => {
         let date = null;
 
@@ -504,8 +548,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         }
                     </div>
                 );
-            case 'checkbox':
-                return <span>[ ]</span>;
             case 'boolean':
                 return (
                     // <Switch
@@ -525,13 +567,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     date = new Date(row[col.key]);
                     return <span>{date.toLocaleDateString()}</span>;
                 }
-                return null;
+                return <span className="text-disabled">---</span>;
             case 'datetime':
                 if (row[col.key]) {
                     date = new Date(row[col.key]);
                     return <span>{date.toLocaleString()}</span>;
                 }
-                return null;
+                return <span className="text-disabled">---</span>;
             case 'object':
                 if (row[col.key] === null) {
                     return <span className="text-danger text-strong">null</span>;
@@ -588,6 +630,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         </div>
                     </div>
                 );
+            case 'checkbox':
+                return <span>[ ]</span>;
+            case 'integer':
+                return <span className="cell-type-integer">{row[col.key]}</span>;
             default:
                 return <span>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
         }
@@ -613,6 +659,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 </div> */}
                 {this.renderMenu()}
                 {this.renderTable()}
+                {this.renderUtilModals()}
             </div>
         );
     }

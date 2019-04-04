@@ -19,11 +19,6 @@
         .page-action-modal.triggered{
             position: fixed !important;
             top: 10% !important;
-
-            &.hide-first{
-                position: unset !important;
-                height: 0;
-            }
         }
     }
 }
@@ -282,7 +277,39 @@
             input { font-size: 80%; max-width: 100%; cursor: pointer; }
         }
 
+        // &.input
+
         &.input-selection { max-width: 50rem; }
+
+        .input-type-imagelink {
+            .imagelink-previewer-item {
+                background-color: #eeeeee;
+                display: inline-block;
+                border: 1px solid #660033;
+
+                .mobile-graphic-previewer,
+                .desktop-graphic-previewer {
+                    margin: .5rem;
+                    display: inline-block;
+                    text-align: center;
+                }
+            }
+
+            .no-image-placeholder {
+                display: block;
+                width: 100px;
+                height: 100px;
+                background-color: lightgray;
+                color: gray;
+                border: 1px solid gray;
+
+                .middle-align {
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
 
         .switch-button { vertical-align: middle; }
     }
