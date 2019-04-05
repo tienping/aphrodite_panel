@@ -522,7 +522,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <div className="input-container input-type-textbox">
                         <input
                             className="default-input-textbox"
-                            placeholder={field.placeholder}
+                            placeholder={field.placeholder || (field.doc && field.doc.description)}
                             value={dataChecking(this.state, field.key, 'value') || ''}
                             onChange={(value) => this.handleTextChange(value, field)}
                         />
@@ -533,7 +533,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     <div className="input-container input-type-textarea">
                         <textarea
                             className="default-input-textarea"
-                            placeholder={field.placeholder}
+                            placeholder={field.placeholder || (field.doc && field.doc.description)}
                             value={dataChecking(this.state, field.key, 'value') || ''}
                             onChange={(value) => this.handleTextChange(value, field)}
                         />
