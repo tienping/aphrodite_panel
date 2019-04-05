@@ -165,7 +165,17 @@ const formSetting = {
         title: 'Create Partner Voucher',
         // maxFormHeight: '363px',
         fields: [
-            { key: 'event_id', label: 'Event ID', type: 'textbox', mandatory: true, doc: { description: 'ID of the parent Partner Event' } },
+            {
+                key: 'event_id',
+                label: 'Event ID',
+                type: 'selection',
+                mandatory: true,
+                doc: { description: 'ID of the parent Partner Event' },
+                itemApi: 'https://api-staging.hermo.my/services/gami/rewards/partner_event_list?page_size=999999',
+                itemDataPath: ['data', 'items'],
+                itemDataValuePath: ['id'],
+                itemDataLabelPath: ['name'],
+            },
             {
                 key: 'voucher_code',
                 label: 'Voucher Code',
