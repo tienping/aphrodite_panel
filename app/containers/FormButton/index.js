@@ -263,40 +263,49 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 return (
                     <div className="input-container input-type-imagelink pb-2">
                         {
-                            dataChecking(this.state, field.key, 'value') &&
+                            dataChecking(this.state, field.key) &&
                                 <div className="imagelink-previewer">
-                                    <div className="imagelink-previewer-item">
-                                        <div className="mobile-graphic-previewer">
-                                            {
-                                                dataChecking(this.state, field.key, 'preview', 'mobile') ?
-                                                    <img
-                                                        width="100px"
-                                                        src={this.state[field.key].preview.mobile}
-                                                        alt="current-mobile-graphic-previewer"
-                                                    />
-                                                    :
-                                                    <div className="no-image-placeholder">
-                                                        <div className="middle-align">No Image</div>
+                                    {
+                                        dataChecking(this.state, field.key, 'length') ?
+                                            this.state[field.key].map((imagelink, index) => (
+                                                <div className="imagelink-previewer-item" key={index}>
+                                                    <div className="imagelink-previewer-inner-div" key={index}>
+                                                        <div className="mobile-graphic-previewer">
+                                                            {
+                                                                dataChecking(imagelink, 'preview', 'mobile') ?
+                                                                    <img
+                                                                        width="100px"
+                                                                        src={imagelink.preview.mobile}
+                                                                        alt="current-mobile-graphic-previewer"
+                                                                    />
+                                                                    :
+                                                                    <div className="no-image-placeholder">
+                                                                        <div className="middle-align">No Image</div>
+                                                                    </div>
+                                                            }
+                                                            <div className="smaller pt-half">Mobile Image</div>
+                                                        </div>
+                                                        <div className="desktop-graphic-previewer">
+                                                            {
+                                                                dataChecking(imagelink, 'preview', 'desktop') ?
+                                                                    <img
+                                                                        width="100px"
+                                                                        src={imagelink.preview.desktop}
+                                                                        alt="current-desktop-graphic-previewer"
+                                                                    />
+                                                                    :
+                                                                    <div className="no-image-placeholder">
+                                                                        <div className="middle-align">No Image</div>
+                                                                    </div>
+                                                            }
+                                                            <div className="smaller pt-half">Desktop Image</div>
+                                                        </div>
                                                     </div>
-                                            }
-                                            <div className="smaller pt-half">Mobile Image</div>
-                                        </div>
-                                        <div className="desktop-graphic-previewer">
-                                            {
-                                                dataChecking(this.state, field.key, 'preview', 'desktop') ?
-                                                    <img
-                                                        width="100px"
-                                                        src={this.state[field.key].preview.desktop}
-                                                        alt="current-desktop-graphic-previewer"
-                                                    />
-                                                    :
-                                                    <div className="no-image-placeholder">
-                                                        <div className="middle-align">No Image</div>
-                                                    </div>
-                                            }
-                                            <div className="smaller pt-half">Desktop Image</div>
-                                        </div>
-                                    </div>
+                                                </div>
+                                        ))
+                                        :
+                                        null
+                                    }
                                 </div>
                         }
                         {
@@ -309,16 +318,26 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             'formButton_util_create_imagelink',
                                             true,
                                             (response) => {
-                                                const obj = {};
-                                                obj[field.key] = {
+                                                const newState = {};
+                                                newState.showingUtilModal = false;
+
+                                                const imagelinkData = {
                                                     value: response.fireApiReturnedData,
                                                     preview: {
                                                         desktop: dataChecking(response, 'desktop', 'value', 'url'),
                                                         mobile: dataChecking(response, 'mobile', 'value', 'url'),
                                                     },
                                                 };
-                                                obj.showingUtilModal = false;
-                                                this.setState(obj);
+
+                                                if (field.allowMultiple) {
+                                                    const arr = (this.state[field.key] && this.state[field.key].length) ? this.state[field.key] : [];
+                                                    arr.push(imagelinkData);
+                                                    newState[field.key] = arr;
+                                                } else {
+                                                    newState[field.key] = [imagelinkData];
+                                                }
+
+                                                this.setState(newState);
                                             },
                                             () => {
                                                 this.setState({ showingUtilModal: false });

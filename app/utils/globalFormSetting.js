@@ -39,7 +39,7 @@ const formSetting = {
     create_testing: {
         title: 'Testing',
         fields: [
-            { key: 'banner', label: 'Banner', type: 'imagelink', doc: { description: 'Banner for the campaign' } },
+            { key: 'banner', label: 'Banner', type: 'imagelink', allowMultiple: true, doc: { description: 'Banner for the campaign' } },
         ],
     },
     create_partner: {
