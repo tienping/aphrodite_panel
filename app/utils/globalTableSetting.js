@@ -222,7 +222,7 @@ const tableSetting = {
             // { key: 'event_code', label: 'Event Code', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
             { key: 'event', label: 'Event', width: '20rem', align: 'left', type: 'string', doc: { description: 'ID/code of the corresponding Partner Event' } },
             { key: 'partner', label: 'Partner', width: '20rem', align: 'left', type: 'string', doc: { description: 'Name or label for the promotion' } },
-            { key: 'user_id', label: 'User', width: '10rem', align: 'left', type: 'string', doc: { description: 'User that owning the voucher' } },
+            { key: 'user_id', label: 'User', width: '10rem', align: 'center', type: 'string', doc: { description: 'User that owning the voucher' } },
             { key: 'voucher_code', label: 'Voucher Code', width: '20rem', align: 'center', type: 'string', doc: { description: 'Voucher code given by vendor (consult tech team if having trouble getting codes)' } },
             // { key: 'user_id', label: 'TNC', width: '60rem', align: 'left', type: 'string', doc: { description: 'The user/customer which own this voucher' } },
             // { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this voucher' } },
