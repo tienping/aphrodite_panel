@@ -67,6 +67,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     componentWillReceiveProps(nextProps) {
         const { formbutton } = nextProps;
         const comingformId = nextProps.formId.split('__#__')[0];
+        const newState = {};
 
         if (formbutton.firing !== this.props.formbutton.firing) {
             if (!formbutton.firing && formbutton.fireApiReturnedData && formbutton.fireApiReturnedData !== this.props.formbutton.fireApiReturnedData) {
@@ -83,7 +84,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 params.firing = formbutton.firing;
                 params.pageType = pageType;
                 params.fireApiReturnedData = formbutton.fireApiReturnedData;
-                this.onCompleting({ showModal: false }, params);
+                this.onCompleting({}, params);
             }
         }
 
@@ -95,19 +96,39 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
 
         if (formbutton.toggleModal !== this.props.toggleModal) {
-            this.setState({ showModal: formbutton.toggleModal });
+            newState.showModal = formbutton.toggleModal;
         }
+        // if (formbutton.toggleModal !== this.props.toggleModal) {
+        //     let newState = {};
+        //     if (formbutton.toggleModal && formbutton.resetOnClose) {
+        //         newState = this.initializedFormData({}, this.state.formSettingKey);
+        //     }
+        //     newState.showModal = formbutton.toggleModal;
+        //     this.setState(newState);
+        // }
 
         if (formbutton.onSuccessCallback && formbutton.onSuccessCallback !== this.props.onSuccessCallback) {
-            this.setState({ onSuccessCallback: formbutton.onSuccessCallback });
+            newState.onSuccessCallback = formbutton.onSuccessCallback;
         }
 
         if (formbutton.onFailureCallback && formbutton.onFailureCallback !== this.props.onFailureCallback) {
-            this.setState({ onFailureCallback: formbutton.onFailureCallback });
+            newState.onFailureCallback = formbutton.onFailureCallback;
         }
+
+        if (formbutton.resetOnClose && !this.state.resetOnClose) {
+            newState.resetOnClose = formbutton.resetOnClose;
+        }
+
+        this.setState(newState);
     }
 
-    onCompleting = (newState, params) => {
+    onCompleting = (stateToBe, params) => {
+        let newState = { ...stateToBe };
+        newState.showModal = false;
+        if (this.state.resetOnClose) {
+            newState = this.initializedFormData(newState, this.state.formSettingKey);
+        }
+
         this.setState(newState);
         if (this.props.onModalComplete && this.props.onModalComplete.constructor === Function) {
             this.props.onModalComplete(params);
@@ -117,7 +138,13 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
     }
 
-    onCancelling = (newState, params) => {
+    onCancelling = (stateToBe, params) => {
+        let newState = { ...stateToBe };
+        newState.showModal = false;
+        if (this.state.resetOnClose) {
+            newState = this.initializedFormData(newState, this.state.formSettingKey);
+        }
+
         this.setState(newState);
         if (this.props.onModalCancel && this.props.onModalCancel.constructor === Function) {
             this.props.onModalCancel(newState);
@@ -316,7 +343,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                         this.setState({ showingUtilModal: true });
                                         this.props.dispatch(tableListingActions.toggleUtilFormButton(
                                             'formButton_util_create_imagelink',
-                                            true,
+                                            true, // toggle status
                                             (response) => {
                                                 const newState = {};
                                                 newState.showingUtilModal = false;
@@ -342,6 +369,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             () => {
                                                 this.setState({ showingUtilModal: false });
                                             },
+                                            true, // resetOnClose
                                         ));
                                     }}
                                 >Add Imagelink</div>
@@ -351,6 +379,9 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     </div>
                 );
             case 'image':
+                if (!this.state.showModal) {
+                    return null;
+                }
                 return (
                     <div className="input-container input-type-image">
                         {
@@ -369,12 +400,12 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             <FilePond
                                 id="gamicenter-imageUploader"
                                 name="file"
-                                // files={dataChecking(this.state, field.key, 'preview')}
-                                onupdatefiles={() => {
+                                files={dataChecking(this.state, field.key, 'uploadingFile')}
+                                onupdatefiles={(fileItems) => {
                                     const obj = {};
-                                    // obj[field.key] = { preview: fileItems.map(
-                                    //     (fileItem) => fileItem.file
-                                    // ) };
+                                    obj[field.key] = { uploadingFile: fileItems.map(
+                                        (fileItem) => fileItem.file
+                                    ) };
                                     obj.uploadingImage = true;
                                     this.setState(obj);
                                 }}
@@ -665,7 +696,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                 this.state.showModal ?
                                     <div
                                         className="modal-close-button"
-                                        onClick={() => { this.onCancelling({ showModal: false }); }}
+                                        onClick={() => { this.onCancelling({}); }}
                                     >
                                         <i className="fas fa-window-close text-secondary-color bigger"></i>
                                     </div>

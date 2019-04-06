@@ -124,6 +124,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             const { toggleUtilFormButton } = tablelistingpage;
             const current = { ...this.state[toggleUtilFormButton.id] };
             current.toggleModal = toggleUtilFormButton.status;
+            current.resetOnClose = toggleUtilFormButton.resetOnClose;
             current.onSuccessCallback = toggleUtilFormButton.onSuccessCallback;
             current.onFailureCallback = toggleUtilFormButton.onFailureCallback;
 

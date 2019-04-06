@@ -79,6 +79,7 @@ function tableListingPageReducer(state = initialState, action) {
                     status: action.status,
                     onSuccessCallback: action.onSuccessCallback,
                     onFailureCallback: action.onFailureCallback,
+                    resetOnClose: action.resetOnClose,
                 });
         // -------------------------- end of GET_LIST -------------------------------
         case GET_DATA_KEY_VALUE:

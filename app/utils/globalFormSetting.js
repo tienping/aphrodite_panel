@@ -105,7 +105,7 @@ const formSetting = {
                 itemDataValuePath: ['id'],
                 itemDataLabelPath: ['name'],
             },
-            { key: 'banner', label: 'Banner', type: 'imagelink', doc: { description: 'Banner for the campaign' } },
+            { key: 'banner', label: 'Banner', type: 'imagelink', allowMultiple: true, doc: { description: 'Banner for the campaign' } },
             // {
             //     key: 'partner',
             //     label: 'Partner\'s ID',

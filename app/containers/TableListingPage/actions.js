@@ -73,13 +73,14 @@ export function addNewButtonToList(newButtonId) {
 }
 
 // toggleUtilFormButton
-export function toggleUtilFormButton(utilButtonId, status, onSuccessCallback, onFailureCallback) {
+export function toggleUtilFormButton(utilButtonId, status, onSuccessCallback, onFailureCallback, resetOnClose) {
     return {
         type: TOGGLE_UTIL_FORM_BUTTON,
         utilButtonId,
         status,
         onSuccessCallback,
         onFailureCallback,
+        resetOnClose,
     };
 }
 
