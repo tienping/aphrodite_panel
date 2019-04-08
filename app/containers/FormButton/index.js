@@ -293,8 +293,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             dataChecking(this.state, field.key) &&
                                 <div className="imagelink-previewer">
                                     {
-                                        dataChecking(this.state, field.key, 'length') ?
-                                            this.state[field.key].map((imagelink, index) => (
+                                        dataChecking(this.state, field.key, 'value', 'length') ?
+                                            this.state[field.key].value.map((imagelink, index) => (
                                                 <div className="imagelink-previewer-item" key={index}>
                                                     <div className="imagelink-previewer-inner-div" key={index}>
                                                         <div className="mobile-graphic-previewer">
@@ -349,7 +349,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                 newState.showingUtilModal = false;
 
                                                 const imagelinkData = {
-                                                    value: response.fireApiReturnedData,
+                                                    data: response.fireApiReturnedData,
                                                     preview: {
                                                         desktop: dataChecking(response, 'desktop', 'value', 'url'),
                                                         mobile: dataChecking(response, 'mobile', 'value', 'url'),
@@ -357,11 +357,16 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                 };
 
                                                 if (field.allowMultiple) {
-                                                    const arr = (this.state[field.key] && this.state[field.key].length) ? this.state[field.key] : [];
+                                                    const arr = (this.state[field.key] && this.state[field.key].value && this.state[field.key].value.length) ?
+                                                        [...this.state[field.key].value] : [];
                                                     arr.push(imagelinkData);
-                                                    newState[field.key] = arr;
+                                                    newState[field.key] = {
+                                                        value: arr,
+                                                    };
                                                 } else {
-                                                    newState[field.key] = [imagelinkData];
+                                                    newState[field.key] = {
+                                                        value: [imagelinkData],
+                                                    };
                                                 }
 
                                                 this.setState(newState);
