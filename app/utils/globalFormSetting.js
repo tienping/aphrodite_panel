@@ -27,14 +27,17 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
 const formSetting = {
     create_sysvar: {
         title: 'System Variable',
-        // maxFormHeight: '430px',
         fields: [
-            { key: 'key', label: 'Key', type: 'textbox', placeholder: 'Key of variable', mandatory: true, doc: { description: 'desc' } },
-            { key: 'category', label: 'Category', type: 'textbox', placeholder: 'Category', doc: { description: 'desc' } },
-            { key: 'start', label: 'Start Date & Time', type: 'datetime', placeholder: 'Start date', doc: { description: 'desc' } },
-            { key: 'end', label: 'End Date & Time', type: 'datetime', placeholder: 'End date', doc: { description: 'desc' } },
-            { key: 'value', label: 'Value', type: 'textbox', placeholder: 'JSON object value', doc: { description: 'desc' } },
+            { key: 'key', label: 'Key', type: 'textbox', mandatory: true, doc: { description: 'Key of variable' } },
+            { key: 'category', label: 'Category', type: 'textbox', doc: { description: 'Category of variable' } },
+            { key: 'value', label: 'Value', type: 'textarea', doc: { description: 'JSON object value' } },
+            { key: 'service', label: 'Service', type: 'textbox', doc: { description: 'Service used' } },
+            { key: 'setting', label: 'Setting', type: 'textarea', doc: { description: 'JSON object setting' } },
+            { key: 'remark', label: 'Remark', type: 'textarea', doc: { description: 'Anything to note down' } },
         ],
+        onSubmit: (scope, tableListingActions, data, fields) => {
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'systems/variables');
+        },
     },
     create_testing: {
         title: 'Testing',
@@ -371,21 +374,11 @@ const formSetting = {
             },
         ],
         onSubmit: (scope, tableListingActions, data) => {
-            const obj = {};
-            if (data.desktop && data.desktop.value) {
-                obj.desktop = {
-                    id: data.desktop.value.id,
-                    location: data.desktop.value.url,
-                };
-            }
-            if (data.mobile && data.mobile.value) {
-                obj.mobile = {
-                    id: data.mobile.value.id,
-                    location: data.mobile.value.url,
-                };
-            }
             scope.props.dispatch(tableListingActions.fireApi({
-                data: { items: [obj] },
+                data: { items: [{
+                    desktop: (data.desktop && data.desktop.value) || null,
+                    mobile: (data.mobile && data.mobile.value) || null,
+                }] },
                 apiUrl: 'https://api-staging.hermo.my/services/imagelink/default',
                 type: 'post',
             }, scope.props.formId));

@@ -351,8 +351,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                 const imagelinkData = {
                                                     data: response.fireApiReturnedData,
                                                     preview: {
-                                                        desktop: dataChecking(response, 'desktop', 'value', 'url'),
-                                                        mobile: dataChecking(response, 'mobile', 'value', 'url'),
+                                                        desktop: dataChecking(response, 'desktop', 'value', 'location'),
+                                                        mobile: dataChecking(response, 'mobile', 'value', 'location'),
                                                     },
                                                 };
 
@@ -425,10 +425,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                                 const response = JSON.parse(responseString);
                                                 const obj = {};
                                                 obj[field.key] = { ...this.state[field.key] };
-                                                obj[field.key].value = {
-                                                    id: response.data[0].id,
-                                                    url: response.data[0].location,
-                                                };
+                                                obj[field.key].value = response.data[0];
                                                 this.setState(obj);
                                             } catch (error) {
                                                 console.warn('Invalid JSON from server', error);
