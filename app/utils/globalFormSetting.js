@@ -9,6 +9,8 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
             extractedData[field.key] = dateValue.toISOString();
         } else if (field.type === 'textbox' || field.type === 'textbox') {
             extractedData[field.key] = `${data[field.key].value}`;
+        } else if (field.type === 'json' || field.type === 'textbox') {
+            extractedData[field.key] = null;
         } else {
             extractedData[field.key] = data[field.key].value;
         }
@@ -25,25 +27,38 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
 };
 
 const formSetting = {
-    create_sysvar: {
-        title: 'System Variable',
-        fields: [
-            { key: 'key', label: 'Key', type: 'textbox', mandatory: true, doc: { description: 'Key of variable' } },
-            { key: 'category', label: 'Category', type: 'textbox', doc: { description: 'Category of variable' } },
-            { key: 'value', label: 'Value', type: 'textarea', doc: { description: 'JSON object value' } },
-            { key: 'service', label: 'Service', type: 'textbox', doc: { description: 'Service used' } },
-            { key: 'setting', label: 'Setting', type: 'textarea', doc: { description: 'JSON object setting' } },
-            { key: 'remark', label: 'Remark', type: 'textarea', doc: { description: 'Anything to note down' } },
-        ],
-        onSubmit: (scope, tableListingActions, data, fields) => {
-            fieldOnSubmit(scope, tableListingActions, data, fields, 'systems/variables');
-        },
-    },
     create_testing: {
         title: 'Testing',
         fields: [
             { key: 'banner', label: 'Banner', type: 'imagelink', allowMultiple: true, doc: { description: 'Banner for the campaign' } },
         ],
+    },
+    create_sysconf: {
+        title: 'System Configuration',
+        fields: [
+            { key: 'key', label: 'Key', type: 'textbox', mandatory: true, doc: { description: 'Key of variable' } },
+            { key: 'type', label: 'Type', type: 'textbox', doc: { description: 'Category of variable' } },
+            { key: 'value', label: 'Value', type: 'json', doc: { description: 'JSON object value' } },
+            { key: 'service', label: 'Service', type: 'textbox', doc: { description: 'Service used' } },
+            { key: 'setting', label: 'Setting', type: 'json', doc: { description: 'JSON object setting' } },
+        ],
+        onSubmit: (scope, tableListingActions, data, fields) => {
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'systems/configs');
+        },
+    },
+    create_sysvar: {
+        title: 'System Variable',
+        fields: [
+            { key: 'key', label: 'Key', type: 'textbox', doc: { description: 'Key of variable' } },
+            { key: 'category', label: 'Category', type: 'textbox', doc: { description: 'Category of variable' } },
+            { key: 'value', label: 'Value', type: 'json', doc: { description: 'JSON object value' } },
+            { key: 'service', label: 'Service', type: 'textbox', doc: { description: 'Service used' } },
+            { key: 'setting', label: 'Setting', type: 'json', doc: { description: 'JSON object setting' } },
+            { key: 'remark', label: 'Remark', type: 'textarea', doc: { description: 'Anything to note down' } },
+        ],
+        onSubmit: (scope, tableListingActions, data, fields) => {
+            fieldOnSubmit(scope, tableListingActions, data, fields, 'systems/variables');
+        },
     },
     create_partner: {
         title: 'Create Partner',
@@ -412,6 +427,20 @@ formSetting.edit_levent.title = 'Edit Hermo Event Details';
 formSetting.edit_levent.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
 formSetting.edit_levent.onSubmit = (scope, tableListingActions, data, fields) => {
     fieldOnSubmit(scope, tableListingActions, data, fields, `rewards/locals/update/${data.id.value}`, scope.props.formId);
+};
+
+formSetting.edit_sysconf = { ...formSetting.create_sysconf };
+formSetting.edit_sysconf.title = 'Edit System Configuration';
+formSetting.edit_sysconf.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
+formSetting.edit_sysconf.onSubmit = (scope, tableListingActions, data, fields) => {
+    fieldOnSubmit(scope, tableListingActions, data, fields, `systems/configs/${data.id.value}`, scope.props.formId);
+};
+
+formSetting.edit_sysvar = { ...formSetting.create_sysvar };
+formSetting.edit_sysvar.title = 'Edit System Variable';
+formSetting.edit_sysvar.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
+formSetting.edit_sysvar.onSubmit = (scope, tableListingActions, data, fields) => {
+    fieldOnSubmit(scope, tableListingActions, data, fields, `systems/variables/${data.id.value}`, scope.props.formId);
 };
 
 export default formSetting;

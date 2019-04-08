@@ -416,7 +416,25 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         return (
             <section className="table-container">
                 {this.renderPaginatior()}
-                <div className="table-content">
+                <div>{this.state.mockScrollLeft}</div>
+                <div
+                    id="mock-scroll-top"
+                    className="mock-scroll-twin mock-scroll-top"
+                    onScroll={(el) => {
+                        const twin = document.getElementById('mock-scroll-bottom');
+                        if (twin) { twin.scrollLeft = el.target.scrollLeft; }
+                    }}
+                >
+                    <div style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}></div>
+                </div>
+                <div
+                    id="mock-scroll-bottom"
+                    className="table-content mock-scroll-twin mock-scroll-bottom"
+                    onScroll={(el) => {
+                        const twin = document.getElementById('mock-scroll-top');
+                        if (twin) { twin.scrollLeft = el.target.scrollLeft; }
+                    }}
+                >
                     <div className="table-content-wrapper" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
                         <div className="table-header table-row" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             {

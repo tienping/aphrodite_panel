@@ -580,6 +580,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         />
                     </div>
                 );
+            case 'json':
             case 'textarea':
                 return (
                     <div className="input-container input-type-textarea">

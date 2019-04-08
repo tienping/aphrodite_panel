@@ -1,49 +1,6 @@
 import { dataChecking } from 'globalUtils';
 
 const tableSetting = {
-    sysconf: {
-        title: 'System Config',
-        hideFromUser: true,
-        link: '/sysconf',
-        iconClass: 'fa fa-cogs p-1',
-        tableWidth: '170rem',
-        api: 'https://api-staging.hermo.my/services/gami/systems/configs',
-        pathToDataRoot: '',
-        fields: [
-            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-            { key: 'key', label: 'Key', width: '15rem', align: 'left', type: 'string', doc: { description: 'desc' } },
-            { key: 'value', label: 'Value', width: '15rem', align: 'left', type: 'object', doc: { description: 'desc' } },
-            { key: 'type', label: 'Type', width: '35rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-            { key: 'service', label: 'Service', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-            { key: 'setting', label: 'Setting', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
-            { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
-            { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is created' } },
-            { key: 'updated_by', label: 'Updated By', width: '15rem', align: 'center', type: 'string', doc: { description: 'The last editor of this Partner Event' } },
-            { key: 'updated_at', label: 'Updated At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is last updated' } },
-        ],
-    },
-    sysvar: {
-        title: 'System Variable',
-        hideFromUser: true,
-        link: '/sysvar',
-        iconClass: 'fa fa-cogs p-1',
-        tableWidth: '195rem',
-        api: 'https://api-staging.hermo.my/services/gami/systems/variables',
-        pathToDataRoot: '',
-        fields: [
-            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-            { key: 'key', label: 'Key', width: '15rem', align: 'left', type: 'string', doc: { description: 'desc' } },
-            { key: 'value', label: 'Value', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
-            { key: 'service', label: 'Service', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-            { key: 'category', label: 'Category', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
-            { key: 'setting', label: 'Setting', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
-            { key: 'remark', label: 'Remark', width: '25rem', align: 'left', type: 'string', doc: { description: 'desc' } },
-            { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
-            { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is created' } },
-            { key: 'updated_by', label: 'Updated By', width: '15rem', align: 'center', type: 'string', doc: { description: 'The last editor of this Partner Event' } },
-            { key: 'updated_at', label: 'Updated At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is last updated' } },
-        ],
-    },
     testing: {
         title: 'Just for testing',
         link: '/testing',
@@ -62,6 +19,125 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'logo', label: 'Logo', width: '30rem', align: 'center', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
+        ],
+    },
+    sysconf: {
+        title: 'System Config',
+        hideFromUser: true,
+        link: '/sysconf',
+        iconClass: 'fa fa-cogs p-1',
+        tableWidth: '190rem',
+        api: 'https://api-staging.hermo.my/services/gami/systems/configs',
+        pathToDataRoot: '',
+        actionButtons: [
+            {
+                title: 'Add New System Configuration',
+                type: 'createNew',
+                width: '275px',
+            },
+        ],
+        fields: [
+            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'key', label: 'Key', width: '25rem', align: 'left', type: 'string', doc: { description: 'desc' } },
+            { key: 'type', label: 'Type', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'value', label: 'Value', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
+            { key: 'service', label: 'Service', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'setting', label: 'Setting', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
+            { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
+            { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is created' } },
+            { key: 'updated_by', label: 'Updated By', width: '15rem', align: 'center', type: 'string', doc: { description: 'The last editor of this Partner Event' } },
+            { key: 'updated_at', label: 'Updated At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is last updated' } },
+            {
+                label: 'Action',
+                width: '10rem',
+                key: 'Action',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'edit',
+                        special: 'edit-form',
+                        image: 'https://img.icons8.com/material/24/000000/pencil.png',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'edit',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+                doc: { description: 'The actions' },
+            },
+        ],
+    },
+    sysvar: {
+        title: 'System Variable',
+        hideFromUser: true,
+        link: '/sysvar',
+        iconClass: 'fa fa-cogs p-1',
+        tableWidth: '215rem',
+        api: 'https://api-staging.hermo.my/services/gami/systems/variables',
+        pathToDataRoot: '',
+        actionButtons: [
+            {
+                title: 'Add New System Variable',
+                type: 'createNew',
+                width: '245px',
+            },
+        ],
+        fields: [
+            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'key', label: 'Key', width: '25rem', align: 'left', type: 'string', doc: { description: 'desc' } },
+            { key: 'category', label: 'Category', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'value', label: 'Value', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
+            { key: 'service', label: 'Service', width: '15rem', align: 'center', type: 'string', doc: { description: 'desc' } },
+            { key: 'setting', label: 'Setting', width: '35rem', align: 'left', type: 'object', doc: { description: 'desc' } },
+            { key: 'remark', label: 'Remark', width: '25rem', align: 'left', type: 'string', doc: { description: 'desc' } },
+            { key: 'created_by', label: 'Created By', width: '15rem', align: 'center', type: 'string', doc: { description: 'Creator of this Partner Event' } },
+            { key: 'created_at', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is created' } },
+            { key: 'updated_by', label: 'Updated By', width: '15rem', align: 'center', type: 'string', doc: { description: 'The last editor of this Partner Event' } },
+            { key: 'updated_at', label: 'Updated At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date this Partner Event is last updated' } },
+            {
+                label: 'Action',
+                width: '10rem',
+                key: 'Action',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'edit',
+                        special: 'edit-form',
+                        image: 'https://img.icons8.com/material/24/000000/pencil.png',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'edit',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+                doc: { description: 'The actions' },
+            },
         ],
     },
     partner: {
