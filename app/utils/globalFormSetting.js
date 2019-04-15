@@ -9,7 +9,7 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
             extractedData[field.key] = dateValue.toISOString();
         } else if (field.type === 'textbox' || field.type === 'textbox') {
             extractedData[field.key] = `${data[field.key].value}`;
-        } else if (field.type === 'json' || field.type === 'textbox') {
+        } else if (field.type === 'json' || field.type === 'textbox' || field.type === 'image') {
             extractedData[field.key] = null;
         } else {
             extractedData[field.key] = data[field.key].value;
