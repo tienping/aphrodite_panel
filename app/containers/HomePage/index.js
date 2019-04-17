@@ -43,7 +43,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                             if (!dataChecking(tableSetting, key, 'hideFromUser')) {
                                 return (
                                     <div key={index}>
-                                        <NavLink to={dataChecking(tableSetting, key, 'link')} className="page-select-button gamicenter-button" title={dataChecking(tableSetting, key, 'title')}>
+                                        <NavLink to={dataChecking(tableSetting, key, 'link')} className="page-select-button my-custom-button" title={dataChecking(tableSetting, key, 'title')}>
                                             {dataChecking(tableSetting, key, 'title')}
                                         </NavLink>
                                     </div>

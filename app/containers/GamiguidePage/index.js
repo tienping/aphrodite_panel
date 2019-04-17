@@ -22,19 +22,19 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
     constructor(props) {
         super(props);
         this.state = {};
-    }
+    }s
 
     render() {
         return (
             <div className="gami-guide-page">
                 <Helmet>
-                    <title>How to use Gamicenter</title>
-                    <meta name="description" content="Documentation for Gamicenter" />
+                    <title>How to use ME</title>
+                    <meta name="description" content="Documentation for ME" />
                 </Helmet>
-                <h1>How to use Gamicenter [Updated Feb 2019]</h1>
+                <h1>How to use ME [Updated Feb 2019]</h1>
                 <hr />
                 <div className="smaller">
-                    <p>Where to find this documentation in gamicenter?</p>
+                    <p>Where to find this documentation in ME?</p>
                     <p>
                         Have a look in the top bar, you will find a question mark button at the left side of the topbar.
                         Yes, that&apos;s it, you can always come back here when you need more help (it&apos;s FREE for lifetime!!!).
@@ -46,7 +46,7 @@ export class GamiguidePage extends React.PureComponent { // eslint-disable-line 
                     <section className="doc-step-by-step">
                         <h3>Step by Step, 1 2 3</h3>
                         <ol>
-                            <li>Go to Gamicenter</li>
+                            <li>Go to Aphrodite</li>
                             <li>Choose the page that you want to view/edit</li>
                             <li>To View</li>
                             <ul style={{ listStyleType: 'square' }}>

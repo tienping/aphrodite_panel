@@ -29,7 +29,7 @@ export class LogoutForm extends React.PureComponent { // eslint-disable-line rea
         return (
             <div id="LogoutForm-container" className="LogoutForm-page">
                 <Helmet>
-                    <title>Logout Gamicenter</title>
+                    <title>Logout Aphrodite</title>
                     <meta name="description" content="Form to facilitate logoin" />
                 </Helmet>
                 <section className="container">
@@ -45,7 +45,7 @@ export class LogoutForm extends React.PureComponent { // eslint-disable-line rea
                                         removeCookie(process.env.ADMIN_KEY);
                                         window.location.href = globalScope.previousPage || '/';
                                     }}
-                                    className="confirm gamicenter-button"
+                                    className="confirm my-custom-button"
                                 >
                                     <FormattedMessage {...messages.confirm} />
                                 </span>
@@ -58,7 +58,7 @@ export class LogoutForm extends React.PureComponent { // eslint-disable-line rea
                                             this.props.history.goBack();
                                         }
                                     }}
-                                    className="cancel invert gamicenter-button"
+                                    className="cancel invert my-custom-button"
                                 >
                                     <FormattedMessage {...messages.cancel} />
                                 </span>

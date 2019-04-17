@@ -37,7 +37,7 @@ export const Form = (props) => (
         {props.error &&
             <ErrorMessage error={props.error} type="danger" />
         }
-        <Input type="submit" className="gamicenter-button" value="Login" loading={props.loading} />
+        <Input type="submit" className="my-custom-button" value="Login" loading={props.loading} />
     </form>
 );
 
@@ -65,7 +65,7 @@ export class LoginForm extends React.PureComponent { // eslint-disable-line reac
         return (
             <div id="LoginForm-container" className="LoginForm-page">
                 <Helmet>
-                    <title>Login to Hermo Gamicenter</title>
+                    <title>Login to Hermo Aphrodite</title>
                     <meta name="description" content="Form to facilitate logoin" />
                 </Helmet>
                 <section className="container">

@@ -41,9 +41,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     componentWillMount() {
         this.setState(this.initialiseProps(this.props));
 
+        const id = dataChecking(this.props, 'match', 'params', 'id');
+
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             if (tableSetting[this.props.pageType].api) {
-                this.props.dispatch(actions.getList({ api: tableSetting[this.props.pageType].api }));
+                this.props.dispatch(actions.getList({ api: tableSetting[this.props.pageType].api, id }));
             }
         }
     }
@@ -210,7 +212,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
                                         }}
                                     >
-                                        <div className="gamicenter-button" style={{ width: item.width }}>{item.title}</div>
+                                        <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
                                 </span>
                             );
@@ -227,7 +229,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
                                         }}
                                     >
-                                        <div className="gamicenter-button" style={{ width: item.width }}>{item.title}</div>
+                                        <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
                                 </span>
                             );
@@ -514,6 +516,47 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         </div>
     );
 
+    renderActionButton = (column, row, rowIndex) => {
+        if (column.special === 'edit-form') {
+            return (
+                <FormButton
+                    key="edit-button"
+                    formId={`edit_${this.props.pageType}__#__${rowIndex}`}
+                    formSettingKey={`edit_${this.props.pageType}`}
+                    initialData={row}
+                    formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
+                    onModalComplete={(newState) => {
+                        this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                    }}
+                >
+                    <div className="my-custom-button smaller px-1 py-half my-quater">
+                        <i className="fas fa-edit"></i>
+                        <span className="pl-1">Edit</span>
+                    </div>
+                </FormButton>
+            );
+        }
+
+        return (
+            <a
+                className="my-custom-button smaller px-1 py-half my-quater"
+                onClick={(value2, index2) => {
+                    if (column.onPressHandling) {
+                        column.onPressHandling(index2, this, row, actions);
+                    }
+                }}
+            >
+                {
+                    column.image ?
+                        <img src={column.image} alt={column.name} width="15px" height="15px" />
+                        :
+                        <i className={column.iconClass ? column.iconClass : 'fas fa-exclamation-circle'} />
+                }
+                <span className="pl-1">{column.name}</span>
+            </a>
+        );
+    }
+
     renderCell = (row, col, rowIndex) => {
         let date = null;
 
@@ -526,46 +569,12 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 return (
                     <div style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                         {
-                            col.items && col.items.map((value, index) => (
+                            col.items && col.items.map((column, index) => (
                                 <div
                                     key={index}
                                     className="action-item"
                                 >
-                                    {
-                                        value.special === 'edit-form' ?
-                                            <FormButton
-                                                key="edit-button"
-                                                formId={`edit_${this.props.pageType}__#__${rowIndex}`}
-                                                formSettingKey={`edit_${this.props.pageType}`}
-                                                initialData={row}
-                                                formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
-                                                onModalComplete={(newState) => {
-                                                    this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
-                                                }}
-                                            >
-                                                <div className="gamicenter-button smaller px-1 py-half my-quater">
-                                                    <i className="fas fa-edit"></i>
-                                                    <span className="pl-1">Edit</span>
-                                                </div>
-                                            </FormButton>
-                                            :
-                                            <a
-                                                className="gamicenter-button smaller px-1 py-half my-quater"
-                                                onClick={(value2, index2) => {
-                                                    if (value.onPressHandling) {
-                                                        value.onPressHandling(index2, this, row, actions);
-                                                    }
-                                                }}
-                                            >
-                                                {
-                                                    value.image ?
-                                                        <img src={value.image} alt={value.name} width="15px" height="15px" />
-                                                        :
-                                                        <i className={value.iconClass ? value.iconClass : 'fas fa-exclamation-circle'} />
-                                                }
-                                                <span className="pl-1">{value.name}</span>
-                                            </a>
-                                    }
+                                    { this.renderActionButton(column, row, rowIndex) }
                                 </div>
                             ))
                         }

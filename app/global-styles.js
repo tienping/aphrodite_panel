@@ -35,9 +35,9 @@ injectGlobal`
         color: white;
     }
 
-    .text-hover-hermo-pink:hover,
-    .text-hover-hermo-pink:focus {
-        color: #FF0066;
+    .text-hover-my-style:hover,
+    .text-hover-my-style:focus {
+        color: #56d8ae;
     }
 
     .text-main-color {

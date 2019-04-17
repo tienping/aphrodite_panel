@@ -1,17 +1,17 @@
 {
-    "name": "gamicenter",
+    "name": "aphrodite_temp",
     "version": "1.0.0",
     "description": "A project based on React Boilerplate with some personalisation",
     "repository": {
         "type": "git",
-        "url": "git://bitbucket.org/hermo/gamicenter.git"
+        "url": "git://bitbucket.org/hermo/aphrodite_temp.git"
     },
     "engines": {
         "npm": ">=3",
         "node": ">=5"
     },
-    "author": "Hermo Developers",
-    "license": "MIT",
+    "author": "Lim Tien Ping",
+    "license": "ISC",
     "scripts": {
         "analyze:clean": "rimraf stats.json",
         "preanalyze": "npm run analyze:clean",

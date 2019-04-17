@@ -16,9 +16,6 @@ export function* doLogin(action) {
         const response = yield call(apiRequest, 'auth/token', 'post', {}, null, { headers: { 'Authorization': `Basic ${hash}` } });
         console.log('response', response);
         if (response && response.ok) {
-            // const response2 = yield call(apiRequest, 'login', 'post', { username }, process.env.GAMI_API);
-            // console.log('response2', response2);
-            // if (response2 && response2.ok) {
             globalScope.token = response.data.token;
             const isAdminResponse = yield call(apiRequest, '/view/preview/145', 'post');
             globalScope.isAdmin = !!(isAdminResponse && isAdminResponse.data && isAdminResponse.data.id);
@@ -33,7 +30,6 @@ export function* doLogin(action) {
                 response.data.messages[0] = { type: 'error', text: 'Invalid user access level!' };
                 yield put(loginFailed(response.data));
             }
-            // }
         } else {
             yield put(loginFailed(response.data));
         }

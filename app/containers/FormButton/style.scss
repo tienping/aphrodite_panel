@@ -31,7 +31,7 @@
     box-shadow: 0px 0px 0px transparent;
     transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
 
-    &.gamicenter-button {
+    &.my-custom-button {
         padding: 0;
         .default-button-text { padding: 1.1rem 3rem; }
     }
@@ -166,7 +166,7 @@
 
             &:hover {
                 .info-icon {
-                    color: #660033;
+                    color: #3E0E0A;
                 }
 
                 .info-content {
@@ -206,7 +206,7 @@
             padding: 0.25rem 0.75rem;
         }
 
-        .gamicenter-imageUploader {
+        .my-custom-imageUploader {
             margin-top: 1rem;
             padding: 0.5rem;
             max-width: 50rem;
@@ -257,9 +257,9 @@
                 text-align: center;
 
                 .upload-button {
-                    border-color: #660033;
+                    border-color: #3E0E0A;
                     border-width: 2px;
-                    color: #660033;
+                    color: #3E0E0A;
                     background-color: RGBA(155, 0, 75, 0.15);
                     margin: 0;
                     font-size: 75%;
@@ -286,7 +286,7 @@
                 .imagelink-previewer-inner-div {
                     background-color: #F5F5F5;
                     display: inline-block;
-                    border: 1px solid #660033;
+                    border: 1px solid #3E0E0A;
                     margin-bottom: 10px;
                     border-radius: 30px;
                     padding: 15px;

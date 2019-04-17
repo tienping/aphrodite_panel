@@ -1,4 +1,4 @@
-# GamiCenter
+# Aphrodite Multi Merchant Center
 This project is extended from react-boilerplate [https://www.reactboilerplate.com/]
 
 # Getting Started
@@ -6,12 +6,12 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 2. `npm install` to setup the environment
 3. `npm start` to start the instance
 4. AWS CLI (for first time): https://cloudacademy.com/blog/how-to-use-aws-cli/
-5. `sudo npm run build && aws s3 sync build/ s3://gamicenter.hermo.my` to push update into s3 instance
+5. `sudo npm run build && aws s3 sync build/ s3://aphrodite.hermo.my` to push update into s3 instance
 
 
 # Settings
 ## Table Setting
-[Example](https://bitbucket.org/hermo/gamicenter/src/26bd00f897ac/app/utils/globalTableSetting.js?at=devel-base)
+[Example](https://bitbucket.org/hermo/aphrodite/src/26bd00f897ac/app/utils/globalTableSetting.js?at=devel-base)
 > object key will be the table's id
 
 * title `string`
@@ -29,7 +29,7 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 
 
 ## Form Setting
-[Example](https://bitbucket.org/hermo/gamicenter/src/26bd00f897ac/app/utils/globalFormSetting.js?at=devel-base)
+[Example](https://bitbucket.org/hermo/aphrodite/src/26bd00f897ac/app/utils/globalFormSetting.js?at=devel-base)
 > object key will be the table's id
 
 * title `string`

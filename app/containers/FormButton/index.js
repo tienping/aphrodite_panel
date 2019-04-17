@@ -338,7 +338,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         {
                             !dataChecking(this.state, field.key, 'value') || field.allowMultiple ?
                                 <div
-                                    className="gamicenter-button smaller invert"
+                                    className="my-custom-button smaller invert"
                                     onClick={() => {
                                         this.setState({ showingUtilModal: true });
                                         this.props.dispatch(tableListingActions.toggleUtilFormButton(
@@ -401,9 +401,9 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     <span className="pr-1">current image</span>
                                 </div>
                         }
-                        <div className="gamicenter-imageUploader">
+                        <div className="my-custom-imageUploader">
                             <FilePond
-                                id="gamicenter-imageUploader"
+                                id="my-custom-imageUploader"
                                 name="file"
                                 files={dataChecking(this.state, field.key, 'uploadingFile')}
                                 onupdatefiles={(fileItems) => {
@@ -466,7 +466,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                 :
                                 null
                         }
-                        <div className="gamicenter-imageUploader">
+                        <div className="my-custom-imageUploader">
                             <div className="image-preview">
                                 <span
                                     className="image-holder"
@@ -515,7 +515,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             <div className="upload-action">
                                 <button
                                     htmlFor={`${this.props.formId}-${field.key}-uploader`}
-                                    className="upload-button gamicenter-button"
+                                    className="upload-button my-custom-button"
                                     onClick={() => {
                                         const inputEl = document.getElementById(`${this.props.formId}-${field.key}-uploader`);
                                         inputEl.click();
@@ -691,7 +691,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                         maxHeight: `${this.state.showModal ? this.state.maxFormHeight : ''}`,
                         width: `${getModalWidth(this.props.style)}`,
                     }}
-                    className={`gamicenter-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
+                    className={`my-custom-button page-action-modal ${this.state.showModal ? 'triggered' : ''}`}
                 >
                     <div className="sticky-container">
                         <div style={{ position: 'relative' }}>
@@ -735,7 +735,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     <div className="submit-button">
                                         <hr />
                                         <div
-                                            className={`gamicenter-button smaller ${this.state.uploadingImage ? 'button-disabled' : ''}`}
+                                            className={`my-custom-button smaller ${this.state.uploadingImage ? 'button-disabled' : ''}`}
                                             onClick={() => {
                                                 if (this.state.uploadingImage) {
                                                     alert('Please be patient until the image upload process to complete.');

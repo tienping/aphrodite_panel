@@ -16,8 +16,8 @@ import {
 
 export function* getTableData(action) {
     try {
-        // const response = yield call(apiRequest, 'services/gami/rewards/event_list', 'get', null, 'https://api-staging.hermo.my');
-        const response = yield call(apiRequest, action.params.api, 'get');
+        const targetApi = action.params.id ? `${action.params.api}/${action.params.id}` : action.params.api;
+        const response = yield call(apiRequest, targetApi, 'get');
 
         if (response && response.ok) {
             yield put(getListSuccess(response.data));

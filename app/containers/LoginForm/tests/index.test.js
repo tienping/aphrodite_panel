@@ -15,7 +15,7 @@ describe('<LoginForm />', () => {
     it('should show the login form correctly', (done) => {
         const wrapper = shallow(<LoginForm {...props} />);
         const form = <Form action={jest.fn} keys={authkeys} {...props} />;
-        expect(wrapper.props().title).toEqual('Login to GamiCenter');
+        expect(wrapper.props().title).toEqual('Login to Aphrodite');
         expect(wrapper.props().children).toEqual(form);
         done();
     });

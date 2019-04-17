@@ -66,7 +66,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                     verticalText: 'Profile',
                     // text: 'Profile',
                     iconClass: 'fa fa-user p-1',
-                    dropdownClass: 'text-white text-hover-hermo-pink p-1',
+                    dropdownClass: 'text-white text-hover-my-style p-1',
                     items: [
                         {
                             code: 'logout',
@@ -126,7 +126,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                                         this.setState({ showSideMenu: false });
                                     }}
                                 >
-                                    <span className="top-bar-title" style={{ backgroundColor: '#555', padding: '3rem 1rem' }}>GAMICENTER</span>
+                                    <span className="top-bar-title" style={{ backgroundColor: '#555', padding: '3rem 1rem' }}>APHRODITE</span>
                                 </NavLink>
                             </div>
                             <div className="side-menu-items" style={{ textAlign: 'left' }}>
@@ -146,21 +146,21 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                 <div>
                     <NavLink
                         to="/howto"
-                        title="How to use Gamicenter like a Pro?"
-                        className="gami-how-to hidden-xs bg-white text-secondary-color"
+                        title="How to use Aphrodite like a Pro?"
+                        className="how-to-use hidden-xs bg-white text-secondary-color"
                         type="default"
                     >&#63;</NavLink>
                     <div>
                         <NavLink to="/" title="Go to homepage" className="gami-header-logo" type="default">
                             <span className="top-bar-side-title text-main-color hidden-xs">HERMO</span>
-                            <span className="top-bar-title big text-main-color text-hover-hermo-pink">GAMICENTER</span>
+                            <span className="top-bar-title big text-main-color text-hover-my-style">APHRODITE</span>
                             <span className="top-bar-side-title text-main-color hidden-xs">HERMO</span>
                         </NavLink>
                     </div>
                 </div>
                 <Navigator
                     className="visible-sm visible-md visible-lg"
-                    itemClassName="text-white text-hover-hermo-pink"
+                    itemClassName="text-white text-hover-my-style"
                     items={this.state.navItems}
                 />
             </div>
