@@ -37,7 +37,7 @@ injectGlobal`
 
     .text-hover-my-style:hover,
     .text-hover-my-style:focus {
-        color: #56d8ae;
+        color: #67b6ff;
     }
 
     .text-main-color {

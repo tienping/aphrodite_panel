@@ -7,7 +7,7 @@ const tableSetting = {
         description: 'A page to view, add and edit merchants in Hermo.',
         iconClass: 'fa fa-users p-1',
         tableWidth: '70rem',
-        api: 'https://api-staging.hermo.my/services/gami/partners/list',
+        api: 'http://aphrodite.alpha.hermo.my/merchant',
         pathToDataRoot: '',
         actionButtons: [
             {
@@ -19,8 +19,8 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
             { key: 'name', label: 'Merchant Name', width: '25rem', align: 'left', type: 'string', doc: { description: 'Partner name' } },
-            { key: 'logo', label: 'Logo', width: '10rem', align: 'center', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
-            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
+            { key: 'createdAt', label: 'Created At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date created' } },
+            { key: 'updatedAt', label: 'Updated At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date last updated' } },
             {
                 label: 'Action',
                 width: '20rem',
@@ -50,26 +50,25 @@ const tableSetting = {
                         },
                     },
                     {
-                        name: 'items',
+                        name: 'products',
                         special: 'render',
                         iconClass: 'fas fa-list',
                         onPressHandling: (index, scope, data) => {
-                            console.log('navigate to child');
-                            scope.props.history.push(`/merchant/${data.id}`);
-                            // const tempState = {
-                            //     showModalType: 'edit',
-                            //     formData: {},
-                            // };
-
-                            // scope.state.formConfig.map((field) => {
-                            //     tempState.formData[field.key] = {
-                            //         value: dataChecking(data, field.dataPath || field.key),
-                            //     };
-                            //     return true;
-                            // });
-                            // tempState.formData.itemId = data.id;
-
-                            // scope.setState(() => (tempState));
+                            scope.props.history.push({
+                                pathname: `/merchant/${data.id}/products`,
+                                state: { pageSubTitle: data.name },
+                            });
+                        },
+                    },
+                    {
+                        name: 'orders',
+                        special: 'render',
+                        iconClass: 'fas fa-file-invoice',
+                        onPressHandling: (index, scope, data) => {
+                            scope.props.history.push({
+                                pathname: `/merchant/${data.id}/orders`,
+                                state: { pageSubTitle: data.name },
+                            });
                         },
                     },
                 ],
@@ -78,29 +77,82 @@ const tableSetting = {
         ],
     },
     product: {
-        title: 'Merchant Product',
-        link: '/merchant/:id',
+        title: 'Products',
+        link: '/merchant/:id/products',
         hideFromUser: true,
         description: 'A page to view and register product onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '70rem',
-        api: 'https://api-staging.hermo.my/services/aphrodite/merchant',
+        tableWidth: '90rem',
+        api: 'http://aphrodite.alpha.hermo.my/merchant/:id/products',
         pathToDataRoot: '',
         actionButtons: [
             {
                 title: 'Associate New Product',
                 type: 'createNew',
-                width: '255px',
+                width: '220px',
             },
         ],
         fields: [
-            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
-            { key: 'name', label: 'Merchant Name', width: '25rem', align: 'left', type: 'string', doc: { description: 'Partner name' } },
-            { key: 'logo', label: 'Logo', width: '10rem', align: 'center', type: 'image', doc: { description: 'Logo of partner vendor branding symbol' } },
-            { key: 'status', label: 'Status', width: '10rem', align: 'center', type: 'boolean', doc: { description: 'Active or inactive entry' } },
+            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
+            { key: 'name', label: 'Product Name', width: '35rem', align: 'left', type: 'string', doc: { description: '' } },
+            { key: 'image_320_200', label: 'Product Image', width: '20rem', align: 'center', type: 'image', doc: { description: '' } },
+            { key: 'merchant_id', label: 'Merchant ID', width: '15rem', align: 'center', type: 'integer', doc: { description: '' } },
             {
                 label: 'Action',
-                width: '20rem',
+                width: '15rem',
+                key: 'Action',
+                align: 'center',
+                type: 'action',
+                items: [
+                    {
+                        name: 'remove',
+                        iconClass: 'fas fa-trash',
+                        onPressHandling: (index, scope, data) => {
+                            const tempState = {
+                                showModalType: 'remove',
+                                formData: {},
+                            };
+
+                            scope.state.formConfig.map((field) => {
+                                tempState.formData[field.key] = {
+                                    value: dataChecking(data, field.dataPath || field.key),
+                                };
+                                return true;
+                            });
+                            tempState.formData.itemId = data.id;
+
+                            scope.setState(() => (tempState));
+                        },
+                    },
+                ],
+                doc: { description: 'The actions' },
+            },
+        ],
+    },
+    order: {
+        title: 'Orders',
+        link: '/merchant/:id/orders',
+        hideFromUser: true,
+        description: 'A page to view and manage order onto merchant',
+        iconClass: 'fab fa-product-hunt p-1',
+        tableWidth: '85rem',
+        api: 'http://aphrodite.alpha.hermo.my/merchant/orders/:id',
+        pathToDataRoot: '',
+        actionButtons: [
+            // {
+            //     title: 'Associate New Product',
+            //     type: 'createNew',
+            //     width: '255px',
+            // },
+        ],
+        fields: [
+            { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
+            { key: 'name', label: 'Product Name', width: '35rem', align: 'left', type: 'string', doc: { description: '' } },
+            { key: 'image_320_200', label: 'Product Image', width: '20rem', align: 'center', type: 'image', doc: { description: '' } },
+            { key: 'merchant_id', label: 'Merchant ID', width: '15rem', align: 'center', type: 'integer', doc: { description: '' } },
+            {
+                label: 'Action',
+                width: '10rem',
                 key: 'Action',
                 align: 'center',
                 type: 'action',

@@ -21,7 +21,7 @@ const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewB
     }
     scope.props.dispatch(tableListingActions.fireApi({
         data: extractedData,
-        apiUrl: `https://api-staging.hermo.my/services/gami/${apiUrl}`,
+        apiUrl: `http://aphrodite.alpha.hermo.my/${apiUrl}`,
         type: 'post',
     }, scope.props.formId));
 };

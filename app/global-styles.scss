@@ -49,7 +49,7 @@ ol, ul { margin: 0; padding-left: 2rem; }
         margin: 1rem 0;
 
         &:hover {
-            background-color: #56d8ae;
+            background-color: #67b6ff;
             color: RGBA(255, 255, 255, 0.85)
         }
     }
@@ -58,7 +58,7 @@ ol, ul { margin: 0; padding-left: 2rem; }
         cursor: pointer;
         transform: scale(1.05);
         transition: transform .215s;
-        color: #56d8ae;
+        color: #67b6ff;
         text-decoration: none;
 
         &.triggered {
@@ -74,6 +74,8 @@ ol, ul { margin: 0; padding-left: 2rem; }
 .text-danger { color: rgb(221, 41, 41) }
 .text-disabled { color: lightgray; }
 
+.text-center { text-align: center; }
+.text-underline { text-decoration: underline; }
 .text-strong { font-weight: bolder; }
 
 .pt-quater { padding-top: .25rem !important; }

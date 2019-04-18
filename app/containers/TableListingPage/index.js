@@ -42,7 +42,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         this.setState(this.initialiseProps(this.props));
 
         const id = dataChecking(this.props, 'match', 'params', 'id');
-
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             if (tableSetting[this.props.pageType].api) {
                 this.props.dispatch(actions.getList({ api: tableSetting[this.props.pageType].api, id }));
@@ -63,10 +62,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         if (tablelistingpage.data !== this.props.tablelistingpage.data) {
             const { data } = tablelistingpage;
-            // const fields = tableSetting[nextProps.pageType].fields;
-            // const result = this.toggledSortResult(0, fields[0].type, dataChecking(data, 'data', 'items')) || [];
             this.setState({
-                data: dataChecking(data, 'data', 'items'),
+                data: dataChecking(data, 'result', 'res'),
                 pagination: {
                     _meta: dataChecking(data, '_meta'),
                     _links: dataChecking(data, '_links'),
@@ -669,7 +666,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     <title style={{ textTransform: 'capitalize' }}>
                         {
                             dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ?
-                                `${tableSetting[this.props.pageType].title}`
+                                `${tableSetting[this.props.pageType].title}${dataChecking(this.props, 'location', 'state', 'pageSubTitle') ? ` - ${this.props.location.state.pageSubTitle}` : ''}`
                                 :
                                 'Table'
                         }
@@ -677,9 +674,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
                 <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ? `${tableSetting[this.props.pageType].title}` : 'Table'}</h1>
-                {/* <div style={{ padding: '1rem', background: 'lime' }}>
-                    <Input></Input>
-                </div> */}
+                {
+                    dataChecking(this.props, 'location', 'state', 'pageSubTitle') &&
+                        <h2 className="text-center text-underline">{this.props.location.state.pageSubTitle}</h2>
+                }
                 {this.renderMenu()}
                 {this.renderTable()}
                 {this.renderUtilModals()}

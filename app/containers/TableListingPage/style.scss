@@ -26,10 +26,10 @@
                 text-decoration: none;
 
                 &:hover {
-                    color: #FF0068;
+                    color: #67b6ff;
 
                     .pagi-item {
-                        border-color: #FF0068;
+                        border-color: #67b6ff;
                     }
                 }
             }
@@ -109,7 +109,7 @@
                             cursor: pointer;
 
                             &:hover {
-                                color: #FF0066;
+                                color: #67b6ff;
                             }
                         }
 
@@ -126,7 +126,7 @@
                             border-radius: 8px;
                             position: absolute;
                             background-color: #E0E0E0;
-                            border: 1px solid #FF0066;
+                            border: 1px solid #67b6ff;
 
                             &.active {
                                 display: block;
@@ -169,6 +169,7 @@
                     border-right: 1px dashed #D0D0FD;
                     word-wrap: break-word;
                     vertical-align: middle;
+                    overflow: auto;
 
                     .html-cell-block {
                         max-height: 100px;

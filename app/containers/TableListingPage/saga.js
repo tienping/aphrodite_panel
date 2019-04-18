@@ -16,7 +16,10 @@ import {
 
 export function* getTableData(action) {
     try {
-        const targetApi = action.params.id ? `${action.params.api}/${action.params.id}` : action.params.api;
+        let targetApi = action.params.api;
+        if (action.params.id && action.params.api.indexOf(':id') !== -1) {
+            targetApi = action.params.api.replace(':id', action.params.id);
+        }
         const response = yield call(apiRequest, targetApi, 'get');
 
         if (response && response.ok) {

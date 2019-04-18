@@ -44,7 +44,7 @@ import {
     fetchConfig,
 } from './actions';
 
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 
 const topbarHeight = '40px';
 
@@ -67,7 +67,8 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                         {/* <Route exact={true} path="/login" component={globalScope.token ? LogoutForm : LoginForm} /> */}
                         <Route exact={true} path="/logout" component={LogoutForm} />
                         <Route exact={true} path="/howto" component={GamiguidePage} />
-                        <PrivateRoute
+                        <Route
+                        // <PrivateRoute
                             exact={true}
                             path="/"
                             token={globalScope.token || ''}
@@ -75,7 +76,8 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                         />
                         {
                             Object.keys(tableSetting).map((key, index) => (
-                                <PrivateRoute
+                                <Route
+                                // <PrivateRoute
                                     key={index}
                                     exact={true}
                                     token={globalScope.token || ''}
