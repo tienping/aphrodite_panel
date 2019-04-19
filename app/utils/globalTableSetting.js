@@ -135,8 +135,8 @@ const tableSetting = {
         hideFromUser: true,
         description: 'A page to view and manage order onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '85rem',
-        api: 'http://aphrodite.alpha.hermo.my/merchant/orders/:id',
+        tableWidth: '60rem',
+        api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
         pathToDataRoot: '',
         actionButtons: [
             // {
@@ -147,9 +147,10 @@ const tableSetting = {
         ],
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
-            { key: 'name', label: 'Product Name', width: '35rem', align: 'left', type: 'string', doc: { description: '' } },
-            { key: 'image_320_200', label: 'Product Image', width: '20rem', align: 'center', type: 'image', doc: { description: '' } },
-            { key: 'merchant_id', label: 'Merchant ID', width: '15rem', align: 'center', type: 'integer', doc: { description: '' } },
+            { key: 'price', label: 'Order Total Price', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'username', label: 'Username', width: '15rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'buy_date', label: 'Buy Date', width: '15rem', align: 'center', type: 'datetime', doc: { description: '' } },
+            { key: 'merchant_id', label: 'Merchant ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
             {
                 label: 'Action',
                 width: '10rem',
