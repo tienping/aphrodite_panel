@@ -11,15 +11,15 @@ export const apiRequest = (path, type, body, baseUrl, headerParams) => {
 const addHeaderToAPI = (apiString) => {
     const api = create({
         baseURL: apiString,
-        // headers: {
-        //     'Content-Type': 'application/json',
-        //     // 'Accept-Language': 'en',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept-Language': 'en',
         //     // 'api-version': '1.0.0',
         //     // 'app-version': DeviceInfo.getVersion(),
         //     // 'app-os-name': 'Platform.OS',
-        //     // 'hertoken': globalScope.token,
+            'hertoken': globalScope.token,
         //     // 'app-os-version': DeviceInfo.getSystemVersion(),
-        // },
+        },
         // timeout: 30000,
     });
 

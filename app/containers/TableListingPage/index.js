@@ -63,7 +63,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         if (tablelistingpage.data !== this.props.tablelistingpage.data) {
             const { data } = tablelistingpage;
             this.setState({
-                data: dataChecking(data, 'result', 'res'),
+                data: dataChecking(data, 'result'),
                 pagination: {
                     _meta: dataChecking(data, '_meta'),
                     _links: dataChecking(data, '_links'),

@@ -10,11 +10,11 @@ const tableSetting = {
         api: 'http://aphrodite.alpha.hermo.my/merchant',
         pathToDataRoot: '',
         actionButtons: [
-            {
-                title: 'Create New Merchant',
-                type: 'createNew',
-                width: '255px',
-            },
+            // {
+            //     title: 'Create New Merchant',
+            //     type: 'createNew',
+            //     width: '255px',
+            // },
         ],
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: 'Unique primary key and indicator for the item' } },
