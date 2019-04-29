@@ -55,8 +55,8 @@ const tableSetting = {
                         iconClass: 'fas fa-list',
                         onPressHandling: (index, scope, data) => {
                             scope.props.history.push({
-                                pathname: `/merchant/${data.id}/products`,
-                                state: { pageSubTitle: data.name },
+                                pathname: '/routingTo',
+                                state: { pageSubTitle: data.name, destination: `/merchant/${data.id}/products` },
                             });
                         },
                     },
@@ -66,8 +66,8 @@ const tableSetting = {
                         iconClass: 'fas fa-file-invoice',
                         onPressHandling: (index, scope, data) => {
                             scope.props.history.push({
-                                pathname: `/merchant/${data.id}/orders`,
-                                state: { pageSubTitle: data.name },
+                                pathname: '/routingTo',
+                                state: { pageSubTitle: data.name, destination: `/merchant/${data.id}/orders` },
                             });
                         },
                     },

@@ -28,6 +28,7 @@ import HomePage from 'containers/HomePage';
 import TableListingPage from 'containers/TableListingPage';
 import GamiguidePage from 'containers/GamiguidePage';
 import LogoutForm from 'containers/LogoutForm';
+import AlternateRoute from 'components/AlternateRoute';
 import NotFoundPage from 'containers/NotFoundPage';
 
 import tableSetting from 'utils/globalTableSetting';
@@ -74,6 +75,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                             token={globalScope.token || ''}
                             render={() => <HomePage />}
                         />
+                        <Route exact={true} path="/routingTo" component={AlternateRoute} />
                         {
                             Object.keys(tableSetting).map((key, index) => (
                                 <Route
