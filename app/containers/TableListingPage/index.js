@@ -655,7 +655,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'integer':
                 return <span className="cell-type-integer">{row[col.key]}</span>;
             default:
-                return <span>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</span>;
+                if (col.dataPath) {
+                    return <span>{dataChecking(row, col.dataPath) || '\u00A0'}</span>;
+                }
+                return <span>{ dataChecking(row, col.key) || '\u00A0'}</span>;
         }
     }
 
