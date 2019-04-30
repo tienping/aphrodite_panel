@@ -1,21 +1,39 @@
+@import "app/themeVariables";
+@import 'legacy-styling';
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+#app {
+    background-color: #fafafa;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+p,
+label {
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    line-height: 1.5em;
+}
+textarea { padding: 3px 8px; }
 a {outline : none !important;}
 
-body { font-size: 12px; }
+ol, ul {
+    margin: 0; padding-left: 2rem;
+    .unstyled { list-style: none; }
+}
+li.unstyled { list-style: none; }
 
 ::placeholder {
     color: rgb(196, 187, 201);
     font-weight: 300;
     font-size: 80%;
 }
-
-textarea {
-    padding: 3px 8px;
-}
-
-ol, ul { margin: 0; padding-left: 2rem; }
-
-.smaller { font-size: 75%; }
-.bigger { font-size: 130%; }
 
 .button-disabled {
     color: gray !important;
@@ -68,35 +86,35 @@ ol, ul { margin: 0; padding-left: 2rem; }
     };
 }
 
-.color-transparent { color: transparent; }
+#hershop-topbar-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    position: sticky;
+    height: 40px;
+    background-color: $main_bg;
+}
 
-.text-success { color: rgb(67, 201, 67) }
-.text-danger { color: rgb(221, 41, 41) }
-.text-disabled { color: lightgray; }
+.smaller { font-size: 75%; }
+.bigger { font-size: 130%; }
+
+.text-white { color: white; }
+.text-transparent { color: transparent; }
+.text-hover-my-style:hover,
+.text-hover-my-style:focus { color: #67b6ff; }
+
+.text-main-color { color: $main_color; }
+.text-secondary-color { color: $secondary_color; }
+.text-tertiary-color { color: $tertiary_color; }
+
+.bg-main-color { background-color: $main_bg; }
+.bg-secondary-color { background-color: $secondary_bg; }
+.bg-tertiary-color { background-color: $tertiary_bg; }
+.bg-white { background-color: white; }
 
 .text-center { text-align: center; }
 .text-underline { text-decoration: underline; }
 .text-strong { font-weight: bolder; }
-
-.pt-quater { padding-top: .25rem !important; }
-.pt-half { padding-top: .5rem !important; }
-.p-1 { padding: 1rem !important; }
-.pt-1 { padding-top: 1rem !important; }
-.pt-2 { padding-top: 2rem !important; }
-.mt-1 { margin-top: 1rem !important; }
-
-.pl-1 { padding-left: 1rem !important; }
-.pl-2 { padding-left: 2rem !important; }
-
-.px-1 { padding-left: 1rem !important; padding-right: 1rem !important; }
-
-.py-half { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
-.py-1 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
-
-.my-quater { margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
-
-.pb-half { padding-bottom: 0.5rem !important; }
-.pb-1 { padding-bottom: 1rem !important; }
-.pb-2 { padding-bottom: 2rem !important; }
 
 .posi-relative { position: relative; }

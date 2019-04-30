@@ -11,7 +11,6 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
@@ -20,24 +19,15 @@ import { dataChecking } from 'globalUtils';
 import messages from './messages';
 import './style.scss';
 
-const Header = styled.h1`
-    text-align: center;
-`;
-
-const Section = styled.section`
-    text-align: center;
-    padding: 5vw 1vw;
-`;
-
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
         return (
             <div className="container">
-                <Header>
+                <h1 className="text-center">
                     <FormattedMessage {...messages.header} />
-                </Header>
+                </h1>
                 {/* <div><Fancy /></div> */}
-                <Section>
+                <section className="main-content text-center">
                     {
                         Object.keys(tableSetting).map((key, index) => {
                             if (!dataChecking(tableSetting, key, 'hideFromUser')) {
@@ -52,7 +42,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                             return null;
                         })
                     }
-                </Section>
+                </section>
             </div>
         );
     }

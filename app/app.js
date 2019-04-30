@@ -12,12 +12,11 @@ import { NotificationContainer } from 'react-notifications';
 
 // Import all the third party stuff
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import theme from 'theme';
+import TopNavigation from 'components/TopNavigation';
 
 // Import root app
 import App from 'containers/App';
@@ -45,20 +44,7 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 
 import configureStore from './configureStore';
 import { translationMessages } from './i18n';
-import './global-styles';
-
-
-const topbarHeight = '40px';
-
-export const HershopTopbar = styled.div`
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2000;
-    position: sticky;
-    height: ${topbarHeight};
-    background-color: ${(props) => props.theme.main_bg};
-`;
+import './global-styles.scss';
 
 // Create redux store with history
 const initialState = {};
@@ -70,20 +56,19 @@ const render = (messages) => {
     ReactDOM.render(
         <Provider store={store}>
             <LanguageProvider messages={messages}>
-                <ThemeProvider theme={theme}>
-                    <ConnectedRouter history={history}>
-                        <div>
-                            <NotificationContainer />
-                            <HershopTopbar
-                                id="hershop-topbar-container"
-                                className=""
-                            >
-                                <Topbar />
-                            </HershopTopbar>
-                            <App />
+                <ConnectedRouter history={history}>
+                    <div>
+                        <NotificationContainer />
+                        <div
+                            id="hershop-topbar-container"
+                            className=""
+                        >
+                            <Topbar />
+                            <TopNavigation />
                         </div>
-                    </ConnectedRouter>
-                </ThemeProvider>
+                        <App />
+                    </div>
+                </ConnectedRouter>
             </LanguageProvider>
         </Provider>,
         MOUNT_NODE

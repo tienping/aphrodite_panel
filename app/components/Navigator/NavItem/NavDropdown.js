@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 import { dataChecking } from 'globalUtils';
@@ -14,14 +13,6 @@ import { dataChecking } from 'globalUtils';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import './NavDropdown.scss';
 import NavItem from './../NavItem/index';
-
-const DropdownContainer = styled(DropdownContent)`
-    position: absolute;
-    background: ${(props) => props.theme.secondary_bg};
-    width: 500px;
-    height: 300px;
-    right: 16px;
-`;
 
 function NavLi(params) {
     return (
@@ -39,7 +30,7 @@ function Section(params) {
             <NavLi data={item} key={item.code} className={params.itemClassName}></NavLi>
         ));
         return (
-            <ul className={`dropdown__quick-links dropdown__segment text-left unstyled ${params.itemClassName}`}>
+            <ul className={`dropdown__quick-links dropdown__segment text-left unstyled pl-0 ${params.itemClassName}`}>
                 {list}
             </ul>
         );
@@ -75,7 +66,7 @@ function NavDropdown(props) {
         return (
             <div className="vertical-dropdown-section">
                 <div className={`section-title ${props.itemClassName}`}>
-                    <span className={`${(props.data.iconClass ? props.data.iconClass : 'dropdown__name')} pt-1 color-transparent`} title={props.data.title}></span>
+                    <span className={`${(props.data.iconClass ? props.data.iconClass : 'dropdown__name')} pt-1 text-transparent`} title={props.data.title}></span>
                     <span>{ props.vertical ? props.data.verticalText : props.data.text}</span>
                 </div>
                 <div className="section-content pl-2" style={{ backgroundColor: 'RGBA(105, 0, 51, 0.1)' }}>
@@ -90,9 +81,9 @@ function NavDropdown(props) {
             <DropdownTrigger>
                 {props.children}
             </DropdownTrigger>
-            <DropdownContainer>
+            <DropdownContent className="dropdown-container">
                 {sections}
-            </DropdownContainer>
+            </DropdownContent>
         </Dropdown>
     );
 }

@@ -6,17 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const Container = styled.section`
-    display: block;
-
-`;
 
 function Modal(props) {
     return (
         <div>
-            <Container className="modal">
+            <section className="modal">
                 <aside className="modal-dialog">
                     <div className="modal-content">
                         {props.title &&
@@ -29,7 +23,7 @@ function Modal(props) {
                         </div>
                     </div>
                 </aside>
-            </Container>
+            </section>
             <div className="modal-backdrop fade show"></div>
         </div>
     );

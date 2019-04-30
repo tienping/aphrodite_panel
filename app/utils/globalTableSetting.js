@@ -135,7 +135,7 @@ const tableSetting = {
         hideFromUser: true,
         description: 'A page to view and manage order onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '60rem',
+        tableWidth: '90rem',
         api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
         pathToDataRoot: '',
         actionButtons: [
@@ -147,10 +147,11 @@ const tableSetting = {
         ],
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
-            { key: 'price', label: 'Order Total Price', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
-            { key: 'username', label: 'Username', width: '15rem', align: 'center', type: 'string', doc: { description: '' } },
-            { key: 'buy_date', label: 'Buy Date', width: '15rem', align: 'center', type: 'datetime', doc: { description: '' } },
-            { key: 'merchant_id', label: 'Merchant ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
+            { key: 'total', dataPath: ['order_info', 'hmall_total_sales'], label: 'Total Sales', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'ordid', dataPath: ['order_info', 'ordid'], label: 'Ordid', width: '20rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'status', dataPath: ['order_info', 'status'], label: 'Status', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'username', dataPath: ['order_info', 'username'], label: 'Username', width: '20rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'created_at', dataPath: ['order_info', 'created'], label: 'Created At', width: '15rem', align: 'center', type: 'datetime', doc: { description: '' } },
             {
                 label: 'Action',
                 width: '10rem',

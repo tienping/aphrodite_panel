@@ -558,8 +558,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         let date = null;
 
         if (!col || !col.key || !row || (row[col.key] === null) || (row[col.key] === '')) {
-            return <span className="text-disabled">---</span>;
+            return <span className="disabled">---</span>;
         }
+
+        const value = dataChecking(row, col.dataPath || col.key);
 
         switch (col.type) {
             case 'action':
@@ -592,17 +594,17 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'image':
                 return <img src={row[col.key]} alt={row.name} width={row.width || '100%'} height={row.height || ''} />;
             case 'date':
-                date = new Date(row[col.key]);
+                date = new Date(value);
                 return <span>{date.toLocaleDateString()}</span>;
             case 'datetime':
-                date = new Date(row[col.key]);
+                date = new Date(value);
                 return <span>{date.toLocaleString()}</span>;
             case 'object':
                 return <ReactJson src={row[col.key]} name={false} enableClipboard={false}></ReactJson>;
             case 'json':
                 return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
             case 'link':
-                return <a href={dataChecking(row, col.key) ? row[col.key] : ''}>{ dataChecking(row, col.key) ? row[col.key] : '\u00A0' }</a>;
+                return <a href={value || ''}>{ value || '\u00A0' }</a>;
             case 'html':
                 return (
                     <div className={`html-cell-block ${dataChecking(this.state, `fullmode_${col.key}`, rowIndex) ? 'full-mode' : ''}`}>
@@ -653,12 +655,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             case 'checkbox':
                 return <span>[ ]</span>;
             case 'integer':
-                return <span className="cell-type-integer">{row[col.key]}</span>;
+                return <span className="cell-type-integer">{value || '\u00A0'}</span>;
             default:
-                if (col.dataPath) {
-                    return <span>{dataChecking(row, col.dataPath) || '\u00A0'}</span>;
-                }
-                return <span>{ dataChecking(row, col.key) || '\u00A0'}</span>;
+                return <span>{ value || '\u00A0'}</span>;
         }
     }
 

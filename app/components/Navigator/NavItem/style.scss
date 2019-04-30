@@ -1,0 +1,17 @@
+@import "app/themeVariables";
+
+.style-navi {
+    cursor: pointer;
+
+    &:hover {
+        color: $tertiary_color;
+    }
+}
+
+.dropdown-container {
+    position: absolute;
+    background: $secondary_bg;
+    width: 500px;
+    height: 300px;
+    right: 16px;
+}
