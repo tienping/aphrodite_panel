@@ -17,7 +17,7 @@ class TopNavigation extends React.PureComponent { // eslint-disable-line react/p
             >
                 <div>
                     {
-                        Object.keys(topNavSetting).map((key) => <div>{key}</div>)
+                        Object.keys(topNavSetting).map((key, index) => <div key={index}>{key}</div>)
                     }
                 </div>
             </div>
