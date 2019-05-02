@@ -22,6 +22,7 @@ import tableSetting from 'utils/globalTableSetting';
 
 import FormButton from 'containers/FormButton';
 import globalScope from 'globalScope';
+import Button from '@material-ui/core/Button';
 // import { Input } from '@tienping/my-react-kit';
 
 import makeSelectTableListingPage from './selectors';
@@ -526,17 +527,18 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
                     }}
                 >
-                    <div className="my-custom-button smaller px-1 py-half my-quater">
+                    <Button variant="outlined" className="my-half">
                         <i className="fas fa-edit"></i>
                         <span className="pl-1">Edit</span>
-                    </div>
+                    </Button>
                 </FormButton>
             );
         }
 
         return (
-            <a
-                className="my-custom-button smaller px-1 py-half my-quater"
+            <Button
+                variant="outlined"
+                className="my-half"
                 onClick={(value2, index2) => {
                     if (column.onPressHandling) {
                         column.onPressHandling(index2, this, row, actions);
@@ -550,7 +552,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         <i className={column.iconClass ? column.iconClass : 'fas fa-exclamation-circle'} />
                 }
                 <span className="pl-1">{column.name}</span>
-            </a>
+            </Button>
         );
     }
 

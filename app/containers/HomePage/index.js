@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
+import Button from '@material-ui/core/Button';
 // import Fancy from '@tienping/my-react-dom';
 
 import messages from './messages';
@@ -32,11 +33,16 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                         Object.keys(tableSetting).map((key, index) => {
                             if (!dataChecking(tableSetting, key, 'hideFromUser')) {
                                 return (
-                                    <div key={index}>
-                                        <NavLink to={dataChecking(tableSetting, key, 'link')} className="page-select-button my-custom-button" title={dataChecking(tableSetting, key, 'title')}>
-                                            {dataChecking(tableSetting, key, 'title')}
-                                        </NavLink>
-                                    </div>
+                                    <NavLink
+                                        key={index}
+                                        to={dataChecking(tableSetting, key, 'link')}
+                                        className="page-select-button"
+                                        title={dataChecking(tableSetting, key, 'title')}
+                                    >
+                                        <Button variant="contained" color="primary">
+                                                {dataChecking(tableSetting, key, 'title')}
+                                        </Button>
+                                    </NavLink>
                                 );
                             }
                             return null;
