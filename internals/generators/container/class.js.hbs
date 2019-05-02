@@ -17,6 +17,8 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 {{/if}}
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+
 {{#if wantSaga}}
 import injectSaga from 'utils/injectSaga';
 {{/if}}
@@ -89,4 +91,5 @@ export default compose(
     withSaga,
 {{/if}}
     withConnect,
+    withRouter,
 )({{ properCase name }});

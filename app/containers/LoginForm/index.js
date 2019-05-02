@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import Input from 'components/Input';
@@ -113,4 +114,5 @@ export default compose(
     withReducer,
     withSaga,
     withConnect,
+    withRouter,
 )(LoginForm);

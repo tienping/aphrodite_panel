@@ -1,29 +1,49 @@
+/**
+ * The global state selectors
+ */
+
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectGlobal = (state) => state.get('global');
-const selectRoute = (state) => state.get('route');
-const selectSession = (state) => state.get('session');
+const selectGlobal = (state) => state.global || initialState;
 
-const makeSelectChecked = () => createSelector(
-    selectSession,
-    (substate) => substate.get('checked')
-);
+const selectRouter = (state) => state.router;
 
-const makeSelectUserData = () => createSelector(
-    selectSession,
-    (substate) => substate.get('user')
-);
+const makeSelectCurrentUser = () =>
+    createSelector(
+        selectGlobal,
+        (globalState) => globalState.currentUser,
+    );
 
-const makeSelectLocation = () => createSelector(
-    selectRoute,
-    (routeState) => routeState.get('location')
-);
+const makeSelectLoading = () =>
+  createSelector(
+    selectGlobal,
+    (globalState) => globalState.loading,
+  );
+
+const makeSelectError = () =>
+    createSelector(
+        selectGlobal,
+        (globalState) => globalState.error,
+    );
+
+const makeSelectRepos = () =>
+    createSelector(
+        selectGlobal,
+        (globalState) => globalState.userData.repositories,
+    );
+
+const makeSelectLocation = () =>
+    createSelector(
+        selectRouter,
+        (routerState) => routerState.location,
+    );
 
 export {
     selectGlobal,
-    selectRoute,
-    selectSession,
-    makeSelectChecked,
-    makeSelectUserData,
+    makeSelectCurrentUser,
+    makeSelectLoading,
+    makeSelectError,
+    makeSelectRepos,
     makeSelectLocation,
 };

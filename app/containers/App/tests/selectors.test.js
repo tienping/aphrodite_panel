@@ -1,78 +1,85 @@
-import { fromJS } from 'immutable';
 import {
-    selectGlobal,
-    selectRoute,
-    selectSession,
-    makeSelectChecked,
-    makeSelectUserData,
-    makeSelectLocation,
+  selectGlobal,
+  makeSelectCurrentUser,
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectRepos,
+  makeSelectLocation,
 } from '../selectors';
 
-describe('Global Selector', () => {
+describe('selectGlobal', () => {
     it('should select the global state', () => {
-        const globalState = fromJS({});
-        const mock = fromJS({ global: globalState });
-        expect(selectGlobal(mock)).toEqual(globalState);
+        const globalState = {};
+        const mockedState = {
+            global: globalState,
+        };
+        expect(selectGlobal(mockedState)).toEqual(globalState);
     });
 });
 
-describe('Routes Selector', () => {
-    it('should select the routes state', () => {
-        const routeState = fromJS({
-            location: {},
-        });
-        const mock = fromJS({ route: routeState });
-        expect(selectRoute(mock)).toEqual(routeState);
-    });
-
-    it('should select the location', () => {
-        const selector = makeSelectLocation();
-        const d = fromJS({
-            location: {
-                pathname: '/test_path',
+describe('makeSelectCurrentUser', () => {
+    const currentUserSelector = makeSelectCurrentUser();
+    it('should select the current user', () => {
+        const username = 'mxstbr';
+        const mockedState = {
+            global: {
+                currentUser: username,
             },
-        });
-
-        const mock = fromJS({
-            route: d,
-        });
-        expect(d.get('location')).toEqual(selector(mock));
+        };
+        expect(currentUserSelector(mockedState)).toEqual(username);
     });
 });
 
-describe('Session Selector', () => {
-    it('should select the session state', () => {
-        const sessionState = fromJS({
-            checked: false,
-            user: {},
-        });
-        const mock = fromJS({
-            session: sessionState,
-        });
-        expect(selectSession(mock)).toEqual(sessionState);
+describe('makeSelectLoading', () => {
+    const loadingSelector = makeSelectLoading();
+    it('should select the loading', () => {
+        const loading = false;
+        const mockedState = {
+            global: {
+                loading,
+            },
+        };
+        expect(loadingSelector(mockedState)).toEqual(loading);
     });
+});
 
-    it('should select the checked', () => {
-        const selectChecked = makeSelectChecked();
-        const checkedState = fromJS({
-            checked: false,
-        });
-        const mock = fromJS({
-            session: checkedState,
-        });
-
-        expect(checkedState.get('checked')).toEqual(selectChecked(mock));
+describe('makeSelectError', () => {
+    const errorSelector = makeSelectError();
+    it('should select the error', () => {
+        const error = 404;
+        const mockedState = {
+            global: {
+                error,
+            },
+        };
+        expect(errorSelector(mockedState)).toEqual(error);
     });
+});
 
-    it('should select user data', () => {
-        const selectUser = makeSelectUserData();
-        const userState = fromJS({
-            user: {},
-        });
-        const mock = fromJS({
-            session: userState,
-        });
+describe('makeSelectRepos', () => {
+    const reposSelector = makeSelectRepos();
+    it('should select the repos', () => {
+        const repositories = [];
+        const mockedState = {
+            global: {
+                userData: {
+                    repositories,
+                },
+            },
+        };
+        expect(reposSelector(mockedState)).toEqual(repositories);
+    });
+});
 
-        expect(userState.get('user')).toEqual(selectUser(mock));
+describe('makeSelectLocation', () => {
+    const locationStateSelector = makeSelectLocation();
+    it('should select the location', () => {
+        const router = {
+            location: { pathname: '/foo' },
+        };
+        const mockedState = {
+            router,
+        };
+        expect(locationStateSelector(mockedState)).toEqual(router.location);
     });
 });

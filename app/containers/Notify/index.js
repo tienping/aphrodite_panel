@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
@@ -54,4 +55,5 @@ const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(
     withConnect,
+    withRouter,
 )(Notify);

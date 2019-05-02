@@ -1,58 +1,38 @@
 /**
  *
- * App.js
+ * App
  *
  * This component is the skeleton around the actual pages, and should only
  * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-
 import Notify from 'containers/Notify';
-
 import HomePage from 'containers/HomePage';
 import TableListingPage from 'containers/TableListingPage';
 import GamiguidePage from 'containers/GamiguidePage';
 import LogoutForm from 'containers/LogoutForm';
-import AlternateRoute from 'components/AlternateRoute';
+import AlternateRoute from 'containers/AlternateRoute';
 import NotFoundPage from 'containers/NotFoundPage';
 
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
 import globalScope from 'globalScope';
 
-import {
-    makeSelectLocation,
-} from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-
-import {
-    fetchConfig,
-} from './actions';
-
 // import PrivateRoute from './PrivateRoute';
 
-export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    componentDidMount() {
-        this.props.dispatch(fetchConfig());
-    }
-
-    render() {
-        return (
+export default function App() {
+    return (
+        <div>
+            <Helmet
+                titleTemplate="%s - React.js Boilerplate"
+                defaultTitle="Aphrodite Panel"
+            >
+                <meta name="description" content="Aphrodite Panel" />
+            </Helmet>
             <section>
                 <Notify></Notify>
 
@@ -85,32 +65,6 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
                     </Switch>
                 </div>
             </section>
-        );
-    }
+        </div>
+    );
 }
-
-App.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    // location: PropTypes.object,
-};
-
-const mapStateToProps = createStructuredSelector({
-    location: makeSelectLocation(),
-});
-
-function mapDispatchToProps(dispatch) {
-    return {
-        dispatch,
-    };
-}
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-const withReducer = injectReducer({ key: 'config', reducer });
-const withSaga = injectSaga({ key: 'config', saga });
-
-export default compose(
-    withReducer,
-    withSaga,
-    withConnect,
-)(App);

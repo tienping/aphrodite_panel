@@ -1,18 +1,64 @@
-import { fromJS } from 'immutable';
+import produce from 'immer';
 
-import languageProviderReducer from '../reducer';
-// import {
-//     DEFAULT_LOCALE,
-// } from '../constants';
+import appReducer from '../reducer';
+import { loadRepos, reposLoaded, repoLoadingError } from '../actions';
 
+/* eslint-disable default-case, no-param-reassign */
 describe('appReducer', () => {
-    it('returns the initial state', () => {
-        expect(languageProviderReducer(undefined, {})).toEqual(fromJS({}));
+    let state;
+    beforeEach(() => {
+        state = {
+            loading: false,
+            error: false,
+            currentUser: false,
+            userData: {
+                repositories: false,
+            },
+        };
     });
 
-    // it('changes the locale', () => {
-    //     expect(languageProviderReducer(undefined, { type: CHANGE_LOCALE, locale: 'de' }).toJS()).toEqual({
-    //         locale: 'de',
-    //     });
-    // });
+    it('should return the initial state', () => {
+        const expectedResult = state;
+        expect(appReducer(undefined, {})).toEqual(expectedResult);
+    });
+
+    it('should handle the loadRepos action correctly', () => {
+        const expectedResult = produce((draft) => {
+            draft.loading = true;
+            draft.error = false;
+            draft.userData.repositories = false;
+        });
+
+        expect(appReducer(state, loadRepos())).toEqual(expectedResult);
+    });
+
+    it('should handle the reposLoaded action correctly', () => {
+        const fixture = [{
+            name: 'My Repo',
+        }];
+        const username = 'test';
+        const expectedResult = produce((draft) => {
+            draft.userData.repositories = fixture;
+            draft.loading = false;
+            draft.currentUser = username;
+        });
+
+        expect(appReducer(state, reposLoaded(fixture, username))).toEqual(
+        expectedResult,
+        );
+    });
+
+    it('should handle the repoLoadingError action correctly', () => {
+        const fixture = {
+            msg: 'Not found',
+        };
+        const expectedResult = produce((draft) => {
+            draft.error = fixture;
+            draft.loading = false;
+        });
+
+        expect(appReducer(state, repoLoadingError(fixture))).toEqual(
+        expectedResult,
+        );
+    });
 });

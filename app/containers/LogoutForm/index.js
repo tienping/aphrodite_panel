@@ -14,6 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { removeCookie } from 'globalUtils';
 import globalScope from 'globalScope';
+import { push } from 'react-router-redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -51,12 +52,9 @@ export class LogoutForm extends React.PureComponent { // eslint-disable-line rea
                                 </span>
                                 <span
                                     onClick={() => {
-                                        if (globalScope.previousPage) {
-                                            this.props.history.push(globalScope.previousPage);
-                                        } else {
-                                            this.props.history.goBack();
-                                            this.props.history.goBack();
-                                        }
+                                        this.props.dispatch(push({
+                                            pathname: globalScope.previousPage,
+                                        }));
                                     }}
                                     className="cancel invert my-custom-button"
                                 >

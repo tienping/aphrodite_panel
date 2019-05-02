@@ -1,40 +1,43 @@
+import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from '../constants';
 
-import {
-    fetchConfig,
-    fetchConfigSuccess,
-    fetchConfigFailed,
-} from '../actions';
-import {
-    FETCH_CONFIG,
-    FETCH_CONFIG_SUCCESS,
-    FETCH_CONFIG_FAILED,
-} from '../constants';
+import { loadRepos, reposLoaded, repoLoadingError } from '../actions';
 
-describe('App actions', () => {
-    describe('fetchConfig', () => {
-        it('has a type of FETCH_CONFIG', () => {
-            const expected = {
-                type: FETCH_CONFIG,
+describe('App Actions', () => {
+    describe('loadRepos', () => {
+        it('should return the correct type', () => {
+            const expectedResult = {
+                type: LOAD_REPOS,
             };
-            expect(fetchConfig()).toEqual(expected);
+
+            expect(loadRepos()).toEqual(expectedResult);
         });
     });
 
-    describe('fetchConfigSuccess', () => {
-        it('has a type of FETCH_CONFIG_SUCCESS', () => {
-            const expected = {
-                type: FETCH_CONFIG_SUCCESS,
+    describe('reposLoaded', () => {
+        it('should return the correct type and the passed repos', () => {
+            const fixture = ['Test'];
+            const username = 'test';
+            const expectedResult = {
+                type: LOAD_REPOS_SUCCESS,
+                repos: fixture,
+                username,
             };
-            expect(fetchConfigSuccess()).toEqual(expected);
+
+            expect(reposLoaded(fixture, username)).toEqual(expectedResult);
         });
     });
 
-    describe('fetchConfigFailed', () => {
-        it('has a type of FETCH_CONFIG_FAILED', () => {
-            const expected = {
-                type: FETCH_CONFIG_FAILED,
+    describe('repoLoadingError', () => {
+        it('should return the correct type and the error', () => {
+            const fixture = {
+                msg: 'Something went wrong!',
             };
-            expect(fetchConfigFailed()).toEqual(expected);
+            const expectedResult = {
+                type: LOAD_REPOS_ERROR,
+                error: fixture,
+            };
+
+            expect(repoLoadingError(fixture)).toEqual(expectedResult);
         });
     });
 });

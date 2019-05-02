@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 // import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
@@ -785,4 +786,5 @@ export default compose(
     withReducer,
     withSaga,
     withConnect,
+    withRouter,
 )(FormButton);

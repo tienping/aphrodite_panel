@@ -1,4 +1,5 @@
 import { dataChecking } from 'globalUtils';
+import { push } from 'react-router-redux';
 
 const tableSetting = {
     merchant_list: {
@@ -6,7 +7,7 @@ const tableSetting = {
         link: '/merchant_list',
         description: 'A page to view, add and edit merchants in Hermo.',
         iconClass: 'fa fa-users p-1',
-        tableWidth: '70rem',
+        tableWidth: '62rem',
         api: 'http://aphrodite.alpha.hermo.my/merchant',
         pathToDataRoot: '',
         actionButtons: [
@@ -23,7 +24,7 @@ const tableSetting = {
             { key: 'updatedAt', label: 'Updated At', width: '10rem', align: 'center', type: 'datetime', doc: { description: 'The date last updated' } },
             {
                 label: 'Action',
-                width: '20rem',
+                width: '12rem',
                 key: 'Action',
                 align: 'center',
                 type: 'action',
@@ -54,10 +55,13 @@ const tableSetting = {
                         special: 'render',
                         iconClass: 'fas fa-list',
                         onPressHandling: (index, scope, data) => {
-                            scope.props.history.push({
+                            scope.props.dispatch(push({
                                 pathname: '/routingTo',
-                                state: { pageSubTitle: data.name, destination: `/merchant/${data.id}/products` },
-                            });
+                                state: {
+                                    destination: `/merchant/${data.id}/products`,
+                                    source: scope.props.location.pathname,
+                                },
+                            }));
                         },
                     },
                     {
@@ -65,10 +69,13 @@ const tableSetting = {
                         special: 'render',
                         iconClass: 'fas fa-file-invoice',
                         onPressHandling: (index, scope, data) => {
-                            scope.props.history.push({
+                            scope.props.dispatch(push({
                                 pathname: '/routingTo',
-                                state: { pageSubTitle: data.name, destination: `/merchant/${data.id}/orders` },
-                            });
+                                state: {
+                                    destination: `/merchant/${data.id}/orders`,
+                                    source: scope.props.location.pathname,
+                                },
+                            }));
                         },
                     },
                 ],

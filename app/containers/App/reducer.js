@@ -1,34 +1,46 @@
 /*
+ * AppReducer
  *
- * App reducer
+ * The reducer takes care of our data. Using actions, we can
+ * update our application state. To add a new action,
+ * add it to the switch statement in the reducer function
  *
  */
 
-import { fromJS } from 'immutable';
+import produce from 'immer';
+import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
 
-import {
-    FETCH_CONFIG,
-    FETCH_CONFIG_SUCCESS,
-    FETCH_CONFIG_FAILED,
-} from './constants';
+// The initial state of the App
+export const initialState = {
+    loading: false,
+    error: false,
+    currentUser: false,
+    userData: {
+        repositories: false,
+    },
+};
 
-const initialState = fromJS({
-    config: {},
-});
+/* eslint-disable default-case, no-param-reassign */
+const appReducer = (state = initialState, action) =>
+    produce((state2, draft) => {
+        switch (action.type) {
+            case LOAD_REPOS:
+                draft.loading = true;
+                draft.error = false;
+                draft.userData.repositories = false;
+                break;
 
-function appReducer(state = initialState, action) {
-    switch (action.type) {
-        case FETCH_CONFIG:
-            return state;
-        case FETCH_CONFIG_SUCCESS:
-            return state
-                .set('config', action.payload);
-        case FETCH_CONFIG_FAILED:
-            return state
-                .set('config', action.payload);
-        default:
-            return state;
-    }
-}
+            case LOAD_REPOS_SUCCESS:
+                draft.userData.repositories = action.repos;
+                draft.loading = false;
+                draft.currentUser = action.username;
+                break;
+
+            case LOAD_REPOS_ERROR:
+                draft.error = action.error;
+                draft.loading = false;
+                break;
+        }
+    });
 
 export default appReducer;

@@ -14,6 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import Navigator from 'components/Navigator';
+import { push } from 'react-router-redux';
 
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
@@ -46,7 +47,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         items.push({
                             code: key,
                             require_login: false,
-                            type: 'external_url',
+                            type: 'internal_url',
                             // type: 'internal_url',
                             title: dataChecking(tableSetting, key, 'title'),
                             verticalText: dataChecking(tableSetting, key, 'title'),
@@ -76,7 +77,9 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                             iconClass: 'fas fa-sign-out-alt px-1',
                             handleLinkClick: () => {
                                 globalScope.previousPage = window.location.pathname;
-                                this.props.history.push('/logout');
+                                this.props.dispatch(push({
+                                    pathname: '/logout',
+                                }));
                             },
                         },
                     ],
