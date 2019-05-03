@@ -15,8 +15,8 @@ import HomePage from 'containers/HomePage';
 import TableListingPage from 'containers/TableListingPage';
 import GamiguidePage from 'containers/GamiguidePage';
 import LogoutForm from 'containers/LogoutForm';
-import AlternateRoute from 'containers/AlternateRoute';
 import NotFoundPage from 'containers/NotFoundPage';
+import GlobalDataProcessor from 'containers/GlobalDataProcessor';
 
 import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
@@ -35,6 +35,7 @@ export default function App() {
             </Helmet>
             <section>
                 <Notify></Notify>
+                <GlobalDataProcessor />
 
                 <div id="hershop-content-container">
                     <Switch>
@@ -48,7 +49,6 @@ export default function App() {
                             token={globalScope.token || ''}
                             render={() => <HomePage />}
                         />
-                        <Route exact={true} path="/routingTo" component={AlternateRoute} />
                         {
                             Object.keys(tableSetting).map((key, index) => (
                                 <Route

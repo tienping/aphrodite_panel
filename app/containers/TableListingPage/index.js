@@ -25,10 +25,12 @@ import globalScope from 'globalScope';
 import Button from '@material-ui/core/Button';
 // import { Input } from '@tienping/my-react-kit';
 
+import makeSelectGlobalDataProcessor from 'containers/GlobalDataProcessor/selectors';
+import * as GDPActions from 'containers/GlobalDataProcessor/actions';
 import makeSelectTableListingPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import * as actions from './actions';
+// import * as actions from './actions';
 // import messages from './messages';
 
 import './style.scss';
@@ -45,24 +47,24 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         const id = dataChecking(this.props, 'match', 'params', 'id');
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             if (tableSetting[this.props.pageType].api) {
-                this.props.dispatch(actions.getList({ api: tableSetting[this.props.pageType].api, id }));
+                this.props.dispatch(GDPActions.getList({ api: tableSetting[this.props.pageType].api, id }));
             }
         }
     }
 
     componentWillReceiveProps(nextProps) {
         let obj = {};
-        const { tablelistingpage } = nextProps;
+        const { globaldataprocessor } = nextProps;
 
         if (nextProps.pageType !== this.props.pageType) {
             this.setState(this.initialiseProps(nextProps));
             if (dataChecking(tableSetting, nextProps.pageType, 'api')) {
-                this.props.dispatch(actions.getList({ api: tableSetting[nextProps.pageType].api }));
+                this.props.dispatch(GDPActions.getList({ api: tableSetting[nextProps.pageType].api }));
             }
         }
 
-        if (tablelistingpage.data !== this.props.tablelistingpage.data) {
-            const { data } = tablelistingpage;
+        if (globaldataprocessor.data !== this.props.globaldataprocessor.data) {
+            const { data } = globaldataprocessor;
             this.setState({
                 data: dataChecking(data, 'result'),
                 pagination: {
@@ -75,24 +77,24 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         this.state.formButtonList.map((buttonKey) => {
-            if (tablelistingpage[buttonKey] &&
-                    tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
-                obj[buttonKey] = tablelistingpage[buttonKey];
+            if (globaldataprocessor[buttonKey] &&
+                    globaldataprocessor[buttonKey] !== this.props.globaldataprocessor[buttonKey]) {
+                obj[buttonKey] = globaldataprocessor[buttonKey];
                 obj[buttonKey].pageType = this.props.pageType;
                 this.setState(obj);
             }
             return true;
         });
 
-        if (tablelistingpage.addNewButtonToList !== this.props.tablelistingpage.addNewButtonToList
-                && !this.state.formButtonList[tablelistingpage.addNewButtonToList]) {
+        if (globaldataprocessor.addNewButtonToList !== this.props.globaldataprocessor.addNewButtonToList
+                && !this.state.formButtonList[globaldataprocessor.addNewButtonToList]) {
             obj = this.state.formButtonList;
-            obj.push(tablelistingpage.addNewButtonToList);
+            obj.push(globaldataprocessor.addNewButtonToList);
             this.setState({ formButtonList: obj });
         }
 
-        if (tablelistingpage.getItemData !== this.props.tablelistingpage.getItemData) {
-            const { data, field, buttonId } = tablelistingpage.getItemData;
+        if (globaldataprocessor.getItemData !== this.props.globaldataprocessor.getItemData) {
+            const { data, field, buttonId } = globaldataprocessor.getItemData;
 
             const arr = dataChecking(data, field.itemDataPath) || [];
             const tempItems = [];
@@ -111,17 +113,17 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         this.state.formButtonList.map((buttonKey) => {
-            if (tablelistingpage[buttonKey] &&
-                    tablelistingpage[buttonKey] !== this.props.tablelistingpage[buttonKey]) {
-                obj[buttonKey] = tablelistingpage[buttonKey];
+            if (globaldataprocessor[buttonKey] &&
+                    globaldataprocessor[buttonKey] !== this.props.globaldataprocessor[buttonKey]) {
+                obj[buttonKey] = globaldataprocessor[buttonKey];
                 obj[buttonKey].pageType = this.props.pageType;
                 this.setState(obj);
             }
             return true;
         });
 
-        if (tablelistingpage.toggleUtilFormButton !== this.props.tablelistingpage.toggleUtilFormButton) {
-            const { toggleUtilFormButton } = tablelistingpage;
+        if (globaldataprocessor.toggleUtilFormButton !== this.props.globaldataprocessor.toggleUtilFormButton) {
+            const { toggleUtilFormButton } = globaldataprocessor;
             const current = { ...this.state[toggleUtilFormButton.id] };
             current.toggleModal = toggleUtilFormButton.status;
             current.resetOnClose = toggleUtilFormButton.resetOnClose;
@@ -138,7 +140,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
     onPageChange(pageApi) {
         if (pageApi) {
-            this.props.dispatch(actions.getList({ api: pageApi }));
+            this.props.dispatch(GDPActions.getList({ api: pageApi }));
         }
     }
 
@@ -207,7 +209,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         // formType="attach"
                                         formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                         onModalComplete={(newState) => {
-                                            this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                            this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                                         }}
                                     >
                                         <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
@@ -224,7 +226,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         // formType="attach"
                                         formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
                                         onModalComplete={(newState) => {
-                                            this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                            this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                                         }}
                                     >
                                         <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
@@ -244,7 +246,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     formType="attach"
                                     formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     onModalComplete={(newState) => {
-                                        this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                                        this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                                     }}
                                 >
                                     {item.title}
@@ -481,7 +483,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         style={{ display: 'inline-block', padding: '3vh 1vw', width: '100%' }}
                                     >
                                         {
-                                            dataChecking(this.props, 'tablelistingpage', 'loading') ?
+                                            dataChecking(this.props, 'globaldataprocessor', 'loading') ?
                                                 'loading'
                                                 :
                                                 'No data found...'
@@ -504,10 +506,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 submitButtonText="Create Imagelink Now"
                 formbutton={this.state.formButton_util_create_imagelink || {}}
                 onModalCancel={() => {
-                    this.props.dispatch(actions.toggleUtilFormButton('formButton_util_create_imagelink', false));
+                    this.props.dispatch(GDPActions.toggleUtilFormButton('formButton_util_create_imagelink', false));
                 }}
                 onModalComplete={() => {
-                    this.props.dispatch(actions.toggleUtilFormButton('formButton_util_create_imagelink', false));
+                    this.props.dispatch(GDPActions.toggleUtilFormButton('formButton_util_create_imagelink', false));
                 }}
                 dispatch={this.props.dispatch}
             ></FormButton>
@@ -524,7 +526,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     initialData={row}
                     formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
                     onModalComplete={(newState) => {
-                        this.props.dispatch(actions.getList({ api: tableSetting[newState.pageType].api }));
+                        this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                     }}
                 >
                     <Button variant="outlined" className="my-half">
@@ -541,7 +543,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 className="my-half"
                 onClick={(value2, index2) => {
                     if (column.onPressHandling) {
-                        column.onPressHandling(index2, this, row, actions);
+                        column.onPressHandling(index2, this, row, GDPActions);
                     }
                 }}
             >
@@ -696,6 +698,7 @@ TableListingPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     tablelistingpage: makeSelectTableListingPage(),
+    globaldataprocessor: makeSelectGlobalDataProcessor(),
 });
 
 function mapDispatchToProps(dispatch) {

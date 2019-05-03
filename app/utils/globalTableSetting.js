@@ -55,13 +55,7 @@ const tableSetting = {
                         special: 'render',
                         iconClass: 'fas fa-list',
                         onPressHandling: (index, scope, data) => {
-                            scope.props.dispatch(push({
-                                pathname: '/routingTo',
-                                state: {
-                                    destination: `/merchant/${data.id}/products`,
-                                    source: scope.props.location.pathname,
-                                },
-                            }));
+                            scope.props.dispatch(push(`/merchant/${data.id}/products`));
                         },
                     },
                     {
@@ -69,13 +63,7 @@ const tableSetting = {
                         special: 'render',
                         iconClass: 'fas fa-file-invoice',
                         onPressHandling: (index, scope, data) => {
-                            scope.props.dispatch(push({
-                                pathname: '/routingTo',
-                                state: {
-                                    destination: `/merchant/${data.id}/orders`,
-                                    source: scope.props.location.pathname,
-                                },
-                            }));
+                            scope.props.dispatch(push(`/merchant/${data.id}/products`));
                         },
                     },
                 ],
@@ -102,8 +90,8 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
             { key: 'name', label: 'Product Name', width: '35rem', align: 'left', type: 'string', doc: { description: '' } },
-            { key: 'image_320_200', label: 'Product Image', width: '20rem', align: 'center', type: 'image', doc: { description: '' } },
-            { key: 'merchant_id', label: 'Merchant ID', width: '15rem', align: 'center', type: 'integer', doc: { description: '' } },
+            { key: 'image_320_200', label: 'Product Image', width: '25rem', align: 'center', type: 'image', doc: { description: '' } },
+            { key: 'merchant_id', label: 'Merchant ID', width: '10rem', align: 'center', type: 'integer', doc: { description: '' } },
             {
                 label: 'Action',
                 width: '15rem',
