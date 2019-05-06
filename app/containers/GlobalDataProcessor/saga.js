@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { apiRequest } from 'globalUtils';
 import { NotificationManager } from 'react-notifications';
+import globalScope from 'globalScope';
 
 import {
     getListSuccess,
@@ -16,13 +17,23 @@ import {
     GET_DATA_KEY_VALUE,
 } from './constants';
 
-export function* getTableData(action) {
+export function* getTableData() {
+// export function* getTableData(action) {
+    console.log('1111', globalScope.socket);
     try {
-        let targetApi = action.params.api;
-        if (action.params.id && action.params.api.indexOf(':id') !== -1) {
-            targetApi = action.params.api.replace(':id', action.params.id);
-        }
-        const response = yield call(apiRequest, targetApi, 'get');
+        // let targetApi = action.params.api;
+        // if (action.params.id && action.params.api.indexOf(':id') !== -1) {
+        //     targetApi = action.params.api.replace(':id', action.params.id);
+        // }
+        const response = yield globalScope.socket.query('merchant').find({
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Language': 'en',
+                'token': globalScope.token,
+            },
+        });
+        // const response = yield featherSocket.query('order').find({ query: { merchant_id: action.params.id } });
+        // const response = yield call(apiRequest, targetApi, 'get');
 
         if (response && response.ok) {
             yield put(getListSuccess(response.data));

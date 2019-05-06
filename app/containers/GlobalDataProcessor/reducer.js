@@ -5,6 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
+import { dataChecking } from 'globalUtils';
 import {
     GET_LIST,
     GET_LIST_SUCCESS,
@@ -40,7 +41,7 @@ function globalDataProcessorReducer(state = initialState, action) {
         case GET_LIST_FAILED:
             return state
                 .set('loading', false)
-                .set('error', action.payload.data.error || true);
+                .set('error', dataChecking(action, 'payload', 'data', 'error') || true);
         case FIRE_API:
             tempObj = {
                 fireApiReturnedData: null,
