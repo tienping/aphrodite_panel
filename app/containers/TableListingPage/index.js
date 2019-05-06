@@ -486,7 +486,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             dataChecking(this.props, 'globaldataprocessor', 'loading') ?
                                                 'loading'
                                                 :
-                                                'No data found...'
+                                                dataChecking(this.props, 'globaldataprocessor', 'error') || 'No data found...'
                                         }
                                     </div>
                                 </div>

@@ -6,6 +6,8 @@
 
 import React from 'react';
 import topNavSetting from 'utils/globalTopNavSetting';
+import Button from '@material-ui/core/Button';
+import DropdownMenu from 'components/DropdownMenu';
 
 import './style.scss';
 
@@ -13,11 +15,28 @@ class TopNavigation extends React.PureComponent { // eslint-disable-line react/p
     render() {
         return (
             <div
-                className="TopNavigation-bar"
+                className="top-navigation-bar"
             >
-                <div>
+                <div className="container">
                     {
-                        Object.keys(topNavSetting).map((key, index) => <div key={index}>{key}</div>)
+                        Object.keys(topNavSetting).map((key, index) => (
+                            <div key={index}>
+                                {
+                                    topNavSetting[index].children ?
+                                        <DropdownMenu
+                                            data={topNavSetting[index]}
+                                        />
+                                        :
+                                        <Button
+                                            key={index}
+                                            className="top-nav-button"
+                                            variant="outlined"
+                                        >
+                                            {topNavSetting[index].label}
+                                        </Button>
+                                }
+                            </div>
+                        ))
                     }
                 </div>
             </div>

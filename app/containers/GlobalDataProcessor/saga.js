@@ -1,5 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { apiRequest } from 'globalUtils';
+import { NotificationManager } from 'react-notifications';
+
 import {
     getListSuccess,
     getListFail,
@@ -26,7 +28,9 @@ export function* getTableData(action) {
             yield put(getListSuccess(response.data));
         } else {
             if (response.data && response.data.error) {
-                alert(response.data.error);
+                NotificationManager.error(response.data.error, 'Error!! (click to dismiss)', 5000, () => {
+                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
+                });
             }
             yield put(getListFail(response));
         }

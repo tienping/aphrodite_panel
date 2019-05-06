@@ -92,6 +92,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
 
     componentDidMount() {
         // this.props.dispatch(fetchTopNav({}));
+        globalScope.dispatch = this.props.dispatch;
     }
 
     render() {

@@ -40,7 +40,7 @@ function globalDataProcessorReducer(state = initialState, action) {
         case GET_LIST_FAILED:
             return state
                 .set('loading', false)
-                .set('error', true);
+                .set('error', action.payload.data.error || true);
         case FIRE_API:
             tempObj = {
                 fireApiReturnedData: null,
