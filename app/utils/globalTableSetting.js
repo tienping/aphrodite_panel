@@ -84,7 +84,7 @@ const tableSetting = {
             {
                 title: 'Associate New Product',
                 type: 'createNew',
-                width: '220px',
+                width: '250px',
             },
         ],
         fields: [

@@ -39,6 +39,7 @@ export function* getTableData(action) {
 export function* fireApi(action) {
     const { apiUrl, type, data } = action.payload;
     try {
+        // const res = yield globalScope.socket.query('merchant').create({ id: 'sadsdf' });
         // const response = yield call(apiRequest, '', type, params, apiUrl, { headers: { 'Content-Type': 'multipart/form-data' } });
         const response = yield call(apiRequest, '', type, data, apiUrl);
 

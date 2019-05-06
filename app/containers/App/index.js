@@ -15,6 +15,7 @@ import HomePage from 'containers/HomePage';
 import TableListingPage from 'containers/TableListingPage';
 import GamiguidePage from 'containers/GamiguidePage';
 import LogoutForm from 'containers/LogoutForm';
+import LoginForm from 'containers/LoginForm';
 import NotFoundPage from 'containers/NotFoundPage';
 import GlobalDataProcessor from 'containers/GlobalDataProcessor';
 
@@ -22,7 +23,7 @@ import tableSetting from 'utils/globalTableSetting';
 import { dataChecking } from 'globalUtils';
 import globalScope from 'globalScope';
 
-// import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
 export default function App() {
     return (
@@ -39,11 +40,10 @@ export default function App() {
 
                 <div id="hershop-content-container">
                     <Switch>
-                        {/* <Route exact={true} path="/login" component={globalScope.token ? LogoutForm : LoginForm} /> */}
+                        <Route exact={true} path="/login" component={globalScope.token ? LogoutForm : LoginForm} />
                         <Route exact={true} path="/logout" component={LogoutForm} />
                         <Route exact={true} path="/howto" component={GamiguidePage} />
-                        <Route
-                        // <PrivateRoute
+                        <PrivateRoute
                             exact={true}
                             path="/"
                             token={globalScope.token || ''}

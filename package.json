@@ -197,7 +197,8 @@
             "jsx-a11y/no-static-element-interactions": 0,
             "no-alert": 0,
             "no-nested-ternary": 0,
-            "react/no-danger": 0
+            "react/no-danger": 0,
+            "no-return-await": 0
         },
         "settings": {
             "import/resolver": {
@@ -269,6 +270,9 @@
         "testRegex": "tests/.*\\.test\\.js$"
     },
     "dependencies": {
+        "@feathersjs/authentication-client": "^1.0.11",
+        "@feathersjs/feathers": "^3.3.1",
+        "@feathersjs/socketio-client": "^1.2.1",
         "@material-ui/core": "^3.9.3",
         "@material-ui/icons": "^3.0.2",
         "@tienping/my-react-dom": "0.0.1",
@@ -320,6 +324,7 @@
         "redux-saga": "0.15.3",
         "reselect": "3.0.1",
         "sanitize.css": "4.1.0",
+        "socket.io-client": "^2.2.0",
         "universal-cookie": "^3.0.7",
         "warning": "3.0.0",
         "whatwg-fetch": "2.0.3"
