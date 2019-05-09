@@ -1,5 +1,7 @@
 import { dataChecking } from 'globalUtils';
 import { push } from 'react-router-redux';
+import globalScope from 'globalScope';
+import { NotificationManager } from 'react-notifications';
 
 const tableSetting = {
     merchant_list: {
@@ -8,7 +10,18 @@ const tableSetting = {
         description: 'A page to view, add and edit merchants in Hermo.',
         iconClass: 'fa fa-users p-1',
         tableWidth: '62rem',
-        api: 'http://aphrodite.alpha.hermo.my/merchant',
+        // api: 'http://aphrodite.alpha.hermo.my/merchant',
+        getSocketParams: () => ({
+            service: 'merchant',
+            options: {
+                query: {},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': 'en',
+                    'token': globalScope.token,
+                },
+            },
+        }),
         pathToDataRoot: '',
         actionButtons: [
             // {
@@ -63,7 +76,7 @@ const tableSetting = {
                         special: 'render',
                         iconClass: 'fas fa-file-invoice',
                         onPressHandling: (index, scope, data) => {
-                            scope.props.dispatch(push(`/merchant/${data.id}/products`));
+                            scope.props.dispatch(push(`/merchant/${data.id}/orders`));
                         },
                     },
                 ],
@@ -78,7 +91,18 @@ const tableSetting = {
         description: 'A page to view and register product onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
         tableWidth: '90rem',
-        api: 'http://aphrodite.alpha.hermo.my/merchant/:id/products',
+        // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/products',
+        getSocketParams: ({ id }) => ({
+            service: 'product',
+            options: {
+                query: { merchant_id: id },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': 'en',
+                    'token': globalScope.token,
+                },
+            },
+        }),
         pathToDataRoot: '',
         actionButtons: [
             {
@@ -102,21 +126,20 @@ const tableSetting = {
                     {
                         name: 'remove',
                         iconClass: 'fas fa-trash',
-                        onPressHandling: (index, scope, data) => {
-                            const tempState = {
-                                showModalType: 'remove',
-                                formData: {},
-                            };
-
-                            scope.state.formConfig.map((field) => {
-                                tempState.formData[field.key] = {
-                                    value: dataChecking(data, field.dataPath || field.key),
-                                };
-                                return true;
-                            });
-                            tempState.formData.itemId = data.id;
-
-                            scope.setState(() => (tempState));
+                        onPressHandling: (index, scope, data, GDPActions) => {
+                            if (data && data.id && data.merchant_id) {
+                                globalScope.socket.associate('default').set({
+                                    model: 'product',
+                                    id: parseInt(data.id, 0),
+                                    associate: 'merchant',
+                                    associate_id: 1,
+                                }).then(() => {
+                                    NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
+                                        // on click action
+                                    });
+                                    scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.merchant_id, 0) })));
+                                });
+                            }
                         },
                     },
                 ],
@@ -131,7 +154,18 @@ const tableSetting = {
         description: 'A page to view and manage order onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
         tableWidth: '90rem',
-        api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
+        // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
+        getSocketParams: ({ id }) => ({
+            service: 'order',
+            options: {
+                query: { merchant_id: id },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': 'en',
+                    'token': globalScope.token,
+                },
+            },
+        }),
         pathToDataRoot: '',
         actionButtons: [
             // {

@@ -46,6 +46,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         const id = dataChecking(this.props, 'match', 'params', 'id');
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
+            if (tableSetting[this.props.pageType].getSocketParams) {
+                this.props.dispatch(GDPActions.getListByFeather(tableSetting[this.props.pageType].getSocketParams({ id })));
+                return;
+            }
             if (tableSetting[this.props.pageType].api) {
                 this.props.dispatch(GDPActions.getList({ api: tableSetting[this.props.pageType].api, id }));
             }
@@ -204,6 +208,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                     <FormButton
                                         key="create-button"
+                                        pageType={this.props.pageType}
                                         formId={`create_${this.props.pageType}`}
                                         formSettingKey={`create_${this.props.pageType}`}
                                         // formType="attach"
@@ -221,6 +226,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                 <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
                                     <FormButton
                                         key="upload-button"
+                                        pageType={this.props.pageType}
                                         formId={`upload_${this.props.pageType}`}
                                         formSettingKey={`upload_${this.props.pageType}`}
                                         // formType="attach"
@@ -501,6 +507,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         <div>
             <FormButton
                 key="util-create-imagelink"
+                pageType={this.props.pageType}
                 formId="util_create_imagelink"
                 formSettingKey="create_imagelink"
                 submitButtonText="Create Imagelink Now"
@@ -521,6 +528,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             return (
                 <FormButton
                     key="edit-button"
+                    pageType={this.props.pageType}
                     formId={`edit_${this.props.pageType}__#__${rowIndex}`}
                     formSettingKey={`edit_${this.props.pageType}`}
                     initialData={row}

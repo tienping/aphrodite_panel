@@ -32,11 +32,11 @@ import { FilePond, registerPlugin } from 'assets/react-filepond.js';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import * as GDPActions from 'containers/GlobalDataProcessor/actions';
 
 // import makeSelectFormButton from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import * as tableListingActions from './../TableListingPage/actions';
 import './style.scss';
 
 registerPlugin(FilePondPluginImagePreview);
@@ -53,6 +53,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     componentWillMount() {
         const { formSettingKey, formId } = this.props;
         const tempObj = {};
+
+        tempObj.routeParams = dataChecking(this.props, 'match', 'params');
 
         if (formId && dataChecking(formSetting, formSettingKey)) {
             tempObj.formSettingKey = formSettingKey;
@@ -217,7 +219,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     onSubmit = () => {
         if (this.state.formOnSubmit) {
-            this.state.formOnSubmit(this, tableListingActions, this.state, this.state.formFields);
+            this.state.formOnSubmit(this, GDPActions, this.state, this.state.formFields);
         }
     }
 
@@ -282,7 +284,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                 itemsData = dataChecking(globalScope, 'selectionData', field.key);
             } else {
                 globalScope.selectionData[field.key] = [];
-                this.props.dispatch(tableListingActions.getDataKeyValue(field));
+                this.props.dispatch(GDPActions.getDataKeyValue(field));
             }
         }
 
@@ -342,7 +344,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     className="my-custom-button smaller invert"
                                     onClick={() => {
                                         this.setState({ showingUtilModal: true });
-                                        this.props.dispatch(tableListingActions.toggleUtilFormButton(
+                                        this.props.dispatch(GDPActions.toggleUtilFormButton(
                                             'formButton_util_create_imagelink',
                                             true, // toggle status
                                             (response) => {

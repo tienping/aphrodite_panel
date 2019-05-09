@@ -24,7 +24,7 @@ export function* doLogin(action) {
                 globalScope.token = response.data.token;
                 setCookie(process.env.TOKEN_KEY, globalScope.token);
                 setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
-                yield globalScope.socket.jwtLogin(globalScope.token);
+                yield globalScope.socket.authenticate(globalScope.token);
                 yield put(loginSuccess(response.data.token));
             } else {
                 globalScope.token = '';

@@ -1,5 +1,7 @@
-// import { dataChecking } from 'globalUtils';
+import { dataChecking } from 'globalUtils';
 import globalScope from 'globalScope';
+import tableSetting from 'utils/globalTableSetting';
+import { NotificationManager } from 'react-notifications';
 
 // const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewButton) => {
 //     const extractedData = {};
@@ -32,17 +34,23 @@ const formSetting = {
         title: 'Associate New Product',
         // maxFormHeight: '480px',
         fields: [
-            { key: 'id', label: 'Select Product', type: 'textbox', mandatory: true, doc: { description: 'Product to be associate to current merchant' } },
-            { key: 'associate_id', label: 'Merchant ID', type: 'hidden', doc: { description: 'Id of current merchant' } },
+            { key: 'product', label: 'Select Product', type: 'textbox', mandatory: true, doc: { description: 'Product to be associate to current merchant' } },
         ],
-        onSubmit: () => {
-        // onSubmit: (scope, tableListingActions, data, fields) => {
-            globalScope.socket.query('association').create({
-                model: 'product',
-                id: 733,
-                associate: 'merchant',
-                associate_id: 3,
-            });
+        onSubmit: (scope, GDPActions, data) => {
+            if (dataChecking(data, 'product', 'value')) {
+                globalScope.socket.associate('default').set({
+                    model: 'product',
+                    id: parseInt(data.product.value, 0),
+                    associate: 'merchant',
+                    associate_id: parseInt(data.routeParams.id, 0),
+                }).then(() => {
+                    NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
+                        // on click action
+                    });
+                    scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 0) })));
+                    scope.onCompleting();
+                });
+            }
         },
     },
 };
