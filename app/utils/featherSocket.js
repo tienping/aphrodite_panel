@@ -1,6 +1,6 @@
-import Feather, { FeatherRest, FeatherSocket } from 'feathersjs-sdk';
+import Feather from 'feathersjs-sdk';
 import globalScope from 'globalScope';
-import { create } from 'apisauce';
+import globalFeatherSetting from 'utils/globalFeatherSetting';
 
 const getFeatherSocket = () => {
     const object = new Feather({
@@ -12,19 +12,7 @@ const getFeatherSocket = () => {
                 'token': globalScope.token,
             },
         },
-        transport: {
-            default: new FeatherRest({
-                host: 'http://aphrodite.alpha.hermo.my',
-                type: 'axios',
-                transport: create({
-                    // baseURL: apiString,
-                    // timeout: 30000,
-                }).axiosInstance,
-            }),
-            socket: new FeatherSocket({
-                host: 'http://aphrodite.alpha.hermo.my',
-            }),
-        },
+        transport: globalFeatherSetting,
     });
     return object;
 };

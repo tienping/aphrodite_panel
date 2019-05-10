@@ -13,6 +13,9 @@ import './style.scss';
 
 class TopNavigation extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     render() {
+        if (!topNavSetting || !topNavSetting.length) {
+            return null;
+        }
         return (
             <div
                 className="top-navigation-bar"

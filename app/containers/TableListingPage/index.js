@@ -46,11 +46,27 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
         const id = dataChecking(this.props, 'match', 'params', 'id');
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
-            if (tableSetting[this.props.pageType].getSocketParams) {
+            if (tableSetting[this.props.pageType].listenSocket) {
+                const params = tableSetting[this.props.pageType].getSocketParams({ id });
+                this.getDataByAsyncAwait(params).then((response) => {
+                    globalScope.socket.subscribe(params.service, params.targetSocket).onChange((response2) => {
+                        this.setState({
+                            data: response2,
+                        });
+                    });
+                    this.setState({
+                        data: dataChecking(response, 'result'),
+                        // pagination: {
+                        //     _meta: dataChecking(data, '_meta'),
+                        //     _links: dataChecking(data, '_links'),
+                        // },
+                        // sorter: null,
+                        // sortDirection: 'desc',
+                    });
+                });
+            } else if (tableSetting[this.props.pageType].getSocketParams) {
                 this.props.dispatch(GDPActions.getListByFeather(tableSetting[this.props.pageType].getSocketParams({ id })));
-                return;
-            }
-            if (tableSetting[this.props.pageType].api) {
+            } else if (tableSetting[this.props.pageType].api) {
                 this.props.dispatch(GDPActions.getList({ api: tableSetting[this.props.pageType].api, id }));
             }
         }
@@ -148,6 +164,22 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
     }
 
+    getDataByAsyncAwait = (params) => globalScope.socket.query(params.service, params.targetSocket).find(params.options);
+
+
+    // const response = yield globalScope.socket.query(action.params.service).find(action.params.options);
+    // getSocketParams: () => ({
+    //     service: 'merchant',
+    //     options: {
+    //         query: {},
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Accept-Language': 'en',
+    //             'token': globalScope.token,
+    //         },
+    //     },
+    // }),
+
     customSorting(data1, data2, dataType) {
         if (dataType === 'datetime') {
             const firstDate = data1 ? new Date(data1) : 0;
@@ -214,7 +246,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         // formType="attach"
                                         formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                         onModalComplete={(newState) => {
-                                            this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                                            if (newState && !tableSetting[newState.pageType].listenSocket) {
+                                                this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                                            }
                                         }}
                                     >
                                         <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
@@ -232,7 +266,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                         // formType="attach"
                                         formbutton={this.state[`formButton_upload_${this.props.pageType}`] || {}}
                                         onModalComplete={(newState) => {
-                                            this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                                            if (newState && !tableSetting[newState.pageType].listenSocket) {
+                                                this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                                            }
                                         }}
                                     >
                                         <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
@@ -252,7 +288,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     formType="attach"
                                     formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     onModalComplete={(newState) => {
-                                        this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                                        if (newState && !tableSetting[newState.pageType].listenSocket) {
+                                            this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                                        }
                                     }}
                                 >
                                     {item.title}
@@ -534,7 +572,9 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     initialData={row}
                     formbutton={this.state[`formButton_edit_${this.props.pageType}__#__${rowIndex}`] || {}}
                     onModalComplete={(newState) => {
-                        this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                        if (newState && !tableSetting[newState.pageType].listenSocket) {
+                            this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
+                        }
                     }}
                 >
                     <Button variant="outlined" className="my-half">
