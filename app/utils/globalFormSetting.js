@@ -105,7 +105,7 @@ const formSetting = {
 };
 
 formSetting.edit_test_api_1 = { ...formSetting.create_test_api_1 };
-formSetting.edit_test_api_1.title = 'Edit test_api_1';
+formSetting.edit_test_api_1.title = 'Edit Product';
 formSetting.edit_test_api_1.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
 formSetting.edit_test_api_1.onSubmit = (scope, tableListingActions, data, fields) => {
     const extractedData = extractData(data, fields);

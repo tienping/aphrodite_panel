@@ -241,7 +241,7 @@ const tableSetting = {
         pathToDataRoot: '',
         actionButtons: [
             {
-                title: 'Associate New Product',
+                title: 'Create New Product',
                 type: 'createNew',
                 width: '255px',
             },
