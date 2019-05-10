@@ -13,7 +13,7 @@ const extractData = (data, fields) => {
         } else if (field.type === 'textbox' || field.type === 'textbox') {
             extractedData[field.key] = `${data[field.key].value}`;
         } else if (field.type === 'json' || field.type === 'textbox' || field.type === 'image') {
-            extractedData[field.key] = null;
+            extractedData[field.key] = data[field.key].value || null;
         } else {
             extractedData[field.key] = data[field.key].value;
         }
@@ -67,7 +67,16 @@ const formSetting = {
             { key: 'code', label: 'Product Code', type: 'textbox', mandatory: true, doc: { description: '' } },
             { key: 'name', label: 'Product Name', type: 'textbox', mandatory: true, doc: { description: '' } },
             { key: 'price', label: 'Product Price', type: 'textbox', mandatory: true, doc: { description: '' } },
-            { key: 'image', label: 'Product Image Url', type: 'textbox', mandatory: true, doc: { description: '' } },
+            // { key: 'image', label: 'Product Image Url', type: 'textbox', mandatory: true, doc: { description: '' } },
+            {
+                key: 'image',
+                label: 'Product Image',
+                type: 'image',
+                allowMultiple: false,
+                requireBase64: true,
+                uploadByFeatherSocket: true,
+                doc: { description: 'Product image upload' },
+            },
             { key: 'desc', label: 'Description', type: 'textarea', mandatory: true, doc: { description: '' } },
         ],
         onSubmit: (scope, GDPActions, data) => {

@@ -15,7 +15,7 @@ const globalFeatherSetting = {
     //     host: 'http://aphrodite.alpha.hermo.my',
     // }),
     socket2: new FeatherSocket({
-        host: 'http://192.168.12.1:3001/',
+        host: 'http://devapi.ordopos.com',
     }),
 
 };

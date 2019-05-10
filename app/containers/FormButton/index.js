@@ -414,11 +414,31 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                     obj[field.key] = { uploadingFile: fileItems.map(
                                         (fileItem) => fileItem.file
                                     ) };
+
                                     obj.uploadingImage = true;
+
+                                    if (field.uploadByFeatherSocket) {
+                                        if (field.requireBase64) {
+                                            const reader = new FileReader();
+                                            reader.readAsDataURL(obj[field.key].uploadingFile[0]);
+                                            reader.onload = () => {
+                                                obj[field.key].value = reader.result;
+                                                obj.uploadingImage = false;
+                                                this.setState(obj);
+                                            };
+                                            reader.onerror = (error) => {
+                                                console.log('Convert file to base64 error: ', error);
+                                            };
+                                        } else {
+                                            obj[field.key].value = obj[field.key].uploadingFile[0];
+                                            obj.uploadingImage = false;
+                                        }
+                                    }
+
                                     this.setState(obj);
                                 }}
                                 allowMultiple={false}
-                                server={{
+                                server={field.uploadByFeatherSocket ? null : {
                                     process: {
                                         headers: {
                                             'hertoken': globalScope.token,
