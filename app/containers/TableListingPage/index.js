@@ -39,6 +39,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     constructor(props) {
         super(props);
         this.state = {};
+        this.socketChannel = null;
     }
 
     componentWillMount() {
@@ -49,11 +50,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             if (tableSetting[this.props.pageType].listenSocket) {
                 const params = tableSetting[this.props.pageType].getSocketParams({ id });
                 this.getDataByAsyncAwait(params).then((response) => {
-                    globalScope.socket.subscribe(params.service, params.targetSocket).onChange((response2) => {
-                        this.setState({
-                            data: response2,
-                        });
-                    });
                     this.setState({
                         data: dataChecking(response, 'result'),
                         // pagination: {
@@ -62,6 +58,12 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         // },
                         // sorter: null,
                         // sortDirection: 'desc',
+                    });
+                });
+                this.socketChannel = globalScope.socket.subscribe(params.service, params.targetSocket).onChange((response2) => {
+                    console.log('on subscribe update', response2);
+                    this.setState({
+                        data: response2,
                     });
                 });
             } else if (tableSetting[this.props.pageType].getSocketParams) {
@@ -156,6 +158,10 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             }
             this.setState({ formButtonList: obj, [toggleUtilFormButton.id]: current });
         }
+    }
+
+    componentWillUnmount() {
+        this.socketChannel(); // to unsubscribe channel
     }
 
     onPageChange(pageApi) {

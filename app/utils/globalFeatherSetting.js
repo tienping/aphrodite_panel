@@ -1,5 +1,6 @@
-import { create } from 'apisauce';
-import { FeatherRest, FeatherSocket } from 'feathersjs-sdk';
+// import { create } from 'apisauce';
+// import { FeatherRest, FeatherSocket } from 'feathersjs-sdk';
+import { FeatherSocket } from 'feathersjs-sdk';
 
 const globalFeatherSetting = {
     // default: new FeatherRest({

@@ -1,6 +1,6 @@
 // import { dataChecking } from 'globalUtils';
-import globalScope from 'globalScope';
-import { push } from 'react-router-redux';
+// import globalScope from 'globalScope';
+// import { push } from 'react-router-redux';
 
 const topNavSetting = [
     // {

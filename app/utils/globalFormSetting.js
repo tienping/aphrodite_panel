@@ -1,6 +1,6 @@
 import { dataChecking } from 'globalUtils';
 import globalScope from 'globalScope';
-import tableSetting from 'utils/globalTableSetting';
+// import tableSetting from 'utils/globalTableSetting';
 import { NotificationManager } from 'react-notifications';
 
 const extractData = (data, fields) => {

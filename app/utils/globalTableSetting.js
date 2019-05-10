@@ -128,7 +128,8 @@ const tableSetting = {
                     {
                         name: 'remove',
                         iconClass: 'fas fa-trash',
-                        onPressHandling: (index, scope, data, GDPActions) => {
+                        onPressHandling: (index, scope, data) => {
+                        // onPressHandling: (index, scope, data, GDPActions) => {
                             if (data && data.id && data.merchant_id) {
                                 globalScope.socket.associate('default').set({
                                     model: 'product',
@@ -226,11 +227,10 @@ const tableSetting = {
         tableWidth: '90rem',
         // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
         listenSocket: true,
-        getSocketParams: ({ id }) => ({
+        getSocketParams: () => ({
             targetSocket: 'socket2',
             service: 'product',
             options: {
-                // query: { merchant_id: id },
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept-Language': 'en',
@@ -279,6 +279,29 @@ const tableSetting = {
                             tempState.formData.itemId = data.id;
 
                             scope.setState(() => (tempState));
+                        },
+                    },
+                    {
+                        name: 'remove',
+                        iconClass: 'fas fa-trash',
+                        onPressHandling: (index, scope, data) => {
+                            globalScope.socket.query('product', 'socket2').remove(data.id, { headers: {
+                                'Content-Type': 'application/json',
+                                'Accept-Language': 'en',
+                                'token': globalScope.token,
+                            } })
+                            .then((response) => {
+                                NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
+                                    // on click action
+                                });
+                                console.log(response);
+                            })
+                            .catch((response) => {
+                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
+                                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
+                                });
+                                console.log(JSON.stringify(response));
+                            });
                         },
                     },
                 ],
