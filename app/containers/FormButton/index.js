@@ -32,6 +32,10 @@ import { FilePond, registerPlugin } from 'assets/react-filepond.js';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
+
 import * as GDPActions from 'containers/GlobalDataProcessor/actions';
 
 // import makeSelectFormButton from './selectors';
@@ -39,7 +43,7 @@ import reducer from './reducer';
 import saga from './saga';
 import './style.scss';
 
-registerPlugin(FilePondPluginImagePreview);
+registerPlugin(FilePondPluginImageResize, FilePondPluginImageTransform, FilePondPluginFileEncode, FilePondPluginImagePreview);
 
 export class FormButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
     constructor(props) {
@@ -409,18 +413,25 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                 id="my-custom-imageUploader"
                                 name="file"
                                 files={dataChecking(this.state, field.key, 'uploadingFile')}
+                                allowImageResize={true}
+                                imageResizeTargetWidth={200}
+                                imageResizeUpscale={false}
                                 onupdatefiles={(fileItems) => {
                                     const obj = {};
                                     obj[field.key] = { uploadingFile: fileItems.map(
                                         (fileItem) => fileItem.file
                                     ) };
-
                                     obj.uploadingImage = !!fileItems.length;
+                                    this.setState(obj);
+                                }}
+                                onpreparefile={(file, output) => {
+                                    const obj = {};
+                                    obj[field.key] = this.state[field.key] || {};
 
-                                    if (field.uploadByFeatherSocket && fileItems.length) {
+                                    if (field.uploadByFeatherSocket) {
                                         if (field.requireBase64) {
                                             const reader = new FileReader();
-                                            reader.readAsDataURL(obj[field.key].uploadingFile[0]);
+                                            reader.readAsDataURL(output);
                                             reader.onload = () => {
                                                 obj[field.key].value = reader.result;
                                                 obj.uploadingImage = false;
@@ -429,9 +440,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             reader.onerror = (error) => {
                                                 console.log('Convert file to base64 error: ', error);
                                             };
-                                            // obj[field.key].value = window.btoa(obj[field.key].uploadingFile[0]);
-                                            // obj.uploadingImage = false;
-                                            // this.setState(obj);
                                         } else {
                                             obj[field.key].value = obj[field.key].uploadingFile[0];
                                             obj.uploadingImage = false;

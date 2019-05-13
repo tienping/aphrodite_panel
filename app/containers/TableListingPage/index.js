@@ -23,6 +23,7 @@ import tableSetting from 'configs/tableSetting';
 import FormButton from 'containers/FormButton';
 import globalScope from 'globalScope';
 import Button from '@material-ui/core/Button';
+import { NotificationManager } from 'react-notifications';
 // import { Input } from '@tienping/my-react-kit';
 
 import makeSelectGlobalDataProcessor from 'containers/GlobalDataProcessor/selectors';
@@ -48,24 +49,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         const id = dataChecking(this.props, 'match', 'params', 'id');
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             if (tableSetting[this.props.pageType].listenSocket) {
-                const params = tableSetting[this.props.pageType].getSocketParams({ id });
-                this.getDataByAsyncAwait(params).then((response) => {
-                    this.setState({
-                        data: dataChecking(response, 'result'),
-                        // pagination: {
-                        //     _meta: dataChecking(data, '_meta'),
-                        //     _links: dataChecking(data, '_links'),
-                        // },
-                        // sorter: null,
-                        // sortDirection: 'desc',
-                    });
-                });
-                this.socketChannel = globalScope.socket.subscribe(params.service, params.targetSocket).onChange((response2) => {
-                    console.log('on subscribe update', response2);
-                    this.setState({
-                        data: response2,
-                    });
-                });
+                this.getFeatherQuery();
             } else if (tableSetting[this.props.pageType].getSocketParams) {
                 this.props.dispatch(GDPActions.getListByFeather(tableSetting[this.props.pageType].getSocketParams({ id })));
             } else if (tableSetting[this.props.pageType].api) {
@@ -170,7 +154,52 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
     }
 
-    getDataByAsyncAwait = (params) => globalScope.socket.query(params.service, params.targetSocket).find(params.options);
+    onFeatherPageChange(direction) {
+        if (direction === 'next') {
+            this.getFeatherQuery({ $skip: this.state.pagination._meta.skip + this.state.pagination._meta.limit });
+        } else if (direction === 'prev') {
+            this.getFeatherQuery({ $skip: this.state.pagination._meta.skip - this.state.pagination._meta.limit });
+        }
+    }
+
+    getFeatherQuery(topUpQuery) {
+        const params = tableSetting[this.props.pageType].getSocketParams({ id: dataChecking(this.props, 'match', 'params', 'id') });
+
+        if (topUpQuery) {
+            params.options.query = {
+                ...params.options.query,
+                ...topUpQuery,
+            };
+        }
+
+        globalScope.feather.authenticate(globalScope.token, 'aphrodite').then(console.log).catch(console.log);
+        globalScope.feather.query(params.service, params.targetSocket).find(params.options)
+            .then((response) => {
+                console.log('getDataByAsyncAwait', response);
+                this.setState({
+                    data: dataChecking(response, 'result'),
+                    pagination: {
+                        _meta: dataChecking(response, 'paginate'),
+                        // _links: dataChecking(data, '_links'),
+                    },
+                    // sorter: null,
+                    // sortDirection: 'desc',
+                });
+            })
+            .catch((response) => {
+                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
+                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
+                });
+                console.log(JSON.stringify(response));
+            });
+
+        this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChange((response2) => {
+            console.log('on subscribe update', response2);
+            this.setState({
+                data: response2,
+            });
+        });
+    }
 
     customSorting(data1, data2, dataType) {
         if (dataType === 'datetime') {
@@ -375,6 +404,54 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
     renderPaginatior() {
         const { pagination } = this.state;
+
+        if (dataChecking(pagination, '_meta', 'limit')) {
+            return (
+                <div className="table-paginator" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>
+                    {
+                        pagination._meta.skip >= pagination._meta.limit ?
+                            <a
+                                className="pagi-button py-1 px-1"
+                                onClick={() => {
+                                    this.onFeatherPageChange('prev');
+                                }}
+                            >
+                                <span className="pagi-prev pagi-item" title="Prev">&lt;</span>
+                            </a>
+                            :
+                            null
+                    }
+                    <span className="pagi-current pagi-item px-1 py-1">
+                        [&nbsp;
+                        {(pagination._meta.skip) + 1}
+                        &nbsp;to&nbsp;
+                        {
+                            pagination._meta.skip + pagination._meta.limit > pagination._meta.total ?
+                                pagination._meta.total
+                                :
+                                pagination._meta.skip + pagination._meta.limit
+                        }
+                        &nbsp; out of &nbsp;
+                        {pagination._meta.total}
+                        &nbsp;]
+                    </span>
+                    {
+                        pagination._meta.total > pagination._meta.skip + pagination._meta.limit ?
+                            <a
+                                className="pagi-button py-1 px-1"
+                                onClick={() => {
+                                    this.onFeatherPageChange('next');
+                                }}
+                            >
+                                <span className="pagi-next pagi-item" title="Next">&gt;</span>
+                            </a>
+                            :
+                            null
+                    }
+                </div>
+            );
+        }
+
         return (
             dataChecking(pagination, '_meta', 'currentPage') ?
                 <div className="table-paginator" style={{ width: dataChecking(this.state, 'tableWidth') || 'auto' }}>

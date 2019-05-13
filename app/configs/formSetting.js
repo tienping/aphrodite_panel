@@ -41,10 +41,24 @@ const formSetting = {
         // maxFormHeight: '480px',
         fields: [
             { key: 'product', label: 'Select Product', type: 'textbox', mandatory: true, doc: { description: 'Product to be associate to current merchant' } },
+            {
+                key: 'product2',
+                label: 'Select Product',
+                type: 'selection',
+                isMulti: true,
+                items: [
+                    { value: '1', label: 'Normal Member' },
+                    { value: '2', label: 'Gold Member' },
+                    { value: '3', label: 'Platinum Member' },
+                ],
+                doc: {
+                    description: '',
+                },
+            },
         ],
         onSubmit: (scope, GDPActions, data) => {
             if (dataChecking(data, 'product', 'value')) {
-                globalScope.socket.associate('default').set({
+                globalScope.feather.associate('default').set({
                     model: 'product',
                     id: parseInt(data.product.value, 0),
                     associate: 'merchant',
@@ -82,7 +96,7 @@ const formSetting = {
         onSubmit: (scope, GDPActions, data) => {
             const extractedData = extractData(data, formSetting.create_test_api_1.fields);
 
-            globalScope.socket.query('product', 'ordo').create(extractedData, { headers: {
+            globalScope.feather.query('product', 'ordo').create(extractedData, { headers: {
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en',
                 'token': globalScope.token,
@@ -110,7 +124,7 @@ formSetting.edit_test_api_1.fields.push({ key: 'id', label: '', type: 'hidden', 
 formSetting.edit_test_api_1.onSubmit = (scope, tableListingActions, data, fields) => {
     const extractedData = extractData(data, fields);
 
-    globalScope.socket.query('product', 'ordo').patch(extractedData.id, extractedData, { headers: {
+    globalScope.feather.query('product', 'ordo').patch(extractedData.id, extractedData, { headers: {
         'Content-Type': 'application/json',
         'Accept-Language': 'en',
         'token': globalScope.token,

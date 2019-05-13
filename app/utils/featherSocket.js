@@ -2,10 +2,10 @@ import Feather from 'feathersjs-sdk';
 import globalScope from 'globalScope';
 import featherSetting from 'configs/featherSetting';
 
-const getFeatherSocket = () => {
+const getFeatherInstance = () => {
     const object = new Feather({
         storage: window.localStorage,
-        defaultHeaders: {
+        defaultParams: {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en',
@@ -21,4 +21,4 @@ const getFeatherSocket = () => {
 // await requester.query('service').find();
 // await requester.query('service', 'other').find();
 
-export default getFeatherSocket;
+export default getFeatherInstance;

@@ -133,7 +133,7 @@ const tableSetting = {
                         onPressHandling: (index, scope, data) => {
                         // onPressHandling: (index, scope, data, GDPActions) => {
                             if (data && data.id && data.merchant_id) {
-                                globalScope.socket.associate('default').set({
+                                globalScope.feather.associate('default').set({
                                     model: 'product',
                                     id: parseInt(data.id, 0),
                                     associate: 'merchant',
@@ -234,7 +234,7 @@ const tableSetting = {
             service: 'product',
             targetSocket: 'ordo',
             options: {
-                query: {},
+                query: { $limit: 999 },
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept-Language': 'en',
@@ -289,7 +289,7 @@ const tableSetting = {
                         name: 'remove',
                         iconClass: 'fas fa-trash',
                         onPressHandling: (index, scope, data) => {
-                            globalScope.socket.query('product', 'ordo').remove(data.id, { headers: {
+                            globalScope.feather.query('product', 'ordo').remove(data.id, { headers: {
                                 'Content-Type': 'application/json',
                                 'Accept-Language': 'en',
                                 'token': globalScope.token,
