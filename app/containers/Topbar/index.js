@@ -16,7 +16,7 @@ import { compose } from 'redux';
 import Navigator from 'components/Navigator';
 import { push } from 'react-router-redux';
 
-import tableSetting from 'utils/globalTableSetting';
+import tableSetting from 'configs/tableSetting';
 import { dataChecking } from 'globalUtils';
 
 import injectReducer from 'utils/injectReducer';

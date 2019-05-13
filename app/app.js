@@ -17,7 +17,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import TopNavigation from 'components/TopNavigation';
-import topNavSetting from 'utils/globalTopNavSetting';
+import topNavSetting from 'configs/topNavSetting';
 
 // Import root app
 import App from 'containers/App';
@@ -52,8 +52,6 @@ const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
-
-console.log(topNavSetting);
 
 const render = (messages) => {
     ReactDOM.render(

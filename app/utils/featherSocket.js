@@ -1,6 +1,6 @@
 import Feather from 'feathersjs-sdk';
 import globalScope from 'globalScope';
-import globalFeatherSetting from 'utils/globalFeatherSetting';
+import featherSetting from 'configs/featherSetting';
 
 const getFeatherSocket = () => {
     const object = new Feather({
@@ -12,7 +12,7 @@ const getFeatherSocket = () => {
                 'token': globalScope.token,
             },
         },
-        transport: globalFeatherSetting,
+        transport: featherSetting,
     });
     return object;
 };

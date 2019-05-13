@@ -1,6 +1,6 @@
 import { dataChecking } from 'globalUtils';
 import globalScope from 'globalScope';
-// import tableSetting from 'utils/globalTableSetting';
+// import tableSetting from 'configs/tableSetting';
 import { NotificationManager } from 'react-notifications';
 
 const extractData = (data, fields) => {
@@ -82,7 +82,7 @@ const formSetting = {
         onSubmit: (scope, GDPActions, data) => {
             const extractedData = extractData(data, formSetting.create_test_api_1.fields);
 
-            globalScope.socket.query('product', 'socket2').create(extractedData, { headers: {
+            globalScope.socket.query('product', 'ordo').create(extractedData, { headers: {
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en',
                 'token': globalScope.token,
@@ -110,7 +110,7 @@ formSetting.edit_test_api_1.fields.push({ key: 'id', label: '', type: 'hidden', 
 formSetting.edit_test_api_1.onSubmit = (scope, tableListingActions, data, fields) => {
     const extractedData = extractData(data, fields);
 
-    globalScope.socket.query('product', 'socket2').patch(extractedData.id, extractedData, { headers: {
+    globalScope.socket.query('product', 'ordo').patch(extractedData.id, extractedData, { headers: {
         'Content-Type': 'application/json',
         'Accept-Language': 'en',
         'token': globalScope.token,

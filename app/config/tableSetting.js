@@ -14,6 +14,7 @@ const tableSetting = {
         listenSocket: true,
         getSocketParams: () => ({
             service: 'merchant',
+            targetSocket: 'aphrodite',
             options: {
                 query: {},
                 headers: {
@@ -96,6 +97,7 @@ const tableSetting = {
         listenSocket: true,
         getSocketParams: ({ id }) => ({
             service: 'product',
+            targetSocket: 'aphrodite',
             options: {
                 query: { merchant_id: id },
                 headers: {
@@ -161,6 +163,7 @@ const tableSetting = {
         listenSocket: true,
         getSocketParams: ({ id }) => ({
             service: 'order',
+            targetSocket: 'aphrodite',
             options: {
                 query: { merchant_id: id },
                 headers: {
@@ -228,9 +231,10 @@ const tableSetting = {
         // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
         listenSocket: true,
         getSocketParams: () => ({
-            targetSocket: 'socket2',
             service: 'product',
+            targetSocket: 'ordo',
             options: {
+                query: {},
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept-Language': 'en',
@@ -285,7 +289,7 @@ const tableSetting = {
                         name: 'remove',
                         iconClass: 'fas fa-trash',
                         onPressHandling: (index, scope, data) => {
-                            globalScope.socket.query('product', 'socket2').remove(data.id, { headers: {
+                            globalScope.socket.query('product', 'ordo').remove(data.id, { headers: {
                                 'Content-Type': 'application/json',
                                 'Accept-Language': 'en',
                                 'token': globalScope.token,

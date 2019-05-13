@@ -12,7 +12,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import tableSetting from 'utils/globalTableSetting';
+import tableSetting from 'configs/tableSetting';
 import { dataChecking } from 'globalUtils';
 import Button from '@material-ui/core/Button';
 // import Fancy from '@tienping/my-react-dom';

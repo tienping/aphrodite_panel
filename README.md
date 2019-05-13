@@ -11,7 +11,7 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 
 # Settings
 ## Table Setting
-[Example](https://bitbucket.org/hermo/aphrodite/src/26bd00f897ac/app/utils/globalTableSetting.js?at=devel-base)
+[Example](https://bitbucket.org/hermo/aphrodite/src/26bd00f897ac/app/configs/tableSetting.js?at=devel-base)
 > object key will be the table's id
 
 * title `string`
@@ -29,7 +29,7 @@ This project is extended from react-boilerplate [https://www.reactboilerplate.co
 
 
 ## Form Setting
-[Example](https://bitbucket.org/hermo/aphrodite/src/26bd00f897ac/app/utils/globalFormSetting.js?at=devel-base)
+[Example](https://bitbucket.org/hermo/aphrodite/src/26bd00f897ac/app/configs/formSetting.js?at=devel-base)
 > object key will be the table's id
 
 * title `string`

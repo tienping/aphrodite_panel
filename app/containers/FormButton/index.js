@@ -25,7 +25,7 @@ import injectReducer from 'utils/injectReducer';
 
 import { dataChecking } from 'globalUtils';
 import Switch from 'react-switch';
-import formSetting from 'utils/globalFormSetting';
+import formSetting from 'configs/formSetting';
 import globalScope from 'globalScope';
 
 import { FilePond, registerPlugin } from 'assets/react-filepond.js';
@@ -415,9 +415,9 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                         (fileItem) => fileItem.file
                                     ) };
 
-                                    obj.uploadingImage = true;
+                                    obj.uploadingImage = !!fileItems.length;
 
-                                    if (field.uploadByFeatherSocket) {
+                                    if (field.uploadByFeatherSocket && fileItems.length) {
                                         if (field.requireBase64) {
                                             const reader = new FileReader();
                                             reader.readAsDataURL(obj[field.key].uploadingFile[0]);
@@ -429,6 +429,9 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                                             reader.onerror = (error) => {
                                                 console.log('Convert file to base64 error: ', error);
                                             };
+                                            // obj[field.key].value = window.btoa(obj[field.key].uploadingFile[0]);
+                                            // obj.uploadingImage = false;
+                                            // this.setState(obj);
                                         } else {
                                             obj[field.key].value = obj[field.key].uploadingFile[0];
                                             obj.uploadingImage = false;

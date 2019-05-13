@@ -18,7 +18,7 @@ import ReactJson from 'react-json-view';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { dataChecking } from 'globalUtils';
-import tableSetting from 'utils/globalTableSetting';
+import tableSetting from 'configs/tableSetting';
 
 import FormButton from 'containers/FormButton';
 import globalScope from 'globalScope';
@@ -171,20 +171,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
     }
 
     getDataByAsyncAwait = (params) => globalScope.socket.query(params.service, params.targetSocket).find(params.options);
-
-
-    // const response = yield globalScope.socket.query(action.params.service).find(action.params.options);
-    // getSocketParams: () => ({
-    //     service: 'merchant',
-    //     options: {
-    //         query: {},
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept-Language': 'en',
-    //             'token': globalScope.token,
-    //         },
-    //     },
-    // }),
 
     customSorting(data1, data2, dataType) {
         if (dataType === 'datetime') {
@@ -650,7 +636,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </div>
                 );
             case 'image':
-                return <img src={row[col.key]} alt={row.name} width={row.width || '100%'} height={row.height || ''} />;
+                return <img src={row[col.key]} alt={row[col.key]} width={row.width || '100%'} height={row.height || ''} />;
             case 'date':
                 date = new Date(value);
                 return <span>{date.toLocaleDateString()}</span>;

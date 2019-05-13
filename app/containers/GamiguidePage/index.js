@@ -12,8 +12,8 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { dataChecking } from 'globalUtils';
-import tableSetting from 'utils/globalTableSetting';
-import formSetting from 'utils/globalFormSetting';
+import tableSetting from 'configs/tableSetting';
+import formSetting from 'configs/formSetting';
 
 // import messages from './messages';
 import './style.scss';

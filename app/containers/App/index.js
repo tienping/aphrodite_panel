@@ -19,7 +19,7 @@ import LoginForm from 'containers/LoginForm';
 import NotFoundPage from 'containers/NotFoundPage';
 import GlobalDataProcessor from 'containers/GlobalDataProcessor';
 
-import tableSetting from 'utils/globalTableSetting';
+import tableSetting from 'configs/tableSetting';
 import { dataChecking } from 'globalUtils';
 import globalScope from 'globalScope';
 

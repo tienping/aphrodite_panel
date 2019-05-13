@@ -2,7 +2,7 @@
 // import { FeatherRest, FeatherSocket } from 'feathersjs-sdk';
 import { FeatherSocket } from 'feathersjs-sdk';
 
-const globalFeatherSetting = {
+const featherSetting = {
     // default: new FeatherRest({
     //     host: 'http://aphrodite.alpha.hermo.my',
     //     type: 'axios',
@@ -11,13 +11,13 @@ const globalFeatherSetting = {
     //         // timeout: 30000,
     //     }).axiosInstance,
     // }),
-    // socket: new FeatherSocket({
-    //     host: 'http://aphrodite.alpha.hermo.my',
-    // }),
-    socket2: new FeatherSocket({
+    aphrodite: new FeatherSocket({
+        host: 'http://aphrodite.alpha.hermo.my',
+    }),
+    ordo: new FeatherSocket({
         host: 'http://devapi.ordopos.com',
     }),
 
 };
 
-export default globalFeatherSetting;
+export default featherSetting;
