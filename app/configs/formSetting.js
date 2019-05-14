@@ -96,6 +96,7 @@ const formSetting = {
         onSubmit: (scope, GDPActions, data) => {
             const extractedData = extractData(data, formSetting.create_test_api_1.fields);
 
+            scope.onUpdateStatus('formLoading', true);
             globalScope.feather.query('product', 'ordo').create(extractedData, { headers: {
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en',
@@ -107,12 +108,14 @@ const formSetting = {
                 });
                 console.log(JSON.stringify(response));
                 scope.onCompleting();
+                scope.onUpdateStatus('formLoading', false);
             })
             .catch((response) => {
                 NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
                     // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
                 });
                 console.log(JSON.stringify(response));
+                scope.onUpdateStatus('formLoading', false);
             });
         },
     },
