@@ -4,8 +4,15 @@
     margin-top: -1px;
     height: 50px;
 
-    .top-nav-button {
-        color: green;
-        border-color: green;
+    .top-nav-item {
+        display: inline-block;
+
+        .top-nav-button,
+        .top-nav-dropdown {
+            color: green;
+            border-color: green;
+            padding: 0.5rem 1rem;
+            margin: 0 1rem;
+        }
     }
 }

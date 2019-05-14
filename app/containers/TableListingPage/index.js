@@ -172,7 +172,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             };
         }
 
-        globalScope.feather.authenticate(globalScope.token, 'aphrodite').then(console.log).catch(console.log);
+        globalScope.feather.authenticate(globalScope.token, 'aphrodite').then((response) => {
+            console.log('authenticate success', response);
+        }).catch((response) => {
+            console.log('authenticate failed', response);
+        });
         globalScope.feather.query(params.service, params.targetSocket).find(params.options)
             .then((response) => {
                 console.log('getDataByAsyncAwait', response);

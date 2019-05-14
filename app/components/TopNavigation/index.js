@@ -23,10 +23,11 @@ class TopNavigation extends React.PureComponent { // eslint-disable-line react/p
                 <div className="container">
                     {
                         Object.keys(topNavSetting).map((key, index) => (
-                            <div key={index}>
+                            <div key={index} className="top-nav-item">
                                 {
                                     topNavSetting[index].children ?
                                         <DropdownMenu
+                                            className="top-nav-dropdown"
                                             data={topNavSetting[index]}
                                         />
                                         :

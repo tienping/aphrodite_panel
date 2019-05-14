@@ -33,7 +33,7 @@ class DropdownMenu extends React.PureComponent { // eslint-disable-line react/pr
     };
 
     render() {
-        const { data } = this.props;
+        const { data, className } = this.props;
         return (
             <div>
                 <Button
@@ -42,6 +42,7 @@ class DropdownMenu extends React.PureComponent { // eslint-disable-line react/pr
                     }}
                     aria-owns={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
+                    className={className}
                     onClick={this.handleToggle}
                 >
                     {data.label}
