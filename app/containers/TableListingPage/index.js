@@ -173,13 +173,12 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         globalScope.feather.authenticate(globalScope.token, 'aphrodite').then((response) => {
-            console.log('authenticate success', response);
+            console.log('authenticate success', { response, token: globalScope.token });
         }).catch((response) => {
-            console.log('authenticate failed', response);
+            console.log('authenticate failed', { response, token: globalScope.token });
         });
         globalScope.feather.query(params.service, params.targetSocket).find(params.options)
             .then((response) => {
-                console.log('getDataByAsyncAwait', response);
                 this.setState({
                     data: dataChecking(response, 'result'),
                     pagination: {
@@ -189,12 +188,13 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     // sorter: null,
                     // sortDirection: 'desc',
                 });
+                console.log('Find data success', { params, response });
             })
             .catch((response) => {
                 NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
                     // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
                 });
-                console.log(JSON.stringify(response));
+                console.log('Find data failed', { params, response });
             });
 
         this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChange((response2) => {
@@ -202,6 +202,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             this.setState({
                 data: response2,
             });
+            console.log('Sucribe onChange triggered', { params, response2 });
         });
     }
 
