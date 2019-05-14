@@ -23,6 +23,8 @@ import { withRouter } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
+import Loading from 'components/Loading';
+
 import { dataChecking } from 'globalUtils';
 import Switch from 'react-switch';
 import formSetting from 'configs/formSetting';
@@ -50,6 +52,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         super(props);
         this.state = {
             showModal: false,
+            formLoading: false,
             uploadingImage: false,
         };
     }
@@ -218,6 +221,12 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         obj[field.key] = {
             value: '',
         };
+        this.setState(obj);
+    }
+
+    onUpdateStatus = (stateName, status) => {
+        const obj = {};
+        obj[stateName] = status;
         this.setState(obj);
     }
 
@@ -718,6 +727,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             {this.props.children}
                         </div>
                 }
+                {this.state.formLoading && <Loading />}
                 <div
                     id="page-action-modal"
                     style={{

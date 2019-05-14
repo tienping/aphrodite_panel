@@ -1,0 +1,20 @@
+.custom-loading-image-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1015;
+    background-color: RGBA(0, 0, 0, 0.15);
+
+    .custom-loading-image-holder {
+        position: relative;
+        top: 40%;
+        transform: translateY(-50%);
+        text-align: center;
+
+        .custom-loading-image {
+            width: 200px;
+        }
+    }
+}

@@ -6,11 +6,20 @@
 
 import React from 'react';
 
+import './style.scss';
 
-function Loading() {
+
+function Loading(props) {
     return (
-        <div>
-            Loading...
+        <div className="custom-loading-image-container">
+            <div className="custom-loading-image-holder">
+                <img
+                    className="custom-loading-image"
+                    style={{ ...props.style }}
+                    src={require('./../../images/loading.svg')}
+                    alt=""
+                />
+            </div>
         </div>
     );
 }
