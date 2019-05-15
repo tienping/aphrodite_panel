@@ -51,8 +51,7 @@ export default function App() {
                         />
                         {
                             Object.keys(tableSetting).map((key, index) => (
-                                <Route
-                                // <PrivateRoute
+                                <PrivateRoute
                                     key={index}
                                     exact={true}
                                     token={globalScope.token || ''}

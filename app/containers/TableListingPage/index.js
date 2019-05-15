@@ -15,6 +15,15 @@ import { compose } from 'redux';
 import ReactJson from 'react-json-view';
 // import Switch from 'react-switch';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { dataChecking, Events } from 'globalUtils';
@@ -181,11 +190,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             };
         }
 
-        globalScope.feather.authenticate(globalScope.token, 'aphrodite').then((response) => {
-            console.log('authenticate success', { response, token: globalScope.token });
-        }).catch((response) => {
-            console.log('authenticate failed', { response, token: globalScope.token });
-        });
         globalScope.feather.query(params.service, params.targetSocket).find(params.options)
             .then((response) => {
                 this.setState({
@@ -541,6 +545,101 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         );
     }
 
+    renderTable2() {
+        return (
+            <section className="table-container">
+                {this.renderPaginatior()}
+                <Paper className="table-content">
+                    <Table className="tablelisting-table-element">
+                        <TableHead className="tablelisting-tableHead table-header">
+                            <TableRow className="tablelisting-tableRow table-row" style={{ textTransform: 'capitalize' }}>
+                                {
+                                    dataChecking(this.state, 'tableConfig') ?
+                                        this.state.tableConfig.map((head, index) => (
+                                            <TableCell
+                                                key={index}
+                                                className="tablelisting-tableCell table-header-item"
+                                                align={head.align}
+                                                // style={{ width: head.width, maxWidth: head.width, textAlign: head.align }}
+                                            >
+
+                                                <Tooltip
+                                                    title="Sort"
+                                                    placement={this.state && true ? 'bottom-end' : 'bottom-start'}
+                                                    enterDelay={300}
+                                                >
+                                                    <TableSortLabel
+                                                        onClick={() => {
+                                                            let data = {};
+                                                            let direction = 'asc';
+
+                                                            if (dataChecking(this.state, 'sorter') === index) {
+                                                                data = this.toggleReverseResult();
+                                                                direction = (dataChecking(this.state, 'sortDirection') === 'desc') ? 'asc' : 'desc';
+                                                            } else {
+                                                                data = this.toggledSortResult(index, head.type);
+                                                            }
+
+                                                            this.setState({
+                                                                sorter: index,
+                                                                sortDirection: direction,
+                                                                data,
+                                                            });
+                                                        }}
+                                                    >
+                                                        <span>{ head.label }</span>
+                                                    </TableSortLabel>
+                                                </Tooltip>
+                                                {/* {this.renderSorter(head, index)} */}
+                                                {/* {this.renderHelp(head, index)} */}
+                                            </TableCell>
+                                        ))
+                                        :
+                                        null
+                                }
+                            </TableRow>
+                        </TableHead>
+                        <TableBody className="tablelisting-tableBody">
+                            {
+                                this.state && this.state.data && this.state.data.length ?
+                                    this.state.data.map((row, index) => (
+                                        <TableRow key={index} className="tablelisting-tableRow table-row">
+                                            {
+                                                dataChecking(this.state, 'tableConfig') ?
+                                                    this.state.tableConfig.map((col, index2) => (
+                                                        <TableCell
+                                                            key={index2}
+                                                            className={`tablelisting-tableCell table-row-item no-border-right ${col.type === 'html' ? 'posi-relative' : ''}`}
+                                                            // style={{ width: col.width, maxWidth: col.width, textAlign: col.align }}
+                                                            align={col.align || 'left'}
+                                                        >{ this.renderCell(row, col, index) }</TableCell>
+                                                    ))
+                                                    :
+                                                    null
+                                            }
+                                        </TableRow>
+                                    ))
+                                    :
+                                    <TableRow className="tablelisting-tableRow no-data">
+                                        <TableCell
+                                            className="tablelisting-tableCell"
+                                        >
+                                            {
+                                                dataChecking(this.props, 'globaldataprocessor', 'loading') ?
+                                                    'loading'
+                                                    :
+                                                    dataChecking(this.props, 'globaldataprocessor', 'error') || 'No data found...'
+                                            }
+                                        </TableCell>
+                                    </TableRow>
+                            }
+                        </TableBody>
+                    </Table>
+                </Paper>
+            </section>
+        );
+    }
+
     renderTable() {
         return (
             <section className="table-container">
@@ -701,7 +800,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         switch (col.type) {
             case 'action':
                 return (
-                    <div style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <div className="cell-type-action" style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                         {
                             col.items && col.items.map((column, index) => (
                                 <div
@@ -721,28 +820,28 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     //     disabled={true}
                     //     checked={row[col.key] || false}
                     // />
-                    <div className="">
+                    <div className="cell-type-boolean">
                         <i className={`fas fa-circle ${row[col.key] ? 'text-success' : 'text-danger'}`}></i>
                         <span className="pl-1">{row[col.key] ? 'Active' : 'Inactive'}</span>
                     </div>
                 );
             case 'image':
-                return <img src={row[col.key]} alt={row[col.key]} width={row.width || '100%'} height={row.height || ''} />;
+                return <img className="cell-type-image" src={row[col.key]} alt={row[col.key]} width={row.width || '100%'} height={row.height || ''} />;
             case 'date':
                 date = new Date(value);
-                return <span>{date.toLocaleDateString()}</span>;
+                return <span className="cell-type-date">{date.toLocaleDateString()}</span>;
             case 'datetime':
                 date = new Date(value);
-                return <span>{date.toLocaleString()}</span>;
+                return <span className="cell-type-datetime">{date.toLocaleString()}</span>;
             case 'object':
-                return <ReactJson src={row[col.key]} name={false} enableClipboard={false}></ReactJson>;
+                return <ReactJson className="cell-type-object" src={row[col.key]} name={false} enableClipboard={false}></ReactJson>;
             case 'json':
-                return <ReactJson src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
+                return <ReactJson className="cell-type-json" src={JSON.parse(row[col.key])} name={false} enableClipboard={false}></ReactJson>;
             case 'link':
-                return <a href={value || ''}>{ value || '\u00A0' }</a>;
+                return <a className="cell-type-link" href={value || ''}>{ value || '\u00A0' }</a>;
             case 'html':
                 return (
-                    <div className={`html-cell-block ${dataChecking(this.state, `fullmode_${col.key}`, rowIndex) ? 'full-mode' : ''}`}>
+                    <div className={`html-cell-block cell-type-html ${dataChecking(this.state, `fullmode_${col.key}`, rowIndex) ? 'full-mode' : ''}`}>
                         <div className="html-cell-container">
                             <span
                                 className={`html-indicator ${dataChecking(this.state, `htmlmode_${col.key}`, rowIndex) ? 'hide-it' : ''}`}
@@ -788,11 +887,11 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </div>
                 );
             case 'checkbox':
-                return <span>[ ]</span>;
+                return <span className="cell-type-checkbox">[ ]</span>;
             case 'integer':
                 return <span className="cell-type-integer">{value || '\u00A0'}</span>;
             default:
-                return <span>{ value || '\u00A0'}</span>;
+                return <span className="cell-type-default">{ value || '\u00A0'}</span>;
         }
     }
 
@@ -817,7 +916,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                         <h2 className="text-center text-underline">{this.props.location.state.pageSubTitle}</h2>
                 }
                 {this.renderMenu()}
-                {this.renderTable()}
+                {this.renderTable2()}
                 {this.renderUtilModals()}
             </div>
         );

@@ -56,180 +56,194 @@
             overflow: auto;
             background-color: #FDFDFD;
             border-top: 1px dashed #D0D0FD;
+        }
 
-            .table-row {
-                border-bottom: 1px double #D0D0FD;
-                border-left: 1px dashed #D0D0FD;
+        .table-header .tablelisting-tableCell {
+            font-size: 120%;
+            font-weight: bolder;
+        }
 
-                &.table-header .table-header-item {
-                    padding: 15px 10px;
-                    background-color: salmon !important;
-                    color: white !important;
-                    font-weight: 700;
-                    font-size: 110%;
-                    position: relative;
+        .table-row {
+            border-bottom: 1px double #D0D0FD;
+            border-left: 1px dashed #D0D0FD;
 
-                    .sort-container {
-                        right: 4px;
-                        bottom: 2px;
-                        position: absolute;
+            &.table-header .table-header-item {
+                padding: 15px 10px;
+                background-color: salmon !important;
+                color: white !important;
+                font-weight: 700;
+                font-size: 110%;
+                position: relative;
 
-                        i {
-                            width: 18px;
-                            height: 18px;
-                            padding: 5px;
-                            text-align: center;
-                            color: gray;
-                            line-height: 1;
-                            background-color: RGBA(255, 255, 255, 0.2);
+                .help-container {
+                    text-align: left;
+                    right: 2px;
+                    top: 2px;
+                    position: absolute;
 
-                            &:hover { background-color: RGBA(255, 255, 255, 0.3); }
+                    i {
+                        width: 22px;
+                        height: 22px;
+                        padding: 5px;
+                        color: RGBA(255, 0, 125, 0.6);
+                        cursor: pointer;
 
-                            &.active {
-                                color: white;
-                            }
-
-                            &.fa-sort-down {
-                                line-height: 0;
-                            }
+                        &:hover {
+                            color: #67b6ff;
                         }
                     }
 
-                    .help-container {
-                        text-align: left;
-                        right: 2px;
-                        top: 2px;
+                    .content-container {
+                        top: 0;
+                        right: 0;
+                        z-index: 2;
+                        width: 15rem;
+                        display: none;
+                        color: black;
+                        font-size: 80%;
+                        font-weight: 500;
+                        padding: 0.35rem;
+                        border-radius: 8px;
                         position: absolute;
+                        background-color: #E0E0E0;
+                        border: 1px solid #67b6ff;
 
-                        i {
-                            width: 22px;
-                            height: 22px;
-                            padding: 5px;
-                            color: RGBA(255, 0, 125, 0.6);
-                            cursor: pointer;
-
-                            &:hover {
-                                color: #67b6ff;
-                            }
+                        &.active {
+                            display: block;
                         }
 
-                        .content-container {
-                            top: 0;
-                            right: 0;
-                            z-index: 2;
-                            width: 15rem;
-                            display: none;
-                            color: black;
-                            font-size: 80%;
-                            font-weight: 500;
-                            padding: 0.35rem;
-                            border-radius: 8px;
-                            position: absolute;
-                            background-color: #E0E0E0;
-                            border: 1px solid #67b6ff;
+                        .close-btn {
+                            text-align: right;
+                            font-size: 50%;
+                            margin-bottom: 0.5rem;
+                        }
 
-                            &.active {
-                                display: block;
-                            }
+                        .content {
+                            padding: .75rem 1.5rem;
+                            padding-top: 0;
+                        }
+                    }
+
+                    &.x-axis-adjustment {
+                        .content-container {
+                            right: -12.5rem;
 
                             .close-btn {
-                                text-align: right;
-                                font-size: 50%;
-                                margin-bottom: 0.5rem;
-                            }
-
-                            .content {
-                                padding: .75rem 1.5rem;
-                                padding-top: 0;
-                            }
-                        }
-
-                        &.x-axis-adjustment {
-                            .content-container {
-                                right: -12.5rem;
-
-                                .close-btn {
-                                    text-align: left;
-                                }
+                                text-align: left;
                             }
                         }
                     }
                 }
+            }
 
-                &:nth-child(even) {
-                    .table-row-item {
-                        background: RGBA(208, 208, 253, 0.2);
-                    }
-                }
-
+            &:nth-child(even) {
                 .table-row-item {
-                    background: #FDFDFD;
-                    padding: 7px 10px;
-                    display: table-cell;
-                    border-right: 1px dashed #D0D0FD;
-                    word-wrap: break-word;
-                    vertical-align: middle;
-                    overflow: auto;
+                    background: RGBA(208, 208, 253, 0.2);
+                }
+            }
 
-                    .html-cell-block {
-                        max-height: 100px;
-                        overflow: hidden;
-                        position: relative;
-                        margin: -4px;
+            .table-row-item {
+                background: #FDFDFD;
+                padding: 7px 10px;
+                display: table-cell;
+                border-right: 1px dashed #D0D0FD;
+                word-wrap: break-word;
+                vertical-align: middle;
+                overflow: auto;
 
-                        &.full-mode {
-                            max-height: unset;
-                            .html-cell-container { border: 2px solid RGBA(125, 0, 66, 0.2); }
+                &.no-border-right { border-right: unset; }
+
+                .cell-type-action {
+                    .action-item {
+                        display: inline-block;
+                        padding: 0.25rem 0.75rem;
+                    }
+                }
+
+                .html-cell-block {
+                    max-height: 100px;
+                    overflow: hidden;
+                    position: relative;
+                    margin: -4px;
+
+                    &.full-mode {
+                        max-height: unset;
+                        .html-cell-container { border: 2px solid RGBA(125, 0, 66, 0.2); }
+                    }
+
+                    .html-cell-container { border: 2px dotted RGBA(125, 125, 125, 0.2); padding: 5px; }
+
+                    .html-indicator {
+                        transition: opacity .5s, padding .5s, height .5s;
+                        opacity: 1;
+                        height: auto;
+
+                        &.code-type {
+                            border: 1px solid white;
+                            background-color: rgb(107, 106, 106);
+                            color: white;
+                            padding: .75rem 1rem;
+                            border-radius: 5px;
+                            display: inline-block;
                         }
 
-                        .html-cell-container { border: 2px dotted RGBA(125, 125, 125, 0.2); padding: 5px; }
-
-                        .html-indicator {
-                            transition: opacity .5s, padding .5s, height .5s;
-                            opacity: 1;
-                            height: auto;
-
-                            &.code-type {
-                                border: 1px solid white;
-                                background-color: rgb(107, 106, 106);
-                                color: white;
-                                padding: .75rem 1rem;
-                                border-radius: 5px;
-                                display: inline-block;
-                            }
-
-                            &.hide-it {
-                                opacity: 0;
-                                height: 0;
-                                padding: 0;
-                                position: absolute;
-                                left: 0;
-                                overflow: hidden;
-                            }
-                        }
-
-                        .toggle-actions {
+                        &.hide-it {
+                            opacity: 0;
+                            height: 0;
+                            padding: 0;
                             position: absolute;
-                            font-weight: 300;
-                            font-size: 80%;
-                            color: black;
-                            bottom: 0px;
-                            right: 0px;
+                            left: 0;
+                            overflow: hidden;
+                        }
+                    }
 
-                            .toggler {
-                                border: 1px solid RGBA(255, 0, 125, 0.3);
-                                display: inline-block;
-                                padding: 2px;
-                                background-color: white;
-                                margin: 3px 4px 4px -2px;
-                                cursor: pointer;
+                    .toggle-actions {
+                        position: absolute;
+                        font-weight: 300;
+                        font-size: 80%;
+                        color: black;
+                        bottom: 0px;
+                        right: 0px;
 
-                                &.full-mode-toggler {
-                                    padding: 2px 4px;
-                                }
+                        .toggler {
+                            border: 1px solid RGBA(255, 0, 125, 0.3);
+                            display: inline-block;
+                            padding: 2px;
+                            background-color: white;
+                            margin: 3px 4px 4px -2px;
+                            cursor: pointer;
+
+                            &.full-mode-toggler {
+                                padding: 2px 4px;
                             }
                         }
                     }
+                }
+            }
+        }
+
+        .sort-container {
+            right: 4px;
+            bottom: 2px;
+            position: absolute;
+
+            i {
+                width: 18px;
+                height: 18px;
+                padding: 5px;
+                text-align: center;
+                color: gray;
+                line-height: 1;
+                background-color: RGBA(255, 255, 255, 0.2);
+
+                &:hover { background-color: RGBA(255, 255, 255, 0.3); }
+
+                &.active {
+                    color: white;
+                }
+
+                &.fa-sort-down {
+                    line-height: 0;
                 }
             }
         }

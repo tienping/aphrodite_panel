@@ -24,8 +24,13 @@ export function* doLogin(action) {
                 globalScope.token = response.data.token;
                 setCookie(process.env.TOKEN_KEY, globalScope.token);
                 setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
-                yield globalScope.feather.authenticate(globalScope.token);
-                yield put(loginSuccess(response.data.token));
+
+                try {
+                    yield globalScope.feather.authenticate({ token: globalScope.token }, 'custom', 'aphrodite');
+                    yield put(loginSuccess(response.data.token));
+                } catch (e) {
+                    console.log('Failed to authenticate', e);
+                }
             } else {
                 globalScope.token = '';
                 response.data.messages[0] = { type: 'error', text: 'Invalid user access level!' };

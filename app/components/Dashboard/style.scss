@@ -1,0 +1,17 @@
+.dashboard-container {
+    justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.dashboard-component {
+    padding: 1rem;
+
+    &.size-half { width: 50%; }
+    &.size-full { width: 100%; }
+}
+
+.dashboard-component-card {
+    height: 100%;
+}

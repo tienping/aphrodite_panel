@@ -17,11 +17,11 @@ const tableSetting = {
             targetSocket: 'aphrodite',
             options: {
                 query: {},
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Language': 'en',
-                    'token': globalScope.token,
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Accept-Language': 'en',
+                //     'token': globalScope.token,
+                // },
             },
         }),
         pathToDataRoot: '',
@@ -100,11 +100,11 @@ const tableSetting = {
             targetSocket: 'aphrodite',
             options: {
                 query: { merchant_id: id },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Language': 'en',
-                    'token': globalScope.token,
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Accept-Language': 'en',
+                //     'token': globalScope.token,
+                // },
             },
         }),
         pathToDataRoot: '',
@@ -166,11 +166,11 @@ const tableSetting = {
             targetSocket: 'aphrodite',
             options: {
                 query: { merchant_id: id },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Language': 'en',
-                    'token': globalScope.token,
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Accept-Language': 'en',
+                //     'token': globalScope.token,
+                // },
             },
         }),
         pathToDataRoot: '',
@@ -235,11 +235,11 @@ const tableSetting = {
             targetSocket: 'ordo',
             options: {
                 query: { $limit: 999 },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Language': 'en',
-                    'token': globalScope.token,
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Accept-Language': 'en',
+                //     'token': globalScope.token,
+                // },
             },
         }),
         pathToDataRoot: '',
@@ -327,11 +327,11 @@ const tableSetting = {
             targetSocket: 'ordo',
             options: {
                 query: { $limit: 999 },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Language': 'en',
-                    'token': globalScope.token,
-                },
+                // headers: {
+                //     'Content-Type': 'application/json',
+                //     'Accept-Language': 'en',
+                //     'token': globalScope.token,
+                // },
             },
         }),
         pathToDataRoot: '',
