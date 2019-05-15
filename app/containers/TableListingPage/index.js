@@ -17,9 +17,10 @@ import ReactJson from 'react-json-view';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { dataChecking } from 'globalUtils';
+import { dataChecking, Events } from 'globalUtils';
 import tableSetting from 'configs/tableSetting';
 
+import Loading from 'components/Loading';
 import FormButton from 'containers/FormButton';
 import globalScope from 'globalScope';
 import Button from '@material-ui/core/Button';
@@ -41,6 +42,8 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         super(props);
         this.state = {};
         this.socketChannel = null;
+
+        Events.listen('updateTableState', 'table-listing-updateTableState', (params) => { this.onUpdateStatus(params); });
     }
 
     componentWillMount() {
@@ -146,6 +149,12 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
 
     componentWillUnmount() {
         this.socketChannel(); // to unsubscribe channel
+    }
+
+    onUpdateStatus = ({ stateName, value }) => {
+        const obj = {};
+        obj[stateName] = value;
+        this.setState(obj);
     }
 
     onPageChange(pageApi) {
@@ -801,6 +810,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
+                {this.state.globalLoading && <Loading />}
                 <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ? `${tableSetting[this.props.pageType].title}` : 'Table'}</h1>
                 {
                     dataChecking(this.props, 'location', 'state', 'pageSubTitle') &&

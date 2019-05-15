@@ -23,9 +23,7 @@ import { withRouter } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
-import Loading from 'components/Loading';
-
-import { dataChecking } from 'globalUtils';
+import { dataChecking, Events } from 'globalUtils';
 import Switch from 'react-switch';
 import formSetting from 'configs/formSetting';
 import globalScope from 'globalScope';
@@ -55,6 +53,8 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             formLoading: false,
             uploadingImage: false,
         };
+
+        Events.listen('updateFormState', 'form-button-updateFormState', (params) => { this.onUpdateStatus(params); });
     }
 
     componentWillMount() {
@@ -224,9 +224,9 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         this.setState(obj);
     }
 
-    onUpdateStatus = (stateName, status) => {
+    onUpdateStatus = ({ stateName, value }) => {
         const obj = {};
-        obj[stateName] = status;
+        obj[stateName] = value;
         this.setState(obj);
     }
 
@@ -727,7 +727,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             {this.props.children}
                         </div>
                 }
-                {this.state.formLoading && <Loading />}
                 <div
                     id="page-action-modal"
                     style={{

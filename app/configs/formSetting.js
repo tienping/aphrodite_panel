@@ -1,4 +1,4 @@
-import { dataChecking } from 'globalUtils';
+import { dataChecking, Events } from 'globalUtils';
 import globalScope from 'globalScope';
 // import tableSetting from 'configs/tableSetting';
 import { NotificationManager } from 'react-notifications';
@@ -96,7 +96,7 @@ const formSetting = {
         onSubmit: (scope, GDPActions, data) => {
             const extractedData = extractData(data, formSetting.create_test_api_1.fields);
 
-            scope.onUpdateStatus('formLoading', true);
+            Events.trigger('updateTableState', { stateName: 'globalLoading', value: true });
             globalScope.feather.query('product', 'ordo').create(extractedData, { headers: {
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en',
@@ -108,14 +108,14 @@ const formSetting = {
                 });
                 console.log(JSON.stringify(response));
                 scope.onCompleting();
-                scope.onUpdateStatus('formLoading', false);
+                Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
             })
             .catch((response) => {
                 NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
                     // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
                 });
                 console.log(JSON.stringify(response));
-                scope.onUpdateStatus('formLoading', false);
+                Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
             });
         },
     },
