@@ -14,7 +14,6 @@ export function* doLogin(action) {
         const base64 = require('base-64');
         const hash = base64.encode(`${username}:${password}`);
         const response = yield call(apiRequest, 'auth/token', 'post', {}, null, { headers: { 'Authorization': `Basic ${hash}` } });
-        console.log('response', response);
         if (response && response.ok) {
             globalScope.token = response.data.token;
             const isAdminResponse = yield call(apiRequest, '/view/preview/145', 'post');
@@ -28,8 +27,8 @@ export function* doLogin(action) {
                 try {
                     yield globalScope.feather.authenticate({ token: globalScope.token }, 'custom', 'aphrodite');
                     yield put(loginSuccess(response.data.token));
-                } catch (e) {
-                    console.log('Failed to authenticate', e);
+                } catch (error) {
+                    console.log('Failed to authenticate', error);
                 }
             } else {
                 globalScope.token = '';

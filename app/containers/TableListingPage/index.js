@@ -26,7 +26,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { dataChecking, Events } from 'globalUtils';
+import { dataChecking, Events, devlog } from 'globalUtils';
 import tableSetting from 'configs/tableSetting';
 
 import Loading from 'components/Loading';
@@ -112,7 +112,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         if (globaldataprocessor.getItemData !== this.props.globaldataprocessor.getItemData) {
-            const { data, field, buttonId } = globaldataprocessor.getItemData;
+            const { data, field } = globaldataprocessor.getItemData;
 
             const arr = dataChecking(data, field.itemDataPath) || [];
             const tempItems = [];
@@ -125,9 +125,6 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             });
 
             globalScope.selectionData[field.key] = tempItems;
-            if (buttonId) {
-                console.log(buttonId);
-            }
         }
 
         this.state.formButtonList.map((buttonKey) => {
@@ -201,21 +198,21 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     // sorter: null,
                     // sortDirection: 'desc',
                 });
-                console.log('Find data success', { params, response });
+                devlog('Find data success', { params, response });
             })
             .catch((response) => {
                 NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
                     // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
                 });
-                console.log('Find data failed', { params, response });
+                devlog('Find data failed', { params, response });
             });
 
         this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChange((response2) => {
-            console.log('on subscribe update', response2);
+            devlog('on subscribe update', response2);
             this.setState({
                 data: response2,
             });
-            console.log('Sucribe onChange triggered', { params, response2 });
+            devlog('Sucribe onChange triggered', { params, response2 });
         });
     }
 
@@ -240,7 +237,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             return arr.sort((a, b) => this.customSorting(a[fields[index].key], b[fields[index].key], dataType));
         }
 
-        console.warn('[TP Warning]: arr is empty in toggledSortResult');
+        devlog('[TP Warning]: arr is empty in toggledSortResult');
 
         return arr;
     }
@@ -909,7 +906,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </title>
                     <meta name="description" content="Description of TableListingPage" />
                 </Helmet>
-                {this.state.globalLoading && <Loading />}
+                {this.state.globalLoading && <Loading fixed={true} />}
                 <h1 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{dataChecking(this.props, 'pageType') && dataChecking(tableSetting, this.props.pageType, 'title') ? `${tableSetting[this.props.pageType].title}` : 'Table'}</h1>
                 {
                     dataChecking(this.props, 'location', 'state', 'pageSubTitle') &&

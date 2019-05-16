@@ -11,7 +11,11 @@ const initialiseApp = async () => {
         globalScope.feather = getFeatherInstance();
 
         if (globalScope.token) {
-            await globalScope.feather.autoAuthenticate('aphrodite');
+            try {
+                await globalScope.feather.autoAuthenticate('aphrodite');
+            } catch (error) {
+                console.log('authenticate failed', error);
+            }
         }
     }
 };

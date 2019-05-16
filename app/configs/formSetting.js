@@ -103,18 +103,12 @@ const formSetting = {
                 'token': globalScope.token,
             } })
             .then((response) => {
-                NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
-                    // on click action
-                });
-                console.log(JSON.stringify(response));
+                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
                 scope.onCompleting();
                 Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
             })
             .catch((response) => {
-                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-                });
-                console.log(JSON.stringify(response));
+                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
                 Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
             });
         },
@@ -133,17 +127,11 @@ formSetting.edit_test_api_1.onSubmit = (scope, tableListingActions, data, fields
         'token': globalScope.token,
     } })
     .then((response) => {
-        NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
-            // on click action
-        });
-        console.log(JSON.stringify(response));
+        NotificationManager.success(JSON.stringify(response), 'Success', 3000);
         scope.onCompleting();
     })
     .catch((response) => {
-        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-            // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-        });
-        console.log(JSON.stringify(response));
+        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
     });
 };
 

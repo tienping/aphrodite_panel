@@ -5,7 +5,9 @@
 */
 
 import React from 'react';
+import Loading from 'components/Loading';
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
+
 import LineChart from 'recharts/lib/chart/LineChart';
 import Line from 'recharts/lib/cartesian/Line';
 import XAxis from 'recharts/lib/cartesian/XAxis';
@@ -17,17 +19,41 @@ import Legend from 'recharts/lib/component/Legend';
 import './style.scss';
 
 function SimpleChart(props) {
+    if (!props.data) {
+        return (
+            <div className="simpleChart-loading">
+                <Loading />
+            </div>
+        );
+    }
+
+    const data = props.data[props.config.virtual[0]];
+
+    const max = Math.max.apply(Math, data.map((o) => o.total));
+    const min = Math.min.apply(Math, data.map((o) => o.total));
+
     return (
-        // 99% per https://github.com/recharts/recharts/issues/172
         <ResponsiveContainer width="99%" height={320}>
-            <LineChart data={props.data}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <CartesianGrid vertical={false} strokeDasharray="3 3" />
+            <LineChart data={data}>
+                <XAxis dataKey={props.config.params.xAxisKey} />
+                <YAxis domain={[min - (min * 0.1), max * 1.1]} />
+                <CartesianGrid
+                    vertical={props.config.params.vertical}
+                    strokeDasharray="3 3"
+                />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="Visits" stroke="#82ca9d" />
-                <Line type="monotone" dataKey="Orders" stroke="#8884d8" activeDot={{ r: 8 }} />
+                {
+                    props.config.params.lines.map((line, index) => (
+                        <Line
+                            key={index}
+                            type={line.type || 'monotone'}
+                            dataKey={line.dataKey}
+                            stroke={line.stroke || '#000000'}
+                            activeDot={line.activeDot}
+                        />
+                    ))
+                }
             </LineChart>
         </ResponsiveContainer>
     );

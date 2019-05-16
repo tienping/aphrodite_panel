@@ -295,16 +295,10 @@ const tableSetting = {
                                 'token': globalScope.token,
                             } })
                             .then((response) => {
-                                NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
-                                    // on click action
-                                });
-                                console.log(response);
+                                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
                             })
                             .catch((response) => {
-                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-                                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-                                });
-                                console.log(JSON.stringify(response));
+                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
                             });
                         },
                     },
@@ -387,16 +381,10 @@ const tableSetting = {
                                 'token': globalScope.token,
                             } })
                             .then((response) => {
-                                NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
-                                    // on click action
-                                });
-                                console.log(response);
+                                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
                             })
                             .catch((response) => {
-                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-                                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-                                });
-                                console.log(JSON.stringify(response));
+                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
                             });
                         },
                     },

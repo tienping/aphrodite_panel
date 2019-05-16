@@ -195,6 +195,9 @@ export const request = (url, options) => (
         .catch(parseJSON)
 );
 
+/**
+ * Cookies utils
+ */
 const cookies = new Cookies();
 export const setCookie = (key, value, options) => {
     const opt = options || { path: '/' };
@@ -202,3 +205,12 @@ export const setCookie = (key, value, options) => {
 };
 export const getCookie = (key, options) => cookies.get(key, options);
 export const removeCookie = (key, options) => cookies.remove(key, options);
+
+/**
+ * Log utils
+ */
+export const devlog = () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        console.log(arguments);
+    }
+};

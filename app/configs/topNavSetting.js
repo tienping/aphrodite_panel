@@ -9,7 +9,6 @@ const topNavSetting = [
             label: 'Create Merchant',
             onClick: () => {
                 alert('Feature still under developmert....');
-                console.log('crete product clicked');
             },
         }, {
             label: 'Merchant List',
@@ -26,7 +25,6 @@ const topNavSetting = [
             label: 'Report 1',
             onClick: () => {
                 alert('Feature still under developmert....');
-                console.log('crete product clicked');
             },
         }, {
             label: 'Report 2',
