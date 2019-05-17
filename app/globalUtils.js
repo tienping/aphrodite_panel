@@ -209,8 +209,8 @@ export const removeCookie = (key, options) => cookies.remove(key, options);
 /**
  * Log utils
  */
-export const devlog = () => {
+export const devlog = (...logs) => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        console.log(arguments);
+        console.log(...logs);
     }
 };

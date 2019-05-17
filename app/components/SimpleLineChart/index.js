@@ -6,8 +6,8 @@
 
 import React from 'react';
 import Loading from 'components/Loading';
-import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
 
+import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
 import LineChart from 'recharts/lib/chart/LineChart';
 import Line from 'recharts/lib/cartesian/Line';
 import XAxis from 'recharts/lib/cartesian/XAxis';
@@ -31,7 +31,7 @@ function SimpleLineChart(props) {
 
     let max = Math.max(...data.map((o) => o.total));
     let min = Math.min(...data.map((o) => o.total));
-    const roundOffBase = 10 ** parseInt(min.toString().split('.')[0].length / 2, 10);
+    const roundOffBase = 10 ** Math.ceil(max.toString().split('.')[0].length / 2, 10);
     max = Math.ceil(max / roundOffBase) * roundOffBase;
     min = Math.floor(min / roundOffBase) * roundOffBase;
 
@@ -39,7 +39,7 @@ function SimpleLineChart(props) {
         <ResponsiveContainer width="99%" height={320}>
             <LineChart data={data}>
                 <XAxis dataKey={props.config.params.xAxisKey} />
-                <YAxis domain={[min, max]} />
+                <YAxis domain={[min - (3 * roundOffBase), max + (3 * roundOffBase)]} />
                 <CartesianGrid
                     vertical={props.config.params.vertical}
                     strokeDasharray="3 3"

@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import SimpleLineChart from 'components/SimpleLineChart';
 import SimpleTable from 'components/SimpleTable';
+import SimpleListing from 'components/SimpleListing';
 import ButtonList from 'components/ButtonList';
 import { NotificationManager } from 'react-notifications';
 
@@ -63,11 +64,18 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
         } else if (config.type === 'table') {
             return (
                 <SimpleTable
-                    data={config.data || []}
-                    config={config.config || []}
+                    config={config || []}
+                    data={this.state.data}
                 />
             );
-        } else if (config.type === 'listitem') {
+        } else if (config.type === 'listing') {
+            return (
+                <SimpleListing
+                    config={config || []}
+                    data={this.state.data}
+                />
+            );
+        } else if (config.type === 'buttonlist') {
             return (
                 <ButtonList
                     config={config.config || []}
@@ -89,7 +97,6 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
                     <Typography variant="h4" color="textPrimary" gutterBottom={true}>
                         {config.title}
                     </Typography>
-                    <hr />
                     {this.renderContent(config)}
                 </CardContent>
             </Card>

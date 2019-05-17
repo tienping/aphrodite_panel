@@ -5,6 +5,8 @@
 */
 
 import React from 'react';
+import Loading from 'components/Loading';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,18 +17,34 @@ import Paper from '@material-ui/core/Paper';
 import './style.scss';
 
 function SimpleTable(props) {
+    if (!props.data) {
+        return (
+            <div className="SimpleLineChart-loading">
+                <Loading />
+            </div>
+        );
+    }
+
+    const data = props.data[props.config.virtual[0]];
+    if (!data) {
+        console.log('Data not found:', props.config.virtual[0]);
+    }
+
     return (
         <Paper>
             <Table className="simpleTable-table-element">
-                <TableHead className="simpleTable-tableHead">
-                    <TableRow className="simpleTable-tableRow" style={{ textTransform: 'capitalize' }}>
-                        {props.config.map((column, index) => <TableCell key={index} className="simpleTable-tableCell" align={column.align || 'left'}>{column.key}</TableCell>)}
-                    </TableRow>
-                </TableHead>
+                {
+                    !props.config.hideHeader &&
+                        <TableHead className="simpleTable-tableHead">
+                            <TableRow className="simpleTable-tableRow" style={{ textTransform: 'capitalize' }}>
+                                {props.config.fields.map((column, index) => <TableCell key={index} className="simpleTable-tableCell" align={column.align || 'left'}>{column.key}</TableCell>)}
+                            </TableRow>
+                        </TableHead>
+                }
                 <TableBody className="simpleTable-tableBody">
-                    {props.data.map((rowData, index) => (
+                    {data.map((rowData, index) => (
                         <TableRow key={index} className="simpleTable-tableRow">
-                            {props.config.map((column, index2) => (
+                            {props.config.fields.map((column, index2) => (
                                 <TableCell
                                     className="simpleTable-tableCell"
                                     key={index2}
