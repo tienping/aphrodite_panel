@@ -1,6 +1,6 @@
 /**
 *
-* SimpleChart
+* SimpleLineChart
 *
 */
 
@@ -18,10 +18,10 @@ import Legend from 'recharts/lib/component/Legend';
 
 import './style.scss';
 
-function SimpleChart(props) {
+function SimpleLineChart(props) {
     if (!props.data) {
         return (
-            <div className="simpleChart-loading">
+            <div className="SimpleLineChart-loading">
                 <Loading />
             </div>
         );
@@ -29,14 +29,17 @@ function SimpleChart(props) {
 
     const data = props.data[props.config.virtual[0]];
 
-    const max = Math.max.apply(Math, data.map((o) => o.total));
-    const min = Math.min.apply(Math, data.map((o) => o.total));
+    let max = Math.max(...data.map((o) => o.total));
+    let min = Math.min(...data.map((o) => o.total));
+    const roundOffBase = 10 ** parseInt(min.toString().split('.')[0].length / 2, 10);
+    max = Math.ceil(max / roundOffBase) * roundOffBase;
+    min = Math.floor(min / roundOffBase) * roundOffBase;
 
     return (
         <ResponsiveContainer width="99%" height={320}>
             <LineChart data={data}>
                 <XAxis dataKey={props.config.params.xAxisKey} />
-                <YAxis domain={[min - (min * 0.1), max * 1.1]} />
+                <YAxis domain={[min, max]} />
                 <CartesianGrid
                     vertical={props.config.params.vertical}
                     strokeDasharray="3 3"
@@ -59,8 +62,8 @@ function SimpleChart(props) {
     );
 }
 
-SimpleChart.propTypes = {
+SimpleLineChart.propTypes = {
 
 };
 
-export default SimpleChart;
+export default SimpleLineChart;

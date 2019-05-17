@@ -8,7 +8,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import SimpleChart from 'components/SimpleChart';
+import SimpleLineChart from 'components/SimpleLineChart';
 import SimpleTable from 'components/SimpleTable';
 import ButtonList from 'components/ButtonList';
 import { NotificationManager } from 'react-notifications';
@@ -55,7 +55,7 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
     renderContent = (config) => {
         if (config.type === 'linegraph') {
             return (
-                <SimpleChart
+                <SimpleLineChart
                     config={config}
                     data={this.state.data}
                 />

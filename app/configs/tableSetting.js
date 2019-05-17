@@ -135,14 +135,14 @@ const tableSetting = {
                             if (data && data.id && data.merchant_id) {
                                 globalScope.feather.associate('default').set({
                                     model: 'product',
-                                    id: parseInt(data.id, 0),
+                                    id: parseInt(data.id, 10),
                                     associate: 'merchant',
                                     associate_id: 1,
                                 }).then(() => {
                                     NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
                                         // on click action
                                     });
-                                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.merchant_id, 0) })));
+                                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.merchant_id, 10) })));
                                 });
                             }
                         },

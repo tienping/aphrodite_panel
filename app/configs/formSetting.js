@@ -60,14 +60,14 @@ const formSetting = {
             if (dataChecking(data, 'product', 'value')) {
                 globalScope.feather.associate('default').set({
                     model: 'product',
-                    id: parseInt(data.product.value, 0),
+                    id: parseInt(data.product.value, 10),
                     associate: 'merchant',
-                    associate_id: parseInt(data.routeParams.id, 0),
+                    associate_id: parseInt(data.routeParams.id, 10),
                 }).then(() => {
                     NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
                         // on click action
                     });
-                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 0) })));
+                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 10) })));
                     scope.onCompleting();
                 });
             }
