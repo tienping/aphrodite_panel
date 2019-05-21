@@ -52,7 +52,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         this.state = {};
         this.socketChannel = null;
 
-        Events.listen('updateTableState', 'table-listing-updateTableState', (params) => { this.onUpdateStatus(params); });
+        Events.listen('updateTableState', 'table-listing-updateTableState', (params) => { this.onUpdateState(params); });
     }
 
     componentWillMount() {
@@ -157,7 +157,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         this.socketChannel(); // to unsubscribe channel
     }
 
-    onUpdateStatus = ({ stateName, value }) => {
+    onUpdateState = ({ stateName, value }) => {
         const obj = {};
         obj[stateName] = value;
         this.setState(obj);
@@ -207,7 +207,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 devlog('Find data failed', { params, response });
             });
 
-        this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChange((response2) => {
+        this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChanged((response2) => {
             devlog('on subscribe update', response2);
             this.setState({
                 data: response2,

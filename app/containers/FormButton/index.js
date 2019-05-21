@@ -54,7 +54,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
             uploadingImage: false,
         };
 
-        Events.listen('updateFormState', 'form-button-updateFormState', (params) => { this.onUpdateStatus(params); });
+        Events.listen('updateFormState', 'form-button-updateFormState', (params) => { this.onUpdateState(params); });
     }
 
     componentWillMount() {
@@ -224,7 +224,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         this.setState(obj);
     }
 
-    onUpdateStatus = ({ stateName, value }) => {
+    onUpdateState = ({ stateName, value }) => {
         const obj = {};
         obj[stateName] = value;
         this.setState(obj);

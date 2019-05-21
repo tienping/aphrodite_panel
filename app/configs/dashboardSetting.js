@@ -32,11 +32,6 @@ const dashboardSetting = [
         type: 'listing',
         size: 'half',
         hideHeader: true,
-        fields: [{
-            key: 'name',
-        }, {
-            key: 'value',
-        }],
         // data: [
         //     { name: 'Total', value: 6 },
         //     { name: 'Today', value: 2 },

@@ -12,7 +12,11 @@ const initialiseApp = async () => {
 
         if (globalScope.token) {
             try {
-                await globalScope.feather.autoAuthenticate('aphrodite');
+                const authenticateReponses = await globalScope.feather.autoAuthenticate('aphrodite');
+                if (authenticateReponses.user) {
+                    globalScope.userData = authenticateReponses.user;
+                    console.log('userData', authenticateReponses.user);
+                }
             } catch (error) {
                 console.log('authenticate failed', error);
             }

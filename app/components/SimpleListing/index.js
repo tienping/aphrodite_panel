@@ -33,8 +33,8 @@ function SimpleListing(props) {
     return (
         <List className="simpleTable-table-element p-2">
             {objArr.map((key, index) => (
-                <div>
-                    <ListItem key={index} className="simpleTable-tableRow px-2 py-1" style={{ displat: 'flex', justifyContent: 'space-between' }}>
+                <div key={index}>
+                    <ListItem className="simpleTable-tableRow px-2 py-1" style={{ displat: 'flex', justifyContent: 'space-between' }}>
                         <Typography variant="h5">{key.toUpperCase()}</Typography>
                         <Typography variant="h5">{data[key]}</Typography>
                     </ListItem>

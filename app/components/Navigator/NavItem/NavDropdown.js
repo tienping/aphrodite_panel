@@ -52,13 +52,20 @@ function Section(params) {
 }
 
 function NavDropdown(props) {
+    let dropDownRef = null;
+
     const sections = props.item.items.map((item) => (
         <Section
             data={item}
             key={item.code}
             itemClassName={props.itemClassName}
             dropdownClass={(props.data && props.data.dropdownClass) || ''}
-            clickHandler={props.clickHandler}
+            clickHandler={({ ...params }) => {
+                dropDownRef.hide();
+                if (props.clickHandler) {
+                    props.clickHandler({ ...params });
+                }
+            }}
         ></Section>
     ));
 
@@ -77,7 +84,7 @@ function NavDropdown(props) {
     }
 
     return (
-        <Dropdown className="NavDropdown-component nav-link text-capitalize dropdown">
+        <Dropdown ref={(ref) => { dropDownRef = ref; }} className="NavDropdown-component nav-link text-capitalize dropdown">
             <DropdownTrigger>
                 {props.children}
             </DropdownTrigger>

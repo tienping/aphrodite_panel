@@ -7,6 +7,7 @@ const tableSetting = {
     merchant_list: {
         title: 'Merchant List',
         link: '/merchant_list',
+        hideFromUser: true,
         description: 'A page to view, add and edit merchants in Hermo.',
         iconClass: 'fa fa-users p-1',
         tableWidth: '62rem',

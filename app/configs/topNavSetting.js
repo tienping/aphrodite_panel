@@ -4,17 +4,28 @@ import { push } from 'react-router-redux';
 
 const topNavSetting = [
     {
-        label: 'Merchant',
+        label: 'Products',
         children: [{
-            label: 'Create Merchant',
+            label: 'Associate Products',
             onClick: () => {
                 alert('Feature still under developmert....');
             },
         }, {
-            label: 'Merchant List',
+            label: 'Products List',
             onClick: () => {
                 globalScope.dispatch(push({
-                    pathname: '/merchant_list',
+                    pathname: '/merchant/:id/products',
+                }));
+            },
+        }],
+    },
+    {
+        label: 'Orders',
+        children: [{
+            label: 'Order List',
+            onClick: () => {
+                globalScope.dispatch(push({
+                    pathname: '/merchant/:id/orders',
                 }));
             },
         }],

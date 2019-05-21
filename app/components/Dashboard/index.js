@@ -8,6 +8,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+// import Divider from '@material-ui/core/Divider';
 import SimpleLineChart from 'components/SimpleLineChart';
 import SimpleTable from 'components/SimpleTable';
 import SimpleListing from 'components/SimpleListing';
@@ -32,24 +33,24 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
             });
         });
 
+        devlog('Finding dashboard data...');
         globalScope.feather.query('merchant', 'aphrodite').get(3, { query: { virtual: virtualGroup } })
             .then((response) => {
+                devlog('Find dashboard data success', { response });
                 this.setState({
                     data: dataChecking(response, 'result'),
                 });
-                devlog('Find dashboard data success', { response });
             })
             .catch((response) => {
                 NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
                 devlog('Find dashboard data failed', { response });
             });
 
-        this.socketChannel = globalScope.feather.subscribe('merchant', 'aphrodite').onChange((response2) => {
+        this.socketChannel = globalScope.feather.subscribe('merchant', 'aphrodite').onChanged((response2) => {
             devlog('on subscribe update', response2);
             this.setState({
                 data: response2,
             });
-            devlog('Sucribe onChange triggered', { response2 });
         });
     }
 
@@ -105,10 +106,15 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
 
     render() {
         return (
-            <div className="dashboard-container">
-                {
-                    this.props.setting.map((config, index) => this.renderComponents(config, index))
-                }
+            <div>
+                <div className="dashboard-container">
+                    {
+                        this.props.setting.map((config, index) => this.renderComponents(config, index))
+                    }
+                </div>
+                <div className="dashboard-footer">
+                    {/* <Divider /> */}
+                </div>
             </div>
         );
     }

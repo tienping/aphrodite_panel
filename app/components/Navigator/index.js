@@ -19,7 +19,7 @@ function Navigator(props) {
         }
 
         return (
-            <li className="nav-item px-2 unstyled" key={item.code}>
+            <li className={`nav-item px-2 unstyled ${globalScope.token ? '' : 'hidden'}`} key={item.code}>
                 <NavItem clickHandler={props.clickHandler} vertical={props.vertical} itemClassName={props.itemClassName} data={item}></NavItem>
             </li>
         );
