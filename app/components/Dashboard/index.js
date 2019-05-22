@@ -33,14 +33,14 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
                     id: 3,
                     successCallback: (response) => {
                         this.setState({
-                            [`data_${virtual}`]: dataChecking(response, 'result', virtual),
+                            [`data_${virtual}`]: dataChecking(response, virtual),
                         });
                     },
                     failedCallback: (response) => {
                         NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
                     },
                     mockData: config.mockData,
-                    mockDataPath: ['result', virtual],
+                    mockDataPath: [virtual],
                 });
             });
         });

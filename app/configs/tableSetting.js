@@ -2,6 +2,7 @@ import { dataChecking } from 'globalUtils';
 import { push } from 'react-router-redux';
 import globalScope from 'globalScope';
 import { NotificationManager } from 'react-notifications';
+import * as Feather from 'featherUtils';
 
 const tableSetting = {
     merchant_list: {
@@ -107,6 +108,7 @@ const tableSetting = {
                 //     'token': globalScope.token,
                 // },
             },
+            mockData: tableSetting.product.mockData,
         }),
         pathToDataRoot: '',
         actionButtons: [
@@ -134,16 +136,22 @@ const tableSetting = {
                         onPressHandling: (index, scope, data) => {
                         // onPressHandling: (index, scope, data, GDPActions) => {
                             if (data && data.id && data.merchant_id) {
-                                globalScope.feather.associate('default').set({
+                                Feather.associate({
                                     model: 'product',
-                                    id: parseInt(data.id, 10),
-                                    associate: 'merchant',
-                                    associate_id: 1,
-                                }).then(() => {
-                                    NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
-                                        // on click action
-                                    });
-                                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.merchant_id, 10) })));
+                                    modelId: parseInt(data.id, 10),
+                                    associateModel: 'merchant',
+                                    associateId: 1,
+                                    socket: 'aphrodite',
+                                    successCallback: () => {
+                                        scope.getFeatherQuery();
+                                        NotificationManager.success('Product disassociate successfully', 'Remove product from merchant', 3000);
+                                    },
+                                    mockData: {
+                                        type: 'remove',
+                                        item: {
+                                            id: parseInt(data.id, 10),
+                                        },
+                                    },
                                 });
                             }
                         },
@@ -152,6 +160,20 @@ const tableSetting = {
                 doc: { description: 'The actions' },
             },
         ],
+        mockData: {
+            data: [
+                { id: 42, name: 'Nature Republic Natural Origin Blur CC SPF 30 PA++ 45g', image_320_200: '42_nature-republic-natural-origin-blur-cc-spf-30-pa-45g_200_125_1459149925.png', merchant_id: 'mock' },
+                { id: 51, name: 'Nature Republic Super Aqua Max Fresh Watery Cream 80ml', image_320_200: '51_nature-republic-super-aqua-max-fresh-watery-cream-80ml_200_125_1522154030.png', merchant_id: 'mock' },
+                { id: 60, name: 'Nature Republic Soothing & Moisture ALOE VERA 80% Emulsion 160ml', image_320_200: '60_nature-republic-soothing-moisture-aloe-vera-80-emulsion-160ml_200_125_1544516556.png', merchant_id: 'mock' },
+                { id: 63, name: 'Nature Republic Aqua Super Aqua Max Deep Moisture Sleeping Pack 100ml', image_320_200: 'sp_1acd6560f8e3e587404d2ab5abb4c669.jpg', merchant_id: 'mock' },
+                { id: 65, name: 'Nature Republic Soothing & Moisture ALOE VERA 90% Toner 160ml', image_320_200: 'sp_c4c1ff83f4a358e33c33eea2a86ededf.jpg', merchant_id: 'mock' },
+                { id: 66, name: 'Nature Republic Super Aqua Max Combination Watery Cream 80ml', image_320_200: '66_nature-republic-super-aqua-max-combination-watery-cream-80ml_200_125_1522154037.png', merchant_id: 'mock' },
+                { id: 69, name: 'Nature Republic Forest Garden Chamomile Cleansing Oil 200ml', image_320_200: '69_nature-republic-forest-garden-chamomile-cleansing-oil-200ml_200_125_1454250049.jpg', merchant_id: 'mock' },
+            ],
+            limit: 12,
+            skip: 0,
+            total: 7,
+        },
     },
     order: {
         title: 'Orders',
@@ -173,6 +195,7 @@ const tableSetting = {
                 //     'token': globalScope.token,
                 // },
             },
+            mockData: tableSetting.order.mockData,
         }),
         pathToDataRoot: '',
         actionButtons: [
@@ -184,11 +207,11 @@ const tableSetting = {
         ],
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
-            { key: 'total', dataPath: ['order_info', 'hmall_total_sales'], label: 'Total Sales', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
-            { key: 'ordid', dataPath: ['order_info', 'ordid'], label: 'Ordid', width: '20rem', align: 'center', type: 'string', doc: { description: '' } },
-            { key: 'status', dataPath: ['order_info', 'status'], label: 'Status', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
-            { key: 'username', dataPath: ['order_info', 'username'], label: 'Username', width: '20rem', align: 'center', type: 'string', doc: { description: '' } },
-            { key: 'created_at', dataPath: ['order_info', 'created'], label: 'Created At', width: '15rem', align: 'center', type: 'datetime', doc: { description: '' } },
+            { key: 'total', dataPath: ['sale_total'], label: 'Total Sales', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'ordid', dataPath: ['ordid'], label: 'Ordid', width: '20rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'status', dataPath: ['status'], label: 'Status', width: '10rem', align: 'center', type: 'string', doc: { description: '' } },
+            // { key: 'username', dataPath: ['username'], label: 'Username', width: '20rem', align: 'center', type: 'string', doc: { description: '' } },
+            { key: 'created_at', dataPath: ['createdAt'], label: 'Created At', width: '15rem', align: 'center', type: 'datetime', doc: { description: '' } },
             {
                 label: 'Action',
                 width: '10rem',
@@ -221,6 +244,84 @@ const tableSetting = {
                 doc: { description: 'The actions' },
             },
         ],
+        mockData: {
+            data: [{
+                createdAt: '2018-11-01T09:17:12.000Z',
+                id: 1,
+                merchant_id: 3,
+                order_id: 1798579,
+                ordid: '20181796716-1065-SKR',
+                sale_total: '122.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T09:20:44.000Z',
+                id: 2,
+                merchant_id: 3,
+                order_id: 1798580,
+                ordid: '20181796717-1483-SKR',
+                sale_total: '89.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T09:25:43.000Z',
+                id: 4,
+                merchant_id: 3,
+                order_id: 1798581,
+                ordid: '20181796718-9769-SKR',
+                sale_total: '73.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T09:39:28.000Z',
+                id: 6,
+                merchant_id: 3,
+                order_id: 1798582,
+                ordid: '20181796719-3418-SKR',
+                sale_total: '59.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T09:40:37.000Z',
+                id: 7,
+                merchant_id: 3,
+                order_id: 1798583,
+                ordid: '20181796720-7440-SKR',
+                sale_total: '78.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T09:47:17.000Z',
+                id: 9,
+                merchant_id: 3,
+                order_id: 1798584,
+                ordid: '20181796721-4016-SKR',
+                sale_total: '192.60',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T10:52:45.000Z',
+                id: 11,
+                merchant_id: 3,
+                order_id: 1798586,
+                ordid: '20181796723-1815-SKR',
+                sale_total: '143.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }, {
+                createdAt: '2018-11-01T11:04:39.000Z',
+                id: 14,
+                merchant_id: 3,
+                order_id: 1798588,
+                ordid: '20181796725-5902-SKR',
+                sale_total: '88.00',
+                status: 'IN PROCESS',
+                updatedAt: null,
+            }],
+            limit: 12,
+            skip: 0,
+            total: 8,
+        },
     },
     test_api_1: {
         title: 'Items',

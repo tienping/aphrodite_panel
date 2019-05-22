@@ -232,7 +232,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
 
     onSubmit = () => {
         if (this.state.formOnSubmit) {
-            this.state.formOnSubmit(this, GDPActions, this.state, this.state.formFields);
+            this.state.formOnSubmit(this, GDPActions, this.state, this.state.formFields, this.props.tableScope);
         }
     }
 

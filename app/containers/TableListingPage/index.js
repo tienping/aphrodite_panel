@@ -14,6 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import ReactJson from 'react-json-view';
 // import Switch from 'react-switch';
+import * as Feather from 'featherUtils';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -51,6 +52,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         super(props);
         this.state = {};
         this.socketChannel = null;
+        this.scope = this;
 
         Events.listen('updateTableState', 'table-listing-updateTableState', (params) => { this.onUpdateState(params); });
     }
@@ -62,6 +64,15 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         if (this.props.pageType && tableSetting && tableSetting[this.props.pageType]) {
             if (tableSetting[this.props.pageType].listenSocket) {
                 this.getFeatherQuery();
+
+                const params = tableSetting[this.props.pageType].getSocketParams({ id: dataChecking(this.props, 'match', 'params', 'id') });
+                this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChanged((response2) => {
+                    devlog('on subscribe update', response2);
+                    this.setState({
+                        data: response2,
+                    });
+                    devlog('Sucribe onChange triggered', { params, response2 });
+                });
             } else if (tableSetting[this.props.pageType].getSocketParams) {
                 this.props.dispatch(GDPActions.getListByFeather(tableSetting[this.props.pageType].getSocketParams({ id })));
             } else if (tableSetting[this.props.pageType].api) {
@@ -84,7 +95,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         if (globaldataprocessor.data !== this.props.globaldataprocessor.data) {
             const { data } = globaldataprocessor;
             this.setState({
-                data: dataChecking(data, 'result'),
+                data,
                 pagination: {
                     _meta: dataChecking(data, '_meta'),
                     _links: dataChecking(data, '_links'),
@@ -187,32 +198,30 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
             };
         }
 
-        globalScope.feather.query(params.service, params.targetSocket).find(params.options)
-            .then((response) => {
+        Feather.find({
+            service: params.service,
+            socket: params.targetSocket,
+            query: params.options,
+            successCallback: (response) => {
                 this.setState({
-                    data: dataChecking(response, 'result'),
+                    data: dataChecking(response, 'data'),
                     pagination: {
-                        _meta: dataChecking(response, 'paginate'),
+                        _meta: {
+                            limit: dataChecking(response, 'limit'),
+                            skip: dataChecking(response, 'skip'),
+                            total: dataChecking(response, 'total'),
+                        },
                         // _links: dataChecking(data, '_links'),
                     },
                     // sorter: null,
                     // sortDirection: 'desc',
                 });
-                devlog('Find data success', { params, response });
-            })
-            .catch((response) => {
-                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-                });
-                devlog('Find data failed', { params, response });
-            });
-
-        this.socketChannel = globalScope.feather.subscribe(params.service, params.targetSocket).onChanged((response2) => {
-            devlog('on subscribe update', response2);
-            this.setState({
-                data: response2,
-            });
-            devlog('Sucribe onChange triggered', { params, response2 });
+            },
+            failedCallback: (response) => {
+                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
+            },
+            mockData: params.mockData,
+            mockDataPath: [],
         });
     }
 
@@ -286,6 +295,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                                 this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                                             }
                                         }}
+                                        tableScope={this}
                                     >
                                         <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
@@ -306,6 +316,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                                 this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                                             }
                                         }}
+                                        tableScope={this}
                                     >
                                         <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
                                     </FormButton>
@@ -328,6 +339,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                             this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                                         }
                                     }}
+                                    tableScope={this}
                                 >
                                     {item.title}
                                 </FormButton>
@@ -736,6 +748,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     this.props.dispatch(GDPActions.toggleUtilFormButton('formButton_util_create_imagelink', false));
                 }}
                 dispatch={this.props.dispatch}
+                tableScope={this}
             ></FormButton>
         </div>
     );
@@ -755,6 +768,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                             this.props.dispatch(GDPActions.getList({ api: tableSetting[newState.pageType].api }));
                         }
                     }}
+                    tableScope={this}
                 >
                     <Button variant="outlined" className="my-half">
                         <i className="fas fa-edit"></i>
@@ -770,7 +784,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                 className="my-half"
                 onClick={(value2, index2) => {
                     if (column.onPressHandling) {
-                        column.onPressHandling(index2, this, row, GDPActions);
+                        column.onPressHandling(index2, this, row, GDPActions, this);
                     }
                 }}
             >
