@@ -13,6 +13,7 @@
     "author": "Lim Tien Ping",
     "license": "ISC",
     "scripts": {
+        "upFeather": "npm i --save feathersjs-sdk@latest && npm run build:dll && npm run start",
         "analyze:clean": "rimraf stats.json",
         "preanalyze": "npm run analyze:clean",
         "analyze": "node ./internals/scripts/analyze.js",
@@ -282,7 +283,7 @@
         "compression": "^1.7.3",
         "cross-env": "5.0.0",
         "express": "^4.16.4",
-        "feathersjs-sdk": "0.0.29",
+        "feathersjs-sdk": "0.0.32",
         "filepond": "^4.3.5",
         "filepond-plugin-file-encode": "^2.1.4",
         "filepond-plugin-image-preview": "^4.0.5",

@@ -16,8 +16,8 @@ import { compose } from 'redux';
 import Navigator from 'components/Navigator';
 import { push } from 'react-router-redux';
 
-import tableSetting from 'configs/tableSetting';
-import { dataChecking, Events } from 'globalUtils';
+// import tableSetting from 'configs/tableSetting';
+import { Events } from 'globalUtils';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -43,27 +43,27 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
             navItems: (() => {
                 const items = [];
 
-                if (Object.keys(tableSetting)) {
-                    Object.keys(tableSetting).forEach((key) => {
-                        if (!dataChecking(tableSetting, key, 'hideFromUser')) {
-                            items.push({
-                                code: key,
-                                require_login: false,
-                                type: 'internal_url',
-                                // type: 'internal_url',
-                                title: dataChecking(tableSetting, key, 'title'),
-                                verticalText: dataChecking(tableSetting, key, 'title'),
-                                url: dataChecking(tableSetting, key, 'link'),
-                                iconClass: dataChecking(tableSetting, key, 'iconClass'),
-                            });
-                        }
-                    });
-                }
+                // if (Object.keys(tableSetting)) {
+                //     Object.keys(tableSetting).forEach((key) => {
+                //         if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                //             items.push({
+                //                 code: key,
+                //                 requireLogin: false,
+                //                 type: 'internal_url',
+                //                 // type: 'internal_url',
+                //                 title: dataChecking(tableSetting, key, 'title'),
+                //                 verticalText: dataChecking(tableSetting, key, 'title'),
+                //                 url: dataChecking(tableSetting, key, 'link'),
+                //                 iconClass: dataChecking(tableSetting, key, 'iconClass'),
+                //             });
+                //         }
+                //     });
+                // }
 
                 if (globalScope.token) {
                     items.push({
                         code: 'user_profile',
-                        require_login: true,
+                        requireLogin: true,
                         type: 'dropdown',
                         title: 'Profile',
                         verticalText: 'Profile',
@@ -73,7 +73,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         items: [
                             {
                                 code: 'logout',
-                                require_login: true,
+                                requireLogin: true,
                                 type: 'exec_function',
                                 text: 'Logout',
                                 iconClass: 'fas fa-sign-out-alt px-1',
@@ -93,7 +93,9 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
         };
 
         Events.listen('updateTopBarState', 'topbar-updateTopBarState', (params) => { this.onUpdateState(params); });
-        Events.listen('forceUpdateTopBar', 'topbar-forceUpdate', () => { this.forceUpdate(); });
+        Events.listen('forceUpdateTopBar', 'topbar-forceUpdate', () => {
+            this.forceUpdate();
+        });
     }
 
     componentDidMount() {

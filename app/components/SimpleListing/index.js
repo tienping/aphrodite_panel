@@ -15,17 +15,13 @@ import Typography from '@material-ui/core/Typography';
 import './style.scss';
 
 function SimpleListing(props) {
-    if (!props.data) {
+    const data = props.data[props.config.virtual[0]];
+    if (!data) {
         return (
             <div className="SimpleLineChart-loading">
                 <Loading />
             </div>
         );
-    }
-
-    const data = props.data[props.config.virtual[0]];
-    if (!data) {
-        console.log('Data not found:', props.config.virtual[0]);
     }
 
     const objArr = Object.keys(data);

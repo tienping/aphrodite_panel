@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { removeCookie, Events } from 'globalUtils';
+import { removeCookie, getCookie, Events } from 'globalUtils';
 import globalScope from 'globalScope';
 import { push } from 'react-router-redux';
 
@@ -43,11 +43,13 @@ export class LogoutForm extends React.PureComponent { // eslint-disable-line rea
                                 <span
                                     onClick={() => {
                                         removeCookie(process.env.TOKEN_KEY);
+                                        console.log(getCookie(process.env.TOKEN_KEY));
                                         removeCookie(process.env.ADMIN_KEY);
                                         globalScope.token = '';
                                         globalScope.userData = null;
 
                                         Events.trigger('forceUpdateTopBar');
+                                        Events.trigger('forceUpdateTopNavigation');
                                         globalScope.feather.logout('aphrodite');
                                         // window.location.href = globalScope.previousPage || '/';
                                         globalScope.dispatch(push({

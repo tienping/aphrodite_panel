@@ -21,59 +21,53 @@ import { dataChecking, devlog } from 'globalUtils';
 import './style.scss';
 
 class Dashboard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    state = {
-        data: null,
-    };
+    state = {};
 
     componentDidMount = () => {
-        const virtualGroup = [];
         this.props.setting.forEach((config) => {
             config.virtual.forEach((virtual) => {
-                virtualGroup.push(virtual);
-            });
-        });
-
-        devlog('Finding dashboard data...');
-        globalScope.feather.query('merchant', 'aphrodite').get(3, { query: { virtual: virtualGroup } })
-            .then((response) => {
-                devlog('Find dashboard data success', { response });
-                this.setState({
-                    data: dataChecking(response, 'result'),
-                });
-            })
-            .catch((response) => {
-                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-                devlog('Find dashboard data failed', { response });
-            });
-
-        this.socketChannel = globalScope.feather.subscribe('merchant', 'aphrodite').onChanged((response2) => {
-            devlog('on subscribe update', response2);
-            this.setState({
-                data: response2,
+                setTimeout(() => {
+                    devlog('Finding dashboard data...', virtual);
+                    globalScope.feather.query('merchant', 'aphrodite').get(3, { query: { virtual } })
+                        .then((response) => {
+                            devlog('Find dashboard data success: ', virtual, response);
+                            this.setState({
+                                [`data_${virtual}`]: dataChecking(response, 'result', virtual),
+                            });
+                        })
+                        .catch((response) => {
+                            NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
+                            devlog('Find dashboard data failed', { virtual, response });
+                        });
+                }, 0);
             });
         });
     }
 
     renderContent = (config) => {
+        const dataObj = {};
+        config.virtual.forEach((key) => {
+            dataObj[key] = this.state[`data_${key}`];
+        });
         if (config.type === 'linegraph') {
             return (
                 <SimpleLineChart
                     config={config}
-                    data={this.state.data}
+                    data={dataObj}
                 />
             );
         } else if (config.type === 'table') {
             return (
                 <SimpleTable
                     config={config || []}
-                    data={this.state.data}
+                    data={dataObj}
                 />
             );
         } else if (config.type === 'listing') {
             return (
                 <SimpleListing
                     config={config || []}
-                    data={this.state.data}
+                    data={dataObj}
                 />
             );
         } else if (config.type === 'buttonlist') {

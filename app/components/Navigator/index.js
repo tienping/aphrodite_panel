@@ -14,12 +14,12 @@ import './style.scss';
 
 function Navigator(props) {
     const menu = props.items.map((item) => {
-        if (item.require_login && !globalScope.token) {
+        if (item.requireLogin && !globalScope.token) {
             return null;
         }
 
         return (
-            <li className={`nav-item px-2 unstyled ${globalScope.token ? '' : 'hidden'}`} key={item.code}>
+            <li className="nav-item px-2 unstyled" key={item.code}>
                 <NavItem clickHandler={props.clickHandler} vertical={props.vertical} itemClassName={props.itemClassName} data={item}></NavItem>
             </li>
         );
@@ -30,7 +30,10 @@ function Navigator(props) {
             <div className={`vertical-navigator ${props.className}`}>
                 <nav className="">
                     <div className="">
-                        {props.items.length && menu}
+                        {
+                            props.items.length ?
+                                menu : null
+                        }
                     </div>
                 </nav>
             </div>
@@ -41,7 +44,10 @@ function Navigator(props) {
         <div className={`${props.className} nav-container`}>
             <nav className="gami-navbar">
                 <div className="gami-navbar-nav">
-                    {props.items.length && menu}
+                    {
+                        props.items.length ?
+                            menu : null
+                    }
                 </div>
             </nav>
         </div>

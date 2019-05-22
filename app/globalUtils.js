@@ -147,7 +147,15 @@ export const Events = {
     trigger: (at, data) => {
         const data2 = data || '';
         const obj = Callbacks[at];
+        if (!obj) {
+            console.warn('Event triggered have not being register: ', at);
+            return;
+        }
         Object.keys(obj).forEach((key) => {
+            if (!obj[key]) {
+                console.warn('Event triggered have not being register yet: ', key);
+                return;
+            }
             obj[key](data2);
         });
     },

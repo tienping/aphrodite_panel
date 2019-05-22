@@ -23,6 +23,7 @@ export function* doLogin(action) {
                 // globalScope.token = response.data.token;
                 globalScope.token = response.data.token;
                 Events.trigger('forceUpdateTopBar');
+                Events.trigger('forceUpdateTopNavigation');
                 setCookie(process.env.TOKEN_KEY, globalScope.token);
                 setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
 

@@ -117,21 +117,6 @@ const startingApp = () => {
     }
 };
 
-// let start1 = false;
-// let start2 = false;
-
-// setTimeout(() => {
-//     if (start2) {
-//         startingApp();
-//     } else {
-//         start1 = true;
-//     }
-// }, 1500);
-
 initialiseApp().then(() => {
-    // if (start1) {
     startingApp();
-    // } else {
-    //     start2 = true;
-    // }
 });

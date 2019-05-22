@@ -19,15 +19,14 @@ import Legend from 'recharts/lib/component/Legend';
 import './style.scss';
 
 function SimpleLineChart(props) {
-    if (!props.data) {
+    const data = props.data[props.config.virtual[0]];
+    if (!data) {
         return (
             <div className="SimpleLineChart-loading">
                 <Loading />
             </div>
         );
     }
-
-    const data = props.data[props.config.virtual[0]];
 
     let max = Math.max(...data.map((o) => o.total));
     let min = Math.min(...data.map((o) => o.total));

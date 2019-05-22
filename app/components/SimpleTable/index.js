@@ -17,17 +17,13 @@ import Paper from '@material-ui/core/Paper';
 import './style.scss';
 
 function SimpleTable(props) {
-    if (!props.data) {
+    const data = props.data[props.config.virtual[0]];
+    if (!data) {
         return (
             <div className="SimpleLineChart-loading">
                 <Loading />
             </div>
         );
-    }
-
-    const data = props.data[props.config.virtual[0]];
-    if (!data) {
-        console.log('Data not found:', props.config.virtual[0]);
     }
 
     return (

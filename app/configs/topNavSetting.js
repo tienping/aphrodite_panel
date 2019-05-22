@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 
 const topNavSetting = [
     {
+        requireLogin: true,
         label: 'Products',
         children: [{
             label: 'Associate Products',
@@ -14,23 +15,25 @@ const topNavSetting = [
             label: 'Products List',
             onClick: () => {
                 globalScope.dispatch(push({
-                    pathname: '/merchant/:id/products',
+                    pathname: `/merchant/${globalScope.userData.merchants[0].id}/products`,
                 }));
             },
         }],
     },
     {
+        requireLogin: true,
         label: 'Orders',
         children: [{
             label: 'Order List',
             onClick: () => {
                 globalScope.dispatch(push({
-                    pathname: '/merchant/:id/orders',
+                    pathname: `/merchant/${globalScope.userData.merchants[0].id}/orders`,
                 }));
             },
         }],
     },
     {
+        requireLogin: true,
         label: 'Reporting',
         children: [{
             label: 'Report 1',

@@ -3,18 +3,11 @@
 // import { push } from 'react-router-redux';
 
 const dashboardSetting = [
-    // {
-    //     virtual: [],
-    //     title: 'Shop Rating',
-    //     type: 'string',
-    //     size: 'half',
-    //     value: 'Your current rating: 4.5 out of 5.0',
-    // },
     {
         virtual: ['total_sales'],
         title: 'Total Sales over days',
         type: 'linegraph',
-        size: 'half',
+        size: 'full',
         params: {
             xAxisKey: 'date',
             vertical: false,
@@ -25,25 +18,68 @@ const dashboardSetting = [
                 // activeDot: { r: 8 },
             }],
         },
+        mockData: [
+            { total: '7412.85', date: '2019-05-14T01:40:07.000Z' },
+            { total: '7136.54', date: '2019-05-14T17:25:57.000Z' },
+            { total: '6650.96', date: '2019-05-15T16:37:15.000Z' },
+            { total: '4904.02', date: '2019-05-16T16:05:53.000Z' },
+            { total: '8633.68', date: '2019-05-17T17:04:41.000Z' },
+            { total: '8978.13', date: '2019-05-18T16:59:52.000Z' },
+            { total: '11689.36', date: '2019-05-19T17:17:36.000Z' },
+        ],
     },
+    {
+        virtual: ['best_seller'],
+        title: 'Best Seller',
+        type: 'table',
+        size: 'half',
+        hideHeader: true,
+        fields: [{
+            key: 'product',
+            align: 'left',
+        }, {
+            key: 'quantity',
+            align: 'center',
+        }],
+        mockData: [
+            { quantity: '8908', product: 'Nature Republic Soothing & Moisture Aloe Vera 92% Soothing Gel 300ml*4pcs' },
+            { quantity: '3870', product: '3CE Velvet Lip Tint 4g [8 Types To Choose]' },
+            { quantity: '3269', product: 'Innisfree No Sebum Mineral Powder 5g' },
+            { quantity: '3269', product: 'Innisfree No Sebum Mineral Powder 5g' },
+            { quantity: '2868', product: 'Nature Republic Soothing & Moisture Aloe Vera 92% Soothing Gel Mist 150ml' },
+            { quantity: '2348', product: 'April Skin Magic Snow Cushion Black 2.0 [3 Types To Choose]' },
+        ],
+    },
+    // {
+    //     virtual: ['rating'],
+    //     title: 'Shop Rating',
+    //     type: 'listing',
+    //     size: 'half',
+    //     mockData: {
+    //         count: '8.25%',
+    //     },
+    // },
     {
         virtual: ['pending'],
         title: 'Total Pending Orders',
         type: 'listing',
         size: 'half',
         hideHeader: true,
-        // data: [
-        //     { name: 'Total', value: 6 },
-        //     { name: 'Today', value: 2 },
-        //     { name: 'Yesterday', value: 5 },
-        //     { name: 'Older', value: 1 },
-        // ],
+        mockData: {
+            older: 482,
+            today: 4,
+            total: 570,
+            yesterday: 84,
+        },
     },
     {
         virtual: ['cancellation'],
         title: 'Cancellation Rate',
         type: 'listing',
         size: 'half',
+        mockData: {
+            count: '17%',
+        },
     },
     // {
     //     virtual: [],
@@ -57,6 +93,9 @@ const dashboardSetting = [
         title: 'Total Out of Stock',
         type: 'listing',
         size: 'half',
+        mockData: {
+            count: 533,
+        },
     },
     // {
     //     virtual: [],
