@@ -194,7 +194,7 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                                         this.forceUpdate();
                                         Events.trigger('forceUpdateTopNavigation');
                                         globalScope.dispatch(push({
-                                            pathname: window.location.pathname,
+                                            pathname: globalScope.previewMode ? window.location.pathname : '/',
                                         }));
                                     }}
                                 >{`${globalScope.previewMode ? 'Exit Preview Mode' : 'Enter Preview Mode'}`}</Button>

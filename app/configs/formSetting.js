@@ -1,5 +1,6 @@
 import { dataChecking, Events } from 'globalUtils';
 import globalScope from 'globalScope';
+import * as Feather from 'featherUtils';
 // import tableSetting from 'configs/tableSetting';
 import { NotificationManager } from 'react-notifications';
 
@@ -56,19 +57,31 @@ const formSetting = {
                 },
             },
         ],
-        onSubmit: (scope, GDPActions, data) => {
+        onSubmit: (scope, GDPActions, data, formFields, tableScope) => {
             if (dataChecking(data, 'product', 'value')) {
-                globalScope.feather.associate('default').set({
+                Feather.associate({
                     model: 'product',
-                    id: parseInt(data.product.value, 10),
-                    associate: 'merchant',
-                    associate_id: parseInt(data.routeParams.id, 10),
-                }).then(() => {
-                    NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
-                        // on click action
-                    });
-                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 10) })));
-                    scope.onCompleting();
+                    modelId: parseInt(data.product.value, 10),
+                    associateModel: 'merchant',
+                    associateId: parseInt(data.routeParams.id, 10),
+                    socket: 'aphrodite',
+                    successCallback: () => {
+                        tableScope.getFeatherQuery();
+                        NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
+                            // on click action
+                        });
+                        // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 10) })));
+                        scope.onCompleting();
+                    },
+                    mockData: {
+                        type: 'add',
+                        item: {
+                            id: parseInt(data.product.value, 10),
+                            name: 'Mock up product',
+                            image_320_200: 'mock_up_image.png',
+                            merchant_id: parseInt(data.routeParams.id, 10) || data.routeParams.id,
+                        },
+                    },
                 });
             }
         },

@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { NotificationManager } from 'react-notifications';
-import { apiRequest, setCookie, devlog } from 'globalUtils';
+import { apiRequest, setCookie } from 'globalUtils';
 import globalScope from 'globalScope';
 
 import { AUTH_LOGIN } from './constants';
@@ -20,26 +20,28 @@ export function* doLogin(action) {
             const isAdminResponse = yield call(apiRequest, '/view/preview/145', 'post');
             globalScope.isAdmin = !!(isAdminResponse && isAdminResponse.data && isAdminResponse.data.id);
             if (globalScope.isAdmin) {
-                // globalScope.token = response.data.token;
-                globalScope.token = response.data.token;
-                setCookie(process.env.TOKEN_KEY, globalScope.token);
-                setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
-
                 try {
                     yield globalScope.feather.authenticate({ token: globalScope.token }, 'custom', 'aphrodite')
                         .then((response2) => {
                             if (response2.user) {
                                 globalScope.userData = response2.user;
-                                console.log('userData', response2.user);
                             }
-                            devlog('Second tier authentication passed');
+                            globalScope.token = response.data.token;
+                            setCookie(process.env.TOKEN_KEY, globalScope.token);
+                            setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
+                            console.log('Second tier authentication passed', response2.user);
                         })
                         .catch((response2) => {
+                            globalScope.token = '';
+                            globalScope.isAdmin = false;
                             NotificationManager.error(JSON.stringify(response2), 'Error!! (click to dismiss)', 5000);
+                            console.log('Second tier authentication failed', response2);
                         });
                     yield put(loginSuccess(response.data.token));
                 } catch (error) {
-                    console.log('Failed to authenticate', error);
+                    globalScope.token = '';
+                    globalScope.isAdmin = false;
+                    console.log('Second tier authentication failed-', error);
                 }
             } else {
                 globalScope.token = '';
