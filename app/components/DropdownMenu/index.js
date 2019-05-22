@@ -59,7 +59,13 @@ class DropdownMenu extends React.PureComponent { // eslint-disable-line react/pr
                                     <MenuList>
                                         {
                                             data.children.map((child, index) => (
-                                                <MenuItem key={index} onClick={child.onClick}>{child.label}</MenuItem>
+                                                <MenuItem
+                                                    key={index}
+                                                    onClick={({ ...params }) => {
+                                                        this.handleClose({ ...params });
+                                                        child.onClick({ ...params });
+                                                    }}
+                                                >{child.label}</MenuItem>
                                             ))
                                         }
                                     </MenuList>

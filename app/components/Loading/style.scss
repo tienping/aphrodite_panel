@@ -4,12 +4,12 @@
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 1015;
-    background-color: RGBA(0, 0, 0, 0.15);
+    z-index: 500;
+    background-color: RGBA(0, 0, 0, 0.05);
 
     .custom-loading-image-holder {
         position: relative;
-        top: 40%;
+        top: 50%;
         transform: translateY(-50%);
         text-align: center;
 

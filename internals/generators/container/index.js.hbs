@@ -22,21 +22,19 @@ import messages from './messages';
 {{/if}}
 
 export class {{ properCase name }} extends React.{{{ component }}} { // eslint-disable-line react/prefer-stateless-function
-    render() {
-        return (
-            <div>
-            {{#if wantHeaders}}
-                <Helmet>
-                    <title>{{properCase name}}</title>
-                    <meta name="description" content="Description of {{properCase name}}" />
-                </Helmet>
-            {{/if}}
-            {{#if wantMessages}}
-                <FormattedMessage {...messages.header} />
-            {{/if}}
-            </div>
-        );
-    }
+    render = () => (
+        <div>
+        {{#if wantHeaders}}
+            <Helmet>
+                <title>{{properCase name}}</title>
+                <meta name="description" content="Description of {{properCase name}}" />
+            </Helmet>
+        {{/if}}
+        {{#if wantMessages}}
+            <FormattedMessage {...messages.header} />
+        {{/if}}
+        </div>
+    );
 }
 
 {{ properCase name }}.propTypes = {

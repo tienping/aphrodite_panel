@@ -11,7 +11,9 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 {{/if}}
 
-function {{ properCase name }}() {
+import './style.scss';
+
+function {{ properCase name }}(props) {
     return (
         <div>
         {{#if wantMessages}}

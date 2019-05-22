@@ -13,8 +13,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import tableSetting from 'configs/tableSetting';
+import dashboardSetting from 'configs/dashboardSetting';
 import { dataChecking } from 'globalUtils';
 import Button from '@material-ui/core/Button';
+import Dashboard from 'components/Dashboard';
 // import Fancy from '@tienping/my-react-dom';
 
 import messages from './messages';
@@ -30,23 +32,26 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                 {/* <div><Fancy /></div> */}
                 <section className="main-content text-center">
                     {
-                        Object.keys(tableSetting).map((key, index) => {
-                            if (!dataChecking(tableSetting, key, 'hideFromUser')) {
-                                return (
-                                    <NavLink
-                                        key={index}
-                                        to={dataChecking(tableSetting, key, 'link')}
-                                        className="page-select-button"
-                                        title={dataChecking(tableSetting, key, 'title')}
-                                    >
-                                        <Button variant="contained" color="primary">
+                        dashboardSetting && dashboardSetting.length ?
+                            <Dashboard setting={dashboardSetting} />
+                            :
+                            Object.keys(tableSetting).map((key, index) => {
+                                if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                                    return (
+                                        <NavLink
+                                            key={index}
+                                            to={dataChecking(tableSetting, key, 'link')}
+                                            className="page-select-button"
+                                            title={dataChecking(tableSetting, key, 'title')}
+                                        >
+                                            <Button variant="contained" color="primary">
                                                 {dataChecking(tableSetting, key, 'title')}
-                                        </Button>
-                                    </NavLink>
-                                );
-                            }
-                            return null;
-                        })
+                                            </Button>
+                                        </NavLink>
+                                    );
+                                }
+                                return null;
+                            })
                     }
                 </section>
             </div>

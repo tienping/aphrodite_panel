@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { removeCookie } from 'globalUtils';
+import { removeCookie, Events } from 'globalUtils';
 import globalScope from 'globalScope';
 import { push } from 'react-router-redux';
 
@@ -44,7 +44,16 @@ export class LogoutForm extends React.PureComponent { // eslint-disable-line rea
                                     onClick={() => {
                                         removeCookie(process.env.TOKEN_KEY);
                                         removeCookie(process.env.ADMIN_KEY);
-                                        window.location.href = globalScope.previousPage || '/';
+                                        globalScope.token = '';
+                                        globalScope.userData = null;
+
+                                        Events.trigger('forceUpdateTopBar');
+                                        Events.trigger('forceUpdateTopNavigation');
+                                        globalScope.feather.logout('aphrodite');
+                                        // window.location.href = globalScope.previousPage || '/';
+                                        globalScope.dispatch(push({
+                                            pathname: globalScope.previousPage || '/',
+                                        }));
                                     }}
                                     className="confirm my-custom-button"
                                 >

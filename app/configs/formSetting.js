@@ -1,4 +1,4 @@
-import { dataChecking } from 'globalUtils';
+import { dataChecking, Events } from 'globalUtils';
 import globalScope from 'globalScope';
 // import tableSetting from 'configs/tableSetting';
 import { NotificationManager } from 'react-notifications';
@@ -60,14 +60,14 @@ const formSetting = {
             if (dataChecking(data, 'product', 'value')) {
                 globalScope.feather.associate('default').set({
                     model: 'product',
-                    id: parseInt(data.product.value, 0),
+                    id: parseInt(data.product.value, 10),
                     associate: 'merchant',
-                    associate_id: parseInt(data.routeParams.id, 0),
+                    associate_id: parseInt(data.routeParams.id, 10),
                 }).then(() => {
                     NotificationManager.success('Product associate successfully', 'Add product to merchant', 3000, () => {
                         // on click action
                     });
-                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 0) })));
+                    // scope.props.dispatch(GDPActions.getListByFeather(tableSetting[scope.props.pageType].getSocketParams({ id: parseInt(data.routeParams.id, 10) })));
                     scope.onCompleting();
                 });
             }
@@ -96,26 +96,20 @@ const formSetting = {
         onSubmit: (scope, GDPActions, data) => {
             const extractedData = extractData(data, formSetting.create_test_api_1.fields);
 
-            scope.onUpdateStatus('formLoading', true);
+            Events.trigger('updateTableState', { stateName: 'globalLoading', value: true });
             globalScope.feather.query('product', 'ordo').create(extractedData, { headers: {
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en',
                 'token': globalScope.token,
             } })
             .then((response) => {
-                NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
-                    // on click action
-                });
-                console.log(JSON.stringify(response));
+                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
                 scope.onCompleting();
-                scope.onUpdateStatus('formLoading', false);
+                Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
             })
             .catch((response) => {
-                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-                });
-                console.log(JSON.stringify(response));
-                scope.onUpdateStatus('formLoading', false);
+                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
+                Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
             });
         },
     },
@@ -133,17 +127,11 @@ formSetting.edit_test_api_1.onSubmit = (scope, tableListingActions, data, fields
         'token': globalScope.token,
     } })
     .then((response) => {
-        NotificationManager.success(JSON.stringify(response), 'Success', 3000, () => {
-            // on click action
-        });
-        console.log(JSON.stringify(response));
+        NotificationManager.success(JSON.stringify(response), 'Success', 3000);
         scope.onCompleting();
     })
     .catch((response) => {
-        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000, () => {
-            // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-        });
-        console.log(JSON.stringify(response));
+        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
     });
 };
 

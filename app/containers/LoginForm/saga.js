@@ -1,5 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { apiRequest, setCookie } from 'globalUtils';
+import { NotificationManager } from 'react-notifications';
+import { apiRequest, setCookie, devlog } from 'globalUtils';
 import globalScope from 'globalScope';
 
 import { AUTH_LOGIN } from './constants';
@@ -14,7 +15,6 @@ export function* doLogin(action) {
         const base64 = require('base-64');
         const hash = base64.encode(`${username}:${password}`);
         const response = yield call(apiRequest, 'auth/token', 'post', {}, null, { headers: { 'Authorization': `Basic ${hash}` } });
-        console.log('response', response);
         if (response && response.ok) {
             globalScope.token = response.data.token;
             const isAdminResponse = yield call(apiRequest, '/view/preview/145', 'post');
@@ -24,8 +24,23 @@ export function* doLogin(action) {
                 globalScope.token = response.data.token;
                 setCookie(process.env.TOKEN_KEY, globalScope.token);
                 setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
-                yield globalScope.feather.authenticate(globalScope.token);
-                yield put(loginSuccess(response.data.token));
+
+                try {
+                    yield globalScope.feather.authenticate({ token: globalScope.token }, 'custom', 'aphrodite')
+                        .then((response2) => {
+                            if (response2.user) {
+                                globalScope.userData = response2.user;
+                                console.log('userData', response2.user);
+                            }
+                            devlog('Second tier authentication passed');
+                        })
+                        .catch((response2) => {
+                            NotificationManager.error(JSON.stringify(response2), 'Error!! (click to dismiss)', 5000);
+                        });
+                    yield put(loginSuccess(response.data.token));
+                } catch (error) {
+                    console.log('Failed to authenticate', error);
+                }
             } else {
                 globalScope.token = '';
                 response.data.messages[0] = { type: 'error', text: 'Invalid user access level!' };

@@ -1,0 +1,12 @@
+.simpleTable-table-element {
+    .simpleTable-tableHead .simpleTable-tableCell {
+        font-size: 120% !important;
+        font-weight: bolder;
+    }
+
+    .simpleTable-tableBody {
+        .simpleTable-tableRow:nth-child(even) {
+            background: RGBA(208, 208, 253, 0.1);
+        }
+    }
+}

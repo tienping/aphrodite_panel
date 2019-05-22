@@ -70,6 +70,22 @@ export const dataChecking = (object, ...argsArr) => {
     return obj;
 };
 
+export const setDataByPath = (data, ...argsArr) => {
+    let args = argsArr;
+    if (argsArr[0].constructor === Array) {
+        args = argsArr[0];
+    }
+
+    let obj = data;
+    for (let i = args.length - 1; i >= 0; i--) {
+        obj = {
+            [args[i]]: obj,
+        };
+    }
+
+    return obj;
+};
+
 /**
  * Parses the JSON returned by a network request
  *
@@ -147,7 +163,15 @@ export const Events = {
     trigger: (at, data) => {
         const data2 = data || '';
         const obj = Callbacks[at];
+        if (!obj) {
+            console.warn('Event triggered have not being register: ', at);
+            return;
+        }
         Object.keys(obj).forEach((key) => {
+            if (!obj[key]) {
+                console.warn('Event triggered have not being register yet: ', key);
+                return;
+            }
             obj[key](data2);
         });
     },
@@ -195,6 +219,9 @@ export const request = (url, options) => (
         .catch(parseJSON)
 );
 
+/**
+ * Cookies utils
+ */
 const cookies = new Cookies();
 export const setCookie = (key, value, options) => {
     const opt = options || { path: '/' };
@@ -202,3 +229,12 @@ export const setCookie = (key, value, options) => {
 };
 export const getCookie = (key, options) => cookies.get(key, options);
 export const removeCookie = (key, options) => cookies.remove(key, options);
+
+/**
+ * Log utils
+ */
+export const devlog = (...logs) => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        console.log(...logs);
+    }
+};

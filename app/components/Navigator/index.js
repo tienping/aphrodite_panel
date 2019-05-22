@@ -14,7 +14,7 @@ import './style.scss';
 
 function Navigator(props) {
     const menu = props.items.map((item) => {
-        if (item.require_login && !globalScope.token) {
+        if (item.requireLogin && !globalScope.token) {
             return null;
         }
 
@@ -30,7 +30,10 @@ function Navigator(props) {
             <div className={`vertical-navigator ${props.className}`}>
                 <nav className="">
                     <div className="">
-                        {props.items.length && menu}
+                        {
+                            props.items.length ?
+                                menu : null
+                        }
                     </div>
                 </nav>
             </div>
@@ -41,7 +44,10 @@ function Navigator(props) {
         <div className={`${props.className} nav-container`}>
             <nav className="gami-navbar">
                 <div className="gami-navbar-nav">
-                    {props.items.length && menu}
+                    {
+                        props.items.length ?
+                            menu : null
+                    }
                 </div>
             </nav>
         </div>

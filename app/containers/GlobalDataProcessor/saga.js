@@ -38,7 +38,6 @@ export function* getTableData(action) {
             yield put(getListFail(response));
         }
     } catch (response) {
-        console.log('getListFail', response);
         yield put(getListFail(response));
     }
 }
@@ -58,7 +57,6 @@ export function* getTableDataByFeather(action) {
             yield put(getListByFeatherFail(response));
         }
     } catch (response) {
-        console.log('getListFail', response);
         yield put(getListByFeatherFail(response));
     }
 }
@@ -78,7 +76,6 @@ export function* fireApi(action) {
             yield put(fireApiFail(response.data, action.formId));
         }
     } catch (error) {
-        console.log('fireApiFail', error);
         yield put(fireApiFail(error, action.formId));
     }
 }
@@ -91,7 +88,6 @@ export function* getDataKeyValue(action) {
     } else {
         if (response.data && response.data.error) {
             alert(JSON.stringify(response.data.error));
-            console.log(response.data.error);
         }
         yield put(getDataKeyValueFail(response.data));
     }

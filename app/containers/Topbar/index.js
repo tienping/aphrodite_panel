@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,8 +17,8 @@ import { compose } from 'redux';
 import Navigator from 'components/Navigator';
 import { push } from 'react-router-redux';
 
-import tableSetting from 'configs/tableSetting';
-import { dataChecking } from 'globalUtils';
+// import tableSetting from 'configs/tableSetting';
+import { Events, setCookie } from 'globalUtils';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -36,63 +37,80 @@ import saga from './saga';
 import './style.scss';
 
 export class Topbar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-    state = {
-        showSideMenu: false,
-        navItems: (() => {
-            const items = [];
+    constructor(props) {
+        super(props);
+        this.state = {
+            showSideMenu: false,
+            navItems: (() => {
+                const items = [];
 
-            if (Object.keys(tableSetting)) {
-                Object.keys(tableSetting).forEach((key) => {
-                    if (!dataChecking(tableSetting, key, 'hideFromUser')) {
-                        items.push({
-                            code: key,
-                            require_login: false,
-                            type: 'internal_url',
-                            // type: 'internal_url',
-                            title: dataChecking(tableSetting, key, 'title'),
-                            verticalText: dataChecking(tableSetting, key, 'title'),
-                            url: dataChecking(tableSetting, key, 'link'),
-                            iconClass: dataChecking(tableSetting, key, 'iconClass'),
-                        });
-                    }
-                });
-            }
+                // if (Object.keys(tableSetting)) {
+                //     Object.keys(tableSetting).forEach((key) => {
+                //         if (!dataChecking(tableSetting, key, 'hideFromUser')) {
+                //             items.push({
+                //                 code: key,
+                //                 requireLogin: false,
+                //                 type: 'internal_url',
+                //                 // type: 'internal_url',
+                //                 title: dataChecking(tableSetting, key, 'title'),
+                //                 verticalText: dataChecking(tableSetting, key, 'title'),
+                //                 url: dataChecking(tableSetting, key, 'link'),
+                //                 iconClass: dataChecking(tableSetting, key, 'iconClass'),
+                //             });
+                //         }
+                //     });
+                // }
 
-            if (globalScope.token) {
-                items.push({
-                    code: 'user_profile',
-                    require_login: true,
-                    type: 'dropdown',
-                    title: 'Profile',
-                    verticalText: 'Profile',
-                    // text: 'Profile',
-                    iconClass: 'fa fa-user p-1',
-                    dropdownClass: 'text-white text-hover-my-style p-1',
-                    items: [
-                        {
-                            code: 'logout',
-                            require_login: true,
-                            type: 'exec_function',
-                            text: 'Logout',
-                            iconClass: 'fas fa-sign-out-alt px-1',
-                            handleLinkClick: () => {
-                                globalScope.previousPage = window.location.pathname;
-                                this.props.dispatch(push({
-                                    pathname: '/logout',
-                                }));
+                if (globalScope.token) {
+                    items.push({
+                        code: 'user_profile',
+                        requireLogin: true,
+                        type: 'dropdown',
+                        title: 'Profile',
+                        verticalText: 'Profile',
+                        // text: 'Profile',
+                        iconClass: 'fa fa-user p-1',
+                        dropdownClass: 'text-white text-hover-my-style p-1',
+                        items: [
+                            {
+                                code: 'logout',
+                                requireLogin: true,
+                                type: 'exec_function',
+                                text: 'Logout',
+                                iconClass: 'fas fa-sign-out-alt px-1',
+                                handleLinkClick: () => {
+                                    globalScope.previousPage = window.location.pathname;
+                                    this.props.dispatch(push({
+                                        pathname: '/logout',
+                                    }));
+                                },
                             },
-                        },
-                    ],
-                });
-            }
+                        ],
+                    });
+                }
 
-            return items;
-        })(),
+                return items;
+            })(),
+        };
+
+        Events.listen('updateTopBarState', 'topbar-updateTopBarState', (params) => { this.onUpdateState(params); });
+        Events.listen('forceUpdateTopBar', 'topbar-forceUpdate', () => {
+            this.forceUpdate();
+        });
     }
 
     componentDidMount() {
         // this.props.dispatch(fetchTopNav({}));
         globalScope.dispatch = this.props.dispatch;
+    }
+
+    onUpdateState = ({ stateName, value }) => {
+        if (!stateName) {
+            this.setState({});
+        }
+        const obj = {};
+        obj[stateName] = value;
+        this.setState(obj);
     }
 
     render() {
@@ -154,6 +172,34 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         className="how-to-use hidden-xs bg-white text-secondary-color"
                         type="default"
                     >&#63;</NavLink>
+                    {
+                        (!globalScope.token || globalScope.previewMode) &&
+                            <div className="toggle-preview-mode-container">
+                                <Button
+                                    title={`${globalScope.previewMode ? 'Exit Preview Mode' : 'Enter Preview Mode'}`}
+                                    className={`toggle-preview-mode hidden-xs ${globalScope.previewMode ? 'active' : ''}`}
+                                    variant="outlined"
+                                    onClick={() => {
+                                        globalScope.token = globalScope.token ? '' : 'preview-mode';
+                                        globalScope.isAdmin = globalScope.token ? '' : 'preview-mode';
+                                        globalScope.previewMode = !globalScope.previewMode;
+                                        setCookie(process.env.PREVIEW_KEY, globalScope.previewMode);
+
+                                        globalScope.userData = {
+                                            merchants: [{
+                                                id: 'mock',
+                                            }],
+                                        };
+
+                                        this.forceUpdate();
+                                        Events.trigger('forceUpdateTopNavigation');
+                                        globalScope.dispatch(push({
+                                            pathname: window.location.pathname,
+                                        }));
+                                    }}
+                                >{`${globalScope.previewMode ? 'Exit Preview Mode' : 'Enter Preview Mode'}`}</Button>
+                            </div>
+                    }
                     <div>
                         <NavLink to="/" title="Go to homepage" className="gami-header-logo" type="default">
                             <span className="top-bar-side-title text-main-color hidden-xs">HERMO</span>
