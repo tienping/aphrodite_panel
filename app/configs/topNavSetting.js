@@ -12,6 +12,13 @@ const topNavSetting = [
                 alert('Feature still under developmert....');
             },
         }, {
+            label: 'merchant',
+            onClick: () => {
+                globalScope.dispatch(push({
+                    pathname: '/merchant_list',
+                }));
+            },
+        }, {
             label: 'Products List',
             onClick: () => {
                 globalScope.dispatch(push({

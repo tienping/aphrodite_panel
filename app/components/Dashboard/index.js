@@ -15,8 +15,8 @@ import SimpleListing from 'components/SimpleListing';
 import ButtonList from 'components/ButtonList';
 import { NotificationManager } from 'react-notifications';
 
-import globalScope from 'globalScope';
-import { dataChecking, devlog } from 'globalUtils';
+import { dataChecking } from 'globalUtils';
+import * as Feather from 'featherUtils';
 
 import './style.scss';
 
@@ -26,20 +26,22 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
     componentDidMount = () => {
         this.props.setting.forEach((config) => {
             config.virtual.forEach((virtual) => {
-                setTimeout(() => {
-                    devlog('Finding dashboard data...', virtual);
-                    globalScope.feather.query('merchant', 'aphrodite').get(3, { query: { virtual } })
-                        .then((response) => {
-                            devlog('Find dashboard data success: ', virtual, response);
-                            this.setState({
-                                [`data_${virtual}`]: dataChecking(response, 'result', virtual),
-                            });
-                        })
-                        .catch((response) => {
-                            NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-                            devlog('Find dashboard data failed', { virtual, response });
+                Feather.get({
+                    service: 'merchant',
+                    socket: 'aphrodite',
+                    query: { virtual },
+                    id: 3,
+                    successCallback: (response) => {
+                        this.setState({
+                            [`data_${virtual}`]: dataChecking(response, 'result', virtual),
                         });
-                }, 0);
+                    },
+                    failedCallback: (response) => {
+                        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
+                    },
+                    mockData: config.mockData,
+                    mockDataPath: ['result', virtual],
+                });
             });
         });
     }

@@ -66,3 +66,21 @@
         }
     }
 }
+
+.toggle-preview-mode-container {
+    position: absolute;
+    left: 50px;
+    top: .3rem;
+
+    .toggle-preview-mode {
+        width: 13rem;
+        border: 1px solid #00CC66;
+        color: green;
+
+        &.active {
+            color: black;
+            border-color: black;
+            background-color: #CCFFCC !important;
+        }
+    }
+}

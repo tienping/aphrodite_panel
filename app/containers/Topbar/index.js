@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,7 +18,7 @@ import Navigator from 'components/Navigator';
 import { push } from 'react-router-redux';
 
 // import tableSetting from 'configs/tableSetting';
-import { Events } from 'globalUtils';
+import { Events, setCookie } from 'globalUtils';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -171,6 +172,34 @@ export class Topbar extends React.PureComponent { // eslint-disable-line react/p
                         className="how-to-use hidden-xs bg-white text-secondary-color"
                         type="default"
                     >&#63;</NavLink>
+                    {
+                        (!globalScope.token || globalScope.previewMode) &&
+                            <div className="toggle-preview-mode-container">
+                                <Button
+                                    title={`${globalScope.previewMode ? 'Exit Preview Mode' : 'Enter Preview Mode'}`}
+                                    className={`toggle-preview-mode hidden-xs ${globalScope.previewMode ? 'active' : ''}`}
+                                    variant="outlined"
+                                    onClick={() => {
+                                        globalScope.token = globalScope.token ? '' : 'preview-mode';
+                                        globalScope.isAdmin = globalScope.token ? '' : 'preview-mode';
+                                        globalScope.previewMode = !globalScope.previewMode;
+                                        setCookie(process.env.PREVIEW_KEY, globalScope.previewMode);
+
+                                        globalScope.userData = {
+                                            merchants: [{
+                                                id: 'mock',
+                                            }],
+                                        };
+
+                                        this.forceUpdate();
+                                        Events.trigger('forceUpdateTopNavigation');
+                                        globalScope.dispatch(push({
+                                            pathname: window.location.pathname,
+                                        }));
+                                    }}
+                                >{`${globalScope.previewMode ? 'Exit Preview Mode' : 'Enter Preview Mode'}`}</Button>
+                            </div>
+                    }
                     <div>
                         <NavLink to="/" title="Go to homepage" className="gami-header-logo" type="default">
                             <span className="top-bar-side-title text-main-color hidden-xs">HERMO</span>

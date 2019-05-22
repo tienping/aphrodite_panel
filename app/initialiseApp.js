@@ -8,6 +8,14 @@ const initialiseApp = async () => {
     globalScope.token = getCookie(process.env.TOKEN_KEY);
     globalScope.isAdmin = getCookie(process.env.ADMIN_KEY);
 
+    if (!globalScope.token) {
+        globalScope.previewMode = getCookie(process.env.PREVIEW_KEY);
+        if (globalScope.previewMode) {
+            globalScope.token = 'preview-mode';
+            globalScope.isAdmin = 'preview-mode';
+        }
+    }
+
     if (!globalScope.feather) {
         globalScope.feather = getFeatherInstance();
 

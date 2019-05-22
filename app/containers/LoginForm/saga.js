@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { NotificationManager } from 'react-notifications';
-import { apiRequest, setCookie, Events, devlog } from 'globalUtils';
+import { apiRequest, setCookie, devlog } from 'globalUtils';
 import globalScope from 'globalScope';
 
 import { AUTH_LOGIN } from './constants';
@@ -22,8 +22,6 @@ export function* doLogin(action) {
             if (globalScope.isAdmin) {
                 // globalScope.token = response.data.token;
                 globalScope.token = response.data.token;
-                Events.trigger('forceUpdateTopBar');
-                Events.trigger('forceUpdateTopNavigation');
                 setCookie(process.env.TOKEN_KEY, globalScope.token);
                 setCookie(process.env.ADMIN_KEY, globalScope.isAdmin);
 

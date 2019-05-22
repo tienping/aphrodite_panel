@@ -70,6 +70,22 @@ export const dataChecking = (object, ...argsArr) => {
     return obj;
 };
 
+export const setDataByPath = (data, ...argsArr) => {
+    let args = argsArr;
+    if (argsArr[0].constructor === Array) {
+        args = argsArr[0];
+    }
+
+    let obj = data;
+    for (let i = args.length - 1; i >= 0; i--) {
+        obj = {
+            [args[i]]: obj,
+        };
+    }
+
+    return obj;
+};
+
 /**
  * Parses the JSON returned by a network request
  *
