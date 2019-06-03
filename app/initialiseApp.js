@@ -31,7 +31,7 @@ const initialiseApp = async () => {
     }
 
     if (!globalScope.token) {
-        globalScope.previewMode = getCookie(process.env.PREVIEW_KEY);
+        globalScope.previewMode = getCookie(process.env.PREVIEW_KEY) === 'true';
         if (globalScope.previewMode) {
             globalScope.token = 'preview-mode';
             globalScope.isAdmin = 'preview-mode';
