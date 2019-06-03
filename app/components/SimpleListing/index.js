@@ -18,7 +18,7 @@ function SimpleListing(props) {
     const data = props.data[props.config.virtual[0]];
     if (!data) {
         return (
-            <div className="SimpleLineChart-loading">
+            <div className="simpleListing-loading">
                 <Loading />
             </div>
         );
@@ -27,10 +27,10 @@ function SimpleListing(props) {
     const objArr = Object.keys(data);
 
     return (
-        <List className="simpleTable-table-element p-2">
+        <List className="simpleListing-list-element p-2">
             {objArr.map((key, index) => (
                 <div key={index}>
-                    <ListItem className="simpleTable-tableRow px-2 py-1" style={{ displat: 'flex', justifyContent: 'space-between' }}>
+                    <ListItem className="simpleListing-item px-2 py-1" style={{ displat: 'flex', justifyContent: 'space-between' }}>
                         <Typography variant="h5">{key.toUpperCase()}</Typography>
                         <Typography variant="h5">{data[key]}</Typography>
                     </ListItem>

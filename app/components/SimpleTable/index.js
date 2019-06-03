@@ -20,7 +20,7 @@ function SimpleTable(props) {
     const data = props.data[props.config.virtual[0]];
     if (!data) {
         return (
-            <div className="SimpleLineChart-loading">
+            <div className="simpleTable-loading">
                 <Loading />
             </div>
         );
