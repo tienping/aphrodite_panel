@@ -44,7 +44,7 @@ export function* getTableData(action) {
 
 export function* getTableDataByFeather(action) {
     try {
-        const response = yield globalScope.feather.query(action.params.service).find(action.params.options);
+        const response = yield globalScope.feather.query(action.params.service, 'aphrodite').find(action.params.options);
 
         if (response && response.ok) {
             yield put(getListByFeatherSuccess(response));

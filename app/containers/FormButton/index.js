@@ -7,10 +7,11 @@
 import React from 'react';
 
 import Select from 'react-select';
-import makeAnimated from 'react-select/lib/animated';
+import AsyncPaginate from 'react-select-async-paginate';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import * as Feather from 'featherUtils';
 
 import { NotificationManager } from 'react-notifications';
 
@@ -108,14 +109,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         if (formbutton.toggleModal !== this.props.toggleModal) {
             newState.showModal = formbutton.toggleModal;
         }
-        // if (formbutton.toggleModal !== this.props.toggleModal) {
-        //     let newState = {};
-        //     if (formbutton.toggleModal && formbutton.resetOnClose) {
-        //         newState = this.initializedFormData({}, this.state.formSettingKey);
-        //     }
-        //     newState.showModal = formbutton.toggleModal;
-        //     this.setState(newState);
-        // }
 
         if (formbutton.onSuccessCallback && formbutton.onSuccessCallback !== this.props.onSuccessCallback) {
             newState.onSuccessCallback = formbutton.onSuccessCallback;
@@ -236,9 +229,36 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
     }
 
+    getAsynData = async (field) => Feather.find({
+        service: 'product',
+        socket: 'aphrodite',
+        // query: { inputValue },
+        mockData: field.mockData,
+        mockDataPath: field.mockDataPath || [],
+    });
+
+    handleTextChange = (event, field) => {
+        const obj = {};
+        obj[field.key] = this.state[field.key] || { value: null };
+        if (field.type === 'boolean') {
+            obj[field.key].value = event;
+        } else if (field.type === 'selection') {
+            obj[field.key] = event;
+        } else if (field.type === 'datetime' || field.type === 'date') {
+            obj[field.key].value = event.getTime();
+        } else if (event && event.target) {
+            obj[field.key].value = event.target.value;
+        } else if (field.listenSocket && field.type === 'selection') {
+            obj[field.key].value = event;
+        } else {
+            alert('unhandled change...');
+        }
+        this.setState(obj);
+    }
+
     initializedFormData(objPassed, formSettingKey) {
         const { initialData } = this.props;
-        const tempObj = objPassed;
+        const tempObj = { ...objPassed };
 
         if (dataChecking(formSetting, formSettingKey, 'fields')) {
             formSetting[formSettingKey].fields.forEach((field) => {
@@ -271,23 +291,6 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
         }
 
         return tempObj;
-    }
-
-    handleTextChange = (event, field) => {
-        const obj = {};
-        obj[field.key] = { value: null };
-        if (field.type === 'boolean') {
-            obj[field.key].value = event;
-        } else if (field.type === 'selection') {
-            obj[field.key] = event;
-        } else if (field.type === 'datetime' || field.type === 'date') {
-            obj[field.key].value = event.getTime();
-        } else if (event && event.target) {
-            obj[field.key].value = event.target.value;
-        } else {
-            alert('unhandled change...');
-        }
-        this.setState(obj);
     }
 
     renderInput(field) {
@@ -636,6 +639,37 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                     </div>
                 );
             case 'selection':
+                if (field.listenSocket) {
+                    return (
+                        <div className="input-container input-type-selection mode-async-select">
+                            <AsyncPaginate
+                                value={this.state[field.key]}
+                                loadOptions={async (inputTerm, currentOptions, params) => {
+                                    const response = await this.getAsynData(field);
+
+                                    const tempItems = [];
+                                    (dataChecking(response, field.itemDataPath) || []).forEach((value) => {
+                                        tempItems.push({
+                                            id: `${field.key}_${value.id}`,
+                                            value: `${dataChecking(value, field.itemDataValuePath)}`,
+                                            label: `${value.id} - ${dataChecking(value, field.itemDataLabelPath)}`,
+                                            // color: '#000',
+                                        });
+                                    });
+                                    const newArr = [...currentOptions, ...tempItems];
+
+                                    return {
+                                        options: newArr,
+                                        hasMore: true,
+                                        additional: params,
+                                    };
+                                }}
+                                onChange={(value) => this.handleTextChange(value, field)}
+                            />
+                        </div>
+                    );
+                }
+
                 return (
                     <div className="input-container input-type-selection">
                         <Select
@@ -643,7 +677,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
                             value={this.state[field.key]}
                             default={itemsData[0]}
                             closeMenuOnSelect={true}
-                            components={makeAnimated()}
+                            // components={makeAnimated()}
                             isMulti={field.isMulti || false}
                             onChange={(value) => this.handleTextChange(value, field)}
                             options={itemsData || []}

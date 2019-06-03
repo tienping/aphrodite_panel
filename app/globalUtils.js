@@ -242,3 +242,10 @@ export const devlog = (...logs) => {
         console.log(...logs);
     }
 };
+
+export const sleep = (ms) =>
+    new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });

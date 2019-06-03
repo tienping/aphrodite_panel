@@ -1,6 +1,6 @@
 import { dataChecking } from 'globalUtils';
 import { push } from 'react-router-redux';
-import globalScope from 'globalScope';
+// import globalScope from 'globalScope';
 import { NotificationManager } from 'react-notifications';
 import * as Feather from 'featherUtils';
 
@@ -19,11 +19,6 @@ const tableSetting = {
             targetSocket: 'aphrodite',
             options: {
                 query: {},
-                // headers: {
-                //     'Content-Type': 'application/json',
-                //     'Accept-Language': 'en',
-                //     'token': globalScope.token,
-                // },
             },
         }),
         pathToDataRoot: '',
@@ -136,11 +131,13 @@ const tableSetting = {
                         onPressHandling: (index, scope, data) => {
                         // onPressHandling: (index, scope, data, GDPActions) => {
                             if (data && data.id && data.merchant_id) {
-                                Feather.associate({
+                                Feather.action({
                                     model: 'product',
                                     modelId: parseInt(data.id, 10),
-                                    associateModel: 'merchant',
-                                    associateId: 1,
+                                    query: {
+                                        type: 'SET_MERCHANT',
+                                        id: 1,
+                                    },
                                     socket: 'aphrodite',
                                     successCallback: () => {
                                         scope.getFeatherQuery();
@@ -220,24 +217,12 @@ const tableSetting = {
                 type: 'action',
                 items: [
                     {
-                        name: 'edit',
-                        special: 'edit-form',
-                        iconClass: 'fas fa-edit',
+                        name: 'View More',
+                        // special: 'edit-form',
+                        iconClass: 'fas fa-eye',
                         onPressHandling: (index, scope, data) => {
-                            const tempState = {
-                                showModalType: 'edit',
-                                formData: {},
-                            };
-
-                            scope.state.formConfig.map((field) => {
-                                tempState.formData[field.key] = {
-                                    value: dataChecking(data, field.dataPath || field.key),
-                                };
-                                return true;
-                            });
-                            tempState.formData.itemId = data.id;
-
-                            scope.setState(() => (tempState));
+                            alert('Under development');
+                            console.log('On view order details', { index, scope, data });
                         },
                     },
                 ],
@@ -322,178 +307,6 @@ const tableSetting = {
             skip: 0,
             total: 8,
         },
-    },
-    test_api_1: {
-        title: 'Items',
-        link: '/test_api_1',
-        hideFromUser: true,
-        description: 'for testing items',
-        iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '90rem',
-        // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
-        listenSocket: true,
-        getSocketParams: () => ({
-            service: 'product',
-            targetSocket: 'ordo',
-            options: {
-                query: { $limit: 999 },
-                // headers: {
-                //     'Content-Type': 'application/json',
-                //     'Accept-Language': 'en',
-                //     'token': globalScope.token,
-                // },
-            },
-        }),
-        pathToDataRoot: '',
-        actionButtons: [
-            {
-                title: 'Create New Product',
-                type: 'createNew',
-                width: '255px',
-            },
-        ],
-        fields: [
-            { key: 'id', type: 'integer', label: 'ID', width: '5rem', align: 'center', doc: { description: '' } },
-            { key: 'code', type: 'string', label: 'Code', width: '10rem', align: 'center', doc: { description: '' } },
-            { key: 'name', type: 'string', label: 'Name', width: '10rem', align: 'center', doc: { description: '' } },
-            { key: 'price', type: 'string', label: 'Price', width: '15rem', align: 'center', doc: { description: '' } },
-            { key: 'image', type: 'image', label: 'Image', width: '20rem', align: 'center', doc: { description: '' } },
-            { key: 'desc', type: 'string', label: 'Desc', width: '20rem', align: 'center', doc: { description: '' } },
-            {
-                label: 'Action',
-                width: '10rem',
-                key: 'Action',
-                align: 'center',
-                type: 'action',
-                items: [
-                    {
-                        name: 'edit',
-                        special: 'edit-form',
-                        iconClass: 'fas fa-edit',
-                        onPressHandling: (index, scope, data) => {
-                            const tempState = {
-                                showModalType: 'edit',
-                                formData: {},
-                            };
-
-                            scope.state.formConfig.map((field) => {
-                                tempState.formData[field.key] = {
-                                    value: dataChecking(data, field.dataPath || field.key),
-                                };
-                                return true;
-                            });
-                            tempState.formData.itemId = data.id;
-
-                            scope.setState(() => (tempState));
-                        },
-                    },
-                    {
-                        name: 'remove',
-                        iconClass: 'fas fa-trash',
-                        onPressHandling: (index, scope, data) => {
-                            globalScope.feather.query('product', 'ordo').remove(data.id, { headers: {
-                                'Content-Type': 'application/json',
-                                'Accept-Language': 'en',
-                                'token': globalScope.token,
-                            } })
-                            .then((response) => {
-                                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
-                            })
-                            .catch((response) => {
-                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-                            });
-                        },
-                    },
-                ],
-                doc: { description: 'The actions' },
-            },
-        ],
-    },
-    test_api_2: {
-        title: 'Topping',
-        link: '/test_api_2',
-        hideFromUser: true,
-        description: 'for testing topping',
-        iconClass: 'fab fa-product-hunt p-1',
-        tableWidth: '90rem',
-        // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
-        listenSocket: true,
-        getSocketParams: () => ({
-            service: 'topping',
-            targetSocket: 'ordo',
-            options: {
-                query: { $limit: 999 },
-                // headers: {
-                //     'Content-Type': 'application/json',
-                //     'Accept-Language': 'en',
-                //     'token': globalScope.token,
-                // },
-            },
-        }),
-        pathToDataRoot: '',
-        actionButtons: [
-            {
-                title: 'Create New Topping',
-                type: 'createNew',
-                width: '255px',
-            },
-        ],
-        fields: [
-            { key: 'id', type: 'integer', label: 'ID', width: '5rem', align: 'center', doc: { description: '' } },
-            { key: 'code', type: 'string', label: 'Code', width: '10rem', align: 'center', doc: { description: '' } },
-            { key: 'name', type: 'string', label: 'Name', width: '10rem', align: 'center', doc: { description: '' } },
-            { key: 'price', type: 'string', label: 'Price', width: '15rem', align: 'center', doc: { description: '' } },
-            { key: 'image', type: 'image', label: 'Image', width: '20rem', align: 'center', doc: { description: '' } },
-            { key: 'desc', type: 'string', label: 'Desc', width: '20rem', align: 'center', doc: { description: '' } },
-            {
-                label: 'Action',
-                width: '10rem',
-                key: 'Action',
-                align: 'center',
-                type: 'action',
-                items: [
-                    {
-                        name: 'edit',
-                        special: 'edit-form',
-                        iconClass: 'fas fa-edit',
-                        onPressHandling: (index, scope, data) => {
-                            const tempState = {
-                                showModalType: 'edit',
-                                formData: {},
-                            };
-
-                            scope.state.formConfig.map((field) => {
-                                tempState.formData[field.key] = {
-                                    value: dataChecking(data, field.dataPath || field.key),
-                                };
-                                return true;
-                            });
-                            tempState.formData.itemId = data.id;
-
-                            scope.setState(() => (tempState));
-                        },
-                    },
-                    {
-                        name: 'remove',
-                        iconClass: 'fas fa-trash',
-                        onPressHandling: (index, scope, data) => {
-                            globalScope.feather.query('product', 'ordo').remove(data.id, { headers: {
-                                'Content-Type': 'application/json',
-                                'Accept-Language': 'en',
-                                'token': globalScope.token,
-                            } })
-                            .then((response) => {
-                                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
-                            })
-                            .catch((response) => {
-                                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-                            });
-                        },
-                    },
-                ],
-                doc: { description: 'The actions' },
-            },
-        ],
     },
 };
 

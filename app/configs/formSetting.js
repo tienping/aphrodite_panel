@@ -1,27 +1,27 @@
-import { dataChecking, Events } from 'globalUtils';
-import globalScope from 'globalScope';
+import { dataChecking } from 'globalUtils';
+// import globalScope from 'globalScope';
 import * as Feather from 'featherUtils';
 // import tableSetting from 'configs/tableSetting';
 import { NotificationManager } from 'react-notifications';
 
-const extractData = (data, fields) => {
-    const extractedData = {};
-    fields.forEach((field) => {
-        extractedData[field.key] = data[field.key].value;
-        if ((field.type === 'date' || field.type === 'datetime') && dataChecking(data, field.key, 'value')) {
-            const dateValue = new Date(data[field.key].value);
-            extractedData[field.key] = dateValue.toISOString();
-        } else if (field.type === 'textbox' || field.type === 'textbox') {
-            extractedData[field.key] = `${data[field.key].value}`;
-        } else if (field.type === 'json' || field.type === 'textbox' || field.type === 'image') {
-            extractedData[field.key] = data[field.key].value || null;
-        } else {
-            extractedData[field.key] = data[field.key].value;
-        }
-    });
+// const extractData = (data, fields) => {
+//     const extractedData = {};
+//     fields.forEach((field) => {
+//         extractedData[field.key] = data[field.key].value;
+//         if ((field.type === 'date' || field.type === 'datetime') && dataChecking(data, field.key, 'value')) {
+//             const dateValue = new Date(data[field.key].value);
+//             extractedData[field.key] = dateValue.toISOString();
+//         } else if (field.type === 'textbox' || field.type === 'textbox') {
+//             extractedData[field.key] = `${data[field.key].value}`;
+//         } else if (field.type === 'json' || field.type === 'textbox' || field.type === 'image') {
+//             extractedData[field.key] = data[field.key].value || null;
+//         } else {
+//             extractedData[field.key] = data[field.key].value;
+//         }
+//     });
 
-    return extractedData;
-};
+//     return extractedData;
+// };
 
 // const fieldOnSubmit = (scope, tableListingActions, data, fields, apiUrl, addNewButton) => {
 //     const extractedData = extractData(data, fields);
@@ -41,17 +41,46 @@ const formSetting = {
         title: 'Associate New Product',
         // maxFormHeight: '480px',
         fields: [
-            { key: 'product', label: 'Select Product', type: 'textbox', mandatory: true, doc: { description: 'Product to be associate to current merchant' } },
             {
-                key: 'product2',
+                key: 'product',
                 label: 'Select Product',
                 type: 'selection',
-                isMulti: true,
-                items: [
-                    { value: '1', label: 'Normal Member' },
-                    { value: '2', label: 'Gold Member' },
-                    { value: '3', label: 'Platinum Member' },
-                ],
+                listenSocket: true,
+                getSocketParams: () => ({
+                    service: 'merchant',
+                    targetSocket: 'aphrodite',
+                    options: {
+                        query: {},
+                    },
+                }),
+                itemDataPath: ['data'],
+                itemDataValuePath: ['id'],
+                itemDataLabelPath: ['name'],
+                mockData: {
+                    data: [
+                        { id: 8881, name: 'zaxCC SPF 30 PA++ 45g', image_320_200: '', merchant_id: 'mock' },
+                        { id: 8882, name: 'zaxCC Watery Cream 80ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 8883, name: 'zaxCC 80% Emulsion 160ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 8884, name: 'zaxCC Moisture Sleeping Pack 100ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 8885, name: 'zaxCC% Toner 160ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 8886, name: 'zaxCC Watery Cream 80ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 8887, name: 'zaxCCCleansing Oil 200ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 88811, name: 'tax SPF 30 PA++ 45g', image_320_200: '', merchant_id: 'mock' },
+                        { id: 88812, name: 'tax Watery Cream 80ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 88813, name: 'tax 80% Emulsion 160ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 88814, name: 'tax Moisture Sleeping Pack 100ml', image_320_200: '', merchant_id: 'mock' },
+                        { id: 88815, name: 'tax% Toner 160ml', image_320_200: '', merchant_id: 'mock' },
+                    ],
+                    limit: 12,
+                    skip: 0,
+                    total: 7,
+                },
+                // isMulti: true,
+                // items: [
+                //     { value: '1', label: 'Normal Member' },
+                //     { value: '2', label: 'Gold Member' },
+                //     { value: '3', label: 'Platinum Member' },
+                // ],
                 doc: {
                     description: '',
                 },
@@ -59,11 +88,13 @@ const formSetting = {
         ],
         onSubmit: (scope, GDPActions, data, formFields, tableScope) => {
             if (dataChecking(data, 'product', 'value')) {
-                Feather.associate({
+                Feather.action({
                     model: 'product',
                     modelId: parseInt(data.product.value, 10),
-                    associateModel: 'merchant',
-                    associateId: parseInt(data.routeParams.id, 10),
+                    query: {
+                        type: 'SET_MERCHANT',
+                        id: parseInt(data.routeParams.id, 10),
+                    },
                     socket: 'aphrodite',
                     successCallback: () => {
                         tableScope.getFeatherQuery();
@@ -86,66 +117,6 @@ const formSetting = {
             }
         },
     },
-    create_test_api_1: {
-        title: 'Create New Product',
-        // maxFormHeight: '480px',
-        fields: [
-            { key: 'id', label: 'Product Id', type: 'hidden', mandatory: true, doc: { description: '' } },
-            { key: 'code', label: 'Product Code', type: 'textbox', mandatory: true, doc: { description: '' } },
-            { key: 'name', label: 'Product Name', type: 'textbox', mandatory: true, doc: { description: '' } },
-            { key: 'price', label: 'Product Price', type: 'textbox', mandatory: true, doc: { description: '' } },
-            // { key: 'image', label: 'Product Image Url', type: 'textbox', mandatory: true, doc: { description: '' } },
-            {
-                key: 'image',
-                label: 'Product Image',
-                type: 'image',
-                allowMultiple: false,
-                requireBase64: true,
-                uploadByFeatherSocket: true,
-                doc: { description: 'Product image upload' },
-            },
-            { key: 'desc', label: 'Description', type: 'textarea', mandatory: true, doc: { description: '' } },
-        ],
-        onSubmit: (scope, GDPActions, data) => {
-            const extractedData = extractData(data, formSetting.create_test_api_1.fields);
-
-            Events.trigger('updateTableState', { stateName: 'globalLoading', value: true });
-            globalScope.feather.query('product', 'ordo').create(extractedData, { headers: {
-                'Content-Type': 'application/json',
-                'Accept-Language': 'en',
-                'token': globalScope.token,
-            } })
-            .then((response) => {
-                NotificationManager.success(JSON.stringify(response), 'Success', 3000);
-                scope.onCompleting();
-                Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
-            })
-            .catch((response) => {
-                NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-                Events.trigger('updateTableState', { stateName: 'globalLoading', value: false });
-            });
-        },
-    },
-};
-
-formSetting.edit_test_api_1 = { ...formSetting.create_test_api_1 };
-formSetting.edit_test_api_1.title = 'Edit Product';
-formSetting.edit_test_api_1.fields.push({ key: 'id', label: '', type: 'hidden', doc: { description: 'Ignore this, will be inject automatically behind the screen' } });
-formSetting.edit_test_api_1.onSubmit = (scope, tableListingActions, data, fields) => {
-    const extractedData = extractData(data, fields);
-
-    globalScope.feather.query('product', 'ordo').patch(extractedData.id, extractedData, { headers: {
-        'Content-Type': 'application/json',
-        'Accept-Language': 'en',
-        'token': globalScope.token,
-    } })
-    .then((response) => {
-        NotificationManager.success(JSON.stringify(response), 'Success', 3000);
-        scope.onCompleting();
-    })
-    .catch((response) => {
-        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-    });
 };
 
 export default formSetting;

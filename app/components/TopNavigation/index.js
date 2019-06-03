@@ -47,6 +47,9 @@ class TopNavigation extends React.PureComponent { // eslint-disable-line react/p
                                                 key={index}
                                                 className="top-nav-button"
                                                 variant="outlined"
+                                                onClick={({ ...params }) => {
+                                                    topNavSetting[key].onClick({ ...params });
+                                                }}
                                             >
                                                 {topNavSetting[index].label}
                                             </Button>
