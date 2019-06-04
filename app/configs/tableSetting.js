@@ -122,7 +122,7 @@ const tableSetting = {
         fields: [
             { key: 'id', label: 'ID', width: '5rem', align: 'center', type: 'integer', doc: { description: '' } },
             { key: 'name', label: 'Product Name', width: '35rem', align: 'left', type: 'string', doc: { description: '' } },
-            { key: 'image_320_200', label: 'Product Image', width: '25rem', align: 'center', type: 'image', doc: { description: '' } },
+            { key: 'image_320_200', label: 'Product Image', width: '25rem', align: 'center', type: 'image', prefix: 'https://cdn5.hermo.my/product_images/malls/', doc: { description: '' } },
             { key: 'merchant_id', label: 'Merchant ID', width: '10rem', align: 'center', type: 'integer', doc: { description: '' } },
             {
                 label: 'Action',
