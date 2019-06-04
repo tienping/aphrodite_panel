@@ -27,6 +27,7 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
         this.props.setting.forEach((config) => {
             config.virtual.forEach((virtual) => {
                 Feather.get({
+                    dataSet: 'dashboard_data',
                     service: 'merchant',
                     socket: 'aphrodite',
                     query: { virtual },

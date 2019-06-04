@@ -230,6 +230,7 @@ export class FormButton extends React.PureComponent { // eslint-disable-line rea
     }
 
     getAsynData = async (field) => Feather.find({
+        dataSet: 'product_selection',
         service: 'product',
         socket: 'aphrodite',
         // query: { inputValue },

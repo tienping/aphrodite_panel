@@ -15,6 +15,7 @@ const tableSetting = {
         // api: 'http://aphrodite.alpha.hermo.my/merchant',
         listenSocket: true,
         getSocketParams: () => ({
+            dataSet: 'merchant',
             service: 'merchant',
             targetSocket: 'aphrodite',
             options: {
@@ -93,6 +94,7 @@ const tableSetting = {
         // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/products',
         listenSocket: true,
         getSocketParams: ({ id }) => ({
+            dataSet: 'product',
             service: 'product',
             targetSocket: 'aphrodite',
             options: {
@@ -108,8 +110,14 @@ const tableSetting = {
         pathToDataRoot: '',
         actionButtons: [
             {
-                title: 'Associate New Product',
-                type: 'createNew',
+                title: 'Create New',
+                type: 'iframe',
+                sourceUrl: 'https://portal.hermo.my/hermint/mall/add.html',
+                width: '250px',
+            },
+            {
+                title: 'Associate Product',
+                type: 'edit',
                 width: '250px',
             },
         ],
@@ -132,7 +140,8 @@ const tableSetting = {
                         // onPressHandling: (index, scope, data, GDPActions) => {
                             if (data && data.id && data.merchant_id) {
                                 Feather.action({
-                                    model: 'product',
+                                    dataSet: 'product',
+                                    service: 'product',
                                     modelId: parseInt(data.id, 10),
                                     query: {
                                         type: 'SET_MERCHANT',
@@ -182,6 +191,7 @@ const tableSetting = {
         // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
         listenSocket: true,
         getSocketParams: ({ id }) => ({
+            dataSet: 'order',
             service: 'order',
             targetSocket: 'aphrodite',
             options: {

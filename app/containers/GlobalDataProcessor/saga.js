@@ -1,13 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { apiRequest } from 'globalUtils';
 import { NotificationManager } from 'react-notifications';
-import globalScope from 'globalScope';
+// import globalScope from 'globalScope';
 
 import {
     getListSuccess,
     getListFail,
-    getListByFeatherSuccess,
-    getListByFeatherFail,
     fireApiSuccess,
     fireApiFail,
     getDataKeyValueSuccess,
@@ -15,7 +13,6 @@ import {
 } from './actions';
 import {
     GET_LIST,
-    GET_LIST_BY_FEATHER,
     FIRE_API,
     GET_DATA_KEY_VALUE,
 } from './constants';
@@ -39,25 +36,6 @@ export function* getTableData(action) {
         }
     } catch (response) {
         yield put(getListFail(response));
-    }
-}
-
-export function* getTableDataByFeather(action) {
-    try {
-        const response = yield globalScope.feather.query(action.params.service, 'aphrodite').find(action.params.options);
-
-        if (response && response.ok) {
-            yield put(getListByFeatherSuccess(response));
-        } else {
-            if (response && response.error) {
-                NotificationManager.error(response.error, 'Error!! (click to dismiss)', 5000, () => {
-                    // alert(JSON.stringify(formbutton.fireApiError).replace('\"', '"'));
-                });
-            }
-            yield put(getListByFeatherFail(response));
-        }
-    } catch (response) {
-        yield put(getListByFeatherFail(response));
     }
 }
 
@@ -96,7 +74,6 @@ export function* getDataKeyValue(action) {
 // Individual exports for testing
 export default function* globalDataProcessorSaga() {
     yield takeLatest(GET_LIST, getTableData);
-    yield takeLatest(GET_LIST_BY_FEATHER, getTableDataByFeather);
     yield takeLatest(FIRE_API, fireApi);
     yield takeLatest(GET_DATA_KEY_VALUE, getDataKeyValue);
 }

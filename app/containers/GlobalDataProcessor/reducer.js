@@ -7,9 +7,6 @@
 import { fromJS } from 'immutable';
 import { dataChecking } from 'globalUtils';
 import {
-    GET_LIST_BY_FEATHER,
-    GET_LIST_BY_FEATHER_SUCCESS,
-    GET_LIST_BY_FEATHER_FAILED,
     GET_LIST,
     GET_LIST_SUCCESS,
     GET_LIST_FAILED,
@@ -32,19 +29,6 @@ const initialState = fromJS({
 function globalDataProcessorReducer(state = initialState, action) {
     let tempObj = {};
     switch (action.type) {
-        case GET_LIST_BY_FEATHER:
-            return state
-                .set('loading', true)
-                .set('error', false);
-        case GET_LIST_BY_FEATHER_SUCCESS:
-            return state
-                .set('loading', false)
-                .set('error', false)
-                .set('data', action.payload);
-        case GET_LIST_BY_FEATHER_FAILED:
-            return state
-                .set('loading', false)
-                .set('error', dataChecking(action, 'payload', 'data', 'error') || true);
         case GET_LIST:
             return state
                 .set('loading', true)

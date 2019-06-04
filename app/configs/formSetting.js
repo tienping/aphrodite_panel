@@ -47,6 +47,7 @@ const formSetting = {
                 type: 'selection',
                 listenSocket: true,
                 getSocketParams: () => ({
+                    dataSet: 'product_selection',
                     service: 'merchant',
                     targetSocket: 'aphrodite',
                     options: {
@@ -89,7 +90,8 @@ const formSetting = {
         onSubmit: (scope, GDPActions, data, formFields, tableScope) => {
             if (dataChecking(data, 'product', 'value')) {
                 Feather.action({
-                    model: 'product',
+                    dataSet: 'product',
+                    service: 'product',
                     modelId: parseInt(data.product.value, 10),
                     query: {
                         type: 'SET_MERCHANT',

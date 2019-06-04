@@ -6,10 +6,6 @@
 
 const prefix = 'app/GlobalDataProcessor';
 
-export const GET_LIST_BY_FEATHER = `${prefix}/GET_LIST_BY_FEATHER`;
-export const GET_LIST_BY_FEATHER_SUCCESS = `${prefix}/GET_LIST_BY_FEATHER_SUCCESS`;
-export const GET_LIST_BY_FEATHER_FAILED = `${prefix}/GET_LIST_BY_FEATHER_FAILED`;
-
 export const GET_LIST = `${prefix}/GET_LIST`;
 export const GET_LIST_SUCCESS = `${prefix}/GET_LIST_SUCCESS`;
 export const GET_LIST_FAILED = `${prefix}/GET_LIST_FAILED`;

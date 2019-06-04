@@ -1,11 +1,11 @@
 import globalScope from 'globalScope';
 import { devlog, setDataByPath, dataChecking } from 'globalUtils';
 
-export const get = ({ service, socket, query, id, successCallback, failedCallback, mockData, mockDataPath }) => {
+export const get = ({ dataSet, service, socket, query, id, successCallback, failedCallback, mockData, mockDataPath }) => {
     devlog(`Get [${socket} -> ${service}] initiating`, { query });
     if (globalScope.previewMode && mockData) {
         const response = setDataByPath(mockData, mockDataPath);
-        globalScope[`${socket}_${service}`] = response;
+        globalScope[`${socket}_${service}_${dataSet || 'nokey'}`] = response;
         devlog(`MockData [${socket} -> ${service}] mock get success`);
         if (successCallback) {
             successCallback(response);
@@ -28,11 +28,11 @@ export const get = ({ service, socket, query, id, successCallback, failedCallbac
     ), 0);
 };
 
-export const find = ({ service, socket, query, successCallback, failedCallback, mockData, mockDataPath }) => {
+export const find = ({ dataSet, service, socket, query, successCallback, failedCallback, mockData, mockDataPath }) => {
     devlog(`Find [${socket} -> ${service}] initiating`, { query });
     if (globalScope.previewMode && mockData) {
         const response = setDataByPath(mockData, mockDataPath);
-        globalScope[`${socket}_${service}`] = response;
+        globalScope[`${socket}_${service}_${dataSet || 'nokey'}`] = response;
         devlog(`MockData [${socket} -> ${service}] mock find success`);
         if (successCallback) {
             successCallback(response);
@@ -60,18 +60,18 @@ export const find = ({ service, socket, query, successCallback, failedCallback, 
     // ), 0);
 };
 
-export const action = ({ service, modelId, query, socket, successCallback, failedCallback, mockData }) => {
+export const action = ({ dataSet, service, modelId, query, socket, successCallback, failedCallback, mockData }) => {
     devlog(`Action ${query.type} [${socket} -> ${query.id} to ${service}:${modelId}] initiating`);
     if (globalScope.previewMode && mockData) {
         const response = null;
         if (mockData) {
-            const arr = dataChecking(globalScope, `${socket}_${service}`, 'data');
+            const arr = dataChecking(globalScope, `${socket}_${service}_${dataSet || 'nokey'}`, 'data');
             if (mockData.type === 'add') {
                 arr.unshift(mockData.item);
-                globalScope[`${socket}_${service}`].total += 1;
+                globalScope[`${socket}_${service}_${dataSet || 'nokey'}`].total += 1;
             } else if (mockData.type === 'remove') {
                 arr.splice(arr.findIndex((value) => (value.id === mockData.item.id)), 1);
-                globalScope[`${socket}_${service}`].total -= 1;
+                globalScope[`${socket}_${service}_${dataSet || 'nokey'}`].total -= 1;
             }
         }
         devlog(`MockData ${query.type} [${socket} -> ${query.id} to ${service}:${modelId}] mock action success`);

@@ -5,9 +5,6 @@
  */
 
 import {
-    GET_LIST_BY_FEATHER,
-    GET_LIST_BY_FEATHER_SUCCESS,
-    GET_LIST_BY_FEATHER_FAILED,
     GET_LIST,
     GET_LIST_SUCCESS,
     GET_LIST_FAILED,
@@ -20,27 +17,6 @@ import {
     GET_DATA_KEY_VALUE_SUCCESS,
     GET_DATA_KEY_VALUE_FAILED,
 } from './constants';
-
-export function getListByFeather(params) {
-    return {
-        type: GET_LIST_BY_FEATHER,
-        params,
-    };
-}
-
-export function getListByFeatherSuccess(response) {
-    return {
-        type: GET_LIST_BY_FEATHER_SUCCESS,
-        payload: response,
-    };
-}
-
-export function getListByFeatherFail(response) {
-    return {
-        type: GET_LIST_BY_FEATHER_FAILED,
-        payload: response,
-    };
-}
 
 export function getList(params) {
     return {
