@@ -12,7 +12,6 @@ const tableSetting = {
         description: 'A page to view, add and edit merchants in Hermo.',
         iconClass: 'fa fa-users p-1',
         tableWidth: '62rem',
-        // api: 'http://aphrodite.alpha.hermo.my/merchant',
         listenSocket: true,
         getSocketParams: () => ({
             dataSet: 'merchant',
@@ -91,7 +90,6 @@ const tableSetting = {
         description: 'A page to view and register product onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
         tableWidth: '90rem',
-        // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/products',
         listenSocket: true,
         getSocketParams: ({ id }) => ({
             dataSet: 'product',
@@ -188,7 +186,6 @@ const tableSetting = {
         description: 'A page to view and manage order onto merchant',
         iconClass: 'fab fa-product-hunt p-1',
         tableWidth: '90rem',
-        // api: 'http://aphrodite.alpha.hermo.my/merchant/:id/orders',
         listenSocket: true,
         getSocketParams: ({ id }) => ({
             dataSet: 'order',

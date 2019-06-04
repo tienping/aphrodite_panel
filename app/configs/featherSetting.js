@@ -3,16 +3,9 @@
 import { FeatherSocket } from 'feathersjs-sdk';
 
 const featherSetting = {
-    // default: new FeatherRest({
-    //     host: 'http://aphrodite.alpha.hermo.my',
-    //     type: 'axios',
-    //     transport: create({
-    //         // baseURL: apiString,
-    //         // timeout: 30000,
-    //     }).axiosInstance,
-    // }),
     aphrodite: new FeatherSocket({
-        host: 'http://aphrodite.alpha.hermo.my',
+        host: 'http://18.138.34.150:9040/', // ec2 instance
+        // host: 'https://aphrodite.alpha.hermo.my',
         // host: 'http://192.168.12.1:3002',
         storage: window.localStorage,
         defaultParams: {},
