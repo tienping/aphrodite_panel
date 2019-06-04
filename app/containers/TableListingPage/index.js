@@ -896,7 +896,15 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                     </div>
                 );
             case 'image':
-                return <img className="cell-type-image" src={`${col.prefix}${row[col.key]}`} alt={row[col.key]} width={row.width || '100%'} height={row.height || ''} />;
+                return (
+                    <img
+                        className="cell-type-image"
+                        src={`${col.prefix}${row[col.key]}`}
+                        alt={row[col.key]}
+                        width={col.width || '100%'}
+                        height={col.height || ''}
+                    />
+                );
             case 'date':
                 date = new Date(value);
                 return <span className="cell-type-date">{date.toLocaleDateString()}</span>;
