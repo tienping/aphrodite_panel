@@ -249,4 +249,72 @@
             }
         }
     }
+
+
+    .page-action-popout-for-iframe {
+        .page-action-modal-content {
+            z-index: 1010;
+            position: absolute;
+            transition: background-color 1s, height .5s, width .5s, left 1s, box-shadow .75s;
+            background-color: white;
+            color: black;
+            overflow: auto;
+            box-shadow: 0px 2px 15px 1px RGBA(0, 0, 0, 0.3);
+            top: 5%;
+            left: 0;
+            right: 0;
+            margin: auto 2rem;
+            border-radius: 10px;
+            width: 92%;
+            // @media screen and (min-width: 1100px) { width: 1000px; }
+
+            .content-title {
+                font-family: cursive;
+                font-size: 145%;
+                font-weight: 600;
+                text-align: left;
+                padding: 1rem 3rem;
+
+                .title-underline {
+                    background-color: gray;
+                    margin: 0.2rem -1.5rem;
+                    padding-bottom: 0.15rem;
+                }
+            }
+
+            .modal-close-button {
+                z-index: 100;
+                top: 0rem;
+                right: 0rem;
+                cursor: pointer;
+                position: absolute;
+                margin: 0.5rem 1rem;
+                font-size: 140%;
+
+                i { padding: 0.3rem }
+            }
+
+            .content-section {
+                min-height: 80vh;
+                display: flex;
+                flex: 1;
+
+                .table-action-iframe {
+                    width: 100%;
+                }
+            }
+        }
+
+        .page-action-modal-wrapper {
+            z-index: 1005;
+            opacity: 1;
+            transition: opacity 1s;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: RGBA(0, 0, 0, 0.5);
+        }
+    }
 }

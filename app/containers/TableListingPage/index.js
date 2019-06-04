@@ -199,6 +199,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
         }
 
         Feather.find({
+            dataSet: params.dataSet,
             service: params.service,
             socket: params.targetSocket,
             query: params.options,
@@ -301,6 +302,64 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     </FormButton>
                                 </span>
                             );
+                        } else if (item.type === 'iframe') {
+                            return (
+                                <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
+                                    <div
+                                        className="my-custom-button"
+                                        style={{ width: item.width }}
+                                        onClick={() => {
+                                            this.setState({
+                                                [`tableActionButton_${index}`]: !this.state[`tableActionButton_${index}`],
+                                            });
+                                        }}
+                                    >
+                                        {item.title}
+                                    </div>
+                                    {
+                                        this.state[`tableActionButton_${index}`] ?
+                                            <div className="page-action-popout-for-iframe">
+                                                <div className="page-action-modal-content">
+                                                    <div className="sticky-container">
+                                                        <div style={{ position: 'relative' }}>
+                                                            <div className="content-title">
+                                                                <span className="text-capitalize">{item.title}</span>
+                                                                <div className="title-underline" />
+                                                            </div>
+                                                            <div
+                                                                className="modal-close-button"
+                                                                onClick={() => {
+                                                                    this.setState({
+                                                                        [`tableActionButton_${index}`]: !this.state[`tableActionButton_${index}`],
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <i className="fas fa-window-close text-secondary-color bigger"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="content-section">
+                                                        <iframe
+                                                            className="table-action-iframe"
+                                                            src={item.sourceUrl}
+                                                            title={`tableActionButton_${index}_iframe`}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="page-action-modal-wrapper"
+                                                    onClick={() => {
+                                                        this.setState({
+                                                            [`tableActionButton_${index}`]: !this.state[`tableActionButton_${index}`],
+                                                        });
+                                                    }}
+                                                ></div>
+                                            </div>
+                                            :
+                                            null
+                                    }
+                                </span>
+                            );
                         } else if (item.type === 'upload') {
                             return (
                                 <span key={index} style={{ display: 'inline-block', width: item.width, margin: '0 1rem' }}>
@@ -332,7 +391,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     pageType={this.props.pageType}
                                     formId={`create_${this.props.pageType}`}
                                     formSettingKey={`create_${this.props.pageType}`}
-                                    formType="attach"
+                                    // formType="attach"
                                     formbutton={this.state[`formButton_create_${this.props.pageType}`] || {}}
                                     onModalComplete={(newState) => {
                                         if (newState && !tableSetting[newState.pageType].listenSocket) {
@@ -341,7 +400,7 @@ export class TableListingPage extends React.PureComponent { // eslint-disable-li
                                     }}
                                     tableScope={this}
                                 >
-                                    {item.title}
+                                    <div className="my-custom-button" style={{ width: item.width }}>{item.title}</div>
                                 </FormButton>
                             </span>
                         );
