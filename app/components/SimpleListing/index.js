@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import './style.scss';
 
 function SimpleListing(props) {
-    const data = props.data[props.config.virtual[0]];
+    const data = props.data;
     if (!data) {
         return (
             <div className="simpleListing-loading">

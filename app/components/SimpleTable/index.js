@@ -17,7 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import './style.scss';
 
 function SimpleTable(props) {
-    const data = props.data[props.config.virtual[0]];
+    const data = props.data;
     if (!data) {
         return (
             <div className="simpleTable-loading">

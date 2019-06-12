@@ -19,7 +19,7 @@ import Legend from 'recharts/lib/component/Legend';
 import './style.scss';
 
 function SimpleLineChart(props) {
-    const data = props.data[props.config.virtual[0]];
+    const data = props.data;
     if (!data) {
         return (
             <div className="SimpleLineChart-loading">

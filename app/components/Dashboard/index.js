@@ -25,52 +25,46 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
 
     componentDidMount = () => {
         this.props.setting.forEach((config) => {
-            config.virtual.forEach((virtual) => {
-                Feather.get({
-                    dataSet: 'dashboard_data',
-                    service: 'merchant',
-                    socket: 'aphrodite',
-                    query: { virtual },
-                    id: 3,
-                    successCallback: (response) => {
-                        this.setState({
-                            [`data_${virtual}`]: dataChecking(response, virtual),
-                        });
-                    },
-                    failedCallback: (response) => {
-                        NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
-                    },
-                    mockData: config.mockData,
-                    mockDataPath: [virtual],
-                });
+            Feather.action({
+                dataSet: 'dashboard_data',
+                service: 'merchant',
+                socket: 'aphrodite',
+                query: { type: config.action },
+                modelId: 3,
+                successCallback: (response) => {
+                    this.setState({
+                        [`data_${config.key}`]: dataChecking(response),
+                    });
+                },
+                failedCallback: (response) => {
+                    NotificationManager.error(JSON.stringify(response), 'Error!! (click to dismiss)', 5000);
+                },
+                mockData: config.mockData,
+                mockDataPath: [],
             });
         });
     }
 
     renderContent = (config) => {
-        const dataObj = {};
-        config.virtual.forEach((key) => {
-            dataObj[key] = this.state[`data_${key}`];
-        });
         if (config.type === 'linegraph') {
             return (
                 <SimpleLineChart
                     config={config}
-                    data={dataObj}
+                    data={this.state[`data_${config.key}`]}
                 />
             );
         } else if (config.type === 'table') {
             return (
                 <SimpleTable
                     config={config || []}
-                    data={dataObj}
+                    data={this.state[`data_${config.key}`]}
                 />
             );
         } else if (config.type === 'listing') {
             return (
                 <SimpleListing
                     config={config || []}
-                    data={dataObj}
+                    data={this.state[`data_${config.key}`]}
                 />
             );
         } else if (config.type === 'buttonlist') {

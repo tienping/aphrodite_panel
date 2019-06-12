@@ -4,7 +4,8 @@
 
 const dashboardSetting = [
     {
-        virtual: ['total_sales'],
+        key: 'total_sales',
+        action: 'TOTAL_SALES',
         title: 'Total Sales over days',
         type: 'linegraph',
         size: 'full',
@@ -29,7 +30,8 @@ const dashboardSetting = [
         ],
     },
     {
-        virtual: ['best_seller'],
+        key: 'best_seller',
+        action: 'BEST_SELLER',
         title: 'Best Seller',
         type: 'table',
         size: 'half',
@@ -50,17 +52,19 @@ const dashboardSetting = [
             { quantity: '2348', product: 'April Skin Magic Snow Cushion Black 2.0 [3 Types To Choose]' },
         ],
     },
-    // {
-    //     virtual: ['rating'],
-    //     title: 'Shop Rating',
-    //     type: 'listing',
-    //     size: 'half',
-    //     mockData: {
-    //         count: '8.25%',
-    //     },
-    // },
     {
-        virtual: ['pending'],
+        key: 'rating',
+        action: 'GET_RATING',
+        title: 'Shop Rating',
+        type: 'listing',
+        size: 'half',
+        mockData: {
+            count: '8.25%',
+        },
+    },
+    {
+        key: 'pending',
+        action: 'PENDING_ORDER',
         title: 'Total Pending Orders',
         type: 'listing',
         size: 'half',
@@ -73,7 +77,8 @@ const dashboardSetting = [
         },
     },
     {
-        virtual: ['cancellation'],
+        key: 'cancellation',
+        action: 'CANCELLATION',
         title: 'Cancellation Rate',
         type: 'listing',
         size: 'half',
@@ -82,14 +87,16 @@ const dashboardSetting = [
         },
     },
     // {
-    //     virtual: [],
+    //     key: 'Rejected',
+    //     action: 'REJECTED',
     //     title: 'Rejected Product',
     //     type: 'string',
     //     size: 'half',
     //     value: '1.5%',
     // },
     {
-        virtual: ['oos'],
+        key: 'oos',
+        action: 'OOS',
         title: 'Total Out of Stock',
         type: 'listing',
         size: 'half',
@@ -98,14 +105,13 @@ const dashboardSetting = [
         },
     },
     // {
-    //     virtual: [],
     //     title: 'Actions',
     //     type: 'buttonlist',
     //     size: 'half',
     //     config: [],
     // },
     // {
-    //     virtual: [],
+    //     key: 'announcements',
     //     title: 'Announcements',
     //     type: 'announcement',
     //     size: 'full',
