@@ -1,29 +1,10 @@
 import 'whatwg-fetch';
-import { create } from 'apisauce';
 import globalScope from 'globalScope';
 import Cookies from 'universal-cookie';
 
 export const apiRequest = (path, type, body, baseUrl, headerParams) => {
-    const apiObject = addHeaderToAPI(baseUrl || globalScope.api);
-    return apiObject[type](path, body, headerParams);
-};
-
-const addHeaderToAPI = (apiString) => {
-    const api = create({
-        baseURL: apiString,
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept-Language': 'en',
-        //     // 'api-version': '1.0.0',
-        //     // 'app-version': DeviceInfo.getVersion(),
-        //     // 'app-os-name': 'Platform.OS',
-            'hertoken': globalScope.token,
-        //     // 'app-os-version': DeviceInfo.getSystemVersion(),
-        },
-        // timeout: 30000,
-    });
-
-    return api;
+    globalScope.axios.setBaseURL(baseUrl || globalScope.api);
+    return globalScope.axios[type](path, body, headerParams);
 };
 
 export const getURLParams = (urlparams) => {
@@ -56,6 +37,10 @@ export const getYdp = (percent) => `${percent}vw`;
 export const dataChecking = (object, ...argsArr) => {
     // let args = Array.prototype.slice.call(arguments, 1);
     let args = argsArr;
+    if (!argsArr || !argsArr.length) {
+        return object;
+    }
+
     if (argsArr[0].constructor === Array) {
         args = argsArr[0];
     }

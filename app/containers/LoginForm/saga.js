@@ -17,6 +17,7 @@ export function* doLogin(action) {
         const response = yield call(apiRequest, 'auth/token', 'post', {}, null, { headers: { 'Authorization': `Basic ${hash}` } });
         if (response && response.ok) {
             globalScope.token = response.data.token;
+            globalScope.axios.setHeader('hertoken', globalScope.token);
             const isAdminResponse = yield call(apiRequest, '/view/preview/145', 'post');
             globalScope.isAdmin = !!(isAdminResponse && isAdminResponse.data && isAdminResponse.data.id);
             if (globalScope.isAdmin) {
@@ -45,6 +46,7 @@ export function* doLogin(action) {
                 }
             } else {
                 globalScope.token = '';
+                globalScope.axios.setHeader('hertoken', '');
                 response.data.messages[0] = { type: 'error', text: 'Invalid user access level!' };
                 yield put(loginFailed(response.data));
             }
