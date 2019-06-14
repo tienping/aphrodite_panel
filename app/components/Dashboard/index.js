@@ -5,9 +5,12 @@
 */
 
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import {
+    Typography,
+    Card,
+    CardHeader,
+    CardContent,
+} from '@material-ui/core';
 // import Divider from '@material-ui/core/Divider';
 import SimpleLineChart from 'components/SimpleLineChart';
 import SimpleTable from 'components/SimpleTable';
@@ -85,10 +88,15 @@ class Dashboard extends React.PureComponent { // eslint-disable-line react/prefe
     renderComponents = (config, index) => (
         <div className={`dashboard-component size-${config.size || 'half'}`} key={index}>
             <Card className="dashboard-component-card" >
+                <CardHeader
+                    avatar={config.iconClass ? <i className={`title-icon ${config.iconClass}`} /> : null}
+                    title={
+                        <Typography variant="h4" color="textPrimary" gutterBottom={true}>
+                            {config.title}
+                        </Typography>
+                    }
+                />
                 <CardContent>
-                    <Typography variant="h4" color="textPrimary" gutterBottom={true}>
-                        {config.title}
-                    </Typography>
                     {this.renderContent(config)}
                 </CardContent>
             </Card>

@@ -10,6 +10,8 @@ import 'babel-polyfill';
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer } from 'react-notifications';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -53,26 +55,30 @@ const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+const themeExtension = createMuiTheme({});
+
 const startingApp = () => {
     const render = (messages) => {
         ReactDOM.render(
             <Provider store={store}>
                 <LanguageProvider messages={messages}>
                     <ConnectedRouter history={history}>
-                        <div>
-                            <NotificationContainer />
-                            <div
-                                id="hershop-topbar-container"
-                                className=""
-                                style={{
-                                    height: topNavSetting && topNavSetting.length ? '64px' : '35px',
-                                }}
-                            >
-                                <Topbar />
-                                <TopNavigation />
+                        <MuiThemeProvider theme={themeExtension}>
+                            <div>
+                                <NotificationContainer />
+                                <div
+                                    id="hershop-topbar-container"
+                                    className=""
+                                    style={{
+                                        height: topNavSetting && topNavSetting.length ? '64px' : '35px',
+                                    }}
+                                >
+                                    <Topbar />
+                                    <TopNavigation />
+                                </div>
+                                <App />
                             </div>
-                            <App />
-                        </div>
+                        </MuiThemeProvider>
                     </ConnectedRouter>
                 </LanguageProvider>
             </Provider>,

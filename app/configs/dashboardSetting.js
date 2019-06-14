@@ -4,6 +4,7 @@
 
 const dashboardSetting = [
     {
+        iconClass: 'fas fa-file-signature',
         key: 'total_sales',
         action: 'TOTAL_SALES',
         title: 'Total Sales over days',
@@ -30,9 +31,10 @@ const dashboardSetting = [
         ],
     },
     {
+        iconClass: 'fas fa-trophy',
         key: 'best_seller',
         action: 'BEST_SELLER',
-        title: 'Best Seller',
+        title: 'Best Seller over pass 30 Days',
         type: 'table',
         size: 'half',
         hideHeader: true,
@@ -53,6 +55,7 @@ const dashboardSetting = [
         ],
     },
     {
+        iconClass: 'fas fa-star',
         key: 'rating',
         action: 'GET_RATING',
         title: 'Shop Rating',
@@ -63,6 +66,7 @@ const dashboardSetting = [
         },
     },
     {
+        iconClass: 'fas fa-pause-circle',
         key: 'pending',
         action: 'PENDING_ORDER',
         title: 'Total Pending Orders',
@@ -77,6 +81,7 @@ const dashboardSetting = [
         },
     },
     {
+        iconClass: 'fas fa-dragon',
         key: 'cancellation',
         action: 'CANCELLATION',
         title: 'Cancellation Rate',
@@ -95,6 +100,7 @@ const dashboardSetting = [
     //     value: '1.5%',
     // },
     {
+        iconClass: 'fas fa-exclamation-triangle',
         key: 'oos',
         action: 'OOS',
         title: 'Total Out of Stock',
